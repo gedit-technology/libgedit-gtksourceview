@@ -3,6 +3,7 @@
  * This file is part of GtkSourceView
  *
  * Copyright (C) 2013 - Paolo Borelli
+ * Copyright (C) 2020 - Sébastien Wilmet
  *
  * GtkSourceView is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -92,6 +93,37 @@ check_strv_equal (const gchar **strv,
 	}
 }
 
+static gint
+sort_strv_compare_cb (gconstpointer a,
+		      gconstpointer b,
+		      gpointer      user_data)
+{
+	const gchar * const *pointer_to_str_a = a;
+	const gchar * const *pointer_to_str_b = b;
+
+	g_assert (pointer_to_str_a != NULL);
+	g_assert (pointer_to_str_b != NULL);
+	g_assert (*pointer_to_str_a != NULL);
+	g_assert (*pointer_to_str_b != NULL);
+
+	return g_strcmp0 (*pointer_to_str_a, *pointer_to_str_b);
+}
+
+static void
+sort_strv (gchar **strv)
+{
+	if (strv == NULL || strv[0] == NULL)
+	{
+		return;
+	}
+
+	g_qsort_with_data (strv,
+			   g_strv_length (strv),
+			   sizeof (gchar *),
+			   sort_strv_compare_cb,
+			   NULL);
+}
+
 static void
 check_language (GtkSourceLanguage  *language,
 		const gchar        *id,
@@ -101,13 +133,13 @@ check_language (GtkSourceLanguage  *language,
 		const gchar        *expected_extra_meta,
 		const gchar       **expected_mime,
 		const gchar       **expected_glob,
-		const gchar       **expected_styles,
+		const gchar       **expected_sorted_style_ids,
 		const gchar        *style_id,
 		const gchar        *expected_style_name)
 {
 	gchar **mime;
 	gchar **glob;
-	gchar **styles;
+	gchar **style_ids;
 
 	g_assert_cmpstr (gtk_source_language_get_id (language), ==, id);
 	g_assert_cmpstr (gtk_source_language_get_name (language), ==, expected_name);
@@ -115,17 +147,21 @@ check_language (GtkSourceLanguage  *language,
 	g_assert (gtk_source_language_get_hidden (language) == expected_hidden);
 	g_assert_cmpstr (gtk_source_language_get_metadata (language, "extra-meta"), ==, expected_extra_meta);
 
+	/* Should be in the same order. */
 	mime = gtk_source_language_get_mime_types (language);
 	check_strv_equal ((const gchar **) mime, expected_mime);
 	g_strfreev (mime);
 
+	/* Should be in the same order. */
 	glob = gtk_source_language_get_globs (language);
 	check_strv_equal ((const gchar **) glob, expected_glob);
 	g_strfreev (glob);
 
-	styles = gtk_source_language_get_style_ids (language);
-	check_strv_equal ((const gchar **) styles, expected_styles);
-	g_strfreev (styles);
+	/* Can be in a different order. */
+	style_ids = gtk_source_language_get_style_ids (language);
+	sort_strv (style_ids);
+	check_strv_equal ((const gchar **) style_ids, expected_sorted_style_ids);
+	g_strfreev (style_ids);
 
 	if (expected_style_name != NULL)
 	{
@@ -140,10 +176,10 @@ test_language (TestFixture   *fixture,
 	GtkSourceLanguage *language;
 	const gchar *mime[] = { "text/x-test", "application/x-test", NULL };
 	const gchar *glob[] = { "*.test", "*.tst", NULL };
-	const gchar *styles[] = { "test-full:keyword", "test-full:string", NULL };
+	const gchar *sorted_style_ids[] = { "test-full:keyword", "test-full:string", NULL };
 
 	language = gtk_source_language_manager_get_language (fixture->manager, "test-full");
-	check_language (language, "test-full", "Test Full", "Sources", FALSE, "extra", mime, glob, styles, "test-full:string", "String");
+	check_language (language, "test-full", "Test Full", "Sources", FALSE, "extra", mime, glob, sorted_style_ids, "test-full:string", "String");
 
 	language = gtk_source_language_manager_get_language (fixture->manager, "test-empty");
 	check_language (language, "test-empty", "Test Empty", "Others", TRUE, NULL, NULL, NULL, NULL, NULL, NULL);
