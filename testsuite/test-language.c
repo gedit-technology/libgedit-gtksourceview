@@ -32,8 +32,8 @@ struct _TestFixture {
 	GtkSourceLanguageManager *manager;
 };
 
-/* If we are running from the source dir (e.g. during make check)
- * we override the path to read from the data dir
+/* If we are running from the source dir (e.g. during make check) we override
+ * the path to read from the data dir.
  */
 static void
 test_fixture_setup (TestFixture   *fixture,
@@ -63,7 +63,7 @@ test_fixture_setup (TestFixture   *fixture,
 		lang_dirs = g_new0 (gchar *, g_strv_length ((gchar **)current) + 2);
 		for (i = 0; current[i] != NULL; i++)
 		{
-			lang_dirs[i] = g_strdup(current[i]);
+			lang_dirs[i] = g_strdup (current[i]);
 		}
 		lang_dirs[i] = g_test_build_filename (G_TEST_DIST, "language-specs", NULL);
 	}
@@ -144,9 +144,9 @@ test_language (TestFixture   *fixture,
                gconstpointer  data)
 {
 	GtkSourceLanguage *language;
-	const gchar *mime[] = { "text/x-test", "application/x-test", NULL};
-	const gchar *glob[] = { "*.test", "*.tst", NULL};
-	const gchar *styles[] = { "test-full:keyword", "test-full:string", NULL};
+	const gchar *mime[] = { "text/x-test", "application/x-test", NULL };
+	const gchar *glob[] = { "*.test", "*.tst", NULL };
+	const gchar *styles[] = { "test-full:keyword", "test-full:string", NULL };
 
 	language = gtk_source_language_manager_get_language (fixture->manager, "test-full");
 	check_language (language, "test-full", "Test Full", "Sources", FALSE, "extra", mime, glob, styles, "test-full:string", "String");
@@ -156,7 +156,8 @@ test_language (TestFixture   *fixture,
 }
 
 int
-main (int argc, char** argv)
+main (int    argc,
+      char **argv)
 {
 	gtk_test_init (&argc, &argv);
 
