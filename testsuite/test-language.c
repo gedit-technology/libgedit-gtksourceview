@@ -79,8 +79,8 @@ test_fixture_teardown (TestFixture   *fixture,
 }
 
 static void
-compare_strv (const gchar **strv,
-	      const gchar **expected_strv)
+check_strv_equal (const gchar **strv,
+		  const gchar **expected_strv)
 {
 	if (strv == NULL || expected_strv == NULL)
 	{
@@ -116,15 +116,15 @@ check_language (GtkSourceLanguage  *language,
 	g_assert_cmpstr (gtk_source_language_get_metadata (language, "extra-meta"), ==, expected_extra_meta);
 
 	mime = gtk_source_language_get_mime_types (language);
-	compare_strv ((const gchar **) mime, expected_mime);
+	check_strv_equal ((const gchar **) mime, expected_mime);
 	g_strfreev (mime);
 
 	glob = gtk_source_language_get_globs (language);
-	compare_strv ((const gchar **) glob, expected_glob);
+	check_strv_equal ((const gchar **) glob, expected_glob);
 	g_strfreev (glob);
 
 	styles = gtk_source_language_get_style_ids (language);
-	compare_strv ((const gchar **) styles, expected_styles);
+	check_strv_equal ((const gchar **) styles, expected_styles);
 	g_strfreev (styles);
 
 	if (expected_style_name != NULL)
