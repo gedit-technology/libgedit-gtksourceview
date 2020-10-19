@@ -1,6 +1,8 @@
 SUBDIRS = po data gtksourceview win32 tests testsuite docs
 
-@CODE_COVERAGE_RULES@
+include $(top_srcdir)/aminclude_static.am
+clean-local: code-coverage-clean
+distclean-local: code-coverage-dist-clean
 
 AM_DISTCHECK_CONFIGURE_FLAGS =		\
 	--enable-gtk-doc		\
@@ -21,6 +23,7 @@ MAINTAINERCLEANFILES = \
 	$(GITIGNORE_MAINTAINERCLEANFILES_TOPLEVEL) \
 	$(GITIGNORE_MAINTAINERCLEANFILES_MAKEFILE_IN) \
 	$(GITIGNORE_MAINTAINERCLEANFILES_M4_LIBTOOL) \
+	aminclude_static.am \
 	gtk-doc.make \
 	INSTALL
 
