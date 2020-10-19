@@ -170,6 +170,13 @@ void		 _gtk_source_file_set_compression_type		(GtkSourceFile            *file,
 G_GNUC_INTERNAL
 GMountOperation	*_gtk_source_file_create_mount_operation	(GtkSourceFile *file);
 
+/* GTimeVal is deprecated, but we don't want to produce compilation warnings for
+ * other modules that #include the GtkSourceView headers.
+ * Also, GtkSourceFile is/will be superseded by TeplFile, so GtkSourceFile will
+ * anyway go away at some point. So it's not worth fixing the problem in
+ * GtkSourceFile.
+ */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 G_GNUC_INTERNAL
 gboolean	 _gtk_source_file_get_modification_time		(GtkSourceFile *file,
 								 GTimeVal      *modification_time);
@@ -177,6 +184,7 @@ gboolean	 _gtk_source_file_get_modification_time		(GtkSourceFile *file,
 G_GNUC_INTERNAL
 void		 _gtk_source_file_set_modification_time		(GtkSourceFile *file,
 								 GTimeVal       modification_time);
+G_GNUC_END_IGNORE_DEPRECATIONS
 
 G_GNUC_INTERNAL
 void		 _gtk_source_file_set_externally_modified	(GtkSourceFile *file,
