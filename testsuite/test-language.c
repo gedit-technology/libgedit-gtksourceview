@@ -82,19 +82,13 @@ static void
 compare_strv (const gchar **strv,
 	      const gchar **expected_strv)
 {
-	if (expected_strv != NULL)
+	if (strv == NULL || expected_strv == NULL)
 	{
-		guint n, i;
-
-		n = g_strv_length ((gchar **) expected_strv);
-		for (i = 0; i < n; i++)
-		{
-			g_assert_cmpstr (strv[i], ==, expected_strv[i]);
-		}
+		g_assert (strv == NULL && expected_strv == NULL);
 	}
 	else
 	{
-		g_assert (strv == NULL);
+		g_assert (g_strv_equal (strv, expected_strv));
 	}
 }
 

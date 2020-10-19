@@ -61,7 +61,7 @@ AC_DEFINE_UNQUOTED([GSV_API_VERSION],
 		   [Define to the GtkSourceView API version.])
 
 # Dependencies
-glib_req=2.48
+glib_req=2.60
 gtk_req=3.20
 libxml_req=2.6
 gladeui_req=3.9
