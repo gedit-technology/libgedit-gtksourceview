@@ -257,7 +257,6 @@ stamp-gtksource-enumtypes.h: Makefile.am $(libgtksourceview_public_headers)
 	&& rm -f xgen-gth && echo stamp > $(@F)
 
 EXTRA_DIST = 					\
-	GtkSource.metadata.in			\
 	gtksourcecompletion.ui			\
 	gtksourceview.gresource.xml
 
@@ -311,38 +310,5 @@ CLEANFILES +=		\
 	$(typelib_DATA)
 
 endif # HAVE_INTROSPECTION
-
-if ENABLE_VAPIGEN
--include $(VAPIGEN_MAKEFILE)
-
-gtksourceview-@GSV_API_VERSION@.vapi: GtkSource-@GSV_API_VERSION@.gir
-
-VAPIGEN_VAPIS = gtksourceview-@GSV_API_VERSION@.vapi
-
-gtksourceview_@GSV_API_VERSION@_vapi_DEPS = \
-	atk \
-	gdk-3.0 \
-	gdk-pixbuf-2.0 \
-	gio-2.0 \
-	gtk+-3.0 \
-	pango \
-	cairo
-
-gtksourceview-@GSV_API_VERSION@.deps:
-	$(AM_V_GEN) for pkg in $(gtksourceview_@GSV_API_VERSION@_vapi_DEPS); do \
-		echo $$pkg >> $@; \
-	done
-
-gtksourceview_@GSV_API_VERSION@_vapi_METADATADIRS = $(srcdir)
-gtksourceview_@GSV_API_VERSION@_vapi_FILES = GtkSource-@GSV_API_VERSION@.gir
-
-vapidir = $(datadir)/vala/vapi
-vapi_DATA =					\
-	gtksourceview-@GSV_API_VERSION@.vapi	\
-	gtksourceview-@GSV_API_VERSION@.deps
-
-CLEANFILES += $(vapi_DATA)
-
-endif # ENABLE_VAPIGEN
 
 -include $(top_srcdir)/git.mk

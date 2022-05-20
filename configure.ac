@@ -193,10 +193,6 @@ AX_VALGRIND_CHECK
 AX_REQUIRE_DEFINED([PKG_CHECK_VAR])
 PKG_CHECK_VAR([GLIB_PREFIX], [glib-2.0], [prefix])
 
-# Vala
-AX_REQUIRE_DEFINED([VAPIGEN_CHECK])
-VAPIGEN_CHECK
-
 # test-widget uses this to find lang files and gtksourcebuffer.c
 ABS_TOP_SRCDIR=`cd $srcdir && pwd`
 AC_SUBST(ABS_TOP_SRCDIR)
@@ -216,7 +212,6 @@ docs/reference/lang-reference.xml
 docs/reference/style-reference.xml
 gtksourceview/Makefile
 gtksourceview/gtksourceversion.h
-gtksourceview/GtkSource-${GSV_API_VERSION}.metadata:gtksourceview/GtkSource.metadata.in
 gtksourceview/completion-providers/Makefile
 gtksourceview/completion-providers/words/Makefile
 po/Makefile.in
@@ -237,7 +232,6 @@ Configuration:
 	Compiler:		${CC}
 	Documentation:		${enable_gtk_doc}
 	GObject introspection:	${found_introspection}
-	Vala:			${enable_vala}
 	Code coverage:		${enable_code_coverage}
 	Valgrind check:		${enable_valgrind}
 	Installed tests:	${enable_installed_tests}
