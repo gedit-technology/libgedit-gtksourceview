@@ -10,7 +10,6 @@ AM_CPPFLAGS = 				\
 	-DGTK_SOURCE_COMPILATION	\
 	-I$(top_builddir)		\
 	-I$(top_srcdir) -I$(srcdir) 	\
-	$(DISABLE_DEPRECATED_CFLAGS)	\
 	$(WARN_CFLAGS) 			\
 	$(CODE_COVERAGE_CPPFLAGS)	\
 	$(GTK_MAC_CFLAGS)		\

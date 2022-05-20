@@ -101,22 +101,6 @@ AC_PATH_PROG(ITSTOOL, itstool)
 AX_REQUIRE_DEFINED([AX_COMPILER_FLAGS])
 AX_COMPILER_FLAGS([WARN_CFLAGS], [WARN_LDFLAGS], [yes])
 
-AC_ARG_ENABLE(deprecations,
-              [AS_HELP_STRING([--disable-deprecations],
-                              [remove deprecated symbols from the header files])],
-              [enable_deprecations=$enableval],
-              [enable_deprecations="yes"])
-
-if test "$enable_deprecations" = "no"; then
-	DISABLE_DEPRECATED_CFLAGS="\
--DG_DISABLE_DEPRECATED \
--DGDK_DISABLE_DEPRECATED \
--DGTK_DISABLE_DEPRECATED \
--DGDK_PIXBUF_DISABLE_DEPRECATED"
-
-	AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
-fi
-
 # Symbol visibility handling.
 #
 # This requires to #include config.h in every *.c file where there is a public
