@@ -8,7 +8,6 @@ AM_DISTCHECK_CONFIGURE_FLAGS =		\
 	--enable-gtk-doc		\
 	--enable-introspection		\
 	--enable-vala			\
-	--enable-glade-catalog		\
 	--disable-code-coverage
 
 pkgconfig_DATA = gtksourceview-@GSV_API_VERSION@.pc

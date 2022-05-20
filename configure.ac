@@ -64,7 +64,6 @@ AC_DEFINE_UNQUOTED([GSV_API_VERSION],
 glib_req=2.60
 gtk_req=3.20
 libxml_req=2.6
-gladeui_req=3.9
 
 AC_CONFIG_SRCDIR([gtksourceview/gtksourcebuffer.h])
 AC_CONFIG_HEADER([config.h])
@@ -171,22 +170,6 @@ if test "$os_osx" = "yes"; then
 	AC_DEFINE([OS_OSX], [1], [Defined if os is Mac OSX])
 fi
 
-# Check for Glade3
-AC_ARG_ENABLE([glade-catalog],
-	[AS_HELP_STRING([--enable-glade-catalog],
-		[Install a glade catalog file [default=no]])],
-	[glade_catalog=$enableval],
-	[glade_catalog=no])
-
-AM_CONDITIONAL([GLADE_CATALOG], [ test "$glade_catalog" = "yes" ])
-
-AS_IF([ test "$glade_catalog" = "yes" ],
-	[PKG_CHECK_MODULES(GLADE, [gladeui-2.0 >= $gladeui_req])
-	 AC_MSG_CHECKING([whether to install Glade catalog])
-	 GLADE_CATALOG_DIR=`$PKG_CONFIG --variable=catalogdir gladeui-2.0 2>&AS_MESSAGE_LOG_FD`
-	 AC_MSG_RESULT([$GLADE_CATALOG_DIR])
-	 AC_SUBST(GLADE_CATALOG_DIR)])
-
 # i18n
 AM_GNU_GETTEXT([external])
 # FIXME: Remove AM_GNU_GETTEXT_VERSION once autoreconf supports AM_GNU_GETTEXT_REQUIRE_VERSION.
@@ -239,8 +222,6 @@ AC_CONFIG_FILES([
 gtksourceview-${GSV_API_VERSION}.pc:gtksourceview.pc.in
 Makefile
 data/Makefile
-data/glade/Makefile
-data/glade/gtksourceview.xml
 data/language-specs/Makefile
 data/styles/Makefile
 docs/Makefile
@@ -270,7 +251,6 @@ Configuration:
 	Source code location:	${srcdir}
 	Prefix:			${prefix}
 	Compiler:		${CC}
-	Glade Catalog:		${glade_catalog}
 	Documentation:		${enable_gtk_doc}
 	GObject introspection:	${found_introspection}
 	Vala:			${enable_vala}
