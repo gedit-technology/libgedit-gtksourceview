@@ -70,11 +70,11 @@ MKDB_OPTIONS = --xml-mode --output-format=xml
 HTML_IMAGES =
 
 # Extra XML files that are included by $(DOC_MAIN_SGML_FILE)
-content_files =				\
-	intro.xml			\
-	lang-tutorial.xml		\
-	lang-reference.xml		\
-	porting-guide-3-to-4.xml	\
+content_files =			\
+	intro.xml		\
+	lang-tutorial.xml	\
+	lang-reference.xml	\
+	porting-guides.xml	\
 	style-reference.xml
 
 # Extra options to supply to gtkdoc-fixref
