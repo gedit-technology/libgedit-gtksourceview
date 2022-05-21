@@ -207,63 +207,21 @@ nodist_libgtksourceview_@GSV_API_VERSION@_include_HEADERS =	\
 gtksourceview-resources.c: gtksourceview.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/gtksourceview.gresource.xml)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source $(srcdir)/gtksourceview.gresource.xml
 
-gtksource-enumtypes.c: stamp-gtksource-enumtypes.c
-	@true
-stamp-gtksource-enumtypes.c: Makefile.am $(libgtksourceview_public_headers)
-	$(AM_V_GEN) (cd $(srcdir) \
-	 && $(GLIB_MKENUMS) \
-			--fhead "#ifdef HAVE_CONFIG_H\n" \
-			--fhead "#include \"config.h\"\n" \
-			--fhead "#endif\n\n" \
-			--fhead "#include <glib-object.h>\n" \
-			--fhead "#include \"gtksourceversion.h\"\n" \
-			--fhead "#include \"gtksource-enumtypes.h\"\n\n" \
-			--fprod "\n/* enumerations from \"@filename@\" */" \
-			--vhead "static const G@Type@Value _@enum_name@_values[] = {" \
-			--vprod "  { @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," \
-			--vtail "  { 0, NULL, NULL }\n};\n\n" \
-			--vtail "GType\n@enum_name@_get_type (void)\n{\n" \
-			--vtail "  static GType type = 0;\n\n" \
-			--vtail "  if (!type)\n" \
-			--vtail "    type = g_@type@_register_static (\"@EnumName@\", _@enum_name@_values);\n\n" \
-			--vtail "  return type;\n}\n\n" \
-		$(libgtksourceview_public_headers) ) > xgen-gtbec \
-	&& (cmp -s xgen-gtbec gtksource-enumtypes.c || cp xgen-gtbec gtksource-enumtypes.c) \
-	&& rm -f xgen-gtbec && echo stamp > $(@F)
+ENUM_TYPES = $(libgtksourceview_public_headers)
 
-gtksource-enumtypes.h: stamp-gtksource-enumtypes.h
-	@true
+gtksource-enumtypes.h: gtksource-enumtypes.h.in $(ENUM_TYPES)
+	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtksource-enumtypes.h.in --identifier-prefix GtkSource --symbol-prefix gtk_source $(ENUM_TYPES)) > $@
 
-# FIXME: we have to sed the file because glib-mkenums does
-#        not recognize GTK_SOURCE as the prefix but instead GTK
-stamp-gtksource-enumtypes.h: Makefile.am $(libgtksourceview_public_headers)
-	$(AM_V_GEN) (cd $(srcdir) \
-	 && $(GLIB_MKENUMS) \
-			--fhead "#ifndef GTKSOURCEVIEW_ENUMTYPES_H\n" \
-			--fhead "#define GTKSOURCEVIEW_ENUMTYPES_H\n\n" \
-			--fhead "#if !defined (GTK_SOURCE_H_INSIDE) && !defined (GTK_SOURCE_COMPILATION)\n" \
-			--fhead "#error \"Only <gtksourceview/gtksource.h> can be included directly.\"\n" \
-			--fhead "#endif\n\n" \
-			--ftail "#endif /* GTKSOURCEVIEW_ENUMTYPES_H */\n" \
-			--fprod "#include <gtksourceview/@filename@>\n" \
-			--eprod "G_BEGIN_DECLS\n" \
-			--eprod "#define GTK_TYPE_@ENUMSHORT@ @enum_name@_get_type()\n" \
-			--eprod "GTK_SOURCE_ENUM_EXTERN\n" \
-			--eprod "GType @enum_name@_get_type (void);\n" \
-			--eprod "G_END_DECLS\n\n" \
-		$(libgtksourceview_public_headers) ) > xgen-gth \
-	&& $(SED) -e 's/GTK_TYPE_SOURCE_/GTK_SOURCE_TYPE_/' <xgen-gth >xgen-gth.temp && mv xgen-gth.temp xgen-gth \
-	&& (cmp -s xgen-gth gtksource-enumtypes.h || cp xgen-gth gtksource-enumtypes.h) \
-	&& rm -f xgen-gth && echo stamp > $(@F)
+gtksource-enumtypes.c: gtksource-enumtypes.c.in $(ENUM_TYPES)
+	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtksource-enumtypes.c.in --identifier-prefix GtkSource --symbol-prefix gtk_source $(ENUM_TYPES)) > $@
 
-EXTRA_DIST = 					\
-	gtksourcecompletion.ui			\
-	gtksourceview.gresource.xml
+EXTRA_DIST = \
+	gtksourcecompletion.ui \
+	gtksourceview.gresource.xml \
+	gtksource-enumtypes.c.in \
+	gtksource-enumtypes.h.in
 
-CLEANFILES = 					\
-	$(BUILT_SOURCES)			\
-	stamp-gtksource-enumtypes.c		\
-	stamp-gtksource-enumtypes.h
+CLEANFILES = $(BUILT_SOURCES)
 
 libgtksourcecompletionwords_files =	\
 	./completion-providers/words/gtksourcecompletionwords.h	\

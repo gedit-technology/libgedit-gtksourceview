@@ -1,0 +1,33 @@
+/*** BEGIN file-header ***/
+#ifndef GTKSOURCEVIEW_ENUMTYPES_H
+#define GTKSOURCEVIEW_ENUMTYPES_H
+
+#if !defined (GTK_SOURCE_H_INSIDE) && !defined (GTK_SOURCE_COMPILATION)
+#error "Only <gtksourceview/gtksource.h> can be included directly."
+#endif
+
+#include <glib-object.h>
+#include <gtksourceview/gtksourceversion.h>
+
+G_BEGIN_DECLS
+
+/*** END file-header ***/
+
+/*** BEGIN file-production ***/
+/* Enumerations from "@filename@" */
+
+/*** END file-production ***/
+
+/*** BEGIN enumeration-production ***/
+#define GTK_SOURCE_TYPE_@ENUMSHORT@ (@enum_name@_get_type())
+
+GTK_SOURCE_ENUM_EXTERN
+GType @enum_name@_get_type (void);
+
+/*** END enumeration-production ***/
+
+/*** BEGIN file-tail ***/
+G_END_DECLS
+
+#endif /* GTKSOURCEVIEW_ENUMTYPES_H */
+/*** END file-tail ***/
