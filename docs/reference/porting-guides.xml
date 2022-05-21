@@ -11,9 +11,9 @@
   <title>GtkSourceView 3 -> 4 Porting Guide</title>
 
   <refsect1>
-    <title>GTK+ dependency</title>
+    <title>GTK dependency</title>
     <para>
-      Both GtkSourceView 3 and GtkSourceView 4 depend on GTK+ 3.
+      Both GtkSourceView 3 and GtkSourceView 4 depend on GTK 3.
     </para>
   </refsect1>
 
