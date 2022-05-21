@@ -81,6 +81,7 @@ AC_PROG_INSTALL
 
 AX_REQUIRE_DEFINED([PKG_PROG_PKG_CONFIG])
 AX_REQUIRE_DEFINED([PKG_INSTALLDIR])
+AX_REQUIRE_DEFINED([PKG_CHECK_VAR])
 PKG_PROG_PKG_CONFIG
 PKG_INSTALLDIR
 
@@ -92,8 +93,8 @@ LT_INIT([disable-static])
 AC_CHECK_HEADERS([unistd.h])
 
 # Pull glib-mkenums & co.
-AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
-AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
+PKG_CHECK_VAR([GLIB_MKENUMS], [glib-2.0], [glib_mkenums])
+PKG_CHECK_VAR([GLIB_COMPILE_RESOURCES], [gio-2.0], [glib_compile_resources])
 AC_PATH_PROG(ITSTOOL, itstool)
 
 # Compile warnings. There can be deprecation warnings at any time, so disable
@@ -189,8 +190,6 @@ AX_CODE_COVERAGE()
 # Valgrind check
 AX_REQUIRE_DEFINED([AX_VALGRIND_CHECK])
 AX_VALGRIND_CHECK
-
-AX_REQUIRE_DEFINED([PKG_CHECK_VAR])
 PKG_CHECK_VAR([GLIB_PREFIX], [glib-2.0], [prefix])
 
 # test-widget uses this to find lang files and gtksourcebuffer.c
