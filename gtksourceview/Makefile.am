@@ -56,6 +56,7 @@ libgtksourceview_public_headers =		\
 	gtksourcetypes.h			\
 	gtksourceundomanager.h			\
 	gtksourceutils.h			\
+	gtksourceversion.h			\
 	gtksourceview.h
 
 libgtksourceview_public_c_files =		\
@@ -91,7 +92,6 @@ libgtksourceview_public_c_files =		\
 	gtksourcetag.c				\
 	gtksourceundomanager.c 			\
 	gtksourceutils.c			\
-	gtksourceversion.c			\
 	gtksourceview.c
 
 libgtksourceview_private_headers =		\
@@ -194,8 +194,7 @@ libgedit_gtksourceview_@GSV_API_VERSION@_includedir = \
 
 libgedit_gtksourceview_@GSV_API_VERSION@_include_HEADERS = $(libgtksourceview_public_headers)
 
-nodist_libgedit_gtksourceview_@GSV_API_VERSION@_include_HEADERS =	\
-	gtksourceversion.h						\
+nodist_libgedit_gtksourceview_@GSV_API_VERSION@_include_HEADERS = \
 	gtksource-enumtypes.h
 
 gtksourceview-resources.c: gtksourceview.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/gtksourceview.gresource.xml)

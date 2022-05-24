@@ -186,7 +186,6 @@ AC_CONFIG_FILES([
 	docs/reference/libgedit-gtksourceview-docs.xml
 	docs/reference/style-reference.xml
 	gtksourceview/Makefile
-	gtksourceview/gtksourceversion.h
 	gtksourceview/completion-providers/Makefile
 	gtksourceview/completion-providers/words/Makefile
 	po/Makefile.in
