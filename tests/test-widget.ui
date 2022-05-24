@@ -284,16 +284,6 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSourceStyleSchemeChooserButton" id="chooser_button">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">0</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkComboBoxText" id="background_pattern">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -304,7 +294,7 @@
                     </items>
                   </object>
                   <packing>
-                    <property name="left_attach">2</property>
+                    <property name="left_attach">1</property>
                     <property name="top_attach">0</property>
                   </packing>
                 </child>
