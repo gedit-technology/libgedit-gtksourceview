@@ -7,7 +7,7 @@
 #endif
 
 #include <glib-object.h>
-#include <gtksourceview/gtksourceversion.h>
+#include <gmodule.h>
 
 G_BEGIN_DECLS
 
@@ -21,7 +21,7 @@ G_BEGIN_DECLS
 /*** BEGIN enumeration-production ***/
 #define GTK_SOURCE_TYPE_@ENUMSHORT@ (@enum_name@_get_type())
 
-GTK_SOURCE_ENUM_EXTERN
+G_MODULE_EXPORT
 GType @enum_name@_get_type (void);
 
 /*** END enumeration-production ***/
