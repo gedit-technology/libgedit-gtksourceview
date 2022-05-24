@@ -79,10 +79,6 @@ G_BEGIN_DECLS
 	(GTK_SOURCE_MAJOR_VERSION == (major) && GTK_SOURCE_MINOR_VERSION == (minor) && \
 	 GTK_SOURCE_MICRO_VERSION >= (micro)))
 
-#ifndef _GTK_SOURCE_EXTERN
-#define _GTK_SOURCE_EXTERN extern
-#endif
-
 /**
  * GTK_SOURCE_VERSION_3_0:
  *
