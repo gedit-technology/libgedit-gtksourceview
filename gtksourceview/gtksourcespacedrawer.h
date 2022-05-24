@@ -104,36 +104,36 @@ typedef enum _GtkSourceSpaceLocationFlags
 	GTK_SOURCE_SPACE_LOCATION_ALL		= 0x7
 } GtkSourceSpaceLocationFlags;
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 GType			gtk_source_space_drawer_get_type		(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 GtkSourceSpaceDrawer *	gtk_source_space_drawer_new			(void);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 GtkSourceSpaceTypeFlags	gtk_source_space_drawer_get_types_for_locations	(GtkSourceSpaceDrawer        *drawer,
 									 GtkSourceSpaceLocationFlags  locations);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 void			gtk_source_space_drawer_set_types_for_locations	(GtkSourceSpaceDrawer        *drawer,
 									 GtkSourceSpaceLocationFlags  locations,
 									 GtkSourceSpaceTypeFlags      types);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 GVariant *		gtk_source_space_drawer_get_matrix		(GtkSourceSpaceDrawer *drawer);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 void			gtk_source_space_drawer_set_matrix		(GtkSourceSpaceDrawer *drawer,
 									 GVariant             *matrix);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 gboolean		gtk_source_space_drawer_get_enable_matrix	(GtkSourceSpaceDrawer *drawer);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 void			gtk_source_space_drawer_set_enable_matrix	(GtkSourceSpaceDrawer *drawer,
 									 gboolean              enable_matrix);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 void			gtk_source_space_drawer_bind_matrix_setting	(GtkSourceSpaceDrawer *drawer,
 									 GSettings            *settings,
 									 const gchar          *key,

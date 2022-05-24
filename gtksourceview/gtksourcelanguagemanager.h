@@ -26,6 +26,7 @@
 #endif
 
 #include <glib-object.h>
+#include <gmodule.h>
 #include <gtksourceview/gtksourcetypes.h>
 
 G_BEGIN_DECLS
@@ -56,30 +57,30 @@ struct _GtkSourceLanguageManagerClass
 	gpointer padding[10];
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType			  gtk_source_language_manager_get_type			(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceLanguageManager *gtk_source_language_manager_new			(void);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceLanguageManager *gtk_source_language_manager_get_default		(void);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar * const *	  gtk_source_language_manager_get_search_path		(GtkSourceLanguageManager *lm);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void			  gtk_source_language_manager_set_search_path		(GtkSourceLanguageManager *lm,
 										 gchar                   **dirs);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar * const *	  gtk_source_language_manager_get_language_ids		(GtkSourceLanguageManager *lm);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceLanguage	 *gtk_source_language_manager_get_language		(GtkSourceLanguageManager *lm,
 										 const gchar              *id);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceLanguage	 *gtk_source_language_manager_guess_language		(GtkSourceLanguageManager *lm,
 										 const gchar		  *filename,
 										 const gchar		  *content_type);

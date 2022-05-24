@@ -51,19 +51,19 @@ struct _GtkSourceCompletionWordsClass {
 	GObjectClass parent_class;
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType		gtk_source_completion_words_get_type	(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceCompletionWords *
 		gtk_source_completion_words_new 	(const gchar              *name,
 		                                         GdkPixbuf                *icon);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void 		gtk_source_completion_words_register 	(GtkSourceCompletionWords *words,
                                                          GtkTextBuffer            *buffer);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void 		gtk_source_completion_words_unregister 	(GtkSourceCompletionWords *words,
                                                          GtkTextBuffer            *buffer);
 

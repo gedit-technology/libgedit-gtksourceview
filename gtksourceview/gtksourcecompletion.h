@@ -100,49 +100,49 @@ struct _GtkSourceCompletionClass
 	gpointer padding[20];
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType		 gtk_source_completion_get_type			(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GQuark		 gtk_source_completion_error_quark		(void);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean	 gtk_source_completion_add_provider		(GtkSourceCompletion           *completion,
 								 GtkSourceCompletionProvider   *provider,
 								 GError                       **error);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean	 gtk_source_completion_remove_provider		(GtkSourceCompletion           *completion,
 								 GtkSourceCompletionProvider   *provider,
 								 GError                       **error);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GList		*gtk_source_completion_get_providers		(GtkSourceCompletion           *completion);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean	 gtk_source_completion_start			(GtkSourceCompletion           *completion,
 								 GList                         *providers,
 								 GtkSourceCompletionContext    *context);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void		 gtk_source_completion_hide			(GtkSourceCompletion           *completion);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceCompletionInfo *
 		 gtk_source_completion_get_info_window		(GtkSourceCompletion           *completion);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceView	*gtk_source_completion_get_view			(GtkSourceCompletion	       *completion);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceCompletionContext *
 		 gtk_source_completion_create_context		(GtkSourceCompletion           *completion,
 		 						 GtkTextIter                   *position);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void		 gtk_source_completion_block_interactive	(GtkSourceCompletion           *completion);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void		 gtk_source_completion_unblock_interactive	(GtkSourceCompletion           *completion);
 
 G_GNUC_INTERNAL

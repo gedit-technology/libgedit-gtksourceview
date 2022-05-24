@@ -26,6 +26,7 @@
 #endif
 
 #include <glib-object.h>
+#include <gmodule.h>
 #include <gtksourceview/gtksourcetypes.h>
 
 G_BEGIN_DECLS
@@ -51,13 +52,13 @@ struct _GtkSourceStyleSchemeChooserInterface
 	gpointer padding[12];
 };
 
-GTK_SOURCE_AVAILABLE_IN_3_16
+G_MODULE_EXPORT
 GType                     gtk_source_style_scheme_chooser_get_type               (void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_3_16
+G_MODULE_EXPORT
 GtkSourceStyleScheme     *gtk_source_style_scheme_chooser_get_style_scheme       (GtkSourceStyleSchemeChooser *chooser);
 
-GTK_SOURCE_AVAILABLE_IN_3_16
+G_MODULE_EXPORT
 void                      gtk_source_style_scheme_chooser_set_style_scheme       (GtkSourceStyleSchemeChooser *chooser,
                                                                                   GtkSourceStyleScheme        *scheme);
 

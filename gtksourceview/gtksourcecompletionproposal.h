@@ -87,37 +87,37 @@ struct _GtkSourceCompletionProposalIface
 	void		 (*changed)		(GtkSourceCompletionProposal *proposal);
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType 			 gtk_source_completion_proposal_get_type 	(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gchar			*gtk_source_completion_proposal_get_label	(GtkSourceCompletionProposal *proposal);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gchar			*gtk_source_completion_proposal_get_markup	(GtkSourceCompletionProposal *proposal);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gchar			*gtk_source_completion_proposal_get_text	(GtkSourceCompletionProposal *proposal);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GdkPixbuf		*gtk_source_completion_proposal_get_icon	(GtkSourceCompletionProposal *proposal);
 
-GTK_SOURCE_AVAILABLE_IN_3_18
+G_MODULE_EXPORT
 const gchar		*gtk_source_completion_proposal_get_icon_name	(GtkSourceCompletionProposal *proposal);
 
-GTK_SOURCE_AVAILABLE_IN_3_18
+G_MODULE_EXPORT
 GIcon			*gtk_source_completion_proposal_get_gicon	(GtkSourceCompletionProposal *proposal);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gchar			*gtk_source_completion_proposal_get_info	(GtkSourceCompletionProposal *proposal);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void			 gtk_source_completion_proposal_changed		(GtkSourceCompletionProposal *proposal);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 guint			 gtk_source_completion_proposal_hash		(GtkSourceCompletionProposal *proposal);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean		 gtk_source_completion_proposal_equal		(GtkSourceCompletionProposal *proposal,
 									 GtkSourceCompletionProposal *other);
 

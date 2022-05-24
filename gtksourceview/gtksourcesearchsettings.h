@@ -26,6 +26,7 @@
 #endif
 
 #include <glib-object.h>
+#include <gmodule.h>
 #include <gtksourceview/gtksourcetypes.h>
 
 G_BEGIN_DECLS
@@ -54,45 +55,45 @@ struct _GtkSourceSearchSettingsClass
 	gpointer padding[10];
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType			 gtk_source_search_settings_get_type			(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceSearchSettings *gtk_source_search_settings_new				(void);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void			 gtk_source_search_settings_set_search_text		(GtkSourceSearchSettings *settings,
 										 const gchar		 *search_text);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar		*gtk_source_search_settings_get_search_text		(GtkSourceSearchSettings *settings);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void			 gtk_source_search_settings_set_case_sensitive		(GtkSourceSearchSettings *settings,
 										 gboolean		  case_sensitive);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean		 gtk_source_search_settings_get_case_sensitive		(GtkSourceSearchSettings *settings);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void			 gtk_source_search_settings_set_at_word_boundaries	(GtkSourceSearchSettings *settings,
 										 gboolean		  at_word_boundaries);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean		 gtk_source_search_settings_get_at_word_boundaries	(GtkSourceSearchSettings *settings);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void			 gtk_source_search_settings_set_wrap_around		(GtkSourceSearchSettings *settings,
 										 gboolean		  wrap_around);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean		 gtk_source_search_settings_get_wrap_around		(GtkSourceSearchSettings *settings);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void			 gtk_source_search_settings_set_regex_enabled		(GtkSourceSearchSettings *settings,
 										 gboolean		  regex_enabled);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean		 gtk_source_search_settings_get_regex_enabled		(GtkSourceSearchSettings *settings);
 
 G_END_DECLS

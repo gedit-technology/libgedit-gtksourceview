@@ -54,25 +54,25 @@ struct _GtkSourceStyleSchemeClass
 	gpointer padding[10];
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType			 gtk_source_style_scheme_get_type			(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar             *gtk_source_style_scheme_get_id				(GtkSourceStyleScheme *scheme);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar             *gtk_source_style_scheme_get_name			(GtkSourceStyleScheme *scheme);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar             *gtk_source_style_scheme_get_description		(GtkSourceStyleScheme *scheme);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar * const *	 gtk_source_style_scheme_get_authors			(GtkSourceStyleScheme *scheme);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar             *gtk_source_style_scheme_get_filename			(GtkSourceStyleScheme *scheme);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceStyle		*gtk_source_style_scheme_get_style			(GtkSourceStyleScheme *scheme,
 										 const gchar          *style_id);
 

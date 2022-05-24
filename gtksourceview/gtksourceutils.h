@@ -26,14 +26,15 @@
 #endif
 
 #include <glib-object.h>
+#include <gmodule.h>
 #include <gtksourceview/gtksourceversion.h>
 
 G_BEGIN_DECLS
 
-GTK_SOURCE_AVAILABLE_IN_3_10
+G_MODULE_EXPORT
 gchar		*gtk_source_utils_unescape_search_text		(const gchar	*text);
 
-GTK_SOURCE_AVAILABLE_IN_3_10
+G_MODULE_EXPORT
 gchar		*gtk_source_utils_escape_search_text		(const gchar	*text);
 
 G_END_DECLS

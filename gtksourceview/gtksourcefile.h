@@ -109,50 +109,50 @@ struct _GtkSourceFileClass
 	gpointer padding[10];
 };
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GType		 gtk_source_file_get_type			(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceFile	*gtk_source_file_new				(void);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GFile		*gtk_source_file_get_location			(GtkSourceFile *file);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 void		 gtk_source_file_set_location			(GtkSourceFile *file,
 								 GFile         *location);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 const GtkSourceEncoding *
 		 gtk_source_file_get_encoding			(GtkSourceFile *file);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceNewlineType
 		 gtk_source_file_get_newline_type		(GtkSourceFile *file);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceCompressionType
 		 gtk_source_file_get_compression_type		(GtkSourceFile *file);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 void		 gtk_source_file_set_mount_operation_factory	(GtkSourceFile                  *file,
 								 GtkSourceMountOperationFactory  callback,
 								 gpointer                        user_data,
 								 GDestroyNotify                  notify);
 
-GTK_SOURCE_AVAILABLE_IN_3_18
+G_MODULE_EXPORT
 void		 gtk_source_file_check_file_on_disk		(GtkSourceFile *file);
 
-GTK_SOURCE_AVAILABLE_IN_3_18
+G_MODULE_EXPORT
 gboolean	 gtk_source_file_is_local			(GtkSourceFile *file);
 
-GTK_SOURCE_AVAILABLE_IN_3_18
+G_MODULE_EXPORT
 gboolean	 gtk_source_file_is_externally_modified		(GtkSourceFile *file);
 
-GTK_SOURCE_AVAILABLE_IN_3_18
+G_MODULE_EXPORT
 gboolean	 gtk_source_file_is_deleted			(GtkSourceFile *file);
 
-GTK_SOURCE_AVAILABLE_IN_3_18
+G_MODULE_EXPORT
 gboolean	 gtk_source_file_is_readonly			(GtkSourceFile *file);
 
 G_GNUC_INTERNAL

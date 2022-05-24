@@ -94,61 +94,61 @@ struct _GtkSourceFileSaverClass
 	gpointer padding[10];
 };
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GType			 gtk_source_file_saver_get_type		(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GQuark			 gtk_source_file_saver_error_quark	(void);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceFileSaver	*gtk_source_file_saver_new		(GtkSourceBuffer          *buffer,
 								 GtkSourceFile            *file);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceFileSaver	*gtk_source_file_saver_new_with_target	(GtkSourceBuffer          *buffer,
 								 GtkSourceFile            *file,
 								 GFile                    *target_location);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceBuffer		*gtk_source_file_saver_get_buffer	(GtkSourceFileSaver       *saver);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceFile		*gtk_source_file_saver_get_file		(GtkSourceFileSaver       *saver);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GFile			*gtk_source_file_saver_get_location	(GtkSourceFileSaver       *saver);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 void			 gtk_source_file_saver_set_encoding	(GtkSourceFileSaver       *saver,
 								 const GtkSourceEncoding  *encoding);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 const GtkSourceEncoding *gtk_source_file_saver_get_encoding	(GtkSourceFileSaver       *saver);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 void			 gtk_source_file_saver_set_newline_type	(GtkSourceFileSaver       *saver,
 								 GtkSourceNewlineType      newline_type);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceNewlineType	 gtk_source_file_saver_get_newline_type	(GtkSourceFileSaver       *saver);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 void			 gtk_source_file_saver_set_compression_type
 								(GtkSourceFileSaver       *saver,
 								 GtkSourceCompressionType  compression_type);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceCompressionType gtk_source_file_saver_get_compression_type
 								(GtkSourceFileSaver       *saver);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 void			 gtk_source_file_saver_set_flags	(GtkSourceFileSaver       *saver,
 								 GtkSourceFileSaverFlags   flags);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceFileSaverFlags	 gtk_source_file_saver_get_flags	(GtkSourceFileSaver       *saver);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 void			 gtk_source_file_saver_save_async	(GtkSourceFileSaver       *saver,
 								 gint                      io_priority,
 								 GCancellable             *cancellable,
@@ -158,7 +158,7 @@ void			 gtk_source_file_saver_save_async	(GtkSourceFileSaver       *saver,
 								 GAsyncReadyCallback       callback,
 								 gpointer                  user_data);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 gboolean		 gtk_source_file_saver_save_finish	(GtkSourceFileSaver       *saver,
 								 GAsyncResult             *result,
 								 GError                  **error);

@@ -72,20 +72,20 @@ struct _GtkSourceCompletionContextClass {
 	gpointer padding[10];
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType		 gtk_source_completion_context_get_type (void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void		 gtk_source_completion_context_add_proposals 	(GtkSourceCompletionContext   *context,
 								 GtkSourceCompletionProvider  *provider,
 								 GList                        *proposals,
 								 gboolean                      finished);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean	 gtk_source_completion_context_get_iter		(GtkSourceCompletionContext   *context,
 								 GtkTextIter                  *iter);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceCompletionActivation
 		 gtk_source_completion_context_get_activation	(GtkSourceCompletionContext   *context);
 

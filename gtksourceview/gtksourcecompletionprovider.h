@@ -108,57 +108,57 @@ struct _GtkSourceCompletionProviderIface
 	gint		 (*get_priority)	(GtkSourceCompletionProvider *provider);
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType		 gtk_source_completion_provider_get_type	(void);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gchar		*gtk_source_completion_provider_get_name	(GtkSourceCompletionProvider *provider);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GdkPixbuf	*gtk_source_completion_provider_get_icon	(GtkSourceCompletionProvider *provider);
 
-GTK_SOURCE_AVAILABLE_IN_3_18
+G_MODULE_EXPORT
 const gchar	*gtk_source_completion_provider_get_icon_name	(GtkSourceCompletionProvider *provider);
 
-GTK_SOURCE_AVAILABLE_IN_3_18
+G_MODULE_EXPORT
 GIcon		*gtk_source_completion_provider_get_gicon	(GtkSourceCompletionProvider *provider);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void		 gtk_source_completion_provider_populate	(GtkSourceCompletionProvider *provider,
 								 GtkSourceCompletionContext  *context);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceCompletionActivation
 		 gtk_source_completion_provider_get_activation (GtkSourceCompletionProvider *provider);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean	 gtk_source_completion_provider_match 		(GtkSourceCompletionProvider *provider,
 		                                                 GtkSourceCompletionContext  *context);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkWidget	*gtk_source_completion_provider_get_info_widget	(GtkSourceCompletionProvider *provider,
 								 GtkSourceCompletionProposal *proposal);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void 		 gtk_source_completion_provider_update_info	(GtkSourceCompletionProvider *provider,
 								 GtkSourceCompletionProposal *proposal,
 								 GtkSourceCompletionInfo     *info);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean	 gtk_source_completion_provider_get_start_iter	(GtkSourceCompletionProvider *provider,
 								 GtkSourceCompletionContext  *context,
 								 GtkSourceCompletionProposal *proposal,
 								 GtkTextIter                 *iter);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean	 gtk_source_completion_provider_activate_proposal (GtkSourceCompletionProvider *provider,
 								   GtkSourceCompletionProposal *proposal,
 								   GtkTextIter                 *iter);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gint		 gtk_source_completion_provider_get_interactive_delay (GtkSourceCompletionProvider *provider);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gint		 gtk_source_completion_provider_get_priority	(GtkSourceCompletionProvider *provider);
 
 G_END_DECLS

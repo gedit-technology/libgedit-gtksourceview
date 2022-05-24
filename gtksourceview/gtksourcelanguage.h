@@ -56,39 +56,39 @@ struct _GtkSourceLanguageClass
 	gpointer padding[10];
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType		  gtk_source_language_get_type 		(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar	 *gtk_source_language_get_id		(GtkSourceLanguage *language);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar	 *gtk_source_language_get_name		(GtkSourceLanguage *language);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar	 *gtk_source_language_get_section	(GtkSourceLanguage *language);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gboolean	  gtk_source_language_get_hidden 	(GtkSourceLanguage *language);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar	 *gtk_source_language_get_metadata	(GtkSourceLanguage *language,
 							 const gchar       *name);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gchar		**gtk_source_language_get_mime_types	(GtkSourceLanguage *language);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gchar		**gtk_source_language_get_globs		(GtkSourceLanguage *language);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 gchar		**gtk_source_language_get_style_ids 	(GtkSourceLanguage *language);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar	*gtk_source_language_get_style_name	(GtkSourceLanguage *language,
 							 const gchar       *style_id);
 
-GTK_SOURCE_AVAILABLE_IN_3_4
+G_MODULE_EXPORT
 const gchar	*gtk_source_language_get_style_fallback	(GtkSourceLanguage *language,
 							 const gchar       *style_id);
 

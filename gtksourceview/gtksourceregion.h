@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 
 #define GTK_SOURCE_TYPE_REGION (gtk_source_region_get_type ())
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 G_DECLARE_DERIVABLE_TYPE (GtkSourceRegion, gtk_source_region,
 			  GTK_SOURCE, REGION,
 			  GObject)
@@ -63,63 +63,63 @@ struct _GtkSourceRegionIter
 	gpointer dummy3;
 };
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 GtkSourceRegion *	gtk_source_region_new			(GtkTextBuffer *buffer);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 GtkTextBuffer *		gtk_source_region_get_buffer		(GtkSourceRegion *region);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 void			gtk_source_region_add_subregion		(GtkSourceRegion   *region,
 								 const GtkTextIter *_start,
 								 const GtkTextIter *_end);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 void			gtk_source_region_add_region		(GtkSourceRegion *region,
 								 GtkSourceRegion *region_to_add);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 void			gtk_source_region_subtract_subregion	(GtkSourceRegion   *region,
 								 const GtkTextIter *_start,
 								 const GtkTextIter *_end);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 void			gtk_source_region_subtract_region	(GtkSourceRegion *region,
 								 GtkSourceRegion *region_to_subtract);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 GtkSourceRegion *	gtk_source_region_intersect_subregion	(GtkSourceRegion   *region,
 								 const GtkTextIter *_start,
 								 const GtkTextIter *_end);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 GtkSourceRegion *	gtk_source_region_intersect_region	(GtkSourceRegion *region1,
 								 GtkSourceRegion *region2);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 gboolean		gtk_source_region_is_empty		(GtkSourceRegion *region);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 gboolean		gtk_source_region_get_bounds		(GtkSourceRegion *region,
 								 GtkTextIter     *start,
 								 GtkTextIter     *end);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 void			gtk_source_region_get_start_region_iter	(GtkSourceRegion     *region,
 								 GtkSourceRegionIter *iter);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 gboolean		gtk_source_region_iter_is_end		(GtkSourceRegionIter *iter);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 gboolean		gtk_source_region_iter_next		(GtkSourceRegionIter *iter);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 gboolean		gtk_source_region_iter_get_subregion	(GtkSourceRegionIter *iter,
 								 GtkTextIter         *start,
 								 GtkTextIter         *end);
 
-GTK_SOURCE_AVAILABLE_IN_3_22
+G_MODULE_EXPORT
 gchar *			gtk_source_region_to_string		(GtkSourceRegion *region);
 
 G_END_DECLS

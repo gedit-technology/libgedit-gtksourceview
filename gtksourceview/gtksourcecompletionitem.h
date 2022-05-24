@@ -53,37 +53,37 @@ struct _GtkSourceCompletionItemClass {
 	gpointer padding[10];
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType 			 gtk_source_completion_item_get_type 		(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_4_0
+G_MODULE_EXPORT
 GtkSourceCompletionItem *gtk_source_completion_item_new			(void);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 void			 gtk_source_completion_item_set_label		(GtkSourceCompletionItem *item,
 									 const gchar             *label);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 void			 gtk_source_completion_item_set_markup		(GtkSourceCompletionItem *item,
 									 const gchar             *markup);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 void			 gtk_source_completion_item_set_text		(GtkSourceCompletionItem *item,
 									 const gchar             *text);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 void			 gtk_source_completion_item_set_icon		(GtkSourceCompletionItem *item,
 									 GdkPixbuf               *icon);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 void			 gtk_source_completion_item_set_icon_name	(GtkSourceCompletionItem *item,
 									 const gchar             *icon_name);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 void			 gtk_source_completion_item_set_gicon		(GtkSourceCompletionItem *item,
 									 GIcon                   *gicon);
 
-GTK_SOURCE_AVAILABLE_IN_3_24
+G_MODULE_EXPORT
 void			 gtk_source_completion_item_set_info		(GtkSourceCompletionItem *item,
 									 const gchar             *info);
 

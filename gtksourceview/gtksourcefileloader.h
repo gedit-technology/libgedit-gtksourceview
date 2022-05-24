@@ -77,40 +77,40 @@ struct _GtkSourceFileLoaderClass
 	gpointer padding[10];
 };
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GType		 	 gtk_source_file_loader_get_type	(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GQuark			 gtk_source_file_loader_error_quark	(void);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceFileLoader	*gtk_source_file_loader_new		(GtkSourceBuffer         *buffer,
 								 GtkSourceFile           *file);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceFileLoader	*gtk_source_file_loader_new_from_stream	(GtkSourceBuffer         *buffer,
 								 GtkSourceFile           *file,
 								 GInputStream            *stream);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 void			 gtk_source_file_loader_set_candidate_encodings
 								(GtkSourceFileLoader     *loader,
 								 GSList                  *candidate_encodings);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceBuffer		*gtk_source_file_loader_get_buffer	(GtkSourceFileLoader     *loader);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceFile		*gtk_source_file_loader_get_file	(GtkSourceFileLoader     *loader);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GFile			*gtk_source_file_loader_get_location	(GtkSourceFileLoader     *loader);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GInputStream		*gtk_source_file_loader_get_input_stream
 								(GtkSourceFileLoader     *loader);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 void			 gtk_source_file_loader_load_async	(GtkSourceFileLoader     *loader,
 								 gint                     io_priority,
 								 GCancellable            *cancellable,
@@ -120,18 +120,18 @@ void			 gtk_source_file_loader_load_async	(GtkSourceFileLoader     *loader,
 								 GAsyncReadyCallback      callback,
 								 gpointer                 user_data);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 gboolean		 gtk_source_file_loader_load_finish	(GtkSourceFileLoader     *loader,
 								 GAsyncResult            *result,
 								 GError                 **error);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 const GtkSourceEncoding	*gtk_source_file_loader_get_encoding	(GtkSourceFileLoader     *loader);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceNewlineType	 gtk_source_file_loader_get_newline_type (GtkSourceFileLoader    *loader);
 
-GTK_SOURCE_AVAILABLE_IN_3_14
+G_MODULE_EXPORT
 GtkSourceCompressionType gtk_source_file_loader_get_compression_type
 								(GtkSourceFileLoader     *loader);
 

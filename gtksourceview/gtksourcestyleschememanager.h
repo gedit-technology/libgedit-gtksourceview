@@ -26,6 +26,7 @@
 #endif
 
 #include <glib-object.h>
+#include <gmodule.h>
 #include <gtksourceview/gtksourcetypes.h>
 
 G_BEGIN_DECLS
@@ -55,39 +56,39 @@ struct _GtkSourceStyleSchemeManagerClass
 	gpointer padding[10];
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType			 gtk_source_style_scheme_manager_get_type		(void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceStyleSchemeManager *
 			 gtk_source_style_scheme_manager_new			(void);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceStyleSchemeManager *
 			 gtk_source_style_scheme_manager_get_default		(void);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void			 gtk_source_style_scheme_manager_set_search_path	(GtkSourceStyleSchemeManager	*manager,
 						    				 gchar			       **path);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void 			 gtk_source_style_scheme_manager_append_search_path	(GtkSourceStyleSchemeManager	*manager,
 						    				 const gchar			*path);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void 			 gtk_source_style_scheme_manager_prepend_search_path	(GtkSourceStyleSchemeManager	*manager,
 						    				 const gchar			*path);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar * const *	 gtk_source_style_scheme_manager_get_search_path	(GtkSourceStyleSchemeManager	*manager);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 void			 gtk_source_style_scheme_manager_force_rescan		(GtkSourceStyleSchemeManager	*manager);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar * const *	 gtk_source_style_scheme_manager_get_scheme_ids		(GtkSourceStyleSchemeManager	*manager);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceStyleScheme	*gtk_source_style_scheme_manager_get_scheme		(GtkSourceStyleSchemeManager	*manager,
 										 const gchar			*scheme_id);
 

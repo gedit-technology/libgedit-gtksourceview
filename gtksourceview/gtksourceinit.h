@@ -24,15 +24,15 @@
 #error "Only <gtksourceview/gtksource.h> can be included directly."
 #endif
 
-#include <glib.h>
+#include <gmodule.h>
 #include <gtksourceview/gtksourceversion.h>
 
 G_BEGIN_DECLS
 
-GTK_SOURCE_AVAILABLE_IN_4_0
+G_MODULE_EXPORT
 void	gtk_source_init		(void);
 
-GTK_SOURCE_AVAILABLE_IN_4_0
+G_MODULE_EXPORT
 void	gtk_source_finalize	(void);
 
 G_END_DECLS

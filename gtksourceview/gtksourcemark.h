@@ -56,21 +56,21 @@ struct _GtkSourceMarkClass
 	gpointer padding[10];
 };
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GType		 gtk_source_mark_get_type (void) G_GNUC_CONST;
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceMark   *gtk_source_mark_new		(const gchar	*name,
 						 const gchar	*category);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 const gchar	*gtk_source_mark_get_category	(GtkSourceMark	*mark);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceMark	*gtk_source_mark_next		(GtkSourceMark	*mark,
 						 const gchar	*category);
 
-GTK_SOURCE_AVAILABLE_IN_ALL
+G_MODULE_EXPORT
 GtkSourceMark	*gtk_source_mark_prev		(GtkSourceMark	*mark,
 						 const gchar	*category);
 
