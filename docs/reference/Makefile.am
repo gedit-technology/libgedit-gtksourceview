@@ -11,7 +11,7 @@ DOC_MAIN_SGML_FILE = libgedit-gtksourceview-docs.xml
 SCAN_OPTIONS =								\
 	--deprecated-guards='GTKSOURCEVIEW_DISABLE_DEPRECATED'		\
 	--rebuild-types							\
-	--ignore-decorators='GTK_SOURCE_DEPRECATED\w*\s*\([^)]*\)|GTK_SOURCE_DEPRECATED\w*|GTK_SOURCE_AVAILABLE\w*'
+	--ignore-decorators='GTK_SOURCE_DEPRECATED\w*\s*\([^)]*\)|GTK_SOURCE_DEPRECATED\w*'
 
 # The directory containing the source code. Relative to $(srcdir)
 DOC_SOURCE_DIR = $(top_srcdir)/gtksourceview
