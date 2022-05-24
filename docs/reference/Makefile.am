@@ -8,9 +8,7 @@ DOC_MODULE = libgedit-gtksourceview-@GSV_API_VERSION@
 DOC_MAIN_SGML_FILE = libgedit-gtksourceview-docs.xml
 
 # Extra options to supply to gtkdoc-scan
-SCAN_OPTIONS =								\
-	--deprecated-guards='GTKSOURCEVIEW_DISABLE_DEPRECATED'		\
-	--rebuild-types
+SCAN_OPTIONS = --rebuild-types
 
 # The directory containing the source code. Relative to $(srcdir)
 DOC_SOURCE_DIR = $(top_srcdir)/gtksourceview
