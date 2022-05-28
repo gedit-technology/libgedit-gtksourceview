@@ -1,3 +1,3 @@
 #!/bin/sh
 
-itstool -i styles.its -o styles.pot default-style-schemes/*.xml
+itstool -i style-schemes.its -o style-schemes.pot default-style-schemes/*.xml

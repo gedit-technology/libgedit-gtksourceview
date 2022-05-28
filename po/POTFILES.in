@@ -1,5 +1,5 @@
 data/language-specs/language-specs.pot
-data/style-schemes/styles.pot
+data/style-schemes/style-schemes.pot
 gtksourceview/completion-providers/words/gtksourcecompletionwords.c
 gtksourceview/gtksourcebuffer.c
 gtksourceview/gtksourcebufferinputstream.c

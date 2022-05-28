@@ -2,4 +2,4 @@
 
 # Usage: ./check-style-schemes.sh XML-FILE(S)...
 
-xmllint --relaxng styles.rng --noout "$@"
+xmllint --relaxng style-schemes.rng --noout "$@"
