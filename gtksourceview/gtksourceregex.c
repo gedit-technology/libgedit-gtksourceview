@@ -66,39 +66,13 @@ struct _GtkSourceRegex
 	guint resolved : 1;
 };
 
-/* Check whether pattern contains \C escape sequence,
- * which means "single byte" in pcre and naturally leads
- * to crash if used for highlighting.
+/* Check whether pattern contains \C escape sequence, which means "single byte"
+ * in pcre and naturally leads to crash if used for highlighting.
  */
 static gboolean
-find_single_byte_escape (const gchar *string)
+find_single_byte_escape (const gchar *str)
 {
-	const char *p = string;
-
-	while ((p = strstr (p, "\\C")))
-	{
-		const char *slash;
-		gboolean found;
-
-		if (p == string)
-			return TRUE;
-
-		found = TRUE;
-		slash = p - 1;
-
-		while (slash >= string && *slash == '\\')
-		{
-			found = !found;
-			slash--;
-		}
-
-		if (found)
-			return TRUE;
-
-		p += 2;
-	}
-
-	return FALSE;
+	return _gtk_source_utils_find_escaped_char (str, 'C') != NULL;
 }
 
 /**
