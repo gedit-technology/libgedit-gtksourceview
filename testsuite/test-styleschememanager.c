@@ -18,7 +18,6 @@
  * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
 static void
@@ -55,12 +54,19 @@ test_prepend_search_path (void)
 }
 
 int
-main (int argc, char** argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	g_test_add_func ("/StyleSchemeManager/get-default", test_get_default);
 	g_test_add_func ("/StyleSchemeManager/prepend-search-path", test_prepend_search_path);
 
-	return g_test_run();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

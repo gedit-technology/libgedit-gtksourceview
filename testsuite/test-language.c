@@ -24,7 +24,6 @@
 #endif
 
 #include <stdlib.h>
-#include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
 typedef struct _TestFixture TestFixture;
@@ -189,9 +188,15 @@ int
 main (int    argc,
       char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	g_test_add ("/Language/language-properties", TestFixture, NULL, test_fixture_setup, test_language, test_fixture_teardown);
 
-	return g_test_run();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

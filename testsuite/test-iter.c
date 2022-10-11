@@ -18,6 +18,7 @@
  * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <gtksourceview/gtksource.h>
 #include "gtksourceview/gtksourceiter.h"
 
 static void
@@ -474,9 +475,13 @@ test_get_trailing_spaces_start_boundary (void)
 }
 
 int
-main (int argc, char **argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	g_test_add_func ("/Iter/full-word/forward", test_forward_full_word_end);
 	g_test_add_func ("/Iter/full-word/backward", test_backward_full_word_start);
@@ -495,5 +500,8 @@ main (int argc, char **argv)
 	g_test_add_func ("/Iter/get_leading_spaces_end_boundary", test_get_leading_spaces_end_boundary);
 	g_test_add_func ("/Iter/get_trailing_spaces_start_boundary", test_get_trailing_spaces_start_boundary);
 
-	return g_test_run ();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

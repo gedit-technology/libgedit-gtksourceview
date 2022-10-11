@@ -21,7 +21,6 @@
  * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
 /* If we are running from the source dir (e.g. during make check)
@@ -185,9 +184,13 @@ test_guess_language (void)
 }
 
 int
-main (int argc, char** argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	init_default_manager ();
 
@@ -199,5 +202,8 @@ main (int argc, char** argv)
 	g_test_add_func ("/LanguageManager/guess-language/subprocess/null_empty", test_guess_language_null_empty);
 	g_test_add_func ("/LanguageManager/guess-language/subprocess/empty_empty", test_guess_language_empty_empty);
 
-	return g_test_run();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

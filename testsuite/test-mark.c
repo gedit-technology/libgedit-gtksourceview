@@ -19,7 +19,6 @@
  * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
 static void
@@ -137,14 +136,21 @@ test_get_source_marks_at_iter (void)
 }
 
 int
-main (int argc, char** argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	g_test_add_func ("/Mark/create", test_create);
 	g_test_add_func ("/Mark/prev-next", test_prev_next);
 	g_test_add_func ("/Mark/forward-backward-iter", test_forward_backward_iter);
 	g_test_add_func ("/Mark/get-source-marks-at-iter", test_get_source_marks_at_iter);
 
-	return g_test_run();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

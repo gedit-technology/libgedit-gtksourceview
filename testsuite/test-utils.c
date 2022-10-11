@@ -76,12 +76,19 @@ test_escape_search_text (void)
 }
 
 int
-main (int argc, char **argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	g_test_add_func ("/Utils/unescape_search_text", test_unescape_search_text);
 	g_test_add_func ("/Utils/escape_search_text", test_escape_search_text);
 
-	return g_test_run ();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

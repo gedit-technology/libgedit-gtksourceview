@@ -17,7 +17,6 @@
  * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
 typedef struct
@@ -1311,9 +1310,13 @@ test_destroy_buffer_during_search (void)
 }
 
 int
-main (int argc, char **argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	init_style_scheme_manager ();
 
@@ -1340,5 +1343,8 @@ main (int argc, char **argv)
 	g_test_add_func ("/Search/regex/look-ahead", test_regex_look_ahead);
 	g_test_add_func ("/Search/destroy-buffer-during-search", test_destroy_buffer_during_search);
 
-	return g_test_run ();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

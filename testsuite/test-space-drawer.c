@@ -236,11 +236,18 @@ test_matrix_getters_setters (void)
 }
 
 int
-main (int argc, char **argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	g_test_add_func ("/SpaceDrawer/matrix-getters-setters", test_matrix_getters_setters);
 
-	return g_test_run();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

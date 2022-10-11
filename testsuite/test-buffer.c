@@ -437,9 +437,13 @@ test_bracket_matching (void)
 }
 
 int
-main (int argc, char** argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	init_default_manager ();
 
@@ -450,5 +454,8 @@ main (int argc, char** argv)
 	g_test_add_func ("/Buffer/sort-lines", test_sort_lines);
 	g_test_add_func ("/Buffer/bracket-matching", test_bracket_matching);
 
-	return g_test_run();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

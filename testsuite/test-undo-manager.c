@@ -18,7 +18,6 @@
  * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
 static void
@@ -874,9 +873,13 @@ test_mix_user_action_and_not_undoable_action (void)
 }
 
 int
-main (int argc, char **argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	g_test_add_func ("/UndoManager/test-get-set-max-undo-levels",
 			 test_get_set_max_undo_levels);
@@ -914,5 +917,8 @@ main (int argc, char **argv)
 	g_test_add_func ("/UndoManager/mix-user-action-and-not-undoable-action",
 			 test_mix_user_action_and_not_undoable_action);
 
-	return g_test_run ();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

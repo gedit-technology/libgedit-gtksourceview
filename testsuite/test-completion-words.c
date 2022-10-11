@@ -66,12 +66,19 @@ test_library_find (void)
 }
 
 int
-main (int argc, char **argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	g_test_add_func ("/CompletionWords/library/find",
 			 test_library_find);
 
-	return g_test_run ();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

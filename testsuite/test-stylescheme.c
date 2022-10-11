@@ -23,7 +23,6 @@
 #endif
 
 #include <stdlib.h>
-#include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
 typedef struct _TestFixture TestFixture;
@@ -149,12 +148,19 @@ test_named_color_alpha (TestFixture   *fixture,
 }
 
 int
-main (int argc, char** argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	g_test_add ("/StyleScheme/scheme-properties", TestFixture, NULL, test_fixture_setup, test_scheme_properties, test_fixture_teardown);
 	g_test_add ("/StyleScheme/named-colors-alpha", TestFixture, NULL, test_fixture_setup, test_named_color_alpha, test_fixture_teardown);
 
-	return g_test_run();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }

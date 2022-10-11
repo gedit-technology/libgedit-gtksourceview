@@ -300,14 +300,21 @@ test_add_subtract_intersect_region (void)
 }
 
 int
-main (int argc, char **argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
 	g_test_add_func ("/Region/weak-ref", test_weak_ref);
 	g_test_add_func ("/Region/add-subtract-subregion", test_add_subtract_subregion);
 	g_test_add_func ("/Region/intersect-subregion", test_intersect_subregion);
 	g_test_add_func ("/Region/add-subtract-intersect-region", test_add_subtract_intersect_region);
 
-	return g_test_run();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }
