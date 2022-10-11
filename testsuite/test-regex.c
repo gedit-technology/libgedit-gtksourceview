@@ -18,27 +18,33 @@
  * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 #include "gtksourceview/gtksourceregex.h"
 
 static void
-test_slash_c_pattern (void)
+test_backslash_c_pattern (void)
 {
 	GtkSourceRegex *regex;
 	GError *error = NULL;
 
 	regex = _gtk_source_regex_new ("\\C", 0, &error);
 	g_assert_error (error, G_REGEX_ERROR, G_REGEX_ERROR_COMPILE);
-	g_assert (regex == NULL);
+	g_assert_null (regex);
 }
 
 int
-main (int argc, char** argv)
+main (int    argc,
+      char **argv)
 {
+	gint ret;
+
 	gtk_test_init (&argc, &argv);
+	gtk_source_init ();
 
-	g_test_add_func ("/Regex/slash-c", test_slash_c_pattern);
+	g_test_add_func ("/Regex/backslash_c_pattern", test_backslash_c_pattern);
 
-	return g_test_run();
+	ret = g_test_run ();
+	gtk_source_finalize ();
+
+	return ret;
 }
