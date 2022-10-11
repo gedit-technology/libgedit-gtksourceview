@@ -1308,7 +1308,7 @@ _gtk_source_space_drawer_draw (GtkSourceSpaceDrawer *drawer,
 			_gtk_source_iter_get_trailing_spaces_start_boundary (&iter, &trailing_start);
 			get_line_end (text_view, &iter, &line_end, max_x, max_y, is_wrapping);
 		}
-	};
+	}
 
 	cairo_restore (cr);
 
