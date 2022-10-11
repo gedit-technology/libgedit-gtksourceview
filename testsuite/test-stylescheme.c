@@ -42,7 +42,7 @@ test_fixture_setup (TestFixture   *fixture,
 	gchar *dir;
 	gchar **style_dirs;
 
-	dir = g_build_filename (TOP_SRCDIR, "data", "styles", NULL);
+	dir = g_build_filename (TOP_SRCDIR, "data", "style-schemes", "default-style-schemes", NULL);
 
 	fixture->manager = gtk_source_style_scheme_manager_get_default ();
 

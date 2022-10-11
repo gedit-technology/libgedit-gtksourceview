@@ -58,7 +58,7 @@ init_style_scheme_manager (void)
 {
 	gchar *dir;
 
-	dir = g_build_filename (TOP_SRCDIR, "data", "styles", NULL);
+	dir = g_build_filename (TOP_SRCDIR, "data", "style-schemes", "default-style-schemes", NULL);
 
 	if (g_file_test (dir, G_FILE_TEST_IS_DIR))
 	{
