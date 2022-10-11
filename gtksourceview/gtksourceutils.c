@@ -5,7 +5,7 @@
  * Copyright (C) 2005 - Paolo Borelli
  * Copyright (C) 2007 - Gustavo Giráldez
  * Copyright (C) 2007 - Paolo Maggi
- * Copyright (C) 2013, 2017 - Sébastien Wilmet <swilmet@gnome.org>
+ * Copyright (C) 2013-2022 - Sébastien Wilmet <swilmet@gnome.org>
  *
  * GtkSourceView is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -319,6 +319,56 @@ _gtk_source_utils_string_to_int (const gchar *str)
 	}
 
 	return number;
+}
+
+/*
+ * _gtk_source_utils_find_escaped_char:
+ * @str: a valid UTF-8 string. Must not be %NULL.
+ * @ch: a character.
+ *
+ * Finds an escaped character. For @ch to be escaped, it must be preceded by an
+ * odd number of backslashes. Usually only one backslash and then @ch.
+ *
+ * Examples with @ch set to `'C'`:
+ * - `"\C"`: C is escaped.
+ * - `"\\C"`: C is not escaped, it is preceded by an escaped backslash.
+ * - `"\\\C"`: C is escaped.
+ *
+ * Use-case: know if `"\C"` is present in a #GRegex pattern.
+ *
+ * Returns: (nullable): the position in @str where @ch has been found to be
+ *   escaped (the return value points to a @ch value, not the backslash). Or
+ *   %NULL if an escaped @ch is not present in @str.
+ */
+const gchar *
+_gtk_source_utils_find_escaped_char (const gchar *str,
+				     gchar        ch)
+{
+	gboolean escaped = FALSE;
+	const gchar *str_pos;
+
+	g_return_val_if_fail (str != NULL, NULL);
+	g_return_val_if_fail (g_utf8_validate (str, -1, NULL), NULL);
+
+	for (str_pos = str; *str_pos != '\0'; str_pos++)
+	{
+		gchar cur_char = *str_pos;
+
+		if (cur_char == '\\')
+		{
+			escaped = !escaped;
+		}
+		else if (cur_char == ch && escaped)
+		{
+			return str_pos;
+		}
+		else
+		{
+			escaped = FALSE;
+		}
+	}
+
+	return NULL;
 }
 
 /*

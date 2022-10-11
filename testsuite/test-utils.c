@@ -18,6 +18,7 @@
  */
 
 #include <gtksourceview/gtksource.h>
+#include "gtksourceview/gtksourceutils-private.h"
 
 static void
 test_unescape_search_text (void)
@@ -75,6 +76,65 @@ test_escape_search_text (void)
 	g_free (escaped_text);
 }
 
+static void
+test_find_escaped_char (void)
+{
+	const gchar *str_pos;
+	const gchar *str;
+
+	/* Without backslashes */
+	str_pos = _gtk_source_utils_find_escaped_char ("", 'C');
+	g_assert_null (str_pos);
+
+	str_pos = _gtk_source_utils_find_escaped_char ("a", 'C');
+	g_assert_null (str_pos);
+
+	str_pos = _gtk_source_utils_find_escaped_char ("abc", 'C');
+	g_assert_null (str_pos);
+
+	str_pos = _gtk_source_utils_find_escaped_char ("C", 'C');
+	g_assert_null (str_pos);
+
+	str_pos = _gtk_source_utils_find_escaped_char ("abC", 'C');
+	g_assert_null (str_pos);
+
+	str_pos = _gtk_source_utils_find_escaped_char ("Cde", 'C');
+	g_assert_null (str_pos);
+
+	str_pos = _gtk_source_utils_find_escaped_char ("UTF-8 éèç C blah", 'C');
+	g_assert_null (str_pos);
+
+	/* With backslash */
+	str_pos = _gtk_source_utils_find_escaped_char ("\\D", 'C');
+	g_assert_null (str_pos);
+
+	str_pos = _gtk_source_utils_find_escaped_char ("\\DC", 'C');
+	g_assert_null (str_pos);
+
+	str_pos = _gtk_source_utils_find_escaped_char ("\\\\C", 'C');
+	g_assert_null (str_pos);
+
+	str = "\\C";
+	str_pos = _gtk_source_utils_find_escaped_char (str, 'C');
+	g_assert_nonnull (str_pos);
+	g_assert_cmpint (str_pos - str, ==, 1);
+
+	str = "\\D\\C";
+	str_pos = _gtk_source_utils_find_escaped_char (str, 'C');
+	g_assert_nonnull (str_pos);
+	g_assert_cmpint (str_pos - str, ==, 3);
+
+	str = "CCC\\C";
+	str_pos = _gtk_source_utils_find_escaped_char (str, 'C');
+	g_assert_nonnull (str_pos);
+	g_assert_cmpint (str_pos - str, ==, 4);
+
+	str = "a \\\\\\Cosinus";
+	str_pos = _gtk_source_utils_find_escaped_char (str, 'C');
+	g_assert_nonnull (str_pos);
+	g_assert_cmpint (str_pos - str, ==, 5);
+}
+
 int
 main (int    argc,
       char **argv)
@@ -86,6 +146,7 @@ main (int    argc,
 
 	g_test_add_func ("/Utils/unescape_search_text", test_unescape_search_text);
 	g_test_add_func ("/Utils/escape_search_text", test_escape_search_text);
+	g_test_add_func ("/Utils/find_escaped_char", test_find_escaped_char);
 
 	ret = g_test_run ();
 	gtk_source_finalize ();

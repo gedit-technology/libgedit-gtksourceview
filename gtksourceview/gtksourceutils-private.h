@@ -38,6 +38,10 @@ GSList *	_gtk_source_utils_get_file_list			(gchar       **path,
 G_GNUC_INTERNAL
 gint		_gtk_source_utils_string_to_int			(const gchar *str);
 
+G_GNUC_INTERNAL
+const gchar *	_gtk_source_utils_find_escaped_char		(const gchar *str,
+								 gchar        ch);
+
 /* Note: it returns duplicated string. */
 G_GNUC_INTERNAL
 gchar *		_gtk_source_utils_dgettext			(const gchar *domain,
