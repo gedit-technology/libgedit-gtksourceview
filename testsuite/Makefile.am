@@ -62,6 +62,9 @@ test_language_SOURCES = test-language.c
 UNIT_TEST_PROGS += test-languagemanager
 test_languagemanager_SOURCES = test-languagemanager.c
 
+UNIT_TEST_PROGS += test-language-specs
+test_language_specs_SOURCES = test-language-specs.c
+
 UNIT_TEST_PROGS += test-mark
 test_mark_SOURCES = test-mark.c
 
