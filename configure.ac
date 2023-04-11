@@ -1,24 +1,12 @@
 AC_PREREQ(2.64)
 
-m4_define(gtksourceview_major_version, 299)
-m4_define(gtksourceview_minor_version, 0)
-m4_define(gtksourceview_micro_version, 0)
-m4_define(gtksourceview_version, gtksourceview_major_version.gtksourceview_minor_version.gtksourceview_micro_version)
-
 AC_INIT([libgedit-gtksourceview],
-	[gtksourceview_version],
+	[299.0.0],
 	[https://github.com/gedit-technology/libgedit-gtksourceview/issues],
 	[libgedit-gtksourceview],
 	[https://gedit-technology.net/])
 
 AX_IS_RELEASE([git-directory])
-
-GTK_SOURCE_MAJOR_VERSION=gtksourceview_major_version
-GTK_SOURCE_MINOR_VERSION=gtksourceview_minor_version
-GTK_SOURCE_MICRO_VERSION=gtksourceview_micro_version
-AC_SUBST(GTK_SOURCE_MAJOR_VERSION)
-AC_SUBST(GTK_SOURCE_MINOR_VERSION)
-AC_SUBST(GTK_SOURCE_MICRO_VERSION)
 
 # Libtool versioning
 #
