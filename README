@@ -19,8 +19,8 @@ The official web site is:
 Dependencies
 ------------
 
-* GLib >= 2.48
-* GTK+ >= 3.20
+* GLib >= 2.60
+* GTK >= 3.20
 * libxml2 >= 2.6
 
 Installation
