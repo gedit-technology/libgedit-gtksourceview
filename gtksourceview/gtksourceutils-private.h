@@ -24,7 +24,6 @@
 #define GTK_SOURCE_UTILS_PRIVATE_H
 
 #include <glib.h>
-#include <pango/pango.h>
 
 G_BEGIN_DECLS
 
@@ -38,9 +37,6 @@ GSList *	_gtk_source_utils_get_file_list			(gchar       **path,
 
 G_GNUC_INTERNAL
 gint		_gtk_source_utils_string_to_int			(const gchar *str);
-
-G_GNUC_INTERNAL
-gchar *		_gtk_source_utils_pango_font_description_to_css	(const PangoFontDescription *font_desc);
 
 /* Note: it returns duplicated string. */
 G_GNUC_INTERNAL
