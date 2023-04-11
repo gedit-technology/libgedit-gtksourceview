@@ -1,6 +1,12 @@
 How to contribute to libgedit-gtksourceview
 ===========================================
 
+Git commit messages
+-------------------
+
+Convention: the first line (a short description) should contain at most 72
+characters.
+
 C code conventions
 ------------------
 
