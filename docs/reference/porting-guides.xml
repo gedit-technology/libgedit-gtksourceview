@@ -7,6 +7,9 @@
  %gtkdocentities;
 ]>
 
+<part id="porting-guides">
+<title>Porting Guides</title>
+
 <chapter id="porting-guide-3-to-4">
   <title>GtkSourceView 3 -> 4 Porting Guide</title>
 
@@ -175,3 +178,5 @@
     </itemizedlist>
   </refsect1>
 </chapter>
+
+</part>
