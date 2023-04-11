@@ -1,14 +1,14 @@
 SUBDIRS = default-style-schemes
 
-#TESTS = check-style.sh
+TESTS = test.sh
 
-stylesdir = $(datadir)/libgedit-gtksourceview-@GSV_API_VERSION@/styles
-dist_styles_DATA = styles.rng
-
-EXTRA_DIST =		\
-	check-style.sh	\
-	styles.its	\
-	styles.pot	\
+EXTRA_DIST =			\
+	check-style-schemes.sh	\
+	styles.its		\
+	styles.pot		\
+	styles.rng		\
+	test.sh			\
+	testdark.xml		\
 	update-pot.sh
 
 -include $(top_srcdir)/git.mk
