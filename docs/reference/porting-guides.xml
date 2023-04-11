@@ -241,6 +241,14 @@
           the Tepl library for a replacement.
         </para>
       </listitem>
+      <listitem>
+        <para>
+          The macros and functions to check the library version have been
+          removed: the <code>gtk_source_check_version()</code>,
+          <code>gtk_source_get_major_version()</code>, etc functions; as well as
+          all the macros such as <code>GTK_SOURCE_CHECK_VERSION()</code>.
+        </para>
+      </listitem>
     </itemizedlist>
   </refsect1>
 </chapter>
