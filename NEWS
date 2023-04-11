@@ -1,3 +1,15 @@
+News in x.y.z, 2023-xx-yy (not yet released)
+-------------------------
+* Rename the project to libgedit-gtksourceview.
+* Bump API version to 300. The "3" means that it targets GTK 3.
+* The Visual Studio (win32) project files are no longer generated.
+* Build system: some updates and simplifications.
+* Unit tests: properly test GtkSourceLanguage.
+* Style schemes: rely less on the provided colors by the GTK theme, fix some
+  regressions in classic and tango.
+* Some features have been removed, see the porting guide.
+* Use G_MODULE_EXPORT instead of custom macros.
+
 News in 4.0.2, 2018-06-17
 -------------------------
 * GtkSourceView has moved to the GNOME GitLab instance. The bugzilla tickets
