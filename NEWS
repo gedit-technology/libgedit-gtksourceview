@@ -9,6 +9,7 @@ News in x.y.z, 2023-xx-yy (not yet released)
   regressions in classic and tango.
 * Some features have been removed, see the porting guide.
 * Use G_MODULE_EXPORT instead of custom macros.
+* Some files reorganization in the data/ directory.
 
 News in 4.0.2, 2018-06-17
 -------------------------
