@@ -1,16 +1,14 @@
-dnl Process this file with autoconf to produce a configure script.
-
 AC_PREREQ(2.64)
 
-m4_define(gtksourceview_major_version, 4)
+m4_define(gtksourceview_major_version, 299)
 m4_define(gtksourceview_minor_version, 0)
-m4_define(gtksourceview_micro_version, 3)
+m4_define(gtksourceview_micro_version, 0)
 m4_define(gtksourceview_version, gtksourceview_major_version.gtksourceview_minor_version.gtksourceview_micro_version)
 
-AC_INIT([gtksourceview],
+AC_INIT([libgedit-gtksourceview],
         [gtksourceview_version],
 	[https://gitlab.gnome.org/GNOME/gtksourceview/issues],
-	[gtksourceview],
+	[libgedit-gtksourceview],
 	[https://wiki.gnome.org/Projects/GtkSourceView])
 
 AX_IS_RELEASE([git-directory])
@@ -24,11 +22,7 @@ AC_SUBST(GTK_SOURCE_MICRO_VERSION)
 
 # Libtool versioning
 #
-# For development releases (if the minor package version is odd), keep the same
-# Libtool version.
-#
-# For a new minor stable release (when incrementing the minor package version
-# to an even number), apply the following algorithm step by step:
+# For a new release, apply the following algorithm step by step:
 # 1. If the library source code has changed at all since the last
 #    update, then increment REVISION.
 # 2. If any exported functions or data have been added, removed, or
@@ -41,7 +35,6 @@ AC_SUBST(GTK_SOURCE_MICRO_VERSION)
 #
 # When incrementing the API version (usually for a new major package version),
 # set CURRENT, REVISION and AGE to 0 since it's like a new library.
-
 GSV_LT_CURRENT=0
 GSV_LT_REVISION=0
 GSV_LT_AGE=0
@@ -51,19 +44,18 @@ AC_SUBST([GSV_LT_VERSION])
 # API version, used for parallel installability.
 # Not used in:
 # - po/Makevars
-# - the docs/reference/gtksourceview-4.0-sections.txt filename
+# - the docs/reference/gtksourceview-300.0-sections.txt filename
 # Because as far as I've tested, it is not easily feasible to not hardcode the
 # API version in those places (swilmet).
-GSV_API_VERSION=4
+GSV_API_VERSION=300
 AC_SUBST([GSV_API_VERSION])
 AC_DEFINE_UNQUOTED([GSV_API_VERSION],
 		   ["$GSV_API_VERSION"],
-		   [Define to the GtkSourceView API version.])
+		   [Define to the libgedit-gtksourceview API version.])
 
 # Dependencies
 glib_req=2.60
 gtk_req=3.20
-libxml_req=2.6
 
 AC_CONFIG_SRCDIR([gtksourceview/gtksourcebuffer.h])
 AC_CONFIG_HEADER([config.h])
@@ -142,7 +134,7 @@ LT_LIB_M
 AX_REQUIRE_DEFINED([AX_PKG_CHECK_MODULES])
 AX_PKG_CHECK_MODULES([DEP],
 		     [glib-2.0 >= $glib_req  gio-2.0 >= $glib_req  gtk+-3.0 >= $gtk_req],
-		     [libxml-2.0 >= $libxml_req])
+		     [libxml-2.0])
 
 dnl check for native osx
 AC_MSG_CHECKING([for native Mac OS X])
@@ -161,7 +153,7 @@ AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.19.6])
 AM_GNU_GETTEXT_REQUIRE_VERSION([0.19.6])
 
-AC_SUBST([GETTEXT_PACKAGE], [gtksourceview-$GSV_API_VERSION])
+AC_SUBST([GETTEXT_PACKAGE], [libgedit-gtksourceview-$GSV_API_VERSION])
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [Define to the gettext package name.])
 
 # Documentation
@@ -198,7 +190,7 @@ AC_SUBST(ABS_TOP_SRCDIR)
 
 # Output files
 AC_CONFIG_FILES([
-gtksourceview-${GSV_API_VERSION}.pc:gtksourceview.pc.in
+libgedit-gtksourceview-${GSV_API_VERSION}.pc:libgedit-gtksourceview.pc.in
 Makefile
 data/Makefile
 data/language-specs/Makefile

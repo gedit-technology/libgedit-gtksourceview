@@ -1,43 +1,38 @@
-GtkSourceView
-=============
+libgedit-gtksourceview
+======================
 
-GtkSourceView is a GNOME library that extends GtkTextView, the standard GTK
-widget for multiline text editing. GtkSourceView adds support for syntax
-highlighting, undo/redo, file loading and saving, search and replace, a
-completion system, printing, displaying line numbers, and other features
-typical of a source code editor.
-
-The GtkSourceView library is free software and is released under the terms of
-the GNU Lesser General Public License, see the 'COPYING' file for more details.
-
-The official web site is:
-
-    https://wiki.gnome.org/Projects/GtkSourceView
+libgedit-gtksourceview is a library that extends GtkTextView, the standard GTK
+widget for multiline text editing. libgedit-gtksourceview adds support for
+syntax highlighting, undo/redo, file loading and saving, search and replace, a
+completion system, printing, displaying line numbers, and other features typical
+of a source code editor.
 
 Dependencies
 ------------
 
-* GLib >= 2.60
-* GTK >= 3.20
-* libxml2 >= 2.6
+- GLib >= 2.60
+- GTK >= 3.20
+- libxml2
 
 Installation
 ------------
 
 Simple install procedure from a tarball:
 
-  $ ./configure
-  $ make
-  [ Become root if necessary ]
-  $ make install
+```
+$ ./configure
+$ make
+[ Become root if necessary ]
+$ make install
+```
 
-See the file 'INSTALL' for more detailed information.
+See the file `INSTALL` for more detailed information.
 
-From the Git repository, the 'configure' script and the 'INSTALL' file are not
-yet generated, so you need to run 'autogen.sh' instead, which takes the same
-arguments as 'configure'.
+From the Git repository, the `configure` script and the `INSTALL` file are not
+yet generated, so you need to run `autogen.sh` instead, which takes the same
+arguments as `configure`.
 
 How to contribute
 -----------------
 
-See the 'HACKING' file.
+See the `HACKING` file.

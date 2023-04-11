@@ -9,12 +9,12 @@ AM_DISTCHECK_CONFIGURE_FLAGS =		\
 	--enable-introspection		\
 	--disable-code-coverage
 
-pkgconfig_DATA = gtksourceview-@GSV_API_VERSION@.pc
+pkgconfig_DATA = libgedit-gtksourceview-@GSV_API_VERSION@.pc
 
 EXTRA_DIST = \
 	gtksourceview.doap \
-	gtksourceview.pc.in \
-	HACKING
+	HACKING \
+	libgedit-gtksourceview.pc.in
 
 MAINTAINERCLEANFILES = \
 	$(GITIGNORE_MAINTAINERCLEANFILES_TOPLEVEL) \

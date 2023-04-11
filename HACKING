@@ -1,23 +1,5 @@
-How to contribute to GtkSourceView
-==================================
-
-GtkSourceView is hosted on the GNOME GitLab instance, you can fork the
-repository and then do a merge request:
-
-    https://gitlab.gnome.org/GNOME/gtksourceview
-
-Read the following wiki page to know the conventions for the commit messages:
-
-    https://wiki.gnome.org/Git/CommitMessages
-
-If you have write access to the Git repository, please don't push your commits
-directly unless you have been given the green light to commit freely to
-GtkSourceView. When in doubt assume you haven't ;-).
-
-People who can commit freely to GtkSourceView:
-* GtkSourceView maintainers (or sub-maintainers in their area of expertise),
-  with of course discussion before doing important changes.
-* GNOME "build sheriffs", to fix build issues.
+How to contribute to libgedit-gtksourceview
+===========================================
 
 C code conventions
 ------------------
@@ -132,13 +114,8 @@ Here are some general advices:
     writing hacks or heuristics to work around a bug or a lack of feature in an
     underlying library.
 
-See also:
-https://blogs.gnome.org/swilmet/2012/08/01/about-code-quality-and-maintainability/
-
 Other links
 -----------
-
-http://ometer.com/hacking.html
 
 For a shared library:
 
