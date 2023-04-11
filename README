@@ -13,8 +13,7 @@ of a source code editor.
 Dependencies
 ------------
 
-- GLib >= 2.60
-- GTK >= 3.20
+- GTK 3
 - libxml2
 
 Installation
