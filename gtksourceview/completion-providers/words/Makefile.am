@@ -2,13 +2,13 @@ include $(top_srcdir)/aminclude_static.am
 clean-local: code-coverage-clean
 distclean-local: code-coverage-dist-clean
 
-AM_CPPFLAGS = 				\
-	-DDATADIR=\""$(datadir)"\" 	\
-	-DG_LOG_DOMAIN=\"GtkSourceView\"\
-	-DGTK_SOURCE_COMPILATION	\
-	-I$(top_srcdir) -I$(srcdir) 	\
-	$(WARN_CFLAGS) 			\
-	$(CODE_COVERAGE_CPPFLAGS)	\
+AM_CPPFLAGS = 						\
+	-DDATADIR=\""$(datadir)"\" 			\
+	-DG_LOG_DOMAIN=\"libgedit-gtksourceview\"	\
+	-DGTK_SOURCE_COMPILATION			\
+	-I$(top_srcdir) -I$(srcdir) 			\
+	$(WARN_CFLAGS) 					\
+	$(CODE_COVERAGE_CPPFLAGS)			\
 	$(DEP_CFLAGS)
 
 noinst_LTLIBRARIES = libgtksourcecompletionwords.la

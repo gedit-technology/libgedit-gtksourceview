@@ -4,15 +4,15 @@ include $(top_srcdir)/aminclude_static.am
 clean-local: code-coverage-clean
 distclean-local: code-coverage-dist-clean
 
-AM_CPPFLAGS = 				\
-	-DDATADIR=\""$(datadir)"\" 	\
-	-DG_LOG_DOMAIN=\"GtkSourceView\"\
-	-DGTK_SOURCE_COMPILATION	\
-	-I$(top_builddir)		\
-	-I$(top_srcdir) -I$(srcdir) 	\
-	$(WARN_CFLAGS) 			\
-	$(CODE_COVERAGE_CPPFLAGS)	\
-	$(GTK_MAC_CFLAGS)		\
+AM_CPPFLAGS = 						\
+	-DDATADIR=\""$(datadir)"\" 			\
+	-DG_LOG_DOMAIN=\"libgedit-gtksourceview\"	\
+	-DGTK_SOURCE_COMPILATION			\
+	-I$(top_builddir)				\
+	-I$(top_srcdir) -I$(srcdir) 			\
+	$(WARN_CFLAGS) 					\
+	$(CODE_COVERAGE_CPPFLAGS)			\
+	$(GTK_MAC_CFLAGS)				\
 	$(DEP_CFLAGS)
 
 BUILT_SOURCES = 			\
