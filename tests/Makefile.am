@@ -2,11 +2,11 @@ include $(top_srcdir)/aminclude_static.am
 clean-local: code-coverage-clean
 distclean-local: code-coverage-dist-clean
 
-AM_CPPFLAGS = 				\
-	-DG_LOG_DOMAIN=\"GtkSourceView\"\
-	-I$(top_srcdir) -I$(srcdir) 	\
-	-DTOP_SRCDIR=\""$(ABS_TOP_SRCDIR)"\"\
-	$(WARN_CFLAGS) 			\
+AM_CPPFLAGS = 						\
+	-DG_LOG_DOMAIN=\"libgedit-gtksourceview\"	\
+	-I$(top_srcdir) -I$(srcdir) 			\
+	-DTOP_SRCDIR=\""$(ABS_TOP_SRCDIR)"\"		\
+	$(WARN_CFLAGS) 					\
 	$(DEP_CFLAGS)
 
 AM_LDFLAGS = $(WARN_LDFLAGS)

@@ -12,11 +12,11 @@ VALGRIND_SUPPRESSIONS_FILES =					\
 	$(top_srcdir)/../GNOME.supp/build/gdk.supp		\
 	$(top_srcdir)/../GNOME.supp/build/gtk3.supp
 
-AM_CPPFLAGS = 				\
-	-DG_LOG_DOMAIN=\"GtkSourceView\"\
-	-I$(top_srcdir) -I$(srcdir) 	\
-	-DTOP_SRCDIR=\""$(ABS_TOP_SRCDIR)"\"\
-	$(WARN_CFLAGS) 			\
+AM_CPPFLAGS = 						\
+	-DG_LOG_DOMAIN=\"libgedit-gtksourceview\"	\
+	-I$(top_srcdir) -I$(srcdir) 			\
+	-DTOP_SRCDIR=\""$(ABS_TOP_SRCDIR)"\"		\
+	$(WARN_CFLAGS) 					\
 	$(DEP_CFLAGS)
 
 AM_LDFLAGS = $(WARN_LDFLAGS)
@@ -122,7 +122,7 @@ instteststyle_DATA = 			\
 
 %.test: %$(EXEEXT) Makefile
 	$(AM_V_GEN) (echo '[Test]' > $@.tmp; \
-	echo 'Description=GtkSourceView test' >> $@.tmp; \
+	echo 'Description=libgedit-gtksourceview test' >> $@.tmp; \
 	echo 'Exec=$(insttestdir)/$<' >> $@.tmp; \
 	echo 'Type=session' >> $@.tmp; \
 	echo 'Output=TAP' >> $@.tmp; \
