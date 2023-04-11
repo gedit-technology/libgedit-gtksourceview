@@ -6,10 +6,10 @@ m4_define(gtksourceview_micro_version, 0)
 m4_define(gtksourceview_version, gtksourceview_major_version.gtksourceview_minor_version.gtksourceview_micro_version)
 
 AC_INIT([libgedit-gtksourceview],
-        [gtksourceview_version],
-	[https://gitlab.gnome.org/GNOME/gtksourceview/issues],
+	[gtksourceview_version],
+	[https://github.com/gedit-technology/libgedit-gtksourceview/issues],
 	[libgedit-gtksourceview],
-	[https://wiki.gnome.org/Projects/GtkSourceView])
+	[https://gedit-technology.net/])
 
 AX_IS_RELEASE([git-directory])
 
