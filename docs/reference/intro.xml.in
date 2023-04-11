@@ -19,7 +19,7 @@
   </para>
 
   <para>
-    GtkSourceView @GSV_API_VERSION@ depends on GTK 3.
+    libgedit-gtksourceview @GSV_API_VERSION@ depends on GTK 3.
   </para>
 
   <refsect1>
