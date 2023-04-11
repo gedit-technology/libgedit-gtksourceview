@@ -25,12 +25,10 @@
 
 G_BEGIN_DECLS
 
-/*
- * We need to be lower than the application priority to allow
- * application overrides. And we need enough room for
- * GtkSourceMap to be able to override the style priority.
+/* We need to be lower than the application priority to allow application
+ * overrides.
  */
-#define GTK_SOURCE_STYLE_PROVIDER_PRIORITY (GTK_STYLE_PROVIDER_PRIORITY_APPLICATION-2)
+#define GTK_SOURCE_STYLE_PROVIDER_PRIORITY (GTK_STYLE_PROVIDER_PRIORITY_APPLICATION - 1)
 
 enum
 {
