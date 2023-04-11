@@ -1,7 +1,7 @@
 AC_PREREQ(2.64)
 
 AC_INIT([libgedit-gtksourceview],
-	[299.0.0],
+	[299.0.1],
 	[https://github.com/gedit-technology/libgedit-gtksourceview/issues],
 	[libgedit-gtksourceview],
 	[https://gedit-technology.net/])
