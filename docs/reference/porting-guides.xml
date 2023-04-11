@@ -179,4 +179,42 @@
   </refsect1>
 </chapter>
 
+<chapter id="porting-guide-gtksourceview-4-to-libgedit-gtksourceview-300">
+  <title>GtkSourceView 4 -> libgedit-gtksourceview 300 Porting Guide</title>
+
+  <refsect1>
+    <title>GTK dependency</title>
+    <para>
+      Both GtkSourceView 4 and libgedit-gtksourceview 300 depend on GTK 3.
+    </para>
+    <para>
+      The “3” in “300” means that it targets GTK 3.
+    </para>
+  </refsect1>
+
+  <refsect1>
+    <title>pkg-config name</title>
+    <para>
+      The new pkg-config name is:
+      <code>libgedit-gtksourceview-300</code>
+    </para>
+  </refsect1>
+
+  <refsect1>
+    <title>For Vala</title>
+    <para>
+      For Vala code, use the GObject Introspection file, not the
+      <code>*.vapi</code>, because the <code>*.vapi</code> file has been
+      removed.
+    </para>
+  </refsect1>
+
+  <refsect1>
+    <title>For Glade</title>
+    <para>
+      The Glade catalog has been removed, so don't rely on it.
+    </para>
+  </refsect1>
+</chapter>
+
 </part>
