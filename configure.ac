@@ -58,7 +58,7 @@ glib_req=2.60
 gtk_req=3.20
 
 AC_CONFIG_SRCDIR([gtksourceview/gtksourcebuffer.h])
-AC_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
 # gnu strictness to generate the INSTALL file
