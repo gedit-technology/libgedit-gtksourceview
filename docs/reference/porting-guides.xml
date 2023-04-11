@@ -225,6 +225,15 @@
       is the usual location where <code>*.lang</code> files are found.
     </para>
   </refsect1>
+
+  <refsect1>
+    <title>API breaks</title>
+    <itemizedlist>
+      <listitem>
+        <code>GtkSourceMap</code> has been removed.
+      </listitem>
+    </itemizedlist>
+  </refsect1>
 </chapter>
 
 </part>
