@@ -14,7 +14,7 @@
 <refnamediv>
 <refname>Language Definition v2.0 Reference</refname>
 <refpurpose>
-Reference to the GtkSourceView language definition file format
+Reference to the libgedit-gtksourceview language definition file format
 </refpurpose>
 </refnamediv>
 
@@ -24,8 +24,7 @@ Reference to the GtkSourceView language definition file format
 <note>
   <para>
     The version 2 here refers to the language definition file format,
-    not to the version of GtkSourceView. This reference is suitable
-    for GtkSourceView 2, 3 and 4.
+    not to the version of libgedit-gtksourceview.
   </para>
 </note>
 
@@ -34,18 +33,16 @@ This is an overview of the Language Definition XML format, describing the
 meaning and usage of every element and attribute.  The formal definition is
 stored in the RelaxNG schema file <filename>language2.rng</filename> which
 should be installed on your system in the directory
-<filename>${PREFIX}/share/gtksourceview-@GSV_API_VERSION@/</filename> (where
-<filename>${PREFIX}</filename> can be <filename>/usr/</filename> or
-<filename>/usr/local/</filename> if you have installed from source.
+<filename>${PREFIX}/share/libgedit-gtksourceview-@GSV_API_VERSION@/</filename>
+(where <filename>${PREFIX}</filename> can be <filename>/usr/</filename> or
+<filename>/usr/local/</filename> if you have installed from source).
 </para>
 
 <para>
 The preinstalled language files are located in
-<filename>${PREFIX}/share/gtksourceview-@GSV_API_VERSION@/language-specs/</filename>. Custom
-user languages are usually placed in
-<filename>~/.local/share/gtksourceview-@GSV_API_VERSION@/language-specs/</filename>. Note:
-replace @GSV_API_VERSION@ with 2.0 or 3.0 in the path for GtkSourceView version
-2 or version 3.
+<filename>${PREFIX}/share/libgedit-gtksourceview-@GSV_API_VERSION@/language-specs/</filename>.
+Custom user languages are usually placed in
+<filename>~/.local/share/libgedit-gtksourceview-@GSV_API_VERSION@/language-specs/</filename>.
 </para>
 </refsect1>
 
@@ -83,9 +80,7 @@ file.
 <title>Conventions</title>
 
 <para>
-It is better to follow the following conventions, especially if you want to
-contribute upstream, and get your language definition file included in
-GtkSourceView.
+It is better to follow these conventions:
 </para>
 
 <itemizedlist>
@@ -118,14 +113,6 @@ GtkSourceView.
   <listitem>
     <para>
       Add the e-mail address of the language definition file author(s).
-    </para>
-  </listitem>
-  <listitem>
-    <para>
-      Refer to the HACKING file for submitting your language definition
-      file upstream. If the file is not included upstream, you can also
-      add the language definition file to the GtkSourceView wiki, so
-      users can easily find it.
     </para>
   </listitem>
 </itemizedlist>
@@ -191,9 +178,10 @@ The version of the XML format (currently "2.0").
 <listitem><para>
 The category in which the language has to be grouped when presented to the user.
 With <code>_section</code> the string is marked for translation. Currently used
-categories in GtkSourceView are "Source", "Script", "Markup", "Scientific" and
-"Other", but it is possible to use arbitrary categories (while usually
-discouraged). The convention in GtkSourceView is to use <code>_section</code>.
+categories in libgedit-gtksourceview are "Source", "Script", "Markup",
+"Scientific" and "Other", but it is possible to use arbitrary categories (while
+usually discouraged). The convention in libgedit-gtksourceview is to use
+<code>_section</code>.
 </para></listitem>
 </varlistentry>
 
@@ -227,9 +215,9 @@ Recognized elements are (all optional):
 The semicolon-separated list of mimetypes associated to the language. See the
 <ulink url="http://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec/">shared-mime-info</ulink>
 freedesktop.org specification. A language definition file shipped by
-GtkSourceView needs to have a mimetype defined in the shared-mime-info
-database. If the language definition file is not shipped by GtkSourceView, you
-can also create the mimetype locally, usually in
+libgedit-gtksourceview needs to have a mimetype defined in the shared-mime-info
+database. If the language definition file is not shipped by
+libgedit-gtksourceview, you can also create the mimetype locally, usually in
 <filename>~/.local/share/mime/packages/</filename>.
 </para></listitem>
 </varlistentry>
@@ -273,7 +261,7 @@ files.
 
 <para>
 Contains the definitions of every style used in the current language and
-their association with predefined styles in GtkSourceView.
+their association with predefined styles in libgedit-gtksourceview.
 </para>
 
 <para>
@@ -319,15 +307,15 @@ hyphens ("<code>-</code>") and underscores ("<code>_</code>").
   </para>
 
   <para>
-    The convention in GtkSourceView is to <emphasis>never</emphasis> mark those
-    strings for translation because they are extremely rarely used in the UI of
-    an application (for example it could be used by a GUI tool to edit or create
-    style schemes, but it is not really useful beyond that), and because those
-    strings would be hard to translate (as a result, if those strings are
-    translated, in practice they would often be translated in a way that the
-    user doesn't understand what it means; for example for the C language,
-    "include" or "define" should not be translated, those are keywords of the
-    programming language).
+    The convention in libgedit-gtksourceview is to <emphasis>never</emphasis>
+    mark those strings for translation because they are extremely rarely used in
+    the UI of an application (for example it could be used by a GUI tool to edit
+    or create style schemes, but it is not really useful beyond that), and
+    because those strings would be hard to translate (as a result, if those
+    strings are translated, in practice they would often be translated in a way
+    that the user doesn't understand what it means; for example for the C
+    language, "include" or "define" should not be translated, those are keywords
+    of the programming language).
   </para>
 </listitem>
 </varlistentry>
@@ -438,7 +426,7 @@ Contained elements:
 <title>Tag <code>&lt;define-regex&gt;</code></title>
 
 <para>
-The syntax highlighting engine of GtkSourceView uses
+The syntax highlighting engine of libgedit-gtksourceview uses
 <link linkend="GRegex"><type>GRegex</type></link>,
 which uses the PCRE library. See the
 <ulink url="https://developer.gnome.org/glib/stable/glib-regex-syntax.html">Regular expression syntax</ulink>
@@ -454,8 +442,8 @@ start and at the end of the regular expression, you can omit the slashes,
 putting here only <code>regex</code>.  The possible options are those specified
 above in the description of the <code>&lt;default-regex-options&gt;</code>
 element. To disable a group of options, instead, you have to prepend an hyphen
-<code>-</code> to them.  In GtkSourceView are also available some extensions to
-the standard Perl style regular expressions:
+<code>-</code> to them. In libgedit-gtksourceview are also available some
+extensions to the standard Perl style regular expressions:
 </para>
 
 <itemizedlist>

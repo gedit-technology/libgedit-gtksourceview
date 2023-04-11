@@ -14,7 +14,7 @@
 <refnamediv>
 <refname>Language Definition v2.0 Tutorial</refname>
 <refpurpose>
-Guide to the GtkSourceView language definition file format
+Guide to the libgedit-gtksourceview language definition file format
 </refpurpose>
 </refnamediv>
 
@@ -24,17 +24,15 @@ Guide to the GtkSourceView language definition file format
 <note>
   <para>
     The version 2 here refers to the language definition file format,
-    not to the version of GtkSourceView. This tutorial is suitable
-    for GtkSourceView 2, 3 and 4.
+    not to the version of libgedit-gtksourceview.
   </para>
 </note>
 
 <para>
-To describe the syntax of a language GtkSourceView uses an XML format which
-defines nested context to be highlighted. Each context roughly corresponds
-to a portion of the syntax which has to be highlighted (e.g. keywords,
-strings, comments), and can contain nested contexts (e.g. escaped
-characters.)
+To describe the syntax of a language libgedit-gtksourceview uses an XML format
+which defines nested context to be highlighted. Each context roughly corresponds
+to a portion of the syntax which has to be highlighted (e.g. keywords, strings,
+comments), and can contain nested contexts (e.g. escaped characters.)
 </para>
 
 <para>
@@ -68,8 +66,9 @@ the name presented to the user.
 <para>
 The attribute <code>section</code> (it is translatable using gettext prepending
 a <code>_</code>), tells the category where this language should be grouped when
-it is presented to the user. Currently available categories in GtkSourceView are
-"Source", "Script", "Markup", "Scientific" and "Other".
+it is presented to the user. Currently available categories in
+libgedit-gtksourceview are "Source", "Script", "Markup", "Scientific" and
+"Other".
 </para>
 
 <para>
@@ -92,8 +91,8 @@ The <code>&lt;metadata&gt;</code> element is optional and provides a collection
 of properties which specify arbitrary information about the language definition
 file itself. It is particularly important to specify the conventional
 <code>mimetypes</code> and <code>globs</code> properties that
-GtkSourceView uses to automatically detect which syntax highlighting to use
-for a given file. They respectively contain a semi-colon separated list of
+libgedit-gtksourceview uses to automatically detect which syntax highlighting to
+use for a given file. They respectively contain a semi-colon separated list of
 mimetypes and filename extensions.
 </para>
 
@@ -110,7 +109,7 @@ mimetypes and filename extensions.
 
 <para>
 This element contains every association between the styles used in the
-description and the defaults stored internally in GtkSourceView.
+description and the defaults stored internally in libgedit-gtksourceview.
 For each style there is a <code>&lt;style&gt;</code> element:
 </para>
 
@@ -225,8 +224,8 @@ instead, you have to preced them with a hyphen (<code>-</code>).
 </para>
 
 <para>
-In GtkSourceView are available also some extensions to the standard perl
-style regular expressions:
+In libgedit-gtksourceview are available also some extensions to the standard
+perl style regular expressions:
 </para>
 
 <itemizedlist>
@@ -249,7 +248,7 @@ style regular expressions:
     sub-pattern (can be a number or a name if named sub-patterns are
     used) in the preceding <code>&lt;start&gt;</code> element. For an example
     see the implementation of here-documents in the <filename>sh.lang</filename>
-    language description distribuited with GtkSourceView.
+    language description distribuited with libgedit-gtksourceview.
 </para></listitem>
 </itemizedlist>
 

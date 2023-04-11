@@ -14,7 +14,7 @@
 <refnamediv>
 <refname>Style Scheme Definition Reference</refname>
 <refpurpose>
-Reference to the GtkSourceView style scheme definition file format
+Reference to the libgedit-gtksourceview style scheme definition file format
 </refpurpose>
 </refnamediv>
 
@@ -25,12 +25,11 @@ This is an overview of the Style Scheme Definition XML format, describing the
 meaning and usage of every element and attribute.  The formal definition is
 stored in the RelaxNG schema file <filename>style.rng</filename> which
 should be installed on your system in the directory
-<filename>${PREFIX}/share/gtksourceview-@GSV_API_VERSION@/</filename> (where
-<filename>${PREFIX}</filename> can be <filename>/usr/</filename> or
+<filename>${PREFIX}/share/libgedit-gtksourceview-@GSV_API_VERSION@/</filename>
+(where <filename>${PREFIX}</filename> can be <filename>/usr/</filename> or
 <filename>/usr/local/</filename> if you have installed from source).
 </para>
 </refsect1>
-
 
 <para>
 The toplevel tag in a style scheme file is <code>&lt;style-scheme&gt;</code>.
@@ -181,7 +180,8 @@ Scale the matched text block. Possible values are a float number as factor
 </para>
 
 <para>
-The following are names of styles which control GtkSourceView appearance:
+The following are names of styles which control libgedit-gtksourceview
+appearance:
 <variablelist>
 <varlistentry>
 <term><code>text</code></term>
@@ -254,10 +254,10 @@ grid. Only the <code>background</code> attribute is used.</para></listitem>
 <refsect1>
 <title>Default style schemes</title>
 <para>
-The GtkSourceView team prefers to just keep a small number of style schemes
-distributed with the library. To add a new style scheme in GtkSourceView
-itself, the style scheme must be very popular, and ideally a
-GtkSourceView-based application must use it by default.
+The libgedit-gtksourceview team prefers to just keep a small number of style
+schemes distributed with the library. To add a new style scheme in
+libgedit-gtksourceview itself, the style scheme must be very popular, and
+ideally a libgedit-gtksourceview-based application must use it by default.
 </para>
 </refsect1>
 

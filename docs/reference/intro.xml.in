@@ -11,15 +11,11 @@
   <title>Introduction</title>
 
   <para>
-    GtkSourceView is a <ulink url="https://www.gnome.org/">GNOME</ulink> library
-    that extends GtkTextView, the standard GTK widget for multiline text
-    editing. GtkSourceView adds support for syntax highlighting, undo/redo, file
-    loading and saving, search and replace, a completion system, printing,
-    displaying line numbers, and other features typical of a source code editor.
-  </para>
-
-  <para>
-    See the <ulink url="https://wiki.gnome.org/Projects/GtkSourceView">GtkSourceView website</ulink>.
+    libgedit-gtksourceview is a library that extends GtkTextView, the standard
+    GTK widget for multiline text editing. libgedit-gtksourceview adds support
+    for syntax highlighting, undo/redo, file loading and saving, search and
+    replace, a completion system, printing, displaying line numbers, and other
+    features typical of a source code editor.
   </para>
 
   <para>
@@ -29,15 +25,8 @@
   <refsect1>
     <title>pkg-config name</title>
     <para>
-      For GtkSourceView @GSV_API_VERSION@, the pkg-config name is:
-      <code>gtksourceview-@GSV_API_VERSION@</code>
-    </para>
-    <para>
-      To compile a program that uses GtkSourceView @GSV_API_VERSION@, you
-      can for example use the following command:
-    </para>
-    <para>
-      <code>$ gcc hello.c `pkg-config --cflags --libs gtksourceview-@GSV_API_VERSION@` -o hello</code>
+      For libgedit-gtksourceview @GSV_API_VERSION@, the pkg-config name is:
+      <code>libgedit-gtksourceview-@GSV_API_VERSION@</code>
     </para>
   </refsect1>
 </part>
