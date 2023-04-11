@@ -35,6 +35,9 @@ AC_SUBST([GSV_LT_VERSION])
 # - the docs/reference/libgedit-gtksourceview-300-sections.txt filename
 # Because as far as I've tested, it is not easily feasible to not hardcode the
 # API version in those places (swilmet).
+#
+# 300, not 3.0, because the GIR file needs to be named GtkSource-*.gir and
+# GtkSource-3.0.gir is already taken.
 GSV_API_VERSION=300
 AC_SUBST([GSV_API_VERSION])
 AC_DEFINE_UNQUOTED([GSV_API_VERSION],
