@@ -167,6 +167,7 @@ AC_CONFIG_FILES([
 	data/Makefile
 	data/language-specs/Makefile
 	data/style-schemes/Makefile
+	data/style-schemes/default-style-schemes/Makefile
 	docs/Makefile
 	docs/reference/Makefile
 	docs/reference/intro.xml

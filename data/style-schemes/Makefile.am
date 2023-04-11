@@ -1,19 +1,11 @@
-TESTS = check-style.sh
+SUBDIRS = default-style-schemes
 
-STYLES =			\
-	classic.xml		\
-	cobalt.xml		\
-	kate.xml		\
-	oblivion.xml		\
-	solarized-dark.xml	\
-	solarized-light.xml	\
-	tango.xml
+#TESTS = check-style.sh
 
 stylesdir = $(datadir)/libgedit-gtksourceview-@GSV_API_VERSION@/styles
-styles_DATA = $(STYLES) styles.rng
+dist_styles_DATA = styles.rng
 
 EXTRA_DIST =		\
-	$(styles_DATA)	\
 	check-style.sh	\
 	styles.its	\
 	styles.pot	\
