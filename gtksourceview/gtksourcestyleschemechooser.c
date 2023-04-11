@@ -29,13 +29,9 @@
  * SECTION:styleschemechooser
  * @Short_description: Interface implemented by widgets for choosing style schemes
  * @Title: GtkSourceStyleSchemeChooser
- * @See_also: #GtkSourceStyleSchemeChooserWidget, #GtkSourceStyleSchemeChooserButton
  *
  * #GtkSourceStyleSchemeChooser is an interface that is implemented by widgets
  * for choosing style schemes.
- *
- * In GtkSourceView, the main widgets that implement this interface are
- * #GtkSourceStyleSchemeChooserWidget and #GtkSourceStyleSchemeChooserButton.
  *
  * Since: 3.16
  */

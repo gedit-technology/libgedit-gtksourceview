@@ -61,8 +61,6 @@ typedef struct _GtkSourceSpaceDrawer		GtkSourceSpaceDrawer;
 typedef struct _GtkSourceStyle			GtkSourceStyle;
 typedef struct _GtkSourceStyleScheme		GtkSourceStyleScheme;
 typedef struct _GtkSourceStyleSchemeChooser	GtkSourceStyleSchemeChooser;
-typedef struct _GtkSourceStyleSchemeChooserButton GtkSourceStyleSchemeChooserButton;
-typedef struct _GtkSourceStyleSchemeChooserWidget GtkSourceStyleSchemeChooserWidget;
 typedef struct _GtkSourceStyleSchemeManager	GtkSourceStyleSchemeManager;
 typedef struct _GtkSourceUndoManager		GtkSourceUndoManager;
 typedef struct _GtkSourceView			GtkSourceView;

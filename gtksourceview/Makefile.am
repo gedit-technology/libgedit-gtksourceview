@@ -51,8 +51,6 @@ libgtksourceview_public_headers =		\
 	gtksourcestyle.h			\
 	gtksourcestylescheme.h			\
 	gtksourcestyleschemechooser.h		\
-	gtksourcestyleschemechooserbutton.h	\
-	gtksourcestyleschemechooserwidget.h	\
 	gtksourcestyleschememanager.h		\
 	gtksourcetag.h				\
 	gtksourcetypes.h			\
@@ -89,8 +87,6 @@ libgtksourceview_public_c_files =		\
 	gtksourcestyle.c			\
 	gtksourcestylescheme.c			\
 	gtksourcestyleschemechooser.c		\
-	gtksourcestyleschemechooserbutton.c	\
-	gtksourcestyleschemechooserwidget.c	\
 	gtksourcestyleschememanager.c		\
 	gtksourcetag.c				\
 	gtksourceundomanager.c 			\
