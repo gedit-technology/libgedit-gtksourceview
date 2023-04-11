@@ -12,7 +12,6 @@ AM_DISTCHECK_CONFIGURE_FLAGS =		\
 pkgconfig_DATA = libgedit-gtksourceview-@GSV_API_VERSION@.pc
 
 EXTRA_DIST = \
-	gtksourceview.doap \
 	HACKING \
 	libgedit-gtksourceview.pc.in
 
