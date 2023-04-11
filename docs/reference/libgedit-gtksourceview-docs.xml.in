@@ -86,7 +86,6 @@
 
     <chapter id="misc">
       <title>Misc</title>
-      <xi:include href="xml/map.xml"/>
       <xi:include href="xml/region.xml"/>
       <xi:include href="xml/spacedrawer.xml"/>
       <xi:include href="xml/tag.xml"/>

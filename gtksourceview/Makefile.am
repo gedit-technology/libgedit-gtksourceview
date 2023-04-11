@@ -41,7 +41,6 @@ libgtksourceview_public_headers =		\
 	gtksourceinit.h				\
 	gtksourcelanguage.h			\
 	gtksourcelanguagemanager.h		\
-	gtksourcemap.h				\
 	gtksourcemark.h				\
 	gtksourcemarkattributes.h		\
 	gtksourceprintcompositor.h		\
@@ -80,7 +79,6 @@ libgtksourceview_public_c_files =		\
 	gtksourceinit.c				\
 	gtksourcelanguage.c 			\
 	gtksourcelanguagemanager.c 		\
-	gtksourcemap.c				\
 	gtksourcemark.c				\
 	gtksourcemarkattributes.c		\
 	gtksourceprintcompositor.c		\
