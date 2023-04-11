@@ -9,7 +9,7 @@ conventions, but for new code it is better to follow them, for consistency.
 
 In the scripts/ directory there is an uncrustify config file with a script to
 apply the coding style to a certain *.c file. The script has not (yet) been run
-on all the GtkSourceView source code, but it can serve as a guideline.
+on all the libgedit-gtksourceview source code, but it can serve as a guideline.
 
   - Avoid trailing whitespace.
 
@@ -31,9 +31,8 @@ on all the GtkSourceView source code, but it can serve as a guideline.
     modifying a block of code, if it switches between one and two lines, we
     don't need to add/remove the curly braces all the time.
 
-  - Follow the C89 standard. In particular, no "//"-style comments.
-
-  - The files should have a modeline for the indentation style.
+  - Follow the C89 standard. There can be exceptions, but these should be
+    justified.
 
   - Do not be cheap about blank lines, spacing the code vertically helps
     readability. However never use two consecutive blank lines, there is really
@@ -42,17 +41,13 @@ on all the GtkSourceView source code, but it can serve as a guideline.
   - As a general rule of thumb, follow the same coding style as the surrounding
     code.
 
-See also:
-https://developer.gnome.org/programming-guidelines/stable/
-https://wiki.gnome.org/Projects/GTK%2B/BestPractices
-https://wiki.gnome.org/Projects/GLib/CompilerRequirements
-
 Programming best-practices
 --------------------------
 
-GtkSourceView is a sizeable piece of software, developed over the years by
-different people and GNOME technologies. Some parts of the code may be a little
-old. So when editing the code, we should try to make it better, not worse.
+libgedit-gtksourceview is a sizeable piece of software, developed over the years
+by different people and GNOME technologies. Some parts of the code may be a
+little old. So when editing the code, we should try to make it better, not
+worse.
 
 Here are some general advices:
 
@@ -110,16 +105,6 @@ Here are some general advices:
     code has more chances to be read than an old commit message (especially if
     the code has been copied from one repository to another).
 
-  - Contribute below on the stack. Fix a problem at the right place, instead of
-    writing hacks or heuristics to work around a bug or a lack of feature in an
-    underlying library.
-
-Other links
------------
-
-For a shared library:
-
-http://davidz25.blogspot.be/2011/07/writing-c-library-intro-conclusion-and.html
-http://akkadia.org/drepper/ (Ulrich Drepper):
-	- How to Write Shared Libraries
-	- Good Practices in Library Design, Implementation, and Maintenance
+  - Ideally, contribute below on the stack. Fix a problem at the right place,
+    instead of writing hacks or heuristics to work around a bug or a lack of
+    feature in an underlying library.
