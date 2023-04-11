@@ -215,6 +215,16 @@
       The Glade catalog has been removed, so don't rely on it.
     </para>
   </refsect1>
+
+  <refsect1>
+    <title>Paths to lang and style files</title>
+    <para>
+      The paths to <code>*.lang</code> and style scheme files have changed. For
+      example,
+      <filename>/usr/share/libgedit-gtksourceview-300/language-specs/</filename>
+      is the usual location where <code>*.lang</code> files are found.
+    </para>
+  </refsect1>
 </chapter>
 
 </part>
