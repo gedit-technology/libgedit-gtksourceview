@@ -230,7 +230,16 @@
     <title>API breaks</title>
     <itemizedlist>
       <listitem>
-        <code>GtkSourceMap</code> has been removed.
+        <para>
+          <code>GtkSourceMap</code> has been removed.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <code>GtkSourceStyleSchemeChooserButton</code> and
+          <code>GtkSourceStyleSchemeChooserWidget</code> have been removed. See
+          the Tepl library for a replacement.
+        </para>
       </listitem>
     </itemizedlist>
   </refsect1>
