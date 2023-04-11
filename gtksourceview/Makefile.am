@@ -173,11 +173,11 @@ libgtksourceview_core_la_LDFLAGS += -framework Cocoa
 endif
 
 # The real library
-lib_LTLIBRARIES = libgtksourceview-@GSV_API_VERSION@.la
+lib_LTLIBRARIES = libgedit-gtksourceview-@GSV_API_VERSION@.la
 
-libgtksourceview_@GSV_API_VERSION@_la_SOURCES =
+libgedit_gtksourceview_@GSV_API_VERSION@_la_SOURCES =
 
-libgtksourceview_@GSV_API_VERSION@_la_LIBADD = 				\
+libgedit_gtksourceview_@GSV_API_VERSION@_la_LIBADD = 			\
 	libgtksourceview-core.la					\
 	completion-providers/words/libgtksourcecompletionwords.la	\
 	$(CODE_COVERAGE_LIBS)						\
@@ -185,23 +185,23 @@ libgtksourceview_@GSV_API_VERSION@_la_LIBADD = 				\
 	$(DEP_LIBS)							\
 	$(GTK_MAC_LIBS)
 
-libgtksourceview_@GSV_API_VERSION@_la_CFLAGS =	\
-	$(HIDDEN_VISIBILITY_CFLAGS)		\
+libgedit_gtksourceview_@GSV_API_VERSION@_la_CFLAGS =	\
+	$(HIDDEN_VISIBILITY_CFLAGS)			\
 	$(CODE_COVERAGE_CFLAGS)
 
-libgtksourceview_@GSV_API_VERSION@_la_LDFLAGS =	\
-	-version-info $(GSV_LT_VERSION)		\
-	-no-undefined 				\
-	-export-dynamic				\
+libgedit_gtksourceview_@GSV_API_VERSION@_la_LDFLAGS =	\
+	-version-info $(GSV_LT_VERSION)			\
+	-no-undefined 					\
+	-export-dynamic					\
 	$(WARN_LDFLAGS)
 
-libgtksourceview_@GSV_API_VERSION@_includedir =				\
-	$(includedir)/gtksourceview-@GSV_API_VERSION@/gtksourceview
+libgedit_gtksourceview_@GSV_API_VERSION@_includedir = \
+	$(includedir)/libgedit-gtksourceview-@GSV_API_VERSION@/gtksourceview
 
-libgtksourceview_@GSV_API_VERSION@_include_HEADERS = $(libgtksourceview_public_headers)
+libgedit_gtksourceview_@GSV_API_VERSION@_include_HEADERS = $(libgtksourceview_public_headers)
 
-nodist_libgtksourceview_@GSV_API_VERSION@_include_HEADERS =	\
-	gtksourceversion.h					\
+nodist_libgedit_gtksourceview_@GSV_API_VERSION@_include_HEADERS =	\
+	gtksourceversion.h						\
 	gtksource-enumtypes.h
 
 gtksourceview-resources.c: gtksourceview.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/gtksourceview.gresource.xml)
@@ -233,7 +233,7 @@ INTROSPECTION_GIRS = GtkSource-@GSV_API_VERSION@.gir
 
 INTROSPECTION_SCANNER_ENV = CC="$(CC)"
 
-GtkSource-@GSV_API_VERSION@.gir: libgtksourceview-@GSV_API_VERSION@.la $(BUILT_SOURCES)
+GtkSource-@GSV_API_VERSION@.gir: libgedit-gtksourceview-@GSV_API_VERSION@.la $(BUILT_SOURCES)
 INTROSPECTION_SCANNER_ARGS =			\
 	-I$(top_srcdir)				\
 	-I$(top_builddir)			\
@@ -243,7 +243,7 @@ GtkSource_@GSV_API_VERSION@_gir_NAMESPACE = GtkSource
 GtkSource_@GSV_API_VERSION@_gir_VERSION = @GSV_API_VERSION@
 GtkSource_@GSV_API_VERSION@_gir_CFLAGS = $(DEP_CFLAGS)
 GtkSource_@GSV_API_VERSION@_gir_SCANNERFLAGS = $(WARN_SCANNERFLAGS)
-GtkSource_@GSV_API_VERSION@_gir_LIBS = libgtksourceview-@GSV_API_VERSION@.la
+GtkSource_@GSV_API_VERSION@_gir_LIBS = libgedit-gtksourceview-@GSV_API_VERSION@.la
 
 # Ensure that gtksource.h is the first one.
 GtkSource_@GSV_API_VERSION@_gir_FILES =		\
@@ -255,7 +255,7 @@ GtkSource_@GSV_API_VERSION@_gir_FILES =		\
 
 GtkSource_@GSV_API_VERSION@_gir_INCLUDES = Gtk-3.0 Gdk-3.0
 GtkSource_@GSV_API_VERSION@_gir_PACKAGES = gtk+-3.0 gdk-3.0
-GtkSource_@GSV_API_VERSION@_gir_EXPORT_PACKAGES = gtksourceview-@GSV_API_VERSION@
+GtkSource_@GSV_API_VERSION@_gir_EXPORT_PACKAGES = libgedit-gtksourceview-@GSV_API_VERSION@
 
 girdir = $(datadir)/gir-1.0
 gir_DATA = GtkSource-@GSV_API_VERSION@.gir

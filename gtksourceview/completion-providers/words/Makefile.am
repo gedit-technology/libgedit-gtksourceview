@@ -42,7 +42,7 @@ libgtksourcecompletionwords_la_LIBADD =		\
 	$(CODE_COVERAGE_LIBS)
 
 libgtksourcecompletionwords_includedir = \
-	$(includedir)/gtksourceview-@GSV_API_VERSION@/gtksourceview/completion-providers/words
+	$(includedir)/libgedit-gtksourceview-@GSV_API_VERSION@/gtksourceview/completion-providers/words
 
 libgtksourcecompletionwords_include_HEADERS =		\
 	$(libgtksourcecompletionwords_headers)

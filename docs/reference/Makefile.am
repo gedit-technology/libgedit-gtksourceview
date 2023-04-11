@@ -80,8 +80,8 @@ FIXXREF_OPTIONS =
 # Only needed if you are using gtkdoc-scangobj to dynamically query widget
 # signals and properties.
 GTKDOC_CFLAGS = -I$(top_srcdir) $(DEP_CFLAGS)
-GTKDOC_LIBS =									\
-	$(top_builddir)/gtksourceview/libgtksourceview-@GSV_API_VERSION@.la	\
+GTKDOC_LIBS =										\
+	$(top_builddir)/gtksourceview/libgedit-gtksourceview-@GSV_API_VERSION@.la	\
 	$(DEP_LIBS)
 
 MAINTAINERCLEANFILES =			\
