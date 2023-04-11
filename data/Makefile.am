@@ -1,3 +1,3 @@
-SUBDIRS = language-specs styles
+SUBDIRS = language-specs style-schemes
 
 -include $(top_srcdir)/git.mk
