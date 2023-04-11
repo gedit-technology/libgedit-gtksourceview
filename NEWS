@@ -1,5 +1,7 @@
-News in x.y.z, 2023-xx-yy (not yet released)
--------------------------
+News in 299.0.0, 2023-04-18
+---------------------------
+This is a development/unstable version.
+
 * Rename the project to libgedit-gtksourceview.
 * Bump API version to 300. The "3" means that it targets GTK 3.
 * The Visual Studio (win32) project files are no longer generated.
@@ -10,6 +12,7 @@ News in x.y.z, 2023-xx-yy (not yet released)
 * Some features have been removed, see the porting guide.
 * Use G_MODULE_EXPORT instead of custom macros.
 * Some files reorganization in the data/ directory.
+* Some code refactorings, write more unit tests.
 
 News in 4.0.2, 2018-06-17
 -------------------------
