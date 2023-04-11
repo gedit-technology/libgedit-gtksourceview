@@ -2,14 +2,10 @@
 AUTOMAKE_OPTIONS = 1.6
 
 # The name of the module.
-# For library-web, it's simpler if the DOC_MODULE follows the scheme:
-# $name-$major.$minor
-# (to show the API online at developer.gnome.org)
-# So, add ".0".
-DOC_MODULE = gtksourceview-@GSV_API_VERSION@.0
+DOC_MODULE = libgedit-gtksourceview-@GSV_API_VERSION@
 
 # The top-level XML file (SGML in the past).
-DOC_MAIN_SGML_FILE = gtksourceview-docs.xml
+DOC_MAIN_SGML_FILE = libgedit-gtksourceview-docs.xml
 
 # Extra options to supply to gtkdoc-scan
 SCAN_OPTIONS =								\
@@ -95,16 +91,16 @@ MAINTAINERCLEANFILES =			\
 # include common portion ...
 include $(top_srcdir)/gtk-doc.make
 
-EXTRA_DIST +=				\
-	gtksourceview-docs.xml.in	\
-	intro.xml.in			\
-	lang-reference.xml.in		\
+EXTRA_DIST +=					\
+	intro.xml.in				\
+	lang-reference.xml.in			\
+	libgedit-gtksourceview-docs.xml.in	\
 	style-reference.xml.in
 
 DISTCLEANFILES =			\
-	gtksourceview-docs.xml		\
 	intro.xml			\
 	lang-reference.xml		\
+	libgedit-gtksourceview-docs.xml	\
 	style-reference.xml
 
 -include $(top_srcdir)/git.mk

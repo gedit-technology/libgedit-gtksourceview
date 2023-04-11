@@ -44,7 +44,7 @@ AC_SUBST([GSV_LT_VERSION])
 # API version, used for parallel installability.
 # Not used in:
 # - po/Makevars
-# - the docs/reference/gtksourceview-300.0-sections.txt filename
+# - the docs/reference/libgedit-gtksourceview-300-sections.txt filename
 # Because as far as I've tested, it is not easily feasible to not hardcode the
 # API version in those places (swilmet).
 GSV_API_VERSION=300
@@ -190,24 +190,24 @@ AC_SUBST(ABS_TOP_SRCDIR)
 
 # Output files
 AC_CONFIG_FILES([
-libgedit-gtksourceview-${GSV_API_VERSION}.pc:libgedit-gtksourceview.pc.in
-Makefile
-data/Makefile
-data/language-specs/Makefile
-data/styles/Makefile
-docs/Makefile
-docs/reference/Makefile
-docs/reference/gtksourceview-docs.xml
-docs/reference/intro.xml
-docs/reference/lang-reference.xml
-docs/reference/style-reference.xml
-gtksourceview/Makefile
-gtksourceview/gtksourceversion.h
-gtksourceview/completion-providers/Makefile
-gtksourceview/completion-providers/words/Makefile
-po/Makefile.in
-tests/Makefile
-testsuite/Makefile
+	libgedit-gtksourceview-${GSV_API_VERSION}.pc:libgedit-gtksourceview.pc.in
+	Makefile
+	data/Makefile
+	data/language-specs/Makefile
+	data/styles/Makefile
+	docs/Makefile
+	docs/reference/Makefile
+	docs/reference/intro.xml
+	docs/reference/lang-reference.xml
+	docs/reference/libgedit-gtksourceview-docs.xml
+	docs/reference/style-reference.xml
+	gtksourceview/Makefile
+	gtksourceview/gtksourceversion.h
+	gtksourceview/completion-providers/Makefile
+	gtksourceview/completion-providers/words/Makefile
+	po/Makefile.in
+	tests/Makefile
+	testsuite/Makefile
 ])
 
 AC_OUTPUT
