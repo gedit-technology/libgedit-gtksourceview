@@ -54,7 +54,6 @@
 #include <gtksourceview/gtksourcetag.h>
 #include <gtksourceview/gtksourceundomanager.h>
 #include <gtksourceview/gtksourceutils.h>
-#include <gtksourceview/gtksourceversion.h>
 #include <gtksourceview/gtksourceview.h>
 #include <gtksourceview/gtksource-enumtypes.h>
 #include <gtksourceview/gtksourceautocleanups.h>

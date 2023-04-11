@@ -25,7 +25,6 @@
 #endif
 
 #include <gmodule.h>
-#include <gtksourceview/gtksourceversion.h>
 
 G_BEGIN_DECLS
 

@@ -56,7 +56,6 @@ libgtksourceview_public_headers =		\
 	gtksourcetypes.h			\
 	gtksourceundomanager.h			\
 	gtksourceutils.h			\
-	gtksourceversion.h			\
 	gtksourceview.h
 
 libgtksourceview_public_c_files =		\
