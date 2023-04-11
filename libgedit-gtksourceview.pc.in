@@ -8,5 +8,5 @@ Description: Source code editing widget
 Version: @PACKAGE_VERSION@
 Requires: @AX_PACKAGE_REQUIRES@
 Requires.private: @AX_PACKAGE_REQUIRES_PRIVATE@
-Libs: -L${libdir} -lgtksourceview-@GSV_API_VERSION@
-Cflags: -I${includedir}/gtksourceview-@GSV_API_VERSION@
+Libs: -L${libdir} -lgedit-gtksourceview-@GSV_API_VERSION@
+Cflags: -I${includedir}/libgedit-gtksourceview-@GSV_API_VERSION@
