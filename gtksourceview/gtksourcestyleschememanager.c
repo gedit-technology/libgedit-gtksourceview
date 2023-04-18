@@ -164,6 +164,14 @@ gtk_source_style_scheme_manager_class_init (GtkSourceStyleSchemeManagerClass *kl
 	 *
 	 * Note that a path to a single file is accepted too, not just
 	 * directories.
+	 *
+	 * To load the style schemes from the filesystem,
+	 * #GtkSourceStyleSchemeManager first looks at the first path, then the
+	 * second path, etc. If there are duplicates (same style scheme ID), the
+	 * first encountered one has the priority.
+	 *
+	 * So the list of paths must be set in priority order, from highest to
+	 * lowest.
 	 */
 	properties[PROP_SEARCH_PATH] =
 		g_param_spec_boxed ("search-path",
@@ -456,11 +464,9 @@ notify_search_path (GtkSourceStyleSchemeManager *manager)
  * gtk_source_style_scheme_manager_set_search_path:
  * @manager: a #GtkSourceStyleSchemeManager.
  * @path: (array zero-terminated=1) (nullable): a %NULL-terminated array of
- *   strings, or %NULL.
+ *   strings, or %NULL to reset the search path to its default value.
  *
- * Sets the list of directories where the @manager looks for style scheme files.
- *
- * If @path is %NULL, the search path is reset to default.
+ * Sets the #GtkSourceStyleSchemeManager:search-path property.
  */
 void
 gtk_source_style_scheme_manager_set_search_path (GtkSourceStyleSchemeManager  *manager,
