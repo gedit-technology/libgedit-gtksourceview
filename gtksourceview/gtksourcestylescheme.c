@@ -182,19 +182,19 @@ gtk_source_style_scheme_get_property (GObject 	 *object,
 	switch (prop_id)
 	{
 		case PROP_ID:
-			g_value_set_string (value, scheme->priv->id);
+			g_value_set_string (value, gtk_source_style_scheme_get_id (scheme));
 			break;
 
 		case PROP_NAME:
-			g_value_set_string (value, scheme->priv->name);
+			g_value_set_string (value, gtk_source_style_scheme_get_name (scheme));
 			break;
 
 		case PROP_DESCRIPTION:
-			g_value_set_string (value, scheme->priv->description);
+			g_value_set_string (value, gtk_source_style_scheme_get_description (scheme));
 			break;
 
 		case PROP_FILENAME:
-			g_value_set_string (value, scheme->priv->filename);
+			g_value_set_string (value, gtk_source_style_scheme_get_filename (scheme));
 			break;
 
 		default:
