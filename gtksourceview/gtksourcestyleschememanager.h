@@ -1,5 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8; coding: utf-8 -*-
- *
+/*
  * This file is part of GtkSourceView
  *
  * Copyright (C) 2003-2007 - Paolo Maggi <paolo.maggi@polito.it>
@@ -57,44 +56,44 @@ struct _GtkSourceStyleSchemeManagerClass
 };
 
 G_MODULE_EXPORT
-GType			 gtk_source_style_scheme_manager_get_type		(void) G_GNUC_CONST;
+GType			gtk_source_style_scheme_manager_get_type		(void);
 
 G_MODULE_EXPORT
 GtkSourceStyleSchemeManager *
-			 gtk_source_style_scheme_manager_new			(void);
+			gtk_source_style_scheme_manager_new			(void);
 
 G_MODULE_EXPORT
 GtkSourceStyleSchemeManager *
-			 gtk_source_style_scheme_manager_get_default		(void);
+			gtk_source_style_scheme_manager_get_default		(void);
 
 G_MODULE_EXPORT
-void			 gtk_source_style_scheme_manager_set_search_path	(GtkSourceStyleSchemeManager	*manager,
-						    				 gchar			       **path);
+void			gtk_source_style_scheme_manager_set_search_path		(GtkSourceStyleSchemeManager  *manager,
+										 gchar                       **path);
 
 G_MODULE_EXPORT
-void 			 gtk_source_style_scheme_manager_append_search_path	(GtkSourceStyleSchemeManager	*manager,
-						    				 const gchar			*path);
+void			gtk_source_style_scheme_manager_append_search_path	(GtkSourceStyleSchemeManager *manager,
+										 const gchar                 *path);
 
 G_MODULE_EXPORT
-void 			 gtk_source_style_scheme_manager_prepend_search_path	(GtkSourceStyleSchemeManager	*manager,
-						    				 const gchar			*path);
+void			gtk_source_style_scheme_manager_prepend_search_path	(GtkSourceStyleSchemeManager *manager,
+										 const gchar                 *path);
 
 G_MODULE_EXPORT
-const gchar * const *	 gtk_source_style_scheme_manager_get_search_path	(GtkSourceStyleSchemeManager	*manager);
+const gchar * const *	gtk_source_style_scheme_manager_get_search_path		(GtkSourceStyleSchemeManager *manager);
 
 G_MODULE_EXPORT
-void			 gtk_source_style_scheme_manager_force_rescan		(GtkSourceStyleSchemeManager	*manager);
+void			gtk_source_style_scheme_manager_force_rescan		(GtkSourceStyleSchemeManager *manager);
 
 G_MODULE_EXPORT
-const gchar * const *	 gtk_source_style_scheme_manager_get_scheme_ids		(GtkSourceStyleSchemeManager	*manager);
+const gchar * const *	gtk_source_style_scheme_manager_get_scheme_ids		(GtkSourceStyleSchemeManager *manager);
 
 G_MODULE_EXPORT
-GtkSourceStyleScheme	*gtk_source_style_scheme_manager_get_scheme		(GtkSourceStyleSchemeManager	*manager,
-										 const gchar			*scheme_id);
+GtkSourceStyleScheme *	gtk_source_style_scheme_manager_get_scheme		(GtkSourceStyleSchemeManager *manager,
+										 const gchar                 *scheme_id);
 
 G_GNUC_INTERNAL
 GtkSourceStyleSchemeManager *
-			 _gtk_source_style_scheme_manager_peek_default		(void);
+			_gtk_source_style_scheme_manager_peek_default		(void);
 
 G_END_DECLS
 
