@@ -69,6 +69,11 @@
 
 #define DEFAULT_STYLE_SCHEME		"classic"
 
+/* We need to be lower than the application priority to allow application
+ * overrides.
+ */
+#define GTK_SOURCE_STYLE_PROVIDER_PRIORITY (GTK_STYLE_PROVIDER_PRIORITY_APPLICATION - 1)
+
 enum
 {
 	PROP_0,
