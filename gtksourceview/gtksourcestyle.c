@@ -38,18 +38,6 @@ struct _GtkSourceStyleClass
 	GObjectClass parent_class;
 };
 
-static void	gtk_source_style_set_property	(GObject      *object,
-						 guint         prop_id,
-						 const GValue *value,
-						 GParamSpec   *pspec);
-
-static void	gtk_source_style_get_property	(GObject      *object,
-						 guint         prop_id,
-						 GValue       *value,
-						 GParamSpec   *pspec);
-
-G_DEFINE_TYPE (GtkSourceStyle, gtk_source_style, G_TYPE_OBJECT)
-
 enum
 {
 	PROP_0,
@@ -70,165 +58,165 @@ enum
 	PROP_SCALE,
 	PROP_SCALE_SET,
 	PROP_UNDERLINE_COLOR,
-	PROP_UNDERLINE_COLOR_SET
+	PROP_UNDERLINE_COLOR_SET,
+	N_PROPERTIES
 };
+
+static GParamSpec *properties[N_PROPERTIES];
+
+G_DEFINE_TYPE (GtkSourceStyle, gtk_source_style, G_TYPE_OBJECT)
+
+static void	gtk_source_style_get_property	(GObject      *object,
+						 guint         prop_id,
+						 GValue       *value,
+						 GParamSpec   *pspec);
+
+static void	gtk_source_style_set_property	(GObject      *object,
+						 guint         prop_id,
+						 const GValue *value,
+						 GParamSpec   *pspec);
 
 static void
 gtk_source_style_class_init (GtkSourceStyleClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	object_class->set_property = gtk_source_style_set_property;
 	object_class->get_property = gtk_source_style_get_property;
+	object_class->set_property = gtk_source_style_set_property;
 
 	/* All properties are CONSTRUCT_ONLY so we can safely return references
 	 * from style_scheme_get_style(). But style scheme is of course cheating
-	 * and sets everything after construction (but nobody can notice it). */
+	 * and sets everything after construction (but nobody can notice it).
+	 */
 
-	g_object_class_install_property (object_class,
-					 PROP_LINE_BACKGROUND,
-					 g_param_spec_string ("line-background",
-							      "Line background",
-							      "Line background color",
-							      NULL,
-							      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_LINE_BACKGROUND] =
+		g_param_spec_string ("line-background",
+				     "line-background",
+				     "Line background color",
+				     NULL,
+				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_BACKGROUND,
-					 g_param_spec_string ("background",
-							      "Background",
-							      "Background color",
-							      NULL,
-							      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_LINE_BACKGROUND_SET] =
+		g_param_spec_boolean ("line-background-set",
+				      "line-background-set",
+				      "Whether line background color is set",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_FOREGROUND,
-					 g_param_spec_string ("foreground",
-							      "Foreground",
-							      "Foreground color",
-							      NULL,
-							      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_BACKGROUND] =
+		g_param_spec_string ("background",
+				     "background",
+				     "Background color",
+				     NULL,
+				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_BOLD,
-					 g_param_spec_boolean ("bold",
-							       "Bold",
-							       "Bold",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_BACKGROUND_SET] =
+		g_param_spec_boolean ("background-set",
+				      "background-set",
+				      "Whether background color is set",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_ITALIC,
-					 g_param_spec_boolean ("italic",
-							       "Italic",
-							       "Italic",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_FOREGROUND] =
+		g_param_spec_string ("foreground",
+				     "foreground",
+				     "Foreground color",
+				     NULL,
+				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_PANGO_UNDERLINE,
-					 g_param_spec_enum ("pango-underline",
-							    "Pango Underline",
-							    "Pango Underline",
-							    PANGO_TYPE_UNDERLINE,
-							    PANGO_UNDERLINE_NONE,
-							    G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_FOREGROUND_SET] =
+		g_param_spec_boolean ("foreground-set",
+				      "foreground-set",
+				      "Whether foreground color is set",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_STRIKETHROUGH,
-					 g_param_spec_boolean ("strikethrough",
-							       "Strikethrough",
-							       "Strikethrough",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_BOLD] =
+		g_param_spec_boolean ("bold",
+				      "bold",
+				      "Bold",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_SCALE,
-					 g_param_spec_string ("scale",
-							      "Scale",
-							      "Text scale factor",
-							      NULL,
-							      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_BOLD_SET] =
+		g_param_spec_boolean ("bold-set",
+				      "bold-set",
+				      "Whether bold attribute is set",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_UNDERLINE_COLOR,
-					 g_param_spec_string ("underline-color",
-							      "Underline Color",
-							      "Underline color",
-							      NULL,
-							      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_ITALIC] =
+		g_param_spec_boolean ("italic",
+				      "italic",
+				      "Italic",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_LINE_BACKGROUND_SET,
-					 g_param_spec_boolean ("line-background-set",
-							       "Line background set",
-							       "Whether line background color is set",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_ITALIC_SET] =
+		g_param_spec_boolean ("italic-set",
+				      "italic-set",
+				      "Whether italic attribute is set",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_FOREGROUND_SET,
-					 g_param_spec_boolean ("foreground-set",
-							       "Foreground set",
-							       "Whether foreground color is set",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_PANGO_UNDERLINE] =
+		g_param_spec_enum ("pango-underline",
+				   "pango-underline",
+				   "Pango Underline",
+				   PANGO_TYPE_UNDERLINE,
+				   PANGO_UNDERLINE_NONE,
+				   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_BACKGROUND_SET,
-					 g_param_spec_boolean ("background-set",
-							       "Background set",
-							       "Whether background color is set",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_UNDERLINE_SET] =
+		g_param_spec_boolean ("underline-set",
+				      "underline-set",
+				      "Whether underline attribute is set",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_BOLD_SET,
-					 g_param_spec_boolean ("bold-set",
-							       "Bold set",
-							       "Whether bold attribute is set",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_STRIKETHROUGH] =
+		g_param_spec_boolean ("strikethrough",
+				      "strikethrough",
+				      "Strikethrough",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_ITALIC_SET,
-					 g_param_spec_boolean ("italic-set",
-							       "Italic set",
-							       "Whether italic attribute is set",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_STRIKETHROUGH_SET] =
+		g_param_spec_boolean ("strikethrough-set",
+				      "strikethrough-set",
+				      "Whether strikethrough attribute is set",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_UNDERLINE_SET,
-					 g_param_spec_boolean ("underline-set",
-							       "Underline set",
-							       "Whether underline attribute is set",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_SCALE] =
+		g_param_spec_string ("scale",
+				     "scale",
+				     "Text scale factor",
+				     NULL,
+				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_STRIKETHROUGH_SET,
-					 g_param_spec_boolean ("strikethrough-set",
-							       "Strikethrough set",
-							       "Whether strikethrough attribute is set",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_SCALE_SET] =
+		g_param_spec_boolean ("scale-set",
+				      "scale-set",
+				      "Whether scale attribute is set",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_SCALE_SET,
-					 g_param_spec_boolean ("scale-set",
-							       "Scale set",
-							       "Whether scale attribute is set",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_UNDERLINE_COLOR] =
+		g_param_spec_string ("underline-color",
+				     "underline-color",
+				     "Underline color",
+				     NULL,
+				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
-	g_object_class_install_property (object_class,
-					 PROP_UNDERLINE_COLOR_SET,
-					 g_param_spec_boolean ("underline-color-set",
-							       "Underline color set",
-							       "Whether underline color attribute is set",
-							       FALSE,
-							       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_UNDERLINE_COLOR_SET] =
+		g_param_spec_boolean ("underline-color-set",
+				      "underline-color-set",
+				      "Whether underline color attribute is set",
+				      FALSE,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+
+	g_object_class_install_properties (object_class, N_PROPERTIES, properties);
 }
 
 static void
