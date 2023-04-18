@@ -182,7 +182,8 @@ AC_CONFIG_FILES([
 	gtksourceview/completion-providers/words/Makefile
 	interactive-tests/Makefile
 	po/Makefile.in
-	testsuite/Makefile
+	tests/Makefile
+	tests/unit-tests/Makefile
 ])
 
 AC_OUTPUT
