@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>libgedit-gtksourceview :: Style scheme file format</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="styles/print.css" />
+</head>
+
+<body>
+<h1>libgedit-gtksourceview :: Style scheme file format</h1>
+<h2>Introduction</h2>
+<p>
+  In libgedit-gtksourceview, a <em>style scheme</em> (or also called
+  <em>color scheme</em>) is used for the syntax highlighting.
+</p>
+
+<h2>It's an XML file format</h2>
+<p>
+  A style scheme file is written in XML.
+</p>
+<p>
+  The file needs to have the <code>.xml</code> extension. For example:
+  <code>classic.xml</code>
+</p>
+<p>  
+  The first line needs to be:
+</p>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+</pre>
+
+<h2>The top-level element: &lt;style-scheme&gt;</h2>
+<p>
+  A style scheme file has only one top-level element:
+  <code>&lt;style-scheme&gt;</code>
+</p>
+
+<p>
+  Example:
+</p>
+<pre>
+&lt;style-scheme id="classic" _name="Classic" version="1.0"&gt;
+  &lt;!-- ... --&gt;
+&lt;/style-scheme&gt;
+</pre>
+
+<p>
+  The <code>&lt;style-scheme&gt;</code> tag supports the following attributes:
+</p>
+<dl>
+  <dt><code>id</code> (mandatory)</dt>
+  <dd>
+    Identifier for the style scheme. Once all style schemes are loaded by the
+    library, each style scheme has a unique <code>id</code>. During the loading,
+    if two or more style schemes have the same <code>id</code>, only one is kept
+    (the one with the highest priority, depending on the order in which the
+    files are loaded).
+  </dd>
+
+  <dt><code>name</code> (mandatory)</dt>
+  <dd>
+    Name of the style scheme. This is the name of the scheme to display to the
+    user, e.g. in a preferences dialog.
+  </dd>
+
+  <dt><code>_name</code></dt>
+  <dd>
+    This is the same as the <code>name</code> attribute, except that it will be
+    translated. <code>name</code> and <code>_name</code> may not be used
+    simultaneously.
+  </dd>
+
+  <dt><code>parent-scheme</code> (optional)</dt>
+  <dd>
+    Style schemes may have <em>parent</em> schemes: all styles but those
+    specified in the scheme will be taken from the parent scheme. In this way a
+    scheme may be customized without copying all its content.
+  </dd>
+
+  <dt><code>version</code> (mandatory)</dt>
+  <dd>
+    Style scheme format identifier. At the moment it must be <code>"1.0"</code>.
+    If the format evolves, especially in incompatible ways, then the version
+    number will be incremented.
+  </dd>
+</dl>
+
+<h2>Possible elements inside &lt;style-scheme&gt;</h2>
+<p>
+  The <code>style-scheme</code> element may contain the following elements:
+  <code>author</code>, <code>description</code>, <code>_description</code>,
+  <code>color</code> and <code>style</code>.
+</p>
+
+<!-- FIXME: document well if mandatory or optional, and if it must appear at
+            most once or if several instances are accepted. -->
+
+<h2>&lt;author&gt;</h2>
+<p>
+  Name of the style scheme author or team. Example:
+</p>
+<pre>
+&lt;author&gt;Gedit Technology dream team&lt;/author&gt;
+</pre>
+
+<h2>&lt;description&gt; or &lt;_description&gt;</h2>
+<p>
+  Description of the style scheme. The <code>&lt;description&gt;</code> value is
+  not translated, while <code>&lt;_description&gt;</code> is. Example:
+</p>
+<pre>
+&lt;_description&gt;Classic color scheme&lt;/_description&gt;
+</pre>
+
+<h2>&lt;color&gt; tags</h2>
+<p>
+  The <code>&lt;color&gt;</code> tags define color names to be used in
+  <code>&lt;style&gt;</code> tags. It has two attributes: <code>name</code> and
+  <code>value</code>. <code>value</code> is the hexadecimal color specification
+  like "#000000" or named color understood by Gdk prefixed with "#", e.g.
+  "#beige".
+</p>
+
+<h2>&lt;style&gt; tags</h2>
+<p>
+  Each <code>&lt;style&gt;</code> tag describes a single element of style scheme
+  (it corresponds to a <code>GtkSourceStyle</code> object in the library API).
+</p>
+
+<h3>&lt;style&gt; attributes</h3>
+<p>
+  A <code>&lt;style&gt;</code> tag supports the following attributes:
+</p>
+<dl>
+  <dt><code>name</code> (mandatory)</dt>
+  <dd>
+    Name of the style. It can be anything, syntax highlighting uses
+    <em>lang-id:style-id</em>, and there are few special styles which are used
+    to control general appearance of the text. Style scheme may contain other
+    names to be used in an application. For instance, it may define color to
+    highlight compilation errors in a build log or a color for bookmarks.
+  </dd>
+
+  <dt><code>foreground</code></dt>
+  <dd>
+    Foreground color. It may be name defined in one of <code>color</code> tags,
+    or value in hexadecimal format, e.g. "#000000", or symbolic name understood
+    by Gdk, prefixed with "#", e.g. "#magenta" or "#darkred".
+  </dd>
+
+  <dt><code>background</code></dt>
+  <dd>
+    Background color.
+  </dd>
+
+  <dt><code>italic</code></dt>
+  <dd>
+    "true" or "false".
+  </dd>
+
+  <dt><code>bold</code></dt>
+  <dd>
+    "true" or "false".
+  </dd>
+
+  <dt><code>underline</code></dt>
+  <dd>
+    Accepts the values supported by <code>PangoUnderline</code> ("none",
+    "single", "double", "low" or "error"). GtkSourceView versions &lt;= 3.16
+    only supported "true" or "false" and such values are still accepted for
+    backward compatibility.
+  </dd>
+
+  <dt><code>underline-color</code></dt>
+  <dd>
+    Underline color.
+  </dd>
+
+  <dt><code>strikethrough</code></dt>
+  <dd>
+    "true" or "false".
+  </dd>
+
+  <dt><code>scale</code></dt>
+  <dd>
+    Scale the matched text block (font size). Possible values are a float number
+    as factor (e.g. <code>"1.75"</code>) or one of the values
+    <code>"xx-small"</code>, <code>"x-small"</code>, <code>"small"</code>,
+    <code>"medium"</code>, <code>"large"</code>, <code>"x-large"</code>,
+    <code>"xx-large"</code>. Useful for example to highlight titles or
+    sub-titles (headings).
+  </dd>
+</dl>
+
+<h3>&lt;style&gt; - Special values for the name attribute</h3>
+<p>
+  The <code>name</code> attribute of a <code>&lt;style&gt;</code> tag can have
+  special values, which control the general appearance:
+</p>
+<dl>
+  <dt><code>text</code></dt>
+  <dd>
+    Default style of text.
+  </dd>
+
+  <dt><code>selection</code></dt>
+  <dd>
+    Style of selected text.
+  </dd>
+
+  <dt><code>selection-unfocused</code></dt>
+  <dd>
+    Style of selected text when the widget doesn't have input focus.
+  </dd>
+
+  <dt><code>cursor</code></dt>
+  <dd>
+    Text cursor style. Only the <code>foreground</code> attribute is used for
+    this style.
+  </dd>
+
+  <dt><code>secondary-cursor</code></dt>
+  <dd>
+    Secondary cursor style (used in bidirectional text). Only the
+    <code>foreground</code> attribute is used for this style. If this is not set
+    while "cursor" is, then a color between text background and cursor colors is
+    chosen, so it is enough to use "cursor" style only.
+  </dd>
+
+  <dt><code>current-line</code></dt>
+  <dd>
+    Current line style. Only the <code>background</code> attribute is used.
+  </dd>
+
+  <dt><code>line-numbers</code></dt>
+  <dd>
+    Text and background colors for the left margin, on which line numbers are
+    drawn.
+  </dd>
+
+  <dt><code>current-line-number</code></dt>
+  <dd>
+    Current line style for the left margin, on which the current line number is
+    drawn. Only the <code>background</code> attribute is used.
+  </dd>
+
+  <dt><code>bracket-match</code></dt>
+  <dd>
+    Style to use for matching brackets.
+  </dd>
+
+  <dt><code>bracket-mismatch</code></dt>
+  <dd>
+    Style to use for mismatching brackets.
+  </dd>
+
+  <dt><code>right-margin</code></dt>
+  <dd>
+    Style to use for the right margin. The <code>foreground</code> attribute is
+    used for drawing the vertical line. And the <code>background</code>
+    attribute is used for the background on the right side of the margin. An
+    alpha channel is applied to the two colors. For a light style scheme, a good
+    color for both attributes is black. For a dark style scheme, white is a good
+    choice.
+  </dd>
+
+  <dt><code>draw-spaces</code></dt>
+  <dd>
+    Style to use for drawing spaces (special symbols for a space, a tabulation,
+    etc). Only the <code>foreground</code> attribute is used.
+  </dd>
+
+  <dt><code>background-pattern</code></dt>
+  <dd>
+    Style to use for drawing a background pattern, for example a grid. Only the
+    <code>background</code> attribute is used.
+  </dd>
+</dl>
+</body>
+</html>

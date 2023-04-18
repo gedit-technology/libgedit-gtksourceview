@@ -1,0 +1,27 @@
+body {
+  /* Wrap around at a more comfortable reading width. */
+  max-width: 72ch;
+
+  /* Center page. */
+  margin: auto;
+
+  padding: 2ch;
+
+  /* For reading text on a screen a sans-serif font is recommended. */
+  font-family: sans-serif;
+}
+
+h1 {
+  color: #555753; /* Tango aluminium5 */
+  background-color: #eeeeec; /* Tango aluminium1 */
+  text-align: center;
+  border: medium solid #555753; /* Tango aluminium5 */
+}
+
+h2 {
+  color: #4e9a06; /* Tango chameleon3 */
+}
+
+h3 {
+  color: #555753; /* Tango aluminium5 */
+}
