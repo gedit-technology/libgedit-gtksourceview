@@ -4588,7 +4588,7 @@ update_right_margin_colors (GtkSourceView *view)
 	{
 		GtkSourceStyle *style;
 
-		style = _gtk_source_style_scheme_get_right_margin_style (view->priv->style_scheme);
+		style = gtk_source_style_scheme_get_style (view->priv->style_scheme, "right-margin");
 
 		if (style != NULL)
 		{
