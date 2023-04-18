@@ -57,7 +57,6 @@
 #define STYLE_LINE_NUMBERS		"line-numbers"
 #define STYLE_CURRENT_LINE_NUMBER	"current-line-number"
 #define STYLE_RIGHT_MARGIN		"right-margin"
-#define STYLE_DRAW_SPACES		"draw-spaces"
 #define STYLE_BACKGROUND_PATTERN	"background-pattern"
 
 #define STYLE_SCHEME_VERSION		"1.0"
@@ -574,14 +573,6 @@ _gtk_source_style_scheme_get_right_margin_style (GtkSourceStyleScheme *scheme)
 	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
 
 	return gtk_source_style_scheme_get_style (scheme, STYLE_RIGHT_MARGIN);
-}
-
-GtkSourceStyle *
-_gtk_source_style_scheme_get_draw_spaces_style (GtkSourceStyleScheme *scheme)
-{
-	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
-
-	return gtk_source_style_scheme_get_style (scheme, STYLE_DRAW_SPACES);
 }
 
 static gboolean

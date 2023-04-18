@@ -721,7 +721,7 @@ _gtk_source_space_drawer_update_color (GtkSourceSpaceDrawer *drawer,
 	{
 		GtkSourceStyle *style;
 
-		style = _gtk_source_style_scheme_get_draw_spaces_style (style_scheme);
+		style = gtk_source_style_scheme_get_style (style_scheme, "draw-spaces");
 
 		if (style != NULL)
 		{

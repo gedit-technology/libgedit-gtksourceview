@@ -101,9 +101,6 @@ G_GNUC_INTERNAL
 GtkSourceStyle		*_gtk_source_style_scheme_get_right_margin_style	(GtkSourceStyleScheme *scheme);
 
 G_GNUC_INTERNAL
-GtkSourceStyle          *_gtk_source_style_scheme_get_draw_spaces_style		(GtkSourceStyleScheme *scheme);
-
-G_GNUC_INTERNAL
 gboolean		 _gtk_source_style_scheme_get_current_line_color	(GtkSourceStyleScheme *scheme,
 										 GdkRGBA              *color);
 
