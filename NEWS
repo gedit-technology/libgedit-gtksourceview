@@ -1,3 +1,12 @@
+News in 299.0.1, 2023-xx-yy (not yet released)
+---------------------------
+* Style schemes (classic and tango): more visible line-numbers background color.
+* Code refactorings in GtkSourceStyle and GtkSourceStyleSchemeManager.
+* Some bug fixes in GtkSourceStyle.
+* Files reorganization in the tests/ directory.
+* Documentation: start to migrate/rewrite some pages to the docs/html/
+  directory.
+
 News in 299.0.0, 2023-04-18
 ---------------------------
 This is a development/unstable version.
