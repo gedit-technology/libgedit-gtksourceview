@@ -66,15 +66,250 @@ static GParamSpec *properties[N_PROPERTIES];
 
 G_DEFINE_TYPE (GtkSourceStyle, gtk_source_style, G_TYPE_OBJECT)
 
-static void	gtk_source_style_get_property	(GObject      *object,
-						 guint         prop_id,
-						 GValue       *value,
-						 GParamSpec   *pspec);
+#define SET_MASK(style,name) (style)->mask |= (GTK_SOURCE_STYLE_USE_##name)
+#define UNSET_MASK(style,name) (style)->mask &= (GTK_SOURCE_STYLE_USE_##name)
 
-static void	gtk_source_style_set_property	(GObject      *object,
-						 guint         prop_id,
-						 const GValue *value,
-						 GParamSpec   *pspec);
+#define MODIFY_MASK(style,value,name)		\
+G_STMT_START {					\
+	if (g_value_get_boolean (value))	\
+		SET_MASK (style, name);		\
+	else					\
+		UNSET_MASK (style, name);	\
+} G_STMT_END
+
+#define GET_MASK(style,value,name)		\
+	g_value_set_boolean (value, ((style)->mask & GTK_SOURCE_STYLE_USE_##name) != 0)
+
+static void
+gtk_source_style_get_property (GObject      *object,
+			       guint         prop_id,
+			       GValue       *value,
+			       GParamSpec   *pspec)
+{
+	GtkSourceStyle *style = GTK_SOURCE_STYLE (object);
+
+	switch (prop_id)
+	{
+		case PROP_FOREGROUND:
+			g_value_set_string (value, style->foreground);
+			break;
+
+		case PROP_BACKGROUND:
+			g_value_set_string (value, style->background);
+			break;
+
+		case PROP_LINE_BACKGROUND:
+			g_value_set_string (value, style->line_background);
+			break;
+
+		case PROP_BOLD:
+			g_value_set_boolean (value, style->bold);
+			break;
+
+		case PROP_ITALIC:
+			g_value_set_boolean (value, style->italic);
+			break;
+
+		case PROP_PANGO_UNDERLINE:
+			g_value_set_enum (value, style->underline);
+			break;
+
+		case PROP_STRIKETHROUGH:
+			g_value_set_boolean (value, style->strikethrough);
+			break;
+
+		case PROP_SCALE:
+			g_value_set_string (value, style->scale);
+			break;
+
+		case PROP_UNDERLINE_COLOR:
+			g_value_set_string (value, style->underline_color);
+			break;
+
+		case PROP_FOREGROUND_SET:
+			GET_MASK (style, value, FOREGROUND);
+			break;
+
+		case PROP_BACKGROUND_SET:
+			GET_MASK (style, value, BACKGROUND);
+			break;
+
+		case PROP_LINE_BACKGROUND_SET:
+			GET_MASK (style, value, LINE_BACKGROUND);
+			break;
+
+		case PROP_BOLD_SET:
+			GET_MASK (style, value, BOLD);
+			break;
+
+		case PROP_ITALIC_SET:
+			GET_MASK (style, value, ITALIC);
+			break;
+
+		case PROP_UNDERLINE_SET:
+			GET_MASK (style, value, UNDERLINE);
+			break;
+
+		case PROP_STRIKETHROUGH_SET:
+			GET_MASK (style, value, STRIKETHROUGH);
+			break;
+
+		case PROP_SCALE_SET:
+			GET_MASK (style, value, SCALE);
+			break;
+
+		case PROP_UNDERLINE_COLOR_SET:
+			GET_MASK (style, value, UNDERLINE_COLOR);
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gtk_source_style_set_property (GObject      *object,
+			       guint         prop_id,
+			       const GValue *value,
+			       GParamSpec   *pspec)
+{
+	GtkSourceStyle *style = GTK_SOURCE_STYLE (object);
+	const gchar *string;
+
+	switch (prop_id)
+	{
+		case PROP_FOREGROUND:
+			string = g_value_get_string (value);
+			if (string != NULL)
+			{
+				style->foreground = g_intern_string (string);
+				SET_MASK (style, FOREGROUND);
+			}
+			else
+			{
+				style->foreground = NULL;
+				UNSET_MASK (style, FOREGROUND);
+			}
+			break;
+
+		case PROP_BACKGROUND:
+			string = g_value_get_string (value);
+			if (string != NULL)
+			{
+				style->background = g_intern_string (string);
+				SET_MASK (style, BACKGROUND);
+			}
+			else
+			{
+				style->background = NULL;
+				UNSET_MASK (style, BACKGROUND);
+			}
+			break;
+
+		case PROP_LINE_BACKGROUND:
+			string = g_value_get_string (value);
+			if (string != NULL)
+			{
+				style->line_background = g_intern_string (string);
+				SET_MASK (style, LINE_BACKGROUND);
+			}
+			else
+			{
+				style->line_background = NULL;
+				UNSET_MASK (style, LINE_BACKGROUND);
+			}
+			break;
+
+		case PROP_BOLD:
+			style->bold = g_value_get_boolean (value) != 0;
+			SET_MASK (style, BOLD);
+			break;
+
+		case PROP_ITALIC:
+			style->italic = g_value_get_boolean (value) != 0;
+			SET_MASK (style, ITALIC);
+			break;
+
+		case PROP_PANGO_UNDERLINE:
+			style->underline = (PangoUnderline) g_value_get_enum (value);
+			SET_MASK (style, UNDERLINE);
+			break;
+
+		case PROP_STRIKETHROUGH:
+			style->strikethrough = g_value_get_boolean (value) != 0;
+			SET_MASK (style, STRIKETHROUGH);
+			break;
+
+		case PROP_SCALE:
+			string = g_value_get_string (value);
+			if (string != NULL)
+			{
+				style->scale = g_intern_string (string);
+				SET_MASK (style, SCALE);
+			}
+			else
+			{
+				style->scale = NULL;
+				UNSET_MASK (style, SCALE);
+			}
+			break;
+
+		case PROP_UNDERLINE_COLOR:
+			string = g_value_get_string (value);
+			if (string != NULL)
+			{
+				style->underline_color = g_intern_string (string);
+				SET_MASK (style, UNDERLINE_COLOR);
+			}
+			else
+			{
+				style->underline_color = NULL;
+				UNSET_MASK (style, UNDERLINE_COLOR);
+			}
+			break;
+
+		case PROP_FOREGROUND_SET:
+			MODIFY_MASK (style, value, FOREGROUND);
+			break;
+
+		case PROP_BACKGROUND_SET:
+			MODIFY_MASK (style, value, BACKGROUND);
+			break;
+
+		case PROP_LINE_BACKGROUND_SET:
+			MODIFY_MASK (style, value, LINE_BACKGROUND);
+			break;
+
+		case PROP_BOLD_SET:
+			MODIFY_MASK (style, value, BOLD);
+			break;
+
+		case PROP_ITALIC_SET:
+			MODIFY_MASK (style, value, ITALIC);
+			break;
+
+		case PROP_UNDERLINE_SET:
+			MODIFY_MASK (style, value, UNDERLINE);
+			break;
+
+		case PROP_STRIKETHROUGH_SET:
+			MODIFY_MASK (style, value, STRIKETHROUGH);
+			break;
+
+		case PROP_SCALE_SET:
+			MODIFY_MASK (style, value, SCALE);
+			break;
+
+		case PROP_UNDERLINE_COLOR_SET:
+			MODIFY_MASK (style, value, UNDERLINE_COLOR);
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
 
 static void
 gtk_source_style_class_init (GtkSourceStyleClass *klass)
@@ -312,251 +547,6 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 static void
 gtk_source_style_init (GtkSourceStyle *style)
 {
-}
-
-#define SET_MASK(style,name) (style)->mask |= (GTK_SOURCE_STYLE_USE_##name)
-#define UNSET_MASK(style,name) (style)->mask &= (GTK_SOURCE_STYLE_USE_##name)
-
-#define MODIFY_MASK(style,value,name)		\
-G_STMT_START {					\
-	if (g_value_get_boolean (value))	\
-		SET_MASK (style, name);		\
-	else					\
-		UNSET_MASK (style, name);	\
-} G_STMT_END
-
-#define GET_MASK(style,value,name)		\
-	g_value_set_boolean (value, ((style)->mask & GTK_SOURCE_STYLE_USE_##name) != 0)
-
-static void
-gtk_source_style_set_property (GObject      *object,
-			       guint         prop_id,
-			       const GValue *value,
-			       GParamSpec   *pspec)
-{
-	GtkSourceStyle *style = GTK_SOURCE_STYLE (object);
-	const gchar *string;
-
-	switch (prop_id)
-	{
-		case PROP_FOREGROUND:
-			string = g_value_get_string (value);
-			if (string != NULL)
-			{
-				style->foreground = g_intern_string (string);
-				SET_MASK (style, FOREGROUND);
-			}
-			else
-			{
-				style->foreground = NULL;
-				UNSET_MASK (style, FOREGROUND);
-			}
-			break;
-
-		case PROP_BACKGROUND:
-			string = g_value_get_string (value);
-			if (string != NULL)
-			{
-				style->background = g_intern_string (string);
-				SET_MASK (style, BACKGROUND);
-			}
-			else
-			{
-				style->background = NULL;
-				UNSET_MASK (style, BACKGROUND);
-			}
-			break;
-
-		case PROP_LINE_BACKGROUND:
-			string = g_value_get_string (value);
-			if (string != NULL)
-			{
-				style->line_background = g_intern_string (string);
-				SET_MASK (style, LINE_BACKGROUND);
-			}
-			else
-			{
-				style->line_background = NULL;
-				UNSET_MASK (style, LINE_BACKGROUND);
-			}
-			break;
-
-		case PROP_BOLD:
-			style->bold = g_value_get_boolean (value) != 0;
-			SET_MASK (style, BOLD);
-			break;
-
-		case PROP_ITALIC:
-			style->italic = g_value_get_boolean (value) != 0;
-			SET_MASK (style, ITALIC);
-			break;
-
-		case PROP_PANGO_UNDERLINE:
-			style->underline = (PangoUnderline) g_value_get_enum (value);
-			SET_MASK (style, UNDERLINE);
-			break;
-
-		case PROP_STRIKETHROUGH:
-			style->strikethrough = g_value_get_boolean (value) != 0;
-			SET_MASK (style, STRIKETHROUGH);
-			break;
-
-		case PROP_SCALE:
-			string = g_value_get_string (value);
-			if (string != NULL)
-			{
-				style->scale = g_intern_string (string);
-				SET_MASK (style, SCALE);
-			}
-			else
-			{
-				style->scale = NULL;
-				UNSET_MASK (style, SCALE);
-			}
-			break;
-
-		case PROP_UNDERLINE_COLOR:
-			string = g_value_get_string (value);
-			if (string != NULL)
-			{
-				style->underline_color = g_intern_string (string);
-				SET_MASK (style, UNDERLINE_COLOR);
-			}
-			else
-			{
-				style->underline_color = NULL;
-				UNSET_MASK (style, UNDERLINE_COLOR);
-			}
-			break;
-
-		case PROP_FOREGROUND_SET:
-			MODIFY_MASK (style, value, FOREGROUND);
-			break;
-
-		case PROP_BACKGROUND_SET:
-			MODIFY_MASK (style, value, BACKGROUND);
-			break;
-
-		case PROP_LINE_BACKGROUND_SET:
-			MODIFY_MASK (style, value, LINE_BACKGROUND);
-			break;
-
-		case PROP_BOLD_SET:
-			MODIFY_MASK (style, value, BOLD);
-			break;
-
-		case PROP_ITALIC_SET:
-			MODIFY_MASK (style, value, ITALIC);
-			break;
-
-		case PROP_UNDERLINE_SET:
-			MODIFY_MASK (style, value, UNDERLINE);
-			break;
-
-		case PROP_STRIKETHROUGH_SET:
-			MODIFY_MASK (style, value, STRIKETHROUGH);
-			break;
-
-		case PROP_SCALE_SET:
-			MODIFY_MASK (style, value, SCALE);
-			break;
-
-		case PROP_UNDERLINE_COLOR_SET:
-			MODIFY_MASK (style, value, UNDERLINE_COLOR);
-			break;
-
-		default:
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-			break;
-	}
-}
-
-static void
-gtk_source_style_get_property (GObject      *object,
-			       guint         prop_id,
-			       GValue       *value,
-			       GParamSpec   *pspec)
-{
-	GtkSourceStyle *style = GTK_SOURCE_STYLE (object);
-
-	switch (prop_id)
-	{
-		case PROP_FOREGROUND:
-			g_value_set_string (value, style->foreground);
-			break;
-
-		case PROP_BACKGROUND:
-			g_value_set_string (value, style->background);
-			break;
-
-		case PROP_LINE_BACKGROUND:
-			g_value_set_string (value, style->line_background);
-			break;
-
-		case PROP_BOLD:
-			g_value_set_boolean (value, style->bold);
-			break;
-
-		case PROP_ITALIC:
-			g_value_set_boolean (value, style->italic);
-			break;
-
-		case PROP_PANGO_UNDERLINE:
-			g_value_set_enum (value, style->underline);
-			break;
-
-		case PROP_STRIKETHROUGH:
-			g_value_set_boolean (value, style->strikethrough);
-			break;
-
-		case PROP_SCALE:
-			g_value_set_string (value, style->scale);
-			break;
-
-		case PROP_UNDERLINE_COLOR:
-			g_value_set_string (value, style->underline_color);
-			break;
-
-		case PROP_FOREGROUND_SET:
-			GET_MASK (style, value, FOREGROUND);
-			break;
-
-		case PROP_BACKGROUND_SET:
-			GET_MASK (style, value, BACKGROUND);
-			break;
-
-		case PROP_LINE_BACKGROUND_SET:
-			GET_MASK (style, value, LINE_BACKGROUND);
-			break;
-
-		case PROP_BOLD_SET:
-			GET_MASK (style, value, BOLD);
-			break;
-
-		case PROP_ITALIC_SET:
-			GET_MASK (style, value, ITALIC);
-			break;
-
-		case PROP_UNDERLINE_SET:
-			GET_MASK (style, value, UNDERLINE);
-			break;
-
-		case PROP_STRIKETHROUGH_SET:
-			GET_MASK (style, value, STRIKETHROUGH);
-			break;
-
-		case PROP_SCALE_SET:
-			GET_MASK (style, value, SCALE);
-			break;
-
-		case PROP_UNDERLINE_COLOR_SET:
-			GET_MASK (style, value, UNDERLINE_COLOR);
-			break;
-
-		default:
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-			break;
-	}
 }
 
 /**
