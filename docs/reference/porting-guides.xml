@@ -249,6 +249,14 @@
           all the macros such as <code>GTK_SOURCE_CHECK_VERSION()</code>.
         </para>
       </listitem>
+      <listitem>
+        <para>
+          The <code>GtkSourceStyleSchemeManager:scheme-ids</code> property has
+          been removed. You can connect to the
+          <link linkend="GtkSourceStyleSchemeManager-changed">GtkSourceStyleSchemeManager::changed</link>
+          signal to be notified.
+        </para>
+      </listitem>
     </itemizedlist>
   </refsect1>
 </chapter>

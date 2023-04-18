@@ -56,7 +56,6 @@ enum
 {
 	PROP_0,
 	PROP_SEARCH_PATH,
-	PROP_SCHEME_IDS,
 	N_PROPERTIES
 };
 
@@ -94,10 +93,6 @@ gtk_source_style_scheme_manager_get_property (GObject    *object,
 	{
 		case PROP_SEARCH_PATH:
 			g_value_set_boxed (value, gtk_source_style_scheme_manager_get_search_path (manager));
-			break;
-
-		case PROP_SCHEME_IDS:
-			g_value_set_boxed (value, gtk_source_style_scheme_manager_get_scheme_ids (manager));
 			break;
 
 		default:
@@ -186,18 +181,6 @@ gtk_source_style_scheme_manager_class_init (GtkSourceStyleSchemeManagerClass *kl
 				    "",
 				    G_TYPE_STRV,
 				    G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyleSchemeManager:scheme-ids:
-	 *
-	 * List of the IDs of the available style schemes.
-	 */
-	properties[PROP_SCHEME_IDS] =
-		g_param_spec_boxed ("scheme-ids",
-				    "scheme-ids",
-				    "",
-				    G_TYPE_STRV,
-				    G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
 	g_object_class_install_properties (object_class, N_PROPERTIES, properties);
 
@@ -479,7 +462,6 @@ search_path_changed (GtkSourceStyleSchemeManager *manager)
 	manager->priv->need_reload = TRUE;
 
 	g_object_notify_by_pspec (G_OBJECT (manager), properties[PROP_SEARCH_PATH]);
-	g_object_notify_by_pspec (G_OBJECT (manager), properties[PROP_SCHEME_IDS]);
 	g_signal_emit (manager, signals[SIGNAL_CHANGED], 0);
 }
 
@@ -621,7 +603,6 @@ gtk_source_style_scheme_manager_force_rescan (GtkSourceStyleSchemeManager *manag
 
 	manager->priv->need_reload = TRUE;
 
-	g_object_notify_by_pspec (G_OBJECT (manager), properties[PROP_SCHEME_IDS]);
 	g_signal_emit (manager, signals[SIGNAL_CHANGED], 0);
 }
 
