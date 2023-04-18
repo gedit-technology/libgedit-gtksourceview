@@ -42,7 +42,7 @@
   <color name="purple"     value="#A020F0"/>
 
   <!-- Global Settings -->
-  <style name="line-numbers"                background="#f4f3f2"/>
+  <style name="line-numbers"                background="#eeeeec"/>
   <style name="current-line"                background="#eeeeec"/>
   <style name="current-line-number"         background="#eeeeec"/>
   <style name="draw-spaces"                 foreground="#babdb6"/>
