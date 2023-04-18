@@ -157,6 +157,9 @@ gtk_source_style_get_property (GObject      *object,
 	}
 }
 
+/* TODO: validate input as early as possible. For example for the 'scale'
+ * property, colors as strings, etc.
+ */
 static void
 gtk_source_style_set_property (GObject      *object,
 			       guint         prop_id,
