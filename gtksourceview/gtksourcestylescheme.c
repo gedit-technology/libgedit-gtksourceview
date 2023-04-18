@@ -224,7 +224,9 @@ gtk_source_style_scheme_class_init (GtkSourceStyleSchemeClass *klass)
 				     "id",
 				     "",
 				     NULL,
-				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				     G_PARAM_READWRITE |
+				     G_PARAM_CONSTRUCT_ONLY |
+				     G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyleScheme:name:
@@ -236,7 +238,7 @@ gtk_source_style_scheme_class_init (GtkSourceStyleSchemeClass *klass)
 				     "name",
 				     "",
 				     NULL,
-				     G_PARAM_READABLE);
+				     G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyleScheme:description:
@@ -248,7 +250,7 @@ gtk_source_style_scheme_class_init (GtkSourceStyleSchemeClass *klass)
 				     "description",
 				     "",
 				     NULL,
-				     G_PARAM_READABLE);
+				     G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyleScheme:filename:
@@ -260,7 +262,7 @@ gtk_source_style_scheme_class_init (GtkSourceStyleSchemeClass *klass)
 				     "filename",
 				     "",
 				     NULL,
-				     G_PARAM_READABLE);
+				     G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
 	g_object_class_install_properties (object_class, N_PROPERTIES, properties);
 }
