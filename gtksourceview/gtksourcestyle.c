@@ -618,20 +618,20 @@ gtk_source_style_copy (const GtkSourceStyle *style)
 {
 	GtkSourceStyle *copy;
 
-	g_return_val_if_fail (style != NULL, NULL);
+	g_return_val_if_fail (GTK_SOURCE_IS_STYLE (style), NULL);
 
 	copy = g_object_new (GTK_SOURCE_TYPE_STYLE, NULL);
 
 	copy->foreground = style->foreground;
 	copy->background = style->background;
+	copy->underline_color = style->underline_color;
+	copy->scale = style->scale;
 	copy->line_background = style->line_background;
+	copy->underline = style->underline;
 	copy->italic = style->italic;
 	copy->bold = style->bold;
-	copy->underline = style->underline;
-	copy->underline_color = style->underline_color;
 	copy->strikethrough = style->strikethrough;
 	copy->mask = style->mask;
-	copy->scale = style->scale;
 
 	return copy;
 }
@@ -655,6 +655,7 @@ void
 gtk_source_style_apply (const GtkSourceStyle *style,
 			GtkTextTag           *tag)
 {
+	g_return_if_fail (style == NULL || GTK_SOURCE_IS_STYLE (style));
 	g_return_if_fail (GTK_IS_TEXT_TAG (tag));
 
 	if (style != NULL)
