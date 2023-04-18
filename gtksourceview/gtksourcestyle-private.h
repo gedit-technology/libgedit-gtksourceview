@@ -40,7 +40,7 @@ enum
 
 struct _GtkSourceStyle
 {
-	GObject base_instance;
+	GObject parent;
 
 	/* These fields are strings interned with g_intern_string(), so we don't
 	 * need to copy/free them.
