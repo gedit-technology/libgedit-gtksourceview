@@ -1,4 +1,4 @@
-SUBDIRS = po data gtksourceview interactive-tests tests docs
+SUBDIRS = po data gtksourceview tests docs
 
 include $(top_srcdir)/aminclude_static.am
 clean-local: code-coverage-clean
