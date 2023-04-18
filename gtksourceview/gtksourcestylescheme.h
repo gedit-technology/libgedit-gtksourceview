@@ -116,4 +116,4 @@ gboolean		 _gtk_source_style_scheme_get_background_pattern_color	(GtkSourceStyle
 
 G_END_DECLS
 
-#endif  /* GTK_SOURCE_STYLE_SCHEME_H */
+#endif /* GTK_SOURCE_STYLE_SCHEME_H */

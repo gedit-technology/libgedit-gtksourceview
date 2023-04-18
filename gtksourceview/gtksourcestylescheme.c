@@ -29,13 +29,11 @@
 #include "gtksourcestyle.h"
 #include "gtksourcestyle-private.h"
 #include "gtksourceview.h"
-#include "gtksourcelanguage-private.h"
 
 /**
  * SECTION:stylescheme
  * @Short_description: Controls the appearance of GtkSourceView
  * @Title: GtkSourceStyleScheme
- * @See_also: #GtkSourceStyle, #GtkSourceStyleSchemeManager
  *
  * #GtkSourceStyleScheme contains all the text styles to be used in
  * #GtkSourceView and #GtkSourceBuffer. For instance, it contains text styles
@@ -47,14 +45,13 @@
  * documented in the [style scheme reference][style-reference].
  *
  * The two style schemes with IDs "classic" and "tango" follow more closely the
- * GTK+ theme (for example for the background color).
+ * GTK theme (for example for the background color).
  */
 
 #define STYLE_TEXT			"text"
 #define STYLE_SELECTED			"selection"
 #define STYLE_SELECTED_UNFOCUSED	"selection-unfocused"
 #define STYLE_BRACKET_MATCH		"bracket-match"
-#define STYLE_BRACKET_MISMATCH		"bracket-mismatch"
 #define STYLE_CURSOR			"cursor"
 #define STYLE_SECONDARY_CURSOR		"secondary-cursor"
 #define STYLE_CURRENT_LINE		"current-line"
