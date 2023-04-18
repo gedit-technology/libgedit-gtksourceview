@@ -57,8 +57,11 @@ enum
 	PROP_STRIKETHROUGH_SET,
 	PROP_SCALE,
 	PROP_SCALE_SET,
+
+	/* FIXME: Not documented in style-scheme-file-format.html. Is it normal? */
 	PROP_LINE_BACKGROUND,
 	PROP_LINE_BACKGROUND_SET,
+
 	N_PROPERTIES
 };
 
