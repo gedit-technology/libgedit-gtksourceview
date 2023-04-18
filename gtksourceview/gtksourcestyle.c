@@ -1,5 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8; coding: utf-8 -*-
- *
+/*
  * This file is part of GtkSourceView
  *
  * Copyright (C) 2003 - Paolo Maggi <paolo.maggi@polito.it>
@@ -29,11 +28,15 @@
  * SECTION:style
  * @Short_description: Represents a style
  * @Title: GtkSourceStyle
- * @See_also: #GtkSourceStyleScheme, #GtkSourceStyleSchemeManager
  *
- * The #GtkSourceStyle structure is used to describe text attributes
- * which are set when given style is used.
+ * The #GtkSourceStyle structure is used to describe text attributes which are
+ * set when the given style is used.
  */
+
+struct _GtkSourceStyleClass
+{
+	GObjectClass parent_class;
+};
 
 static void	gtk_source_style_set_property	(GObject      *object,
 						 guint         prop_id,
@@ -44,11 +47,6 @@ static void	gtk_source_style_get_property	(GObject      *object,
 						 guint         prop_id,
 						 GValue       *value,
 						 GParamSpec   *pspec);
-
-struct _GtkSourceStyleClass
-{
-	GObjectClass parent_class;
-};
 
 G_DEFINE_TYPE (GtkSourceStyle, gtk_source_style, G_TYPE_OBJECT)
 
