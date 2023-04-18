@@ -25,7 +25,6 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <gtksourceview/gtksourcetypes.h>
 
 G_BEGIN_DECLS
 
@@ -36,7 +35,8 @@ G_BEGIN_DECLS
 #define GTK_SOURCE_IS_STYLE_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_SOURCE_TYPE_STYLE))
 #define GTK_SOURCE_STYLE_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_SOURCE_TYPE_STYLE, GtkSourceStyleClass))
 
-typedef struct _GtkSourceStyleClass GtkSourceStyleClass;
+typedef struct _GtkSourceStyle		GtkSourceStyle;
+typedef struct _GtkSourceStyleClass	GtkSourceStyleClass;
 
 G_MODULE_EXPORT
 GType			gtk_source_style_get_type	(void);
