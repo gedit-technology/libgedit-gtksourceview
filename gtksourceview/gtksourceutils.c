@@ -248,12 +248,10 @@ build_file_listing (const gchar *item,
 
 	if (!only_dirs && g_file_test (item, G_FILE_TEST_IS_REGULAR))
 	{
-		filenames = g_slist_prepend (filenames, g_strdup(item));
-		return filenames;
-
+		return g_slist_prepend (filenames, g_strdup (item));
 	}
-	dir = g_dir_open (item, 0, NULL);
 
+	dir = g_dir_open (item, 0, NULL);
 	if (dir == NULL)
 	{
 		return filenames;
@@ -285,10 +283,16 @@ _gtk_source_utils_get_file_list (gchar       **path,
 				 gboolean      only_dirs)
 {
 	GSList *files = NULL;
+	gint i;
 
-	for ( ; path && *path; ++path)
+	if (path == NULL)
 	{
-		files = build_file_listing (*path, files, suffix, only_dirs);
+		return NULL;
+	}
+
+	for (i = 0; path[i] != NULL; i++)
+	{
+		files = build_file_listing (path[i], files, suffix, only_dirs);
 	}
 
 	return g_slist_reverse (files);
