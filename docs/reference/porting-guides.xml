@@ -251,8 +251,9 @@
       </listitem>
       <listitem>
         <para>
-          The <code>GtkSourceStyleSchemeManager:scheme-ids</code> property has
-          been removed. You can connect to the
+          The <code>GtkSourceStyleSchemeManager:scheme-ids</code> and
+          <code>GtkSourceStyleSchemeManager:search-path</code> properties have
+          been removed. Instead, you can connect to the
           <link linkend="GtkSourceStyleSchemeManager-changed">GtkSourceStyleSchemeManager::changed</link>
           signal to be notified.
         </para>

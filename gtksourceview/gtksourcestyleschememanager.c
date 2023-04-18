@@ -54,18 +54,10 @@ struct _GtkSourceStyleSchemeManagerPrivate
 
 enum
 {
-	PROP_0,
-	PROP_SEARCH_PATH,
-	N_PROPERTIES
-};
-
-enum
-{
 	SIGNAL_CHANGED,
 	N_SIGNALS
 };
 
-static GParamSpec *properties[N_PROPERTIES];
 static guint signals[N_SIGNALS];
 static GtkSourceStyleSchemeManager *default_instance;
 
@@ -79,46 +71,6 @@ init_default_search_path (GtkSourceStyleSchemeManager *manager)
 {
 	g_strfreev (manager->priv->search_path);
 	manager->priv->search_path = _gtk_source_utils_get_default_dirs (STYLES_DIR);
-}
-
-static void
-gtk_source_style_scheme_manager_get_property (GObject    *object,
-					      guint       prop_id,
-					      GValue     *value,
-					      GParamSpec *pspec)
-{
-	GtkSourceStyleSchemeManager *manager = GTK_SOURCE_STYLE_SCHEME_MANAGER (object);
-
-	switch (prop_id)
-	{
-		case PROP_SEARCH_PATH:
-			g_value_set_boxed (value, gtk_source_style_scheme_manager_get_search_path (manager));
-			break;
-
-		default:
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-			break;
-	}
-}
-
-static void
-gtk_source_style_scheme_manager_set_property (GObject 	   *object,
-					      guint         prop_id,
-					      const GValue *value,
-					      GParamSpec   *pspec)
-{
-	GtkSourceStyleSchemeManager *manager = GTK_SOURCE_STYLE_SCHEME_MANAGER (object);
-
-	switch (prop_id)
-	{
-		case PROP_SEARCH_PATH:
-			gtk_source_style_scheme_manager_set_search_path (manager, g_value_get_boxed (value));
-			break;
-
-		default:
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-			break;
-	}
 }
 
 static void
@@ -155,34 +107,7 @@ gtk_source_style_scheme_manager_class_init (GtkSourceStyleSchemeManagerClass *kl
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	object_class->get_property = gtk_source_style_scheme_manager_get_property;
-	object_class->set_property = gtk_source_style_scheme_manager_set_property;
 	object_class->finalize = gtk_source_style_scheme_manager_finalize;
-
-	/**
-	 * GtkSourceStyleSchemeManager:search-path:
-	 *
-	 * List of directories and files where the style schemes are located.
-	 *
-	 * Note that a path to a single file is accepted too, not just
-	 * directories.
-	 *
-	 * To load the style schemes from the filesystem,
-	 * #GtkSourceStyleSchemeManager first looks at the first path, then the
-	 * second path, etc. If there are duplicates (same style scheme ID), the
-	 * first encountered one has the priority.
-	 *
-	 * So the list of paths must be set in priority order, from highest to
-	 * lowest.
-	 */
-	properties[PROP_SEARCH_PATH] =
-		g_param_spec_boxed ("search-path",
-				    "search-path",
-				    "",
-				    G_TYPE_STRV,
-				    G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
-
-	g_object_class_install_properties (object_class, N_PROPERTIES, properties);
 
 	/**
 	 * GtkSourceStyleSchemeManager::changed:
@@ -460,8 +385,6 @@ static void
 search_path_changed (GtkSourceStyleSchemeManager *manager)
 {
 	manager->priv->need_reload = TRUE;
-
-	g_object_notify_by_pspec (G_OBJECT (manager), properties[PROP_SEARCH_PATH]);
 	g_signal_emit (manager, signals[SIGNAL_CHANGED], 0);
 }
 
@@ -471,7 +394,21 @@ search_path_changed (GtkSourceStyleSchemeManager *manager)
  * @path: (array zero-terminated=1) (nullable): a %NULL-terminated array of
  *   strings, or %NULL to reset the search path to its default value.
  *
- * Sets the #GtkSourceStyleSchemeManager:search-path property.
+ * Sets the search path of @manager.
+ *
+ * @manager will then try to load style schemes from the locations provided in
+ * the search path.
+ *
+ * The search path can contain:
+ * - Paths to directories;
+ * - Paths to individual files.
+ *
+ * To load the style schemes from the filesystem, #GtkSourceStyleSchemeManager
+ * first looks at the first path, then the second path, etc. If there are
+ * duplicates (same #GtkSourceStyleScheme ID), the first encountered one has the
+ * priority.
+ *
+ * So the list of paths must be set in priority order, from highest to lowest.
  */
 void
 gtk_source_style_scheme_manager_set_search_path (GtkSourceStyleSchemeManager  *manager,
@@ -519,7 +456,8 @@ add_search_path_to_ptr_array (GtkSourceStyleSchemeManager *manager,
  * @manager: a #GtkSourceStyleSchemeManager.
  * @path: a directory or a filename.
  *
- * Adds @path at the end of the #GtkSourceStyleSchemeManager:search-path.
+ * Adds @path at the end of the @manager's search path (i.e., at the lowest
+ * priority). See gtk_source_style_scheme_manager_set_search_path().
  */
 void
 gtk_source_style_scheme_manager_append_search_path (GtkSourceStyleSchemeManager *manager,
@@ -546,7 +484,8 @@ gtk_source_style_scheme_manager_append_search_path (GtkSourceStyleSchemeManager 
  * @manager: a #GtkSourceStyleSchemeManager.
  * @path: a directory or a filename.
  *
- * Prepends @path to the #GtkSourceStyleSchemeManager:search-path.
+ * Adds @path at the beginning of the @manager's search path (i.e., at the
+ * highest priority). See gtk_source_style_scheme_manager_set_search_path().
  */
 void
 gtk_source_style_scheme_manager_prepend_search_path (GtkSourceStyleSchemeManager *manager,
@@ -572,8 +511,12 @@ gtk_source_style_scheme_manager_prepend_search_path (GtkSourceStyleSchemeManager
  * gtk_source_style_scheme_manager_get_search_path:
  * @manager: a #GtkSourceStyleSchemeManager.
  *
- * Returns: (array zero-terminated=1) (transfer none): the value of the
- *   #GtkSourceStyleSchemeManager:search-path property.
+ * Gets the search path of @manager.
+ *
+ * See also gtk_source_style_scheme_manager_set_search_path().
+ *
+ * Returns: (array zero-terminated=1) (transfer none): the search path of
+ *   @manager.
  */
 const gchar * const *
 gtk_source_style_scheme_manager_get_search_path (GtkSourceStyleSchemeManager *manager)
