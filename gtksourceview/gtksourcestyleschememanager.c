@@ -215,9 +215,9 @@ _gtk_source_style_scheme_manager_peek_default (void)
 }
 
 static gboolean
-build_reference_chain (GtkSourceStyleScheme *scheme,
-		       GHashTable           *hash,
-		       GSList              **ret)
+build_reference_chain (GtkSourceStyleScheme  *scheme,
+		       GHashTable            *hash,
+		       GSList               **ret)
 {
 	GSList *chain;
 	gboolean retval = TRUE;
@@ -226,13 +226,14 @@ build_reference_chain (GtkSourceStyleScheme *scheme,
 
 	while (TRUE)
 	{
-		GtkSourceStyleScheme *parent_scheme;
 		const gchar *parent_id;
+		GtkSourceStyleScheme *parent_scheme;
 
 		parent_id = _gtk_source_style_scheme_get_parent_id (scheme);
-
 		if (parent_id == NULL)
+		{
 			break;
+		}
 
 		parent_scheme = g_hash_table_lookup (hash, parent_id);
 
@@ -263,7 +264,8 @@ build_reference_chain (GtkSourceStyleScheme *scheme,
 }
 
 static GSList *
-check_parents (GSList *schemes, GHashTable *hash)
+check_parents (GSList     *schemes,
+	       GHashTable *hash)
 {
 	GSList *to_check;
 
@@ -271,11 +273,9 @@ check_parents (GSList *schemes, GHashTable *hash)
 
 	while (to_check != NULL)
 	{
-		GtkSourceStyleScheme *scheme_to_check;
+		GtkSourceStyleScheme *scheme_to_check = to_check->data;
 		GSList *chain;
 		gboolean valid;
-
-		scheme_to_check = to_check->data;
 
 		valid = build_reference_chain (scheme_to_check, hash, &chain);
 
@@ -300,13 +300,11 @@ check_parents (GSList *schemes, GHashTable *hash)
 }
 
 static gint
-schemes_compare (GtkSourceStyleScheme *scheme1, GtkSourceStyleScheme *scheme2)
+schemes_compare (GtkSourceStyleScheme *scheme1,
+		 GtkSourceStyleScheme *scheme2)
 {
-	const gchar *name1;
-	const gchar *name2;
-
-	name1 = gtk_source_style_scheme_get_name (scheme1);
-	name2 = gtk_source_style_scheme_get_name (scheme2);
+	const gchar *name1 = gtk_source_style_scheme_get_name (scheme1);
+	const gchar *name2 = gtk_source_style_scheme_get_name (scheme2);
 
 	return g_utf8_collate (name1, name2);
 }
@@ -314,21 +312,20 @@ schemes_compare (GtkSourceStyleScheme *scheme1, GtkSourceStyleScheme *scheme2)
 static gchar **
 schemes_list_to_ids (GSList *list)
 {
-	gchar **res;
-	guint i = 0;
+	GPtrArray *ids;
+	GSList *l;
 
-	res = g_new (gchar *, g_slist_length (list) + 1);
+	ids = g_ptr_array_new ();
 
-	for ( ; list != NULL; list = list->next)
+	for (l = list; l != NULL; l = l->next)
 	{
-		const gchar *id = gtk_source_style_scheme_get_id (list->data);
-		res[i] = g_strdup (id);
-		++i;
+		const gchar *cur_id = gtk_source_style_scheme_get_id (l->data);
+		g_ptr_array_add (ids, g_strdup (cur_id));
 	}
 
-	res[i] = NULL;
+	g_ptr_array_add (ids, NULL);
 
-	return res;
+	return (gchar **) g_ptr_array_free (ids, FALSE);
 }
 
 static void
