@@ -80,9 +80,6 @@ G_STMT_START {					\
 		UNSET_MASK (style, name);	\
 } G_STMT_END
 
-#define GET_MASK(style,value,name)		\
-	g_value_set_boolean (value, ((style)->mask & GTK_SOURCE_STYLE_USE_##name) != 0)
-
 static void
 gtk_source_style_get_property (GObject      *object,
 			       guint         prop_id,
@@ -98,7 +95,7 @@ gtk_source_style_get_property (GObject      *object,
 			break;
 
 		case PROP_FOREGROUND_SET:
-			GET_MASK (style, value, FOREGROUND);
+			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_FOREGROUND);
 			break;
 
 		case PROP_BACKGROUND:
@@ -106,7 +103,7 @@ gtk_source_style_get_property (GObject      *object,
 			break;
 
 		case PROP_BACKGROUND_SET:
-			GET_MASK (style, value, BACKGROUND);
+			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_BACKGROUND);
 			break;
 
 		case PROP_ITALIC:
@@ -114,7 +111,7 @@ gtk_source_style_get_property (GObject      *object,
 			break;
 
 		case PROP_ITALIC_SET:
-			GET_MASK (style, value, ITALIC);
+			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_ITALIC);
 			break;
 
 		case PROP_BOLD:
@@ -122,7 +119,7 @@ gtk_source_style_get_property (GObject      *object,
 			break;
 
 		case PROP_BOLD_SET:
-			GET_MASK (style, value, BOLD);
+			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_BOLD);
 			break;
 
 		case PROP_PANGO_UNDERLINE:
@@ -130,7 +127,7 @@ gtk_source_style_get_property (GObject      *object,
 			break;
 
 		case PROP_UNDERLINE_SET:
-			GET_MASK (style, value, UNDERLINE);
+			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_UNDERLINE);
 			break;
 
 		case PROP_UNDERLINE_COLOR:
@@ -138,7 +135,7 @@ gtk_source_style_get_property (GObject      *object,
 			break;
 
 		case PROP_UNDERLINE_COLOR_SET:
-			GET_MASK (style, value, UNDERLINE_COLOR);
+			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR);
 			break;
 
 		case PROP_STRIKETHROUGH:
@@ -146,7 +143,7 @@ gtk_source_style_get_property (GObject      *object,
 			break;
 
 		case PROP_STRIKETHROUGH_SET:
-			GET_MASK (style, value, STRIKETHROUGH);
+			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_STRIKETHROUGH);
 			break;
 
 		case PROP_SCALE:
@@ -154,7 +151,7 @@ gtk_source_style_get_property (GObject      *object,
 			break;
 
 		case PROP_SCALE_SET:
-			GET_MASK (style, value, SCALE);
+			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_SCALE);
 			break;
 
 		case PROP_LINE_BACKGROUND:
@@ -162,7 +159,7 @@ gtk_source_style_get_property (GObject      *object,
 			break;
 
 		case PROP_LINE_BACKGROUND_SET:
-			GET_MASK (style, value, LINE_BACKGROUND);
+			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_LINE_BACKGROUND);
 			break;
 
 		default:
