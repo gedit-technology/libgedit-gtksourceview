@@ -80,9 +80,6 @@ G_GNUC_INTERNAL
 GtkSourceStyleScheme	*_gtk_source_style_scheme_new_from_file			(const gchar *filename);
 
 G_GNUC_INTERNAL
-GtkSourceStyleScheme	*_gtk_source_style_scheme_get_default			(void);
-
-G_GNUC_INTERNAL
 const gchar		*_gtk_source_style_scheme_get_parent_id			(GtkSourceStyleScheme *scheme);
 
 G_GNUC_INTERNAL

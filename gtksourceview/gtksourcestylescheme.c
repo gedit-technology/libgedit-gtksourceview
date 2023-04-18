@@ -25,7 +25,6 @@
 #include <libxml/parser.h>
 #include <string.h>
 #include <glib/gi18n-lib.h>
-#include "gtksourcestyleschememanager.h"
 #include "gtksourcestyle.h"
 #include "gtksourcestyle-private.h"
 #include "gtksourceview.h"
@@ -62,8 +61,6 @@
 #define STYLE_BACKGROUND_PATTERN	"background-pattern"
 
 #define STYLE_SCHEME_VERSION		"1.0"
-
-#define DEFAULT_STYLE_SCHEME		"classic"
 
 /* We need to be lower than the application priority to allow application
  * overrides.
@@ -1452,23 +1449,4 @@ _gtk_source_style_scheme_set_parent (GtkSourceStyleScheme *scheme,
 	}
 
 	scheme->priv->parent = parent_scheme;
-}
-
-/**
- * _gtk_source_style_scheme_get_default:
- *
- * Returns: default style scheme to be used when user didn't set
- * style scheme explicitly.
- *
- * Since: 2.0
- */
-GtkSourceStyleScheme *
-_gtk_source_style_scheme_get_default (void)
-{
-	GtkSourceStyleSchemeManager *manager;
-
-	manager = gtk_source_style_scheme_manager_get_default ();
-
-	return gtk_source_style_scheme_manager_get_scheme (manager,
-							   DEFAULT_STYLE_SCHEME);
 }

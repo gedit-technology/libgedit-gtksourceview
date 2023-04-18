@@ -565,6 +565,7 @@ static void
 gtk_source_buffer_init (GtkSourceBuffer *buffer)
 {
 	GtkSourceBufferPrivate *priv = gtk_source_buffer_get_instance_private (buffer);
+	GtkSourceStyleSchemeManager *style_scheme_manager;
 
 	buffer->priv = priv;
 
@@ -580,8 +581,8 @@ gtk_source_buffer_init (GtkSourceBuffer *buffer)
 
 	priv->all_source_marks = _gtk_source_marks_sequence_new (GTK_TEXT_BUFFER (buffer));
 
-	priv->style_scheme = _gtk_source_style_scheme_get_default ();
-
+	style_scheme_manager = gtk_source_style_scheme_manager_get_default ();
+	priv->style_scheme = gtk_source_style_scheme_manager_get_scheme (style_scheme_manager, "classic");
 	if (priv->style_scheme != NULL)
 	{
 		g_object_ref (priv->style_scheme);
