@@ -46,15 +46,16 @@ struct _GtkSourceStyle
 	 */
 	const gchar *foreground;
 	const gchar *background;
-	const gchar *line_background;
-	const gchar *scale;
 	const gchar *underline_color;
+	const gchar *scale;
+	const gchar *line_background;
 
 	PangoUnderline underline;
 
 	guint italic : 1;
 	guint bold : 1;
 	guint strikethrough : 1;
+
 	guint mask : 12;
 };
 
