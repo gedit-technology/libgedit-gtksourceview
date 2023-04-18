@@ -1,5 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8; coding: utf-8 -*-
- *
+/*
  * This file is part of GtkSourceView
  *
  * Copyright (C) 2003 - Paolo Maggi <paolo.maggi@polito.it>
@@ -40,15 +39,15 @@ G_BEGIN_DECLS
 typedef struct _GtkSourceStyleClass GtkSourceStyleClass;
 
 G_MODULE_EXPORT
-GType		 gtk_source_style_get_type	(void) G_GNUC_CONST;
+GType			gtk_source_style_get_type	(void);
 
 G_MODULE_EXPORT
-GtkSourceStyle	*gtk_source_style_copy		(const GtkSourceStyle *style);
+GtkSourceStyle *	gtk_source_style_copy		(const GtkSourceStyle *style);
 
 G_MODULE_EXPORT
-void		 gtk_source_style_apply		(const GtkSourceStyle *style,
-						 GtkTextTag           *tag);
+void			gtk_source_style_apply		(const GtkSourceStyle *style,
+							 GtkTextTag           *tag);
 
 G_END_DECLS
 
-#endif  /* GTK_SOURCE_STYLE_H */
+#endif /* GTK_SOURCE_STYLE_H */

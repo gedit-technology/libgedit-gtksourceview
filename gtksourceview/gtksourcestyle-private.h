@@ -1,5 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8; coding: utf-8 -*-
- *
+/*
  * This file is part of GtkSourceView
  *
  * Copyright (C) 2003 - Paolo Maggi <paolo.maggi@polito.it>
@@ -61,4 +60,4 @@ struct _GtkSourceStyle
 
 G_END_DECLS
 
-#endif  /* GTK_SOURCE_STYLE_PRIVATE_H */
+#endif /* GTK_SOURCE_STYLE_PRIVATE_H */
