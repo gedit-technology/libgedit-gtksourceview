@@ -60,7 +60,14 @@ enum
 	N_PROPERTIES
 };
 
+enum
+{
+	SIGNAL_CHANGED,
+	N_SIGNALS
+};
+
 static GParamSpec *properties[N_PROPERTIES];
+static guint signals[N_SIGNALS];
 static GtkSourceStyleSchemeManager *default_instance;
 
 #define STYLES_DIR		"styles"
@@ -193,6 +200,21 @@ gtk_source_style_scheme_manager_class_init (GtkSourceStyleSchemeManagerClass *kl
 				    G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
 	g_object_class_install_properties (object_class, N_PROPERTIES, properties);
+
+	/**
+	 * GtkSourceStyleSchemeManager::changed:
+	 * @manager: the #GtkSourceStyleSchemeManager emitting the signal.
+	 *
+	 * Emitted when the @manager has changed.
+	 *
+	 * Since: 300.0
+	 */
+	signals[SIGNAL_CHANGED] =
+		g_signal_new ("changed",
+			      G_TYPE_FROM_CLASS (klass),
+			      G_SIGNAL_RUN_FIRST,
+			      0, NULL, NULL, NULL,
+			      G_TYPE_NONE, 0);
 }
 
 static void
@@ -458,6 +480,7 @@ search_path_changed (GtkSourceStyleSchemeManager *manager)
 
 	g_object_notify_by_pspec (G_OBJECT (manager), properties[PROP_SEARCH_PATH]);
 	g_object_notify_by_pspec (G_OBJECT (manager), properties[PROP_SCHEME_IDS]);
+	g_signal_emit (manager, signals[SIGNAL_CHANGED], 0);
 }
 
 /**
@@ -599,6 +622,7 @@ gtk_source_style_scheme_manager_force_rescan (GtkSourceStyleSchemeManager *manag
 	manager->priv->need_reload = TRUE;
 
 	g_object_notify_by_pspec (G_OBJECT (manager), properties[PROP_SCHEME_IDS]);
+	g_signal_emit (manager, signals[SIGNAL_CHANGED], 0);
 }
 
 /**
