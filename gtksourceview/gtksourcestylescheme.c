@@ -27,7 +27,6 @@
 #include <glib/gi18n-lib.h>
 #include "gtksourcestyle.h"
 #include "gtksourcestyle-private.h"
-#include "gtksourceview.h"
 
 /**
  * SECTION:stylescheme
@@ -741,28 +740,22 @@ get_css_provider_cursors (GtkSourceStyleScheme *scheme,
 	return provider;
 }
 
-/**
- * _gtk_source_style_scheme_apply:
- * @scheme:: a #GtkSourceStyleScheme.
- * @view: a #GtkSourceView to apply styles to.
- *
- * Sets style colors from @scheme to the @view.
- *
- * Since: 2.0
+/* Adds the #GtkCssProvider's (that are part of @scheme) to @widget.
+ * @widget is typically a #GtkSourceView.
  */
 void
-_gtk_source_style_scheme_apply (GtkSourceStyleScheme *scheme,
-				GtkSourceView        *view)
+_gtk_source_style_scheme_add_css_providers_to_widget (GtkSourceStyleScheme *scheme,
+						      GtkWidget            *widget)
 {
 	GtkStyleContext *context;
 
 	g_return_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme));
-	g_return_if_fail (GTK_SOURCE_IS_VIEW (view));
+	g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	context = gtk_widget_get_style_context (GTK_WIDGET (view));
+	context = gtk_widget_get_style_context (widget);
 	gtk_style_context_add_provider (context,
-	                                GTK_STYLE_PROVIDER (scheme->priv->css_provider),
-	                                GTK_SOURCE_STYLE_PROVIDER_PRIORITY);
+					GTK_STYLE_PROVIDER (scheme->priv->css_provider),
+					GTK_SOURCE_STYLE_PROVIDER_PRIORITY);
 
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 	/* See https://bugzilla.gnome.org/show_bug.cgi?id=708583 */
@@ -774,8 +767,7 @@ _gtk_source_style_scheme_apply (GtkSourceStyleScheme *scheme,
 	 */
 	if (scheme->priv->css_provider_cursors == NULL)
 	{
-		scheme->priv->css_provider_cursors = get_css_provider_cursors (scheme,
-									       GTK_WIDGET (view));
+		scheme->priv->css_provider_cursors = get_css_provider_cursors (scheme, widget);
 	}
 
 	if (scheme->priv->css_provider_cursors != NULL)
@@ -790,25 +782,19 @@ _gtk_source_style_scheme_apply (GtkSourceStyleScheme *scheme,
 	}
 }
 
-/**
- * _gtk_source_style_scheme_unapply:
- * @scheme: (nullable): a #GtkSourceStyleScheme or %NULL.
- * @view: a #GtkSourceView to unapply styles to.
- *
- * Removes the styles from @scheme in the @view.
- *
- * Since: 3.0
+/* Removes the #GtkCssProvider's (that are part of @scheme) from @widget.
+ * @widget is typically a #GtkSourceView.
  */
 void
-_gtk_source_style_scheme_unapply (GtkSourceStyleScheme *scheme,
-				  GtkSourceView        *view)
+_gtk_source_style_scheme_remove_css_providers_from_widget (GtkSourceStyleScheme *scheme,
+							   GtkWidget            *widget)
 {
 	GtkStyleContext *context;
 
 	g_return_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme));
-	g_return_if_fail (GTK_SOURCE_IS_VIEW (view));
+	g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	context = gtk_widget_get_style_context (GTK_WIDGET (view));
+	context = gtk_widget_get_style_context (widget);
 	gtk_style_context_remove_provider (context,
 	                                   GTK_STYLE_PROVIDER (scheme->priv->css_provider));
 

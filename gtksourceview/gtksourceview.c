@@ -4685,14 +4685,16 @@ gtk_source_view_update_style_scheme (GtkSourceView *view)
 
 	if (view->priv->style_scheme != NULL)
 	{
-		_gtk_source_style_scheme_unapply (view->priv->style_scheme, view);
+		_gtk_source_style_scheme_remove_css_providers_from_widget (view->priv->style_scheme,
+									   GTK_WIDGET (view));
 	}
 
 	g_set_object (&view->priv->style_scheme, new_scheme);
 
 	if (view->priv->style_scheme != NULL)
 	{
-		_gtk_source_style_scheme_apply (view->priv->style_scheme, view);
+		_gtk_source_style_scheme_add_css_providers_to_widget (view->priv->style_scheme,
+								      GTK_WIDGET (view));
 	}
 
 	update_style (view);

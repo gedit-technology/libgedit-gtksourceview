@@ -87,20 +87,20 @@ void			 _gtk_source_style_scheme_set_parent			(GtkSourceStyleScheme *scheme,
 										 GtkSourceStyleScheme *parent_scheme);
 
 G_GNUC_INTERNAL
-void			 _gtk_source_style_scheme_apply				(GtkSourceStyleScheme *scheme,
-										 GtkSourceView        *view);
-
-G_GNUC_INTERNAL
-void			 _gtk_source_style_scheme_unapply			(GtkSourceStyleScheme *scheme,
-										 GtkSourceView        *view);
-
-G_GNUC_INTERNAL
 gboolean		 _gtk_source_style_scheme_get_current_line_color	(GtkSourceStyleScheme *scheme,
 										 GdkRGBA              *color);
 
 G_GNUC_INTERNAL
 gboolean		 _gtk_source_style_scheme_get_background_pattern_color	(GtkSourceStyleScheme *scheme,
 										 GdkRGBA              *color);
+
+G_GNUC_INTERNAL
+void			 _gtk_source_style_scheme_add_css_providers_to_widget	(GtkSourceStyleScheme *scheme,
+										 GtkWidget            *widget);
+
+G_GNUC_INTERNAL
+void			 _gtk_source_style_scheme_remove_css_providers_from_widget (GtkSourceStyleScheme *scheme,
+										    GtkWidget            *widget);
 
 G_END_DECLS
 
