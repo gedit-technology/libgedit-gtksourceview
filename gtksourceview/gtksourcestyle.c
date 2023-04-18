@@ -222,9 +222,6 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 static void
 gtk_source_style_init (GtkSourceStyle *style)
 {
-	style->foreground = NULL;
-	style->background = NULL;
-	style->line_background = NULL;
 }
 
 #define SET_MASK(style,name) (style)->mask |= (GTK_SOURCE_STYLE_USE_##name)
