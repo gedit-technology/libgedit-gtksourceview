@@ -50,7 +50,6 @@
 #define STYLE_TEXT			"text"
 #define STYLE_SELECTED			"selection"
 #define STYLE_SELECTED_UNFOCUSED	"selection-unfocused"
-#define STYLE_BRACKET_MATCH		"bracket-match"
 #define STYLE_CURSOR			"cursor"
 #define STYLE_SECONDARY_CURSOR		"secondary-cursor"
 #define STYLE_CURRENT_LINE		"current-line"
@@ -556,14 +555,6 @@ gtk_source_style_scheme_get_style (GtkSourceStyleScheme *scheme,
 			     style);
 
 	return style;
-}
-
-GtkSourceStyle *
-_gtk_source_style_scheme_get_matching_brackets_style (GtkSourceStyleScheme *scheme)
-{
-	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
-
-	return gtk_source_style_scheme_get_style (scheme, STYLE_BRACKET_MATCH);
 }
 
 static gboolean

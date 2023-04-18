@@ -95,9 +95,6 @@ void			 _gtk_source_style_scheme_unapply			(GtkSourceStyleScheme *scheme,
 										 GtkSourceView        *view);
 
 G_GNUC_INTERNAL
-GtkSourceStyle		*_gtk_source_style_scheme_get_matching_brackets_style	(GtkSourceStyleScheme *scheme);
-
-G_GNUC_INTERNAL
 gboolean		 _gtk_source_style_scheme_get_current_line_color	(GtkSourceStyleScheme *scheme,
 										 GdkRGBA              *color);
 

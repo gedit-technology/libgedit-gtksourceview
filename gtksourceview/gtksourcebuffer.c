@@ -810,7 +810,7 @@ update_bracket_match_style (GtkSourceBuffer *buffer)
 
 	if (buffer->priv->style_scheme != NULL)
 	{
-		style = _gtk_source_style_scheme_get_matching_brackets_style (buffer->priv->style_scheme);
+		style = gtk_source_style_scheme_get_style (buffer->priv->style_scheme, "bracket-match");
 	}
 
 	gtk_source_style_apply (style, buffer->priv->bracket_match_tag);
