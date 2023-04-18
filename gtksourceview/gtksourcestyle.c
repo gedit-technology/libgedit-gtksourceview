@@ -89,130 +89,220 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 	 * and sets everything after construction (but nobody can notice it).
 	 */
 
+	/**
+	 * GtkSourceStyle:line-background:
+	 *
+	 * Line background color.
+	 */
 	properties[PROP_LINE_BACKGROUND] =
 		g_param_spec_string ("line-background",
 				     "line-background",
-				     "Line background color",
+				     "",
 				     NULL,
 				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:line-background-set:
+	 *
+	 * Whether #GtkSourceStyle:line-background is set.
+	 */
 	properties[PROP_LINE_BACKGROUND_SET] =
 		g_param_spec_boolean ("line-background-set",
 				      "line-background-set",
-				      "Whether line background color is set",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:background:
+	 *
+	 * Background color.
+	 */
 	properties[PROP_BACKGROUND] =
 		g_param_spec_string ("background",
 				     "background",
-				     "Background color",
+				     "",
 				     NULL,
 				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:background-set:
+	 *
+	 * Whether #GtkSourceStyle:background is set.
+	 */
 	properties[PROP_BACKGROUND_SET] =
 		g_param_spec_boolean ("background-set",
 				      "background-set",
-				      "Whether background color is set",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:foreground:
+	 *
+	 * Foreground color.
+	 */
 	properties[PROP_FOREGROUND] =
 		g_param_spec_string ("foreground",
 				     "foreground",
-				     "Foreground color",
+				     "",
 				     NULL,
 				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:foreground-set:
+	 *
+	 * Whether #GtkSourceStyle:foreground is set.
+	 */
 	properties[PROP_FOREGROUND_SET] =
 		g_param_spec_boolean ("foreground-set",
 				      "foreground-set",
-				      "Whether foreground color is set",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:bold:
+	 *
+	 * Bold.
+	 */
 	properties[PROP_BOLD] =
 		g_param_spec_boolean ("bold",
 				      "bold",
-				      "Bold",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:bold-set:
+	 *
+	 * Whether #GtkSourceStyle:bold is set.
+	 */
 	properties[PROP_BOLD_SET] =
 		g_param_spec_boolean ("bold-set",
 				      "bold-set",
-				      "Whether bold attribute is set",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:italic:
+	 *
+	 * Italic.
+	 */
 	properties[PROP_ITALIC] =
 		g_param_spec_boolean ("italic",
 				      "italic",
-				      "Italic",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:italic-set:
+	 *
+	 * Whether #GtkSourceStyle:italic is set.
+	 */
 	properties[PROP_ITALIC_SET] =
 		g_param_spec_boolean ("italic-set",
 				      "italic-set",
-				      "Whether italic attribute is set",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:pango-underline:
+	 *
+	 * Pango underline.
+	 */
 	properties[PROP_PANGO_UNDERLINE] =
 		g_param_spec_enum ("pango-underline",
 				   "pango-underline",
-				   "Pango Underline",
+				   "",
 				   PANGO_TYPE_UNDERLINE,
 				   PANGO_UNDERLINE_NONE,
 				   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:underline-set:
+	 *
+	 * Whether #GtkSourceStyle:pango-underline is set.
+	 */
 	properties[PROP_UNDERLINE_SET] =
 		g_param_spec_boolean ("underline-set",
 				      "underline-set",
-				      "Whether underline attribute is set",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:strikethrough:
+	 *
+	 * Strikethrough.
+	 */
 	properties[PROP_STRIKETHROUGH] =
 		g_param_spec_boolean ("strikethrough",
 				      "strikethrough",
-				      "Strikethrough",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:strikethrough-set:
+	 *
+	 * Whether #GtkSourceStyle:strikethrough is set.
+	 */
 	properties[PROP_STRIKETHROUGH_SET] =
 		g_param_spec_boolean ("strikethrough-set",
 				      "strikethrough-set",
-				      "Whether strikethrough attribute is set",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:scale:
+	 *
+	 * Text scale factor.
+	 */
 	properties[PROP_SCALE] =
 		g_param_spec_string ("scale",
 				     "scale",
-				     "Text scale factor",
+				     "",
 				     NULL,
 				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:scale-set:
+	 *
+	 * Whether #GtkSourceStyle:scale is set.
+	 */
 	properties[PROP_SCALE_SET] =
 		g_param_spec_boolean ("scale-set",
 				      "scale-set",
-				      "Whether scale attribute is set",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:underline-color:
+	 *
+	 * Underline color.
+	 */
 	properties[PROP_UNDERLINE_COLOR] =
 		g_param_spec_string ("underline-color",
 				     "underline-color",
-				     "Underline color",
+				     "",
 				     NULL,
 				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+	/**
+	 * GtkSourceStyle:underline-color-set:
+	 *
+	 * Whether #GtkSourceStyle:underline-color is set.
+	 */
 	properties[PROP_UNDERLINE_COLOR_SET] =
 		g_param_spec_boolean ("underline-color-set",
 				      "underline-color-set",
-				      "Whether underline color attribute is set",
+				      "",
 				      FALSE,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
