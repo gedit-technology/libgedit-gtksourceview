@@ -70,15 +70,6 @@
  */
 #define GTK_SOURCE_STYLE_PROVIDER_PRIORITY (GTK_STYLE_PROVIDER_PRIORITY_APPLICATION - 1)
 
-enum
-{
-	PROP_0,
-	PROP_ID,
-	PROP_NAME,
-	PROP_DESCRIPTION,
-	PROP_FILENAME
-};
-
 struct _GtkSourceStyleSchemePrivate
 {
 	gchar *id;
@@ -95,6 +86,18 @@ struct _GtkSourceStyleSchemePrivate
 	GtkCssProvider *css_provider;
 	GtkCssProvider *css_provider_cursors;
 };
+
+enum
+{
+	PROP_0,
+	PROP_ID,
+	PROP_NAME,
+	PROP_DESCRIPTION,
+	PROP_FILENAME,
+	N_PROPERTIES
+};
+
+static GParamSpec *properties[N_PROPERTIES];
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtkSourceStyleScheme, gtk_source_style_scheme, G_TYPE_OBJECT)
 
@@ -216,52 +219,50 @@ gtk_source_style_scheme_class_init (GtkSourceStyleSchemeClass *klass)
 	 * Style scheme id, a unique string used to identify the style scheme
 	 * in #GtkSourceStyleSchemeManager.
 	 */
-	g_object_class_install_property (object_class,
-					 PROP_ID,
-					 g_param_spec_string ("id",
-						 	      "Style scheme id",
-							      "Style scheme id",
-							      NULL,
-							      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_ID] =
+		g_param_spec_string ("id",
+				     "id",
+				     "",
+				     NULL,
+				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
 	/**
 	 * GtkSourceStyleScheme:name:
 	 *
 	 * Style scheme name, a translatable string to present to the user.
 	 */
-	g_object_class_install_property (object_class,
-					 PROP_NAME,
-					 g_param_spec_string ("name",
-						 	      "Style scheme name",
-							      "Style scheme name",
-							      NULL,
-							      G_PARAM_READABLE));
+	properties[PROP_NAME] =
+		g_param_spec_string ("name",
+				     "name",
+				     "",
+				     NULL,
+				     G_PARAM_READABLE);
 
 	/**
 	 * GtkSourceStyleScheme:description:
 	 *
 	 * Style scheme description, a translatable string to present to the user.
 	 */
-	g_object_class_install_property (object_class,
-					 PROP_DESCRIPTION,
-					 g_param_spec_string ("description",
-						 	      "Style scheme description",
-							      "Style scheme description",
-							      NULL,
-							      G_PARAM_READABLE));
+	properties[PROP_DESCRIPTION] =
+		g_param_spec_string ("description",
+				     "description",
+				     "",
+				     NULL,
+				     G_PARAM_READABLE);
 
 	/**
 	 * GtkSourceStyleScheme:filename:
 	 *
 	 * Style scheme filename or %NULL.
 	 */
-	g_object_class_install_property (object_class,
-					 PROP_FILENAME,
-					 g_param_spec_string ("filename",
-						 	      "Style scheme filename",
-							      "Style scheme filename",
-							      NULL,
-							      G_PARAM_READABLE));
+	properties[PROP_FILENAME] =
+		g_param_spec_string ("filename",
+				     "filename",
+				     "",
+				     NULL,
+				     G_PARAM_READABLE);
+
+	g_object_class_install_properties (object_class, N_PROPERTIES, properties);
 }
 
 static void
