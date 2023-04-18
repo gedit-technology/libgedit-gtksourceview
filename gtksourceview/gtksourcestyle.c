@@ -389,7 +389,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				     "foreground",
 				     "",
 				     NULL,
-				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				     G_PARAM_READWRITE |
+				     G_PARAM_CONSTRUCT_ONLY |
+				     G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:foreground-set:
@@ -401,7 +403,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "foreground-set",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:background:
@@ -413,7 +417,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				     "background",
 				     "",
 				     NULL,
-				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				     G_PARAM_READWRITE |
+				     G_PARAM_CONSTRUCT_ONLY |
+				     G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:background-set:
@@ -425,7 +431,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "background-set",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:italic:
@@ -437,7 +445,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "italic",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:italic-set:
@@ -449,7 +459,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "italic-set",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:bold:
@@ -461,7 +473,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "bold",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:bold-set:
@@ -473,7 +487,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "bold-set",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:pango-underline:
@@ -486,7 +502,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				   "",
 				   PANGO_TYPE_UNDERLINE,
 				   PANGO_UNDERLINE_NONE,
-				   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				   G_PARAM_READWRITE |
+				   G_PARAM_CONSTRUCT_ONLY |
+				   G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:underline-set:
@@ -498,7 +516,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "underline-set",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:underline-color:
@@ -510,7 +530,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				     "underline-color",
 				     "",
 				     NULL,
-				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				     G_PARAM_READWRITE |
+				     G_PARAM_CONSTRUCT_ONLY |
+				     G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:underline-color-set:
@@ -522,7 +544,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "underline-color-set",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:strikethrough:
@@ -534,7 +558,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "strikethrough",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:strikethrough-set:
@@ -546,7 +572,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "strikethrough-set",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:scale:
@@ -558,7 +586,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				     "scale",
 				     "",
 				     NULL,
-				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				     G_PARAM_READWRITE |
+				     G_PARAM_CONSTRUCT_ONLY |
+				     G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:scale-set:
@@ -570,7 +600,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "scale-set",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:line-background:
@@ -582,7 +614,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				     "line-background",
 				     "",
 				     NULL,
-				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				     G_PARAM_READWRITE |
+				     G_PARAM_CONSTRUCT_ONLY |
+				     G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:line-background-set:
@@ -594,7 +628,9 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      "line-background-set",
 				      "",
 				      FALSE,
-				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+				      G_PARAM_READWRITE |
+				      G_PARAM_CONSTRUCT_ONLY |
+				      G_PARAM_STATIC_STRINGS);
 
 	g_object_class_install_properties (object_class, N_PROPERTIES, properties);
 }
