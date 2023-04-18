@@ -651,6 +651,9 @@ gtk_source_style_copy (const GtkSourceStyle *style)
  *
  * Since: 3.22
  */
+/* FIXME: the GtkTextTag docs (in the class description) says that we should not
+ * set the "set" properties independently.
+ */
 void
 gtk_source_style_apply (const GtkSourceStyle *style,
 			GtkTextTag           *tag)
