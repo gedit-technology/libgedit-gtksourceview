@@ -180,8 +180,8 @@ AC_CONFIG_FILES([
 	gtksourceview/Makefile
 	gtksourceview/completion-providers/Makefile
 	gtksourceview/completion-providers/words/Makefile
+	interactive-tests/Makefile
 	po/Makefile.in
-	tests/Makefile
 	testsuite/Makefile
 ])
 
