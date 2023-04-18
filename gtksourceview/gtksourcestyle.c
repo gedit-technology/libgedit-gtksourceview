@@ -724,7 +724,7 @@ gtk_source_style_apply (const GtkSourceStyle *style,
 
 		if (style->mask & GTK_SOURCE_STYLE_USE_STRIKETHROUGH)
 		{
-			g_object_set (tag, "strikethrough", style->strikethrough != 0, NULL);
+			g_object_set (tag, "strikethrough", style->strikethrough, NULL);
 		}
 		else
 		{
