@@ -257,6 +257,12 @@
           <link linkend="GtkSourceStyleSchemeManager-changed">GtkSourceStyleSchemeManager::changed</link>
           signal to be notified.
         </para>
+        <para>
+          The <code>gtk_source_style_scheme_manager_get_scheme_ids()</code>
+          function has been removed, use
+          <link linkend="gtk-source-style-scheme-manager-get-schemes">gtk_source_style_scheme_manager_get_schemes()</link>
+          instead.
+        </para>
       </listitem>
     </itemizedlist>
   </refsect1>

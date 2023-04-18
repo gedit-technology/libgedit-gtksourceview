@@ -43,12 +43,6 @@ struct _GtkSourceStyleSchemeManagerPrivate
 	 */
 	GHashTable *schemes_hash_table;
 
-	/* Store the IDs of the available schemes.
-	 * Because gtk_source_style_scheme_manager_get_scheme_ids() has a
-	 * (transfer none) return value.
-	 */
-	gchar **ids;
-
 	guint need_reload : 1;
 };
 
@@ -74,25 +68,16 @@ init_default_search_path (GtkSourceStyleSchemeManager *manager)
 }
 
 static void
-free_schemes (GtkSourceStyleSchemeManager *manager)
-{
-	if (manager->priv->schemes_hash_table != NULL)
-	{
-		g_hash_table_destroy (manager->priv->schemes_hash_table);
-		manager->priv->schemes_hash_table = NULL;
-	}
-
-	g_strfreev (manager->priv->ids);
-	manager->priv->ids = NULL;
-}
-
-static void
 gtk_source_style_scheme_manager_finalize (GObject *object)
 {
 	GtkSourceStyleSchemeManager *manager = GTK_SOURCE_STYLE_SCHEME_MANAGER (object);
 
 	g_strfreev (manager->priv->search_path);
-	free_schemes (manager);
+
+	if (manager->priv->schemes_hash_table != NULL)
+	{
+		g_hash_table_destroy (manager->priv->schemes_hash_table);
+	}
 
 	if (default_instance == manager)
 	{
@@ -291,40 +276,6 @@ setup_parent_schemes (GtkSourceStyleSchemeManager *manager)
 		; /* empty loop body */
 }
 
-static gint
-schemes_compare_by_name (GtkSourceStyleScheme *scheme1,
-			 GtkSourceStyleScheme *scheme2)
-{
-	const gchar *name1 = gtk_source_style_scheme_get_name (scheme1);
-	const gchar *name2 = gtk_source_style_scheme_get_name (scheme2);
-
-	return g_utf8_collate (name1, name2);
-}
-
-static void
-update_scheme_ids (GtkSourceStyleSchemeManager *manager)
-{
-	GPtrArray *ids;
-	GList *schemes;
-	GList *l;
-
-	ids = g_ptr_array_new ();
-
-	schemes = g_hash_table_get_values (manager->priv->schemes_hash_table);
-	schemes = g_list_sort (schemes, (GCompareFunc) schemes_compare_by_name);
-
-	for (l = schemes; l != NULL; l = l->next)
-	{
-		const gchar *cur_id = gtk_source_style_scheme_get_id (l->data);
-		g_ptr_array_add (ids, g_strdup (cur_id));
-	}
-
-	g_ptr_array_add (ids, NULL);
-	manager->priv->ids = (gchar **) g_ptr_array_free (ids, FALSE);
-
-	g_list_free (schemes);
-}
-
 static void
 reload_if_needed (GtkSourceStyleSchemeManager *manager)
 {
@@ -336,7 +287,11 @@ reload_if_needed (GtkSourceStyleSchemeManager *manager)
 		return;
 	}
 
-	free_schemes (manager);
+	if (manager->priv->schemes_hash_table != NULL)
+	{
+		g_hash_table_destroy (manager->priv->schemes_hash_table);
+	}
+
 	manager->priv->schemes_hash_table = g_hash_table_new_full (g_str_hash,
 								   g_str_equal,
 								   g_free,
@@ -375,7 +330,7 @@ reload_if_needed (GtkSourceStyleSchemeManager *manager)
 	}
 
 	setup_parent_schemes (manager);
-	update_scheme_ids (manager);
+
 	manager->priv->need_reload = FALSE;
 
 	g_slist_free_full (files, g_free);
@@ -549,23 +504,14 @@ gtk_source_style_scheme_manager_force_rescan (GtkSourceStyleSchemeManager *manag
 	g_signal_emit (manager, signals[SIGNAL_CHANGED], 0);
 }
 
-/**
- * gtk_source_style_scheme_manager_get_scheme_ids:
- * @manager: a #GtkSourceStyleSchemeManager.
- *
- * Returns: (nullable) (array zero-terminated=1) (transfer none): a
- *   %NULL-terminated array of strings containing the IDs of the available style
- *   schemes, or %NULL if no style schemes are available. The array is sorted
- *   alphabetically according to the scheme name.
- */
-const gchar * const *
-gtk_source_style_scheme_manager_get_scheme_ids (GtkSourceStyleSchemeManager *manager)
+static gint
+schemes_compare_by_name (GtkSourceStyleScheme *scheme1,
+			 GtkSourceStyleScheme *scheme2)
 {
-	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME_MANAGER (manager), NULL);
+	const gchar *name1 = gtk_source_style_scheme_get_name (scheme1);
+	const gchar *name2 = gtk_source_style_scheme_get_name (scheme2);
 
-	reload_if_needed (manager);
-
-	return (const gchar * const *) manager->priv->ids;
+	return g_utf8_collate (name1, name2);
 }
 
 /**

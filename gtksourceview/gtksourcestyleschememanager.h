@@ -86,9 +86,6 @@ G_MODULE_EXPORT
 void			gtk_source_style_scheme_manager_force_rescan		(GtkSourceStyleSchemeManager *manager);
 
 G_MODULE_EXPORT
-const gchar * const *	gtk_source_style_scheme_manager_get_scheme_ids		(GtkSourceStyleSchemeManager *manager);
-
-G_MODULE_EXPORT
 GList *			gtk_source_style_scheme_manager_get_schemes		(GtkSourceStyleSchemeManager *manager);
 
 G_MODULE_EXPORT
