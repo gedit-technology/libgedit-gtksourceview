@@ -89,6 +89,9 @@ G_MODULE_EXPORT
 const gchar * const *	gtk_source_style_scheme_manager_get_scheme_ids		(GtkSourceStyleSchemeManager *manager);
 
 G_MODULE_EXPORT
+GList *			gtk_source_style_scheme_manager_get_schemes		(GtkSourceStyleSchemeManager *manager);
+
+G_MODULE_EXPORT
 GtkSourceStyleScheme *	gtk_source_style_scheme_manager_get_scheme		(GtkSourceStyleSchemeManager *manager,
 										 const gchar                 *scheme_id);
 

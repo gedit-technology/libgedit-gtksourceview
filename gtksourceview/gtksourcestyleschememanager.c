@@ -569,6 +569,28 @@ gtk_source_style_scheme_manager_get_scheme_ids (GtkSourceStyleSchemeManager *man
 }
 
 /**
+ * gtk_source_style_scheme_manager_get_schemes:
+ * @manager: a #GtkSourceStyleSchemeManager.
+ *
+ * Returns: (transfer container) (element-type GtkSourceStyleScheme): a list of
+ *   all the #GtkSourceStyleScheme's that are part of @manager. The list is
+ *   sorted alphabetically according to the scheme name.
+ * Since: 300.0
+ */
+GList *
+gtk_source_style_scheme_manager_get_schemes (GtkSourceStyleSchemeManager *manager)
+{
+	GList *schemes;
+
+	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME_MANAGER (manager), NULL);
+
+	reload_if_needed (manager);
+
+	schemes = g_hash_table_get_values (manager->priv->schemes_hash_table);
+	return g_list_sort (schemes, (GCompareFunc) schemes_compare_by_name);
+}
+
+/**
  * gtk_source_style_scheme_manager_get_scheme:
  * @manager: a #GtkSourceStyleSchemeManager.
  * @scheme_id: style scheme ID to find.
