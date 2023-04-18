@@ -1407,14 +1407,7 @@ _gtk_source_style_scheme_new_from_file (const gchar *filename)
 	return scheme;
 }
 
-/**
- * _gtk_source_style_scheme_get_parent_id:
- * @scheme: a #GtkSourceStyleScheme.
- *
- * Returns: (nullable): parent style scheme id or %NULL.
- *
- * Since: 2.0
- */
+/* Returns: (nullable): the parent style scheme ID, or %NULL. */
 const gchar *
 _gtk_source_style_scheme_get_parent_id (GtkSourceStyleScheme *scheme)
 {
@@ -1423,17 +1416,6 @@ _gtk_source_style_scheme_get_parent_id (GtkSourceStyleScheme *scheme)
 	return scheme->priv->parent_id;
 }
 
-/**
- * _gtk_source_style_scheme_set_parent:
- * @scheme: a #GtkSourceStyleScheme.
- * @parent_scheme: parent #GtkSourceStyleScheme for @scheme.
- *
- * Sets @parent_scheme as parent scheme for @scheme, @scheme will
- * look for styles in @parent_scheme if it doesn't have style set
- * for given name.
- *
- * Since: 2.0
- */
 void
 _gtk_source_style_scheme_set_parent (GtkSourceStyleScheme *scheme,
 				     GtkSourceStyleScheme *parent_scheme)
@@ -1441,12 +1423,5 @@ _gtk_source_style_scheme_set_parent (GtkSourceStyleScheme *scheme,
 	g_return_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme));
 	g_return_if_fail (parent_scheme == NULL || GTK_SOURCE_IS_STYLE_SCHEME (parent_scheme));
 
-	g_clear_object (&scheme->priv->parent);
-
-	if (parent_scheme != NULL)
-	{
-		g_object_ref (parent_scheme);
-	}
-
-	scheme->priv->parent = parent_scheme;
+	g_set_object (&scheme->priv->parent, parent_scheme);
 }
