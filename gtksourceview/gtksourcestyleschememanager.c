@@ -127,6 +127,11 @@ gtk_source_style_scheme_manager_finalize (GObject *object)
 	free_schemes (manager);
 	g_strfreev (manager->priv->search_path);
 
+	if (default_instance == manager)
+	{
+		default_instance = NULL;
+	}
+
 	G_OBJECT_CLASS (gtk_source_style_scheme_manager_parent_class)->finalize (object);
 }
 
@@ -198,12 +203,6 @@ gtk_source_style_scheme_manager_get_default (void)
 	if (default_instance == NULL)
 	{
 		default_instance = gtk_source_style_scheme_manager_new ();
-
-		/* FIXME: probably better to set default_instance to NULL in
-		 * finalize().
-		 */
-		g_object_add_weak_pointer (G_OBJECT (default_instance),
-					   (gpointer) &default_instance);
 	}
 
 	return default_instance;
