@@ -45,7 +45,7 @@ AC_DEFINE_UNQUOTED([GSV_API_VERSION],
 		   [Define to the libgedit-gtksourceview API version.])
 
 # Dependencies
-glib_req=2.60
+glib_req=2.74
 gtk_req=3.20
 
 AC_CONFIG_SRCDIR([gtksourceview/gtksourcebuffer.h])

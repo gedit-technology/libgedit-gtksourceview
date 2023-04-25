@@ -27,30 +27,63 @@ test_get_default (void)
 
 	default_manager1 = gtk_source_style_scheme_manager_get_default ();
 	default_manager2 = gtk_source_style_scheme_manager_get_default ();
-	g_assert (default_manager1 == default_manager2);
+	g_assert_true (default_manager1 == default_manager2);
 }
 
 static void
 test_prepend_search_path (void)
 {
 	GtkSourceStyleSchemeManager *manager;
-	gchar *styles_test_dir;
+	gchar *dataset_dir;
 	GtkSourceStyleScheme *scheme;
 	const gchar *obtained_filename;
 	gchar *expected_filename;
 
 	manager = gtk_source_style_scheme_manager_get_default ();
 
-	styles_test_dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
-	gtk_source_style_scheme_manager_prepend_search_path (manager, styles_test_dir);
+	dataset_dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
+	gtk_source_style_scheme_manager_prepend_search_path (manager, dataset_dir);
 
 	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "classic");
 	obtained_filename = gtk_source_style_scheme_get_filename (scheme);
-	expected_filename = g_build_filename (styles_test_dir, "classic.xml", NULL);
+	expected_filename = g_build_filename (dataset_dir, "classic.xml", NULL);
 	g_assert_cmpstr (obtained_filename, ==, expected_filename);
 
-	g_free (styles_test_dir);
+	g_free (dataset_dir);
 	g_free (expected_filename);
+}
+
+static void
+set_single_search_path (GtkSourceStyleSchemeManager *manager,
+			const gchar                 *path)
+{
+	const gchar *search_path[] = { path, NULL };
+
+	gtk_source_style_scheme_manager_set_search_path (manager, (gchar **) search_path);
+}
+
+static void
+test_unknown_parent (void)
+{
+	if (g_test_subprocess ())
+	{
+		GtkSourceStyleSchemeManager *manager;
+		gchar *dataset_dir;
+
+		manager = gtk_source_style_scheme_manager_get_default ();
+
+		dataset_dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "unknown-parent", NULL);
+		set_single_search_path (manager, dataset_dir);
+		g_free (dataset_dir);
+
+		/* Triggers a g_warning(). */
+		gtk_source_style_scheme_manager_get_schemes (manager);
+		return;
+	}
+
+	g_test_trap_subprocess (NULL, 0, G_TEST_SUBPROCESS_DEFAULT);
+	g_test_trap_assert_failed ();
+	g_test_trap_assert_stderr ("*Unknown parent-scheme*");
 }
 
 int
@@ -64,6 +97,7 @@ main (int    argc,
 
 	g_test_add_func ("/StyleSchemeManager/get_default", test_get_default);
 	g_test_add_func ("/StyleSchemeManager/prepend_search_path", test_prepend_search_path);
+	g_test_add_func ("/StyleSchemeManager/unknown_parent", test_unknown_parent);
 
 	ret = g_test_run ();
 	gtk_source_finalize ();
