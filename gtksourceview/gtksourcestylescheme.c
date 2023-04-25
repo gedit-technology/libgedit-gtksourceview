@@ -290,15 +290,13 @@ gtk_source_style_scheme_init (GtkSourceStyleScheme *scheme)
  * gtk_source_style_scheme_get_id:
  * @scheme: a #GtkSourceStyleScheme.
  *
- * Returns: @scheme id.
- *
+ * Returns: the value of the #GtkSourceStyleScheme:id property.
  * Since: 2.0
  */
 const gchar *
 gtk_source_style_scheme_get_id (GtkSourceStyleScheme *scheme)
 {
 	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
-	g_return_val_if_fail (scheme->priv->id != NULL, "");
 
 	return scheme->priv->id;
 }
@@ -307,15 +305,13 @@ gtk_source_style_scheme_get_id (GtkSourceStyleScheme *scheme)
  * gtk_source_style_scheme_get_name:
  * @scheme: a #GtkSourceStyleScheme.
  *
- * Returns: @scheme name.
- *
+ * Returns: the value of the #GtkSourceStyleScheme:name property.
  * Since: 2.0
  */
 const gchar *
 gtk_source_style_scheme_get_name (GtkSourceStyleScheme *scheme)
 {
 	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
-	g_return_val_if_fail (scheme->priv->name != NULL, "");
 
 	return scheme->priv->name;
 }
@@ -324,8 +320,8 @@ gtk_source_style_scheme_get_name (GtkSourceStyleScheme *scheme)
  * gtk_source_style_scheme_get_description:
  * @scheme: a #GtkSourceStyleScheme.
  *
- * Returns: (nullable): @scheme description (if defined), or %NULL.
- *
+ * Returns: (nullable): the value of the #GtkSourceStyleScheme:description
+ *   property.
  * Since: 2.0
  */
 const gchar *
@@ -341,9 +337,8 @@ gtk_source_style_scheme_get_description (GtkSourceStyleScheme *scheme)
  * @scheme: a #GtkSourceStyleScheme.
  *
  * Returns: (nullable) (array zero-terminated=1) (transfer none): a
- * %NULL-terminated array containing the @scheme authors or %NULL if
- * no author is specified by the style scheme.
- *
+ *   %NULL-terminated array containing the @scheme authors or %NULL if no author
+ *   is specified by the style scheme.
  * Since: 2.0
  */
 const gchar * const *
@@ -363,9 +358,8 @@ gtk_source_style_scheme_get_authors (GtkSourceStyleScheme *scheme)
  * gtk_source_style_scheme_get_filename:
  * @scheme: a #GtkSourceStyleScheme.
  *
- * Returns: (nullable): @scheme file name if the scheme was created
- * parsing a style scheme file or %NULL in the other cases.
- *
+ * Returns: (nullable): @scheme file name if the scheme was created parsing a
+ *   style scheme file or %NULL in the other cases.
  * Since: 2.0
  */
 const gchar *
