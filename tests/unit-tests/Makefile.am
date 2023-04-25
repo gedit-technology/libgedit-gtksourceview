@@ -109,35 +109,4 @@ EXTRA_DIST =				\
 	styles/classic.xml		\
 	styles/test.xml
 
-if INSTALLED_TESTS
-insttestdir = $(libexecdir)/installed-tests/$(PACKAGE)-@GSV_API_VERSION@
-insttest_PROGRAMS = $(UNIT_TEST_PROGS)
-
-insttestlangdir = $(libexecdir)/installed-tests/$(PACKAGE)-@GSV_API_VERSION@/language-specs
-insttestlang_DATA = 			\
-	language-specs/test-empty.lang	\
-	language-specs/test-full.lang
-
-instteststyledir = $(libexecdir)/installed-tests/$(PACKAGE)-@GSV_API_VERSION@/styles
-instteststyle_DATA = 			\
-	styles/classic.xml		\
-	styles/test.xml
-
-%.test: %$(EXEEXT) Makefile
-	$(AM_V_GEN) (echo '[Test]' > $@.tmp; \
-	echo 'Description=libgedit-gtksourceview test' >> $@.tmp; \
-	echo 'Exec=$(insttestdir)/$<' >> $@.tmp; \
-	echo 'Type=session' >> $@.tmp; \
-	echo 'Output=TAP' >> $@.tmp; \
-	mv $@.tmp $@)
-
-test_files = $(UNIT_TEST_PROGS:=.test)
-
-CLEANFILES = $(test_files)
-
-testmetadir = $(datadir)/installed-tests/$(PACKAGE)-@GSV_API_VERSION@
-testmeta_DATA = $(test_files)
-
-endif # INSTALLED_TESTS
-
 -include $(top_srcdir)/git.mk

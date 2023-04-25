@@ -133,17 +133,6 @@ AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [Define to the gette
 AX_REQUIRE_DEFINED([GTK_DOC_CHECK])
 GTK_DOC_CHECK([1.25], [--flavour=no-tmpl])
 
-# Installed Tests
-#
-# Initially done for Gnome Continuous, but can also be useful on Windows with
-# MSYS2 in case an executable needs to be installed in order to test it.
-AC_ARG_ENABLE(installed_tests,
-              AS_HELP_STRING([--enable-installed-tests],
-                             [Install test programs (default: no)]),,
-              [enable_installed_tests=no])
-
-AM_CONDITIONAL(INSTALLED_TESTS, test "x$enable_installed_tests" = "xyes")
-
 # Introspection
 AX_REQUIRE_DEFINED([GOBJECT_INTROSPECTION_CHECK])
 GOBJECT_INTROSPECTION_CHECK([1.42.0])
@@ -199,5 +188,4 @@ Configuration:
 	GObject introspection:	${found_introspection}
 	Code coverage:		${enable_code_coverage}
 	Valgrind check:		${enable_valgrind}
-	Installed tests:	${enable_installed_tests}
 "
