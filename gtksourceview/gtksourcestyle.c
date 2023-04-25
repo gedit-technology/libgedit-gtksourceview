@@ -23,6 +23,7 @@
 
 #include "gtksourcestyle.h"
 #include "gtksourcestyle-private.h"
+#include "gtksourcestyleschemeparser.h"
 
 /**
  * SECTION:style
@@ -157,9 +158,6 @@ gtk_source_style_get_property (GObject      *object,
 	}
 }
 
-/* TODO: validate input as early as possible. For example for the 'scale'
- * property, colors as strings, etc.
- */
 static void
 gtk_source_style_set_property (GObject      *object,
 			       guint         prop_id,
@@ -773,7 +771,7 @@ gtk_source_style_apply (const GtkSourceStyle *style,
 		}
 
 		if ((style->mask & GTK_SOURCE_STYLE_USE_SCALE) &&
-		    _gtk_source_style_parse_scale (style->scale, &scale_factor))
+		    _gtk_source_style_scheme_parser_parse_scale (style->scale, &scale_factor))
 		{
 			g_object_set (tag, "scale", scale_factor, NULL);
 		}
@@ -807,69 +805,4 @@ gtk_source_style_apply (const GtkSourceStyle *style,
 			      "paragraph-background-set", FALSE,
 			      NULL);
 	}
-}
-
-/*
- * _gtk_source_style_parse_scale:
- * @scale_str: the input value as a string.
- * @scale_factor: (out) (optional): the output value as a number.
- *
- * This function parses @scale_str and - if successful - writes the output value
- * to @scale_factor. @scale_factor is then suitable for the #GtkTextTag's
- * #GtkTextTag:scale property.
- *
- * Returns: %TRUE on success, %FALSE otherwise.
- */
-gboolean
-_gtk_source_style_parse_scale (const gchar *scale_str,
-			       gdouble     *scale_factor)
-{
-	gdouble val;
-	gint i;
-	struct { const gchar *name; gdouble value; } pango_scale_table[] = {
-		{ "xx-small",	PANGO_SCALE_XX_SMALL },
-		{ "x-small",	PANGO_SCALE_X_SMALL },
-		{ "small",	PANGO_SCALE_SMALL },
-		{ "medium",	PANGO_SCALE_MEDIUM },
-		{ "large",	PANGO_SCALE_LARGE },
-		{ "x-large",	PANGO_SCALE_X_LARGE },
-		{ "xx-large",	PANGO_SCALE_XX_LARGE },
-		{ NULL,		0.0 }
-	};
-
-	if (scale_factor != NULL)
-	{
-		/* Ensure to set a value, as a safety net. */
-		*scale_factor = 1.0;
-	}
-
-	g_return_val_if_fail (scale_str != NULL, FALSE);
-
-	for (i = 0; pango_scale_table[i].name != NULL; i++)
-	{
-		if (g_str_equal (scale_str, pango_scale_table[i].name))
-		{
-			if (scale_factor != NULL)
-			{
-				*scale_factor = pango_scale_table[i].value;
-			}
-			return TRUE;
-		}
-	}
-
-	/* Ideally: have a g_ascii_string_to_signed() equivalent for double and
-	 * use it. To check that scale_str contains *only* a valid floating
-	 * point number.
-	 */
-	val = g_ascii_strtod (scale_str, NULL);
-	if (val > 0.0)
-	{
-		if (scale_factor != NULL)
-		{
-			*scale_factor = val;
-		}
-		return TRUE;
-	}
-
-	return FALSE;
 }

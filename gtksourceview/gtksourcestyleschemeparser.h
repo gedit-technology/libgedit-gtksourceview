@@ -24,6 +24,10 @@
 
 G_BEGIN_DECLS
 
+G_GNUC_INTERNAL
+gboolean	_gtk_source_style_scheme_parser_parse_scale	(const gchar *scale_str,
+								 gdouble     *scale_factor);
+
 G_END_DECLS
 
 #endif /* GTK_SOURCE_STYLE_SCHEME_PARSER_H */

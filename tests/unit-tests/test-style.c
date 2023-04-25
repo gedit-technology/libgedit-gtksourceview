@@ -18,26 +18,26 @@
  */
 
 #include <gtksourceview/gtksource.h>
-#include "gtksourceview/gtksourcestyle-private.h"
+#include "gtksourceview/gtksourcestyleschemeparser.h"
 
 static void
-test_scale (void)
+test_parse_scale (void)
 {
 	gdouble val = 0.0;
 
-	g_assert_false (_gtk_source_style_parse_scale ("", NULL));
-	g_assert_false (_gtk_source_style_parse_scale ("foo", NULL));
-	g_assert_false (_gtk_source_style_parse_scale ("0", NULL));
-	g_assert_false (_gtk_source_style_parse_scale ("0.0", NULL));
-	g_assert_false (_gtk_source_style_parse_scale ("-1", NULL));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_scale ("", NULL));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_scale ("foo", NULL));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_scale ("0", NULL));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_scale ("0.0", NULL));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_scale ("-1", NULL));
 
-	g_assert_true (_gtk_source_style_parse_scale ("1.2", NULL));
-	g_assert_true (_gtk_source_style_parse_scale ("1.2", &val));
+	g_assert_true (_gtk_source_style_scheme_parser_parse_scale ("1.2", NULL));
+	g_assert_true (_gtk_source_style_scheme_parser_parse_scale ("1.2", &val));
 	g_assert_cmpfloat (val, ==, 1.2);
 
-	g_assert_true (_gtk_source_style_parse_scale ("x-large", &val));
-	g_assert_false (_gtk_source_style_parse_scale ("X-Large", &val));
-	g_assert_false (_gtk_source_style_parse_scale (" x-large", &val));
+	g_assert_true (_gtk_source_style_scheme_parser_parse_scale ("x-large", &val));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_scale ("X-Large", &val));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_scale (" x-large", &val));
 }
 
 int
@@ -49,7 +49,7 @@ main (int    argc,
 	gtk_test_init (&argc, &argv);
 	gtk_source_init ();
 
-	g_test_add_func ("/Style/scale", test_scale);
+	g_test_add_func ("/StyleSchemeParser/parse_scale", test_parse_scale);
 
 	ret = g_test_run ();
 	gtk_source_finalize ();
