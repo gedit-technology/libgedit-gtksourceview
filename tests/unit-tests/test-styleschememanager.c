@@ -85,6 +85,29 @@ test_unknown_parent (void)
 	g_object_unref (manager);
 }
 
+static void
+test_parents_ref_cycle (void)
+{
+	GtkSourceStyleSchemeManager *manager;
+	gchar *dataset_dir;
+	GList *schemes;
+
+	manager = gtk_source_style_scheme_manager_new ();
+
+	dataset_dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "parents-ref-cycle", NULL);
+	set_single_search_path (manager, dataset_dir);
+	g_free (dataset_dir);
+
+	g_test_expect_message (G_LOG_DOMAIN,
+			       G_LOG_LEVEL_WARNING,
+			       "*parent-scheme reference cycle*");
+	schemes = gtk_source_style_scheme_manager_get_schemes (manager);
+	g_test_assert_expected_messages ();
+
+	g_assert_cmpuint (g_list_length (schemes), ==, 0);
+	g_object_unref (manager);
+}
+
 int
 main (int    argc,
       char **argv)
@@ -97,6 +120,7 @@ main (int    argc,
 	g_test_add_func ("/StyleSchemeManager/get_default", test_get_default);
 	g_test_add_func ("/StyleSchemeManager/prepend_search_path", test_prepend_search_path);
 	g_test_add_func ("/StyleSchemeManager/unknown_parent", test_unknown_parent);
+	g_test_add_func ("/StyleSchemeManager/parents_ref_cycle", test_parents_ref_cycle);
 
 	ret = g_test_run ();
 	gtk_source_finalize ();
