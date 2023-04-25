@@ -65,25 +65,24 @@ set_single_search_path (GtkSourceStyleSchemeManager *manager,
 static void
 test_unknown_parent (void)
 {
-	if (g_test_subprocess ())
-	{
-		GtkSourceStyleSchemeManager *manager;
-		gchar *dataset_dir;
+	GtkSourceStyleSchemeManager *manager;
+	gchar *dataset_dir;
+	GList *schemes;
 
-		manager = gtk_source_style_scheme_manager_get_default ();
+	manager = gtk_source_style_scheme_manager_new ();
 
-		dataset_dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "unknown-parent", NULL);
-		set_single_search_path (manager, dataset_dir);
-		g_free (dataset_dir);
+	dataset_dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "unknown-parent", NULL);
+	set_single_search_path (manager, dataset_dir);
+	g_free (dataset_dir);
 
-		/* Triggers a g_warning(). */
-		gtk_source_style_scheme_manager_get_schemes (manager);
-		return;
-	}
+	g_test_expect_message (G_LOG_DOMAIN,
+			       G_LOG_LEVEL_WARNING,
+			       "*Unknown parent-scheme*");
+	schemes = gtk_source_style_scheme_manager_get_schemes (manager);
+	g_test_assert_expected_messages ();
 
-	g_test_trap_subprocess (NULL, 0, G_TEST_SUBPROCESS_DEFAULT);
-	g_test_trap_assert_failed ();
-	g_test_trap_assert_stderr ("*Unknown parent-scheme*");
+	g_assert_cmpuint (g_list_length (schemes), ==, 0);
+	g_object_unref (manager);
 }
 
 int
