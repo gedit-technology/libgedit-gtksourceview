@@ -36,6 +36,7 @@ gtksourceview/gtksourcespacedrawer.c
 gtksourceview/gtksourcestyle.c
 gtksourceview/gtksourcestylescheme.c
 gtksourceview/gtksourcestyleschememanager.c
+gtksourceview/gtksourcestyleschemeparser.c
 gtksourceview/gtksourcetag.c
 gtksourceview/gtksourceundomanagerdefault.c
 gtksourceview/gtksourceutils.c

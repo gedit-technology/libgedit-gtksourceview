@@ -51,6 +51,7 @@ IGNORE_HFILES =					\
 	gtksourcepixbufhelper.h			\
 	gtksourceregex.h			\
 	gtksourcestyle-private.h		\
+	gtksourcestyleschemeparser.h		\
 	gtksourcetypes-private.h		\
 	gtksourceundomanagerdefault.h		\
 	gtksourceutils-private.h
