@@ -102,11 +102,9 @@ TESTS_ENVIRONMENT = G_TEST_SRCDIR="$(abs_srcdir)"
 TESTS = $(UNIT_TEST_PROGS)
 noinst_PROGRAMS = $(UNIT_TEST_PROGS)
 
-EXTRA_DIST =				\
-	language-specs/test-empty.lang	\
-	language-specs/test-full.lang	\
-	setup-file-saver.sh		\
-	styles/classic.xml		\
-	styles/test.xml
+EXTRA_DIST =			\
+	language-specs		\
+	setup-file-saver.sh	\
+	styles
 
 -include $(top_srcdir)/git.mk
