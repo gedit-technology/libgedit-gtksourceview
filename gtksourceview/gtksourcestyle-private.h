@@ -59,6 +59,10 @@ struct _GtkSourceStyle
 	guint mask : 12;
 };
 
+G_GNUC_INTERNAL
+gboolean	_gtk_source_style_parse_scale		(const gchar *scale_str,
+							 gdouble     *scale_factor);
+
 G_END_DECLS
 
 #endif /* GTK_SOURCE_STYLE_PRIVATE_H */
