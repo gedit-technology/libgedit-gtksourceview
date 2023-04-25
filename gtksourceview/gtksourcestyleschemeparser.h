@@ -20,13 +20,17 @@
 #ifndef GTK_SOURCE_STYLE_SCHEME_PARSER_H
 #define GTK_SOURCE_STYLE_SCHEME_PARSER_H
 
-#include <glib.h>
+#include <gdk/gdk.h>
 
 G_BEGIN_DECLS
 
 G_GNUC_INTERNAL
-gboolean	_gtk_source_style_scheme_parser_parse_scale	(const gchar *scale_str,
-								 gdouble     *scale_factor);
+gboolean	_gtk_source_style_scheme_parser_parse_final_color	(const gchar *color_str,
+									 GdkRGBA     *rgba);
+
+G_GNUC_INTERNAL
+gboolean	_gtk_source_style_scheme_parser_parse_scale		(const gchar *scale_str,
+									 gdouble     *scale_factor);
 
 G_END_DECLS
 

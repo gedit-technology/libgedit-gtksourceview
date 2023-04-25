@@ -21,6 +21,27 @@
 #include "gtksourceview/gtksourcestyleschemeparser.h"
 
 static void
+test_parse_final_color (void)
+{
+	GdkRGBA rgba;
+
+	g_assert_false (_gtk_source_style_scheme_parser_parse_final_color ("", &rgba));
+
+	g_assert_true (_gtk_source_style_scheme_parser_parse_final_color ("#000000", &rgba));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_final_color ("000000", &rgba));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_final_color ("##000000", &rgba));
+
+	g_assert_true (_gtk_source_style_scheme_parser_parse_final_color ("#black", &rgba));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_final_color ("black", &rgba));
+
+	g_assert_true (_gtk_source_style_scheme_parser_parse_final_color ("#rgb(255,0,0)", &rgba));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_final_color ("rgb(255,0,0)", &rgba));
+
+	g_assert_true (_gtk_source_style_scheme_parser_parse_final_color ("#rgba(255,0,0,0.5)", &rgba));
+	g_assert_false (_gtk_source_style_scheme_parser_parse_final_color ("rgba(255,0,0,0.5)", &rgba));
+}
+
+static void
 test_parse_scale (void)
 {
 	gdouble val = 0.0;
@@ -49,6 +70,7 @@ main (int    argc,
 	gtk_test_init (&argc, &argv);
 	gtk_source_init ();
 
+	g_test_add_func ("/StyleSchemeParser/parse_final_color", test_parse_final_color);
 	g_test_add_func ("/StyleSchemeParser/parse_scale", test_parse_scale);
 
 	ret = g_test_run ();

@@ -18,7 +18,52 @@
  */
 
 #include "gtksourcestyleschemeparser.h"
-#include <pango/pango.h>
+
+/*
+ * _gtk_source_style_scheme_parser_parse_final_color:
+ * @color_str: the string to parse.
+ * @rgba: (out):
+ *
+ * This function parses a string that should contain a final color value.
+ *
+ * It can be either:
+ * - For the `<color>` tag: the content of the `value` attribute.
+ * - For the `<style>` tag: the content of an attribute taking a color as value,
+ *   but that doesn't reference a `<color>` tag.
+ *
+ * Returns: %TRUE on success, %FALSE otherwise.
+ */
+gboolean
+_gtk_source_style_scheme_parser_parse_final_color (const gchar *color_str,
+						   GdkRGBA     *rgba)
+{
+	g_return_val_if_fail (color_str != NULL, FALSE);
+	g_return_val_if_fail (rgba != NULL, FALSE);
+
+	/* All final color values must start with #, so when reading a style
+	 * scheme file we directly know that it's a final value.
+	 * References to a <color> tag never start with #.
+	 */
+	if (color_str[0] != '#')
+	{
+		return FALSE;
+	}
+
+	/* To avoid for example "##000000" being accepted (see below). */
+	if (color_str[1] == '#')
+	{
+		return FALSE;
+	}
+
+	/* Something like "#000000" */
+	if (gdk_rgba_parse (rgba, color_str))
+	{
+		return TRUE;
+	}
+
+	/* Skip the # prefix, to accept the other variants. */
+	return gdk_rgba_parse (rgba, color_str + 1);
+}
 
 /*
  * _gtk_source_style_scheme_parser_parse_scale:
