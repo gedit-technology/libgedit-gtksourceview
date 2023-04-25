@@ -702,6 +702,8 @@ gtk_source_style_apply (const GtkSourceStyle *style,
 
 	if (style != NULL)
 	{
+		gdouble scale_factor = 1.0;
+
 		g_object_freeze_notify (G_OBJECT (tag));
 
 		if (style->mask & GTK_SOURCE_STYLE_USE_FOREGROUND)
@@ -770,44 +772,10 @@ gtk_source_style_apply (const GtkSourceStyle *style,
 			g_object_set (tag, "strikethrough-set", FALSE, NULL);
 		}
 
-		if (style->mask & GTK_SOURCE_STYLE_USE_SCALE)
+		if ((style->mask & GTK_SOURCE_STYLE_USE_SCALE) &&
+		    _gtk_source_style_parse_scale (style->scale, &scale_factor))
 		{
-			if (g_ascii_strcasecmp (style->scale, "large") == 0)
-			{
-				g_object_set (tag, "scale", PANGO_SCALE_LARGE, NULL);
-			}
-			else if (g_ascii_strcasecmp (style->scale, "x-large") == 0)
-			{
-				g_object_set (tag, "scale", PANGO_SCALE_X_LARGE, NULL);
-			}
-			else if (g_ascii_strcasecmp (style->scale, "xx-large") == 0)
-			{
-				g_object_set (tag, "scale", PANGO_SCALE_XX_LARGE, NULL);
-			}
-			else if (g_ascii_strcasecmp (style->scale, "small") == 0)
-			{
-				g_object_set (tag, "scale", PANGO_SCALE_SMALL, NULL);
-			}
-			else if (g_ascii_strcasecmp (style->scale, "x-small") == 0)
-			{
-				g_object_set (tag, "scale", PANGO_SCALE_X_SMALL, NULL);
-			}
-			else if (g_ascii_strcasecmp (style->scale, "xx-small") == 0)
-			{
-				g_object_set (tag, "scale", PANGO_SCALE_XX_SMALL, NULL);
-			}
-			else if (g_ascii_strcasecmp (style->scale, "medium") == 0)
-			{
-				g_object_set (tag, "scale", PANGO_SCALE_MEDIUM, NULL);
-			}
-			else if (g_ascii_strtod (style->scale, NULL) > 0)
-			{
-				g_object_set (tag, "scale", g_ascii_strtod (style->scale, NULL), NULL);
-			}
-			else
-			{
-				g_object_set (tag, "scale-set", FALSE, NULL);
-			}
+			g_object_set (tag, "scale", scale_factor, NULL);
 		}
 		else
 		{
