@@ -83,14 +83,14 @@ test_search_context_SOURCES = test-search-context.c
 UNIT_TEST_PROGS += test-space-drawer
 test_space_drawer_SOURCES = test-space-drawer.c
 
-UNIT_TEST_PROGS += test-style
-test_style_SOURCES = test-style.c
-
 UNIT_TEST_PROGS += test-stylescheme
 test_stylescheme_SOURCES = test-stylescheme.c
 
 UNIT_TEST_PROGS += test-styleschememanager
 test_styleschememanager_SOURCES = test-styleschememanager.c
+
+UNIT_TEST_PROGS += test-styleschemeparser
+test_styleschemeparser_SOURCES = test-styleschemeparser.c
 
 UNIT_TEST_PROGS += test-undo-manager
 test_undo_manager_SOURCES = test-undo-manager.c
