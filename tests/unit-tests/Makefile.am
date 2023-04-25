@@ -103,8 +103,8 @@ TESTS = $(UNIT_TEST_PROGS)
 noinst_PROGRAMS = $(UNIT_TEST_PROGS)
 
 EXTRA_DIST =			\
+	datasets		\
 	language-specs		\
-	setup-file-saver.sh	\
-	styles
+	setup-file-saver.sh
 
 -include $(top_srcdir)/git.mk

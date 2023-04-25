@@ -49,7 +49,7 @@ test_fixture_setup (TestFixture   *fixture,
 	{
 		style_dirs = g_new0 (gchar *, 3);
 		style_dirs[0] = dir;
-		style_dirs[1] = g_test_build_filename (G_TEST_DIST, "styles", NULL);
+		style_dirs[1] = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
 	}
 	else
 	{
@@ -64,7 +64,7 @@ test_fixture_setup (TestFixture   *fixture,
 		{
 			style_dirs[i] = g_strdup(current[i]);
 		}
-		style_dirs[i] = g_test_build_filename (G_TEST_DIST, "styles", NULL);
+		style_dirs[i] = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
 	}
 
 	gtk_source_style_scheme_manager_set_search_path (fixture->manager, style_dirs);

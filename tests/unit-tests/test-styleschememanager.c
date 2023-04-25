@@ -41,7 +41,7 @@ test_prepend_search_path (void)
 
 	manager = gtk_source_style_scheme_manager_get_default ();
 
-	styles_test_dir = g_test_build_filename (G_TEST_DIST, "styles", NULL);
+	styles_test_dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
 	gtk_source_style_scheme_manager_prepend_search_path (manager, styles_test_dir);
 
 	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "classic");
