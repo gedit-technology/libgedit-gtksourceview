@@ -100,6 +100,56 @@ test_prepend_search_path (void)
 }
 
 static void
+test_append_search_path (void)
+{
+	GtkSourceStyleSchemeManager *manager;
+	GtkSourceStyleScheme *scheme;
+	gchar *obtained_filename_before;
+	const gchar *obtained_filename_after;
+	gchar *dataset_dir;
+	GList *schemes;
+	guint n_schemes_before;
+	guint n_schemes_after;
+
+	manager = create_manager ();
+
+	// Currently, only the default style schemes are loaded.
+	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "classic");
+	g_assert_true (scheme != NULL);
+	obtained_filename_before = g_strdup (gtk_source_style_scheme_get_filename (scheme));
+
+	schemes = gtk_source_style_scheme_manager_get_schemes (manager);
+	n_schemes_before = g_list_length (schemes);
+	g_list_free (schemes);
+
+	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "test");
+	g_assert_true (scheme == NULL);
+
+	// Now append the basics/ dir to the search path.
+	dataset_dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
+	gtk_source_style_scheme_manager_append_search_path (manager, dataset_dir);
+
+	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "classic");
+	g_assert_true (scheme != NULL);
+
+	obtained_filename_after = gtk_source_style_scheme_get_filename (scheme);
+	g_assert_cmpstr (obtained_filename_after, ==, obtained_filename_before);
+
+	schemes = gtk_source_style_scheme_manager_get_schemes (manager);
+	n_schemes_after = g_list_length (schemes);
+	g_list_free (schemes);
+
+	// The 'test' scheme has been added.
+	g_assert_cmpuint (n_schemes_after, ==, (n_schemes_before + 1));
+	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "test");
+	g_assert_true (scheme != NULL);
+
+	g_object_unref (manager);
+	g_free (obtained_filename_before);
+	g_free (dataset_dir);
+}
+
+static void
 test_unknown_parent (void)
 {
 	GtkSourceStyleSchemeManager *manager;
@@ -196,6 +246,7 @@ main (int    argc,
 
 	g_test_add_func ("/StyleSchemeManager/get_default", test_get_default);
 	g_test_add_func ("/StyleSchemeManager/prepend_search_path", test_prepend_search_path);
+	g_test_add_func ("/StyleSchemeManager/append_search_path", test_append_search_path);
 	g_test_add_func ("/StyleSchemeManager/unknown_parent", test_unknown_parent);
 	g_test_add_func ("/StyleSchemeManager/parents_ref_cycle", test_parents_ref_cycle);
 	g_test_add_func ("/StyleSchemeManager/parents", test_parents);
