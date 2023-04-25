@@ -42,12 +42,9 @@ From the Git repository, the `configure` script and the `INSTALL` file are not
 yet generated, so you need to run `autogen.sh` instead, which takes the same
 arguments as `configure`.
 
-Tarballs
---------
+Resources
+---------
 
-See https://gedit-technology.net/
-
-How to contribute
------------------
-
-See the `HACKING` file.
+- [Tarballs](https://gedit-technology.net/)
+- [Translations](https://hosted.weblate.org/projects/gedit-technology/)
+- How to contribute: see the `HACKING` file.
