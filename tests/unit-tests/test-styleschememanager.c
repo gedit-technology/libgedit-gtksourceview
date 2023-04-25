@@ -1,4 +1,3 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8; coding: utf-8 -*- */
 /*
  * This file is part of GtkSourceView
  *
@@ -23,34 +22,35 @@
 static void
 test_get_default (void)
 {
-	GtkSourceStyleSchemeManager *sm1, *sm2;
+	GtkSourceStyleSchemeManager *default_manager1;
+	GtkSourceStyleSchemeManager *default_manager2;
 
-	sm1 = gtk_source_style_scheme_manager_get_default ();
-	sm2 = gtk_source_style_scheme_manager_get_default ();
-	g_assert (sm1 == sm2);
+	default_manager1 = gtk_source_style_scheme_manager_get_default ();
+	default_manager2 = gtk_source_style_scheme_manager_get_default ();
+	g_assert (default_manager1 == default_manager2);
 }
 
 static void
 test_prepend_search_path (void)
 {
-	GtkSourceStyleSchemeManager *sm;
-	gchar *style_dir;
+	GtkSourceStyleSchemeManager *manager;
+	gchar *styles_test_dir;
 	GtkSourceStyleScheme *scheme;
-	const gchar *fname;
-	gchar *expected;
+	const gchar *obtained_filename;
+	gchar *expected_filename;
 
-	sm = gtk_source_style_scheme_manager_get_default ();
+	manager = gtk_source_style_scheme_manager_get_default ();
 
-	style_dir = g_test_build_filename (G_TEST_DIST, "styles", NULL);
-	gtk_source_style_scheme_manager_prepend_search_path (sm, style_dir);
+	styles_test_dir = g_test_build_filename (G_TEST_DIST, "styles", NULL);
+	gtk_source_style_scheme_manager_prepend_search_path (manager, styles_test_dir);
 
-	scheme = gtk_source_style_scheme_manager_get_scheme (sm, "classic");
-	fname = gtk_source_style_scheme_get_filename (scheme);
-	expected = g_build_filename (style_dir, "classic.xml", NULL);
-	g_assert_cmpstr (fname, ==, expected);
+	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "classic");
+	obtained_filename = gtk_source_style_scheme_get_filename (scheme);
+	expected_filename = g_build_filename (styles_test_dir, "classic.xml", NULL);
+	g_assert_cmpstr (obtained_filename, ==, expected_filename);
 
-	g_free (expected);
-	g_free (style_dir);
+	g_free (styles_test_dir);
+	g_free (expected_filename);
 }
 
 int
@@ -62,8 +62,8 @@ main (int    argc,
 	gtk_test_init (&argc, &argv);
 	gtk_source_init ();
 
-	g_test_add_func ("/StyleSchemeManager/get-default", test_get_default);
-	g_test_add_func ("/StyleSchemeManager/prepend-search-path", test_prepend_search_path);
+	g_test_add_func ("/StyleSchemeManager/get_default", test_get_default);
+	g_test_add_func ("/StyleSchemeManager/prepend_search_path", test_prepend_search_path);
 
 	ret = g_test_run ();
 	gtk_source_finalize ();
