@@ -16,17 +16,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview HEAD\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/gedit-technology/"
+"libgedit-gtksourceview/issues\n"
 "POT-Creation-Date: 2023-04-28 20:25+0200\n"
-"PO-Revision-Date: 2017-08-16 08:50+0200\n"
-"Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
-"Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
+"PO-Revision-Date: 2023-04-28 21:03+0000\n"
+"Last-Translator: Sébastien Wilmet <swilmet@informatique-libre.be>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/gedit-technology/"
+"libgedit-gtksourceview/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1;\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #. (itstool) path: abnf.lang/language@_section
 #. (itstool) path: actionscript.lang/language@_section
@@ -256,10 +258,8 @@ msgstr "Spécification RPM"
 
 #. (itstool) path: tera.lang/language@_name
 #: tera.lang:23
-#, fuzzy
-#| msgid "Template"
 msgid "Tera Template"
-msgstr "Gabarit"
+msgstr "Gabarit Tera"
 
 #. (itstool) path: default-style-schemes/classic.xml/style-scheme@_name
 #: default-style-schemes/classic.xml:23
