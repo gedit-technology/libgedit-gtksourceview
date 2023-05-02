@@ -403,34 +403,6 @@ gtk_source_style_scheme_get_style (GtkSourceStyleScheme *scheme,
 }
 
 static gboolean
-get_foreground_color (GtkSourceStyle *style,
-		      GdkRGBA        *rgba)
-{
-	if (style != NULL &&
-	    (style->mask & GTK_SOURCE_STYLE_USE_FOREGROUND) &&
-	    style->foreground != NULL)
-	{
-		return _gtk_source_style_scheme_parser_parse_final_color (style->foreground, rgba);
-	}
-
-	return FALSE;
-}
-
-static gboolean
-get_background_color (GtkSourceStyle *style,
-		      GdkRGBA        *rgba)
-{
-	if (style != NULL &&
-	    (style->mask & GTK_SOURCE_STYLE_USE_BACKGROUND) &&
-	    style->background != NULL)
-	{
-		return _gtk_source_style_scheme_parser_parse_final_color (style->background, rgba);
-	}
-
-	return FALSE;
-}
-
-static gboolean
 get_style_foreground_color (GtkSourceStyleScheme *scheme,
 			    const gchar          *style_id,
 			    GdkRGBA              *foreground_color)
@@ -644,35 +616,37 @@ _gtk_source_style_scheme_remove_css_providers_from_widget (GtkSourceStyleScheme 
 #define ERROR_QUARK (g_quark_from_static_string ("gtk-source-style-scheme-parser-error"))
 
 static void
-get_css_color_style (GtkSourceStyle *style,
-                     gchar         **bg,
-                     gchar         **text)
+get_css_color_style (GtkSourceStyle  *style,
+		     gchar          **bg,
+		     gchar          **text)
 {
-	GdkRGBA color;
+	GtkSourceStyleData *style_data;
 
-	if (get_background_color (style, &color))
+	*bg = NULL;
+	*text = NULL;
+
+	if (style == NULL)
 	{
-		gchar *bg_color;
-		bg_color = gdk_rgba_to_string (&color);
-		*bg = g_strdup_printf ("background-color: %s;\n", bg_color);
-		g_free (bg_color);
-	}
-	else
-	{
-		*bg = NULL;
+		return;
 	}
 
-	if (get_foreground_color (style, &color))
+	style_data = gtk_source_style_get_data (style);
+
+	if (style_data->use_background_color)
 	{
-		gchar *text_color;
-		text_color = gdk_rgba_to_string (&color);
-		*text = g_strdup_printf ("color: %s;\n", text_color);
-		g_free (text_color);
+		gchar *bg_color_str = gdk_rgba_to_string (&style_data->background_color);
+		*bg = g_strdup_printf ("background-color: %s;\n", bg_color_str);
+		g_free (bg_color_str);
 	}
-	else
+
+	if (style_data->use_foreground_color)
 	{
-		*text = NULL;
+		gchar *fg_color_str = gdk_rgba_to_string (&style_data->foreground_color);
+		*text = g_strdup_printf ("color: %s;\n", fg_color_str);
+		g_free (fg_color_str);
 	}
+
+	g_free (style_data);
 }
 
 static void
