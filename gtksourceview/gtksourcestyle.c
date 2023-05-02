@@ -29,6 +29,17 @@
  * set when the given style is used.
  */
 
+/* API design:
+ *
+ * A GtkSourceStyle object is read-only. It is created by a
+ * GtkSourceStyleScheme. In the past there were lots of properties to get each
+ * individual attribute. The properties had the advantage to be
+ * language-bindings friendly. Now there is gtk_source_style_get_data(), but it
+ * has the (skip) annotation.
+ * With all the properties (they were read-write and construct-only) there were
+ * a lot of code. The idea is to have something simpler.
+ */
+
 struct _GtkSourceStyleClass
 {
 	GObjectClass parent_class;
