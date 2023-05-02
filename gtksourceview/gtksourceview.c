@@ -4586,48 +4586,25 @@ update_right_margin_colors (GtkSourceView *view)
 
 	if (view->priv->style_scheme != NULL)
 	{
-		GtkSourceStyle *style;
-
-		style = gtk_source_style_scheme_get_style (view->priv->style_scheme, "right-margin");
+		GtkSourceStyle *style = gtk_source_style_scheme_get_style (view->priv->style_scheme, "right-margin");
 
 		if (style != NULL)
 		{
-			gchar *color_str = NULL;
-			gboolean color_set;
-			GdkRGBA color;
+			GtkSourceStyleData *style_data = gtk_source_style_get_data (style);
 
-			g_object_get (style,
-				      "foreground", &color_str,
-				      "foreground-set", &color_set,
-				      NULL);
-
-			if (color_set &&
-			    color_str != NULL &&
-			    gdk_rgba_parse (&color, color_str))
+			if (style_data->use_foreground_color)
 			{
-				view->priv->right_margin_line_color = gdk_rgba_copy (&color);
-				view->priv->right_margin_line_color->alpha =
-					RIGHT_MARGIN_LINE_ALPHA / 255.;
+				view->priv->right_margin_line_color = gdk_rgba_copy (&style_data->foreground_color);
+				view->priv->right_margin_line_color->alpha = RIGHT_MARGIN_LINE_ALPHA / 255.0;
 			}
 
-			g_free (color_str);
-			color_str = NULL;
-
-			g_object_get (style,
-				      "background", &color_str,
-				      "background-set", &color_set,
-				      NULL);
-
-			if (color_set &&
-			    color_str != NULL &&
-			    gdk_rgba_parse (&color, color_str))
+			if (style_data->use_background_color)
 			{
-				view->priv->right_margin_overlay_color = gdk_rgba_copy (&color);
-				view->priv->right_margin_overlay_color->alpha =
-					RIGHT_MARGIN_OVERLAY_ALPHA / 255.;
+				view->priv->right_margin_overlay_color = gdk_rgba_copy (&style_data->background_color);
+				view->priv->right_margin_overlay_color->alpha = RIGHT_MARGIN_OVERLAY_ALPHA / 255.0;
 			}
 
-			g_free (color_str);
+			g_free (style_data);
 		}
 	}
 
@@ -4645,8 +4622,7 @@ update_right_margin_colors (GtkSourceView *view)
 		gtk_style_context_restore (context);
 
 		view->priv->right_margin_line_color = gdk_rgba_copy (&color);
-		view->priv->right_margin_line_color->alpha =
-			RIGHT_MARGIN_LINE_ALPHA / 255.;
+		view->priv->right_margin_line_color->alpha = RIGHT_MARGIN_LINE_ALPHA / 255.0;
 	}
 }
 
