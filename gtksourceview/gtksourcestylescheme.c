@@ -441,44 +441,37 @@ get_color_by_name (GtkSourceStyleScheme *scheme,
 	return color;
 }
 
+static void
+fix_style_color_for_attribute (GtkSourceStyleScheme  *scheme,
+			       GtkSourceStyle        *style,
+			       guint                  attr_mask,
+			       const gchar          **attr_value)
+{
+	if (style->mask & attr_mask)
+	{
+		const gchar *color = get_color_by_name (scheme, *attr_value);
+
+		if (color != NULL)
+		{
+			*attr_value = g_intern_string (color);
+		}
+		else
+		{
+			style->mask &= ~attr_mask;
+		}
+	}
+}
+
 static GtkSourceStyle *
 fix_style_colors (GtkSourceStyleScheme *scheme,
 		  GtkSourceStyle       *real_style)
 {
-	GtkSourceStyle *style;
-	guint i;
+	GtkSourceStyle *style = gtk_source_style_copy (real_style);
 
-	struct {
-		guint mask;
-		guint offset;
-	} attributes[] = {
-		{ GTK_SOURCE_STYLE_USE_BACKGROUND, G_STRUCT_OFFSET (GtkSourceStyle, background) },
-		{ GTK_SOURCE_STYLE_USE_FOREGROUND, G_STRUCT_OFFSET (GtkSourceStyle, foreground) },
-		{ GTK_SOURCE_STYLE_USE_LINE_BACKGROUND, G_STRUCT_OFFSET (GtkSourceStyle, line_background) },
-		{ GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR, G_STRUCT_OFFSET (GtkSourceStyle, underline_color) }
-	};
-
-	style = gtk_source_style_copy (real_style);
-
-	for (i = 0; i < G_N_ELEMENTS (attributes); i++)
-	{
-		if (style->mask & attributes[i].mask)
-		{
-			const gchar **attr = G_STRUCT_MEMBER_P (style, attributes[i].offset);
-			const gchar *color = get_color_by_name (scheme, *attr);
-
-			if (color == NULL)
-			{
-				/* warning is spit out in get_color_by_name,
-				 * here we make sure style doesn't have NULL color */
-				style->mask &= ~attributes[i].mask;
-			}
-			else
-			{
-				*attr = g_intern_string (color);
-			}
-		}
-	}
+	fix_style_color_for_attribute (scheme, style, GTK_SOURCE_STYLE_USE_BACKGROUND, &style->background);
+	fix_style_color_for_attribute (scheme, style, GTK_SOURCE_STYLE_USE_FOREGROUND, &style->foreground);
+	fix_style_color_for_attribute (scheme, style, GTK_SOURCE_STYLE_USE_LINE_BACKGROUND, &style->line_background);
+	fix_style_color_for_attribute (scheme, style, GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR, &style->underline_color);
 
 	return style;
 }
