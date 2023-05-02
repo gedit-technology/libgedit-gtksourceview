@@ -41,8 +41,6 @@ struct _GtkSourceStyleClass
 enum
 {
 	PROP_0,
-	PROP_STRIKETHROUGH,
-	PROP_STRIKETHROUGH_SET,
 
 	/* FIXME: Not documented in style-scheme-file-format.html. Is it normal? */
 	PROP_LINE_BACKGROUND,
@@ -65,14 +63,6 @@ gtk_source_style_get_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_STRIKETHROUGH:
-			g_value_set_boolean (value, style->strikethrough);
-			break;
-
-		case PROP_STRIKETHROUGH_SET:
-			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_STRIKETHROUGH);
-			break;
-
 		case PROP_LINE_BACKGROUND:
 			g_value_set_string (value, style->line_background);
 			break;
@@ -98,22 +88,6 @@ gtk_source_style_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_STRIKETHROUGH:
-			style->strikethrough = g_value_get_boolean (value) != FALSE;
-			style->mask |= GTK_SOURCE_STYLE_USE_STRIKETHROUGH;
-			break;
-
-		case PROP_STRIKETHROUGH_SET:
-			if (g_value_get_boolean (value))
-			{
-				style->mask |= GTK_SOURCE_STYLE_USE_STRIKETHROUGH;
-			}
-			else
-			{
-				style->mask &= ~GTK_SOURCE_STYLE_USE_STRIKETHROUGH;
-			}
-			break;
-
 		case PROP_LINE_BACKGROUND:
 			string = g_value_get_string (value);
 			if (string != NULL)
@@ -157,34 +131,6 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 	 * from style_scheme_get_style(). But style scheme is of course cheating
 	 * and sets everything after construction (but nobody can notice it).
 	 */
-
-	/**
-	 * GtkSourceStyle:strikethrough:
-	 *
-	 * Strikethrough.
-	 */
-	properties[PROP_STRIKETHROUGH] =
-		g_param_spec_boolean ("strikethrough",
-				      "strikethrough",
-				      "",
-				      FALSE,
-				      G_PARAM_READWRITE |
-				      G_PARAM_CONSTRUCT_ONLY |
-				      G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyle:strikethrough-set:
-	 *
-	 * Whether #GtkSourceStyle:strikethrough is set.
-	 */
-	properties[PROP_STRIKETHROUGH_SET] =
-		g_param_spec_boolean ("strikethrough-set",
-				      "strikethrough-set",
-				      "",
-				      FALSE,
-				      G_PARAM_READWRITE |
-				      G_PARAM_CONSTRUCT_ONLY |
-				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:line-background:
