@@ -78,7 +78,6 @@ test_scheme_properties (void)
 	g_object_unref (manager);
 }
 
-#if 0
 static void
 test_rgba_colors (void)
 {
@@ -87,7 +86,7 @@ test_rgba_colors (void)
 	GtkSourceStyle *style_current_line;
 	GtkSourceStyle *style_background_pattern;
 	GtkSourceStyleData *style_data_current_line;
-	GtkSourceStyleData *style_data_background_pattern;
+	//GtkSourceStyleData *style_data_background_pattern;
 
 	style_current_line = gtk_source_style_scheme_get_style (scheme, "current-line");
 	style_background_pattern = gtk_source_style_scheme_get_style (scheme, "background-pattern");
@@ -95,17 +94,19 @@ test_rgba_colors (void)
 	g_assert_true (style_background_pattern != NULL);
 
 	style_data_current_line = gtk_source_style_get_data (style_current_line);
-	style_data_background_pattern = gtk_source_style_get_data (style_background_pattern);
+	// FIXME: the following gtk_source_style_get_data() call fails.
+	//style_data_background_pattern = gtk_source_style_get_data (style_background_pattern);
 
 	g_assert_true (style_data_current_line->use_background_color);
+#if 0
 	g_assert_true (style_data_background_pattern->use_background_color);
 	g_assert_true (gdk_rgba_equal (&style_data_current_line->background_color,
 				       &style_data_background_pattern->background_color));
+#endif
 
 	g_free (style_data_current_line);
-	g_free (style_data_background_pattern);
+	//g_free (style_data_background_pattern);
 }
-#endif
 
 int
 main (int    argc,
@@ -117,7 +118,7 @@ main (int    argc,
 	gtk_source_init ();
 
 	g_test_add_func ("/StyleScheme/scheme_properties", test_scheme_properties);
-	//g_test_add_func ("/StyleScheme/rgba_colors", test_rgba_colors);
+	g_test_add_func ("/StyleScheme/rgba_colors", test_rgba_colors);
 
 	ret = g_test_run ();
 	gtk_source_finalize ();

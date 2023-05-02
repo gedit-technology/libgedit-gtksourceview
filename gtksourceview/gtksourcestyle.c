@@ -19,6 +19,7 @@
 
 #include "gtksourcestyle.h"
 #include "gtksourcestyle-private.h"
+#include "gtksourcestyleschemeparser.h"
 
 /**
  * SECTION:style
@@ -76,22 +77,30 @@ gtk_source_style_get_data (GtkSourceStyle *style)
 
 	if (style->mask & GTK_SOURCE_STYLE_USE_FOREGROUND)
 	{
-		data->use_foreground_color = gdk_rgba_parse (&data->foreground_color, style->foreground);
+		data->use_foreground_color =
+			_gtk_source_style_scheme_parser_parse_final_color (style->foreground,
+									   &data->foreground_color);
 		g_warn_if_fail (data->use_foreground_color);
 	}
 	if (style->mask & GTK_SOURCE_STYLE_USE_BACKGROUND)
 	{
-		data->use_background_color = gdk_rgba_parse (&data->background_color, style->background);
+		data->use_background_color =
+			_gtk_source_style_scheme_parser_parse_final_color (style->background,
+									   &data->background_color);
 		g_warn_if_fail (data->use_background_color);
 	}
 	if (style->mask & GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR)
 	{
-		data->use_underline_color = gdk_rgba_parse (&data->underline_color, style->underline_color);
+		data->use_underline_color =
+			_gtk_source_style_scheme_parser_parse_final_color (style->underline_color,
+									   &data->underline_color);
 		g_warn_if_fail (data->use_underline_color);
 	}
 	if (style->mask & GTK_SOURCE_STYLE_USE_LINE_BACKGROUND)
 	{
-		data->use_paragraph_background_color = gdk_rgba_parse (&data->paragraph_background_color, style->line_background);
+		data->use_paragraph_background_color =
+			_gtk_source_style_scheme_parser_parse_final_color (style->line_background,
+									   &data->paragraph_background_color);
 		g_warn_if_fail (data->use_paragraph_background_color);
 	}
 
