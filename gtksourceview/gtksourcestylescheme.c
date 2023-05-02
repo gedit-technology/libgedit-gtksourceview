@@ -430,12 +430,41 @@ get_background_color (GtkSourceStyle *style,
 	return FALSE;
 }
 
+static gboolean
+get_style_foreground_color (GtkSourceStyleScheme *scheme,
+			    const gchar          *style_id,
+			    GdkRGBA              *foreground_color)
+{
+	GtkSourceStyle *style;
+	GtkSourceStyleData *style_data;
+	gboolean success = FALSE;
+
+	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), FALSE);
+	g_return_val_if_fail (style_id != NULL, FALSE);
+	g_return_val_if_fail (foreground_color != NULL, FALSE);
+
+	style = gtk_source_style_scheme_get_style (scheme, style_id);
+	if (style == NULL)
+	{
+		return FALSE;
+	}
+
+	style_data = gtk_source_style_get_data (style);
+
+	if (style_data->use_foreground_color)
+	{
+		*foreground_color = style_data->foreground_color;
+		success = TRUE;
+	}
+
+	g_free (style_data);
+	return success;
+}
+
 static gchar *
 get_cursors_css_style (GtkSourceStyleScheme *scheme,
 		       GtkWidget            *widget)
 {
-	GtkSourceStyle *primary_style;
-	GtkSourceStyle *secondary_style;
 	GdkRGBA primary_color = { 0 };
 	GdkRGBA secondary_color = { 0 };
 	gboolean primary_color_set;
@@ -443,11 +472,8 @@ get_cursors_css_style (GtkSourceStyleScheme *scheme,
 	gchar *secondary_color_str;
 	GString *css;
 
-	primary_style = gtk_source_style_scheme_get_style (scheme, STYLE_CURSOR);
-	secondary_style = gtk_source_style_scheme_get_style (scheme, STYLE_SECONDARY_CURSOR);
-
-	primary_color_set = get_foreground_color (primary_style, &primary_color);
-	secondary_color_set = get_foreground_color (secondary_style, &secondary_color);
+	primary_color_set = get_style_foreground_color (scheme, STYLE_CURSOR, &primary_color);
+	secondary_color_set = get_style_foreground_color (scheme, STYLE_SECONDARY_CURSOR, &secondary_color);
 
 	if (!primary_color_set && !secondary_color_set)
 	{
