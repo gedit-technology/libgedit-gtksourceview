@@ -1291,14 +1291,12 @@ parse_style_scheme_element (GtkSourceStyleScheme *scheme,
 		g_ptr_array_add (scheme->priv->authors, NULL);
 }
 
-/**
+/*
  * _gtk_source_style_scheme_new_from_file:
  * @filename: file to parse.
  *
- * Returns: (nullable): new #GtkSourceStyleScheme created from file,
- * or %NULL on error.
- *
- * Since: 2.0
+ * Returns: (nullable): new #GtkSourceStyleScheme created from @filename, or
+ *   %NULL on error.
  */
 GtkSourceStyleScheme *
 _gtk_source_style_scheme_new_from_file (const gchar *filename)
