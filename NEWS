@@ -1,3 +1,9 @@
+News in 299.0.2, 2023-xx-yy (not yet released)
+---------------------------
+* Continue to rework GtkSourceStyle* classes.
+* Remove support for installed tests.
+* Translations: test Weblate.
+
 News in 299.0.1, 2023-04-26
 ---------------------------
 * Style schemes (classic and tango): more visible line-numbers background color.
