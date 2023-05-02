@@ -41,8 +41,6 @@ struct _GtkSourceStyleClass
 enum
 {
 	PROP_0,
-	PROP_ITALIC,
-	PROP_ITALIC_SET,
 	PROP_BOLD,
 	PROP_BOLD_SET,
 	PROP_PANGO_UNDERLINE,
@@ -73,14 +71,6 @@ gtk_source_style_get_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_ITALIC:
-			g_value_set_boolean (value, style->italic);
-			break;
-
-		case PROP_ITALIC_SET:
-			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_ITALIC);
-			break;
-
 		case PROP_BOLD:
 			g_value_set_boolean (value, style->bold);
 			break;
@@ -138,22 +128,6 @@ gtk_source_style_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_ITALIC:
-			style->italic = g_value_get_boolean (value) != FALSE;
-			style->mask |= GTK_SOURCE_STYLE_USE_ITALIC;
-			break;
-
-		case PROP_ITALIC_SET:
-			if (g_value_get_boolean (value))
-			{
-				style->mask |= GTK_SOURCE_STYLE_USE_ITALIC;
-			}
-			else
-			{
-				style->mask &= ~GTK_SOURCE_STYLE_USE_ITALIC;
-			}
-			break;
-
 		case PROP_BOLD:
 			style->bold = g_value_get_boolean (value) != FALSE;
 			style->mask |= GTK_SOURCE_STYLE_USE_BOLD;
@@ -270,34 +244,6 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 	 * from style_scheme_get_style(). But style scheme is of course cheating
 	 * and sets everything after construction (but nobody can notice it).
 	 */
-
-	/**
-	 * GtkSourceStyle:italic:
-	 *
-	 * Italic.
-	 */
-	properties[PROP_ITALIC] =
-		g_param_spec_boolean ("italic",
-				      "italic",
-				      "",
-				      FALSE,
-				      G_PARAM_READWRITE |
-				      G_PARAM_CONSTRUCT_ONLY |
-				      G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyle:italic-set:
-	 *
-	 * Whether #GtkSourceStyle:italic is set.
-	 */
-	properties[PROP_ITALIC_SET] =
-		g_param_spec_boolean ("italic-set",
-				      "italic-set",
-				      "",
-				      FALSE,
-				      G_PARAM_READWRITE |
-				      G_PARAM_CONSTRUCT_ONLY |
-				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:bold:
