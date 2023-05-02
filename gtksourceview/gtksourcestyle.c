@@ -41,8 +41,6 @@ struct _GtkSourceStyleClass
 enum
 {
 	PROP_0,
-	PROP_FOREGROUND,
-	PROP_FOREGROUND_SET,
 	PROP_BACKGROUND,
 	PROP_BACKGROUND_SET,
 	PROP_ITALIC,
@@ -77,14 +75,6 @@ gtk_source_style_get_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_FOREGROUND:
-			g_value_set_string (value, style->foreground);
-			break;
-
-		case PROP_FOREGROUND_SET:
-			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_FOREGROUND);
-			break;
-
 		case PROP_BACKGROUND:
 			g_value_set_string (value, style->background);
 			break;
@@ -158,31 +148,6 @@ gtk_source_style_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_FOREGROUND:
-			string = g_value_get_string (value);
-			if (string != NULL)
-			{
-				style->foreground = g_intern_string (string);
-				style->mask |= GTK_SOURCE_STYLE_USE_FOREGROUND;
-			}
-			else
-			{
-				style->foreground = NULL;
-				style->mask &= ~GTK_SOURCE_STYLE_USE_FOREGROUND;
-			}
-			break;
-
-		case PROP_FOREGROUND_SET:
-			if (g_value_get_boolean (value))
-			{
-				style->mask |= GTK_SOURCE_STYLE_USE_FOREGROUND;
-			}
-			else
-			{
-				style->mask &= ~GTK_SOURCE_STYLE_USE_FOREGROUND;
-			}
-			break;
-
 		case PROP_BACKGROUND:
 			string = g_value_get_string (value);
 			if (string != NULL)
@@ -340,34 +305,6 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 	 * from style_scheme_get_style(). But style scheme is of course cheating
 	 * and sets everything after construction (but nobody can notice it).
 	 */
-
-	/**
-	 * GtkSourceStyle:foreground:
-	 *
-	 * Foreground color.
-	 */
-	properties[PROP_FOREGROUND] =
-		g_param_spec_string ("foreground",
-				     "foreground",
-				     "",
-				     NULL,
-				     G_PARAM_READWRITE |
-				     G_PARAM_CONSTRUCT_ONLY |
-				     G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyle:foreground-set:
-	 *
-	 * Whether #GtkSourceStyle:foreground is set.
-	 */
-	properties[PROP_FOREGROUND_SET] =
-		g_param_spec_boolean ("foreground-set",
-				      "foreground-set",
-				      "",
-				      FALSE,
-				      G_PARAM_READWRITE |
-				      G_PARAM_CONSTRUCT_ONLY |
-				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:background:
