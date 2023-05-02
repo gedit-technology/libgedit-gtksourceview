@@ -41,8 +41,6 @@ struct _GtkSourceStyleClass
 enum
 {
 	PROP_0,
-	PROP_BOLD,
-	PROP_BOLD_SET,
 	PROP_PANGO_UNDERLINE,
 	PROP_UNDERLINE_SET,
 	PROP_UNDERLINE_COLOR,
@@ -71,14 +69,6 @@ gtk_source_style_get_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_BOLD:
-			g_value_set_boolean (value, style->bold);
-			break;
-
-		case PROP_BOLD_SET:
-			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_BOLD);
-			break;
-
 		case PROP_PANGO_UNDERLINE:
 			g_value_set_enum (value, style->underline);
 			break;
@@ -128,22 +118,6 @@ gtk_source_style_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_BOLD:
-			style->bold = g_value_get_boolean (value) != FALSE;
-			style->mask |= GTK_SOURCE_STYLE_USE_BOLD;
-			break;
-
-		case PROP_BOLD_SET:
-			if (g_value_get_boolean (value))
-			{
-				style->mask |= GTK_SOURCE_STYLE_USE_BOLD;
-			}
-			else
-			{
-				style->mask &= ~GTK_SOURCE_STYLE_USE_BOLD;
-			}
-			break;
-
 		case PROP_PANGO_UNDERLINE:
 			style->underline = g_value_get_enum (value);
 			style->mask |= GTK_SOURCE_STYLE_USE_UNDERLINE;
@@ -244,34 +218,6 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 	 * from style_scheme_get_style(). But style scheme is of course cheating
 	 * and sets everything after construction (but nobody can notice it).
 	 */
-
-	/**
-	 * GtkSourceStyle:bold:
-	 *
-	 * Bold.
-	 */
-	properties[PROP_BOLD] =
-		g_param_spec_boolean ("bold",
-				      "bold",
-				      "",
-				      FALSE,
-				      G_PARAM_READWRITE |
-				      G_PARAM_CONSTRUCT_ONLY |
-				      G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyle:bold-set:
-	 *
-	 * Whether #GtkSourceStyle:bold is set.
-	 */
-	properties[PROP_BOLD_SET] =
-		g_param_spec_boolean ("bold-set",
-				      "bold-set",
-				      "",
-				      FALSE,
-				      G_PARAM_READWRITE |
-				      G_PARAM_CONSTRUCT_ONLY |
-				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:pango-underline:
