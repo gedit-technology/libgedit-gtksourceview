@@ -672,7 +672,7 @@ gtk_source_style_copy (const GtkSourceStyle *style)
  * @tag: a #GtkTextTag to apply styles to.
  *
  * This function modifies the #GtkTextTag properties that are related to the
- * #GtkSourceStyle properties. Other #GtkTextTag properties are left untouched.
+ * #GtkSourceStyle attributes. Other #GtkTextTag properties are left untouched.
  *
  * If @style is non-%NULL, applies @style to @tag.
  *
@@ -681,98 +681,94 @@ gtk_source_style_copy (const GtkSourceStyle *style)
  *
  * Since: 3.22
  */
-/* FIXME: the GtkTextTag docs (in the class description) says that we should not
- * set the "set" properties independently.
- */
 void
-gtk_source_style_apply (const GtkSourceStyle *style,
-			GtkTextTag           *tag)
+gtk_source_style_apply (GtkSourceStyle *style,
+			GtkTextTag     *tag)
 {
 	g_return_if_fail (style == NULL || GTK_SOURCE_IS_STYLE (style));
 	g_return_if_fail (GTK_IS_TEXT_TAG (tag));
 
 	if (style != NULL)
 	{
+		GtkSourceStyleData *data = gtk_source_style_get_data (style);
+
 		g_object_freeze_notify (G_OBJECT (tag));
 
-		if (style->mask & GTK_SOURCE_STYLE_USE_FOREGROUND)
+		if (data->use_foreground_color)
 		{
-			g_object_set (tag, "foreground", style->foreground, NULL);
+			g_object_set (tag, "foreground-rgba", &data->foreground_color, NULL);
 		}
 		else
 		{
 			g_object_set (tag, "foreground-set", FALSE, NULL);
 		}
 
-		if (style->mask & GTK_SOURCE_STYLE_USE_BACKGROUND)
+		if (data->use_background_color)
 		{
-			g_object_set (tag, "background", style->background, NULL);
+			g_object_set (tag, "background-rgba", &data->background_color, NULL);
 		}
 		else
 		{
 			g_object_set (tag, "background-set", FALSE, NULL);
 		}
 
-		if (style->mask & GTK_SOURCE_STYLE_USE_ITALIC)
+		if (data->use_italic)
 		{
-			g_object_set (tag, "style", style->italic ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL, NULL);
+			g_object_set (tag, "style", data->italic ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL, NULL);
 		}
 		else
 		{
 			g_object_set (tag, "style-set", FALSE, NULL);
 		}
 
-		if (style->mask & GTK_SOURCE_STYLE_USE_BOLD)
+		if (data->use_bold)
 		{
-			g_object_set (tag, "weight", style->bold ? PANGO_WEIGHT_BOLD : PANGO_WEIGHT_NORMAL, NULL);
+			g_object_set (tag, "weight", data->bold ? PANGO_WEIGHT_BOLD : PANGO_WEIGHT_NORMAL, NULL);
 		}
 		else
 		{
 			g_object_set (tag, "weight-set", FALSE, NULL);
 		}
 
-		if (style->mask & GTK_SOURCE_STYLE_USE_UNDERLINE)
+		if (data->use_underline)
 		{
-			g_object_set (tag, "underline", style->underline, NULL);
+			g_object_set (tag, "underline", data->underline, NULL);
 		}
 		else
 		{
 			g_object_set (tag, "underline-set", FALSE, NULL);
 		}
 
-		if (style->mask & GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR)
+		if (data->use_underline_color)
 		{
-			GdkRGBA underline_rgba;
-
-			gdk_rgba_parse (&underline_rgba, style->underline_color);
-			g_object_set (tag, "underline-rgba", &underline_rgba, NULL);
+			g_object_set (tag, "underline-rgba", &data->underline_color, NULL);
 		}
 		else
 		{
 			g_object_set (tag, "underline-rgba-set", FALSE, NULL);
 		}
 
-		if (style->mask & GTK_SOURCE_STYLE_USE_STRIKETHROUGH)
+		if (data->use_strikethrough)
 		{
-			g_object_set (tag, "strikethrough", style->strikethrough, NULL);
+			g_object_set (tag, "strikethrough", data->strikethrough, NULL);
 		}
 		else
 		{
 			g_object_set (tag, "strikethrough-set", FALSE, NULL);
 		}
 
-		if (style->use_scale)
+		if (data->use_scale)
 		{
-			g_object_set (tag, "scale", style->scale, NULL);
+			g_object_set (tag, "scale", data->scale, NULL);
 		}
 		else
 		{
 			g_object_set (tag, "scale-set", FALSE, NULL);
 		}
 
-		if (style->mask & GTK_SOURCE_STYLE_USE_LINE_BACKGROUND)
+		if (data->use_paragraph_background_color)
 		{
-			g_object_set (tag, "paragraph-background", style->line_background, NULL);
+			g_object_set (tag, "paragraph-background-rgba", &data->paragraph_background_color, NULL);
 		}
 		else
 		{
@@ -780,6 +776,8 @@ gtk_source_style_apply (const GtkSourceStyle *style,
 		}
 
 		g_object_thaw_notify (G_OBJECT (tag));
+
+		g_free (data);
 	}
 	else
 	{

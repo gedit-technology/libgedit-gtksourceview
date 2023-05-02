@@ -100,8 +100,8 @@ G_MODULE_EXPORT
 GtkSourceStyle *	gtk_source_style_copy		(const GtkSourceStyle *style);
 
 G_MODULE_EXPORT
-void			gtk_source_style_apply		(const GtkSourceStyle *style,
-							 GtkTextTag           *tag);
+void			gtk_source_style_apply		(GtkSourceStyle *style,
+							 GtkTextTag     *tag);
 
 G_END_DECLS
 
