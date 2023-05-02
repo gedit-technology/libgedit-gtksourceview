@@ -40,7 +40,8 @@ struct _GtkSourceStyle
 {
 	GObject parent;
 
-	/* TODO: have GdkRGBA types for all color properties.
+	/* TODO: use an embedded GtkSourceStyleData field.
+	 * Which means to have GdkRGBA types for all color properties.
 	 * GtkTextTag has corresponding *-rgba properties for all stuff we need.
 	 */
 
@@ -60,10 +61,7 @@ struct _GtkSourceStyle
 	guint bold : 1;
 	guint strikethrough : 1;
 
-	/* TODO: replace the mask by one bit field for each attribute. */
-
 	guint mask : 12;
-
 	guint use_scale : 1;
 };
 
