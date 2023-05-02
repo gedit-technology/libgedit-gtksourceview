@@ -67,6 +67,7 @@ typedef struct _GtkSourceStyleData	GtkSourceStyleData;
  *
  * Since: 300.0
  */
+/* TODO: Add docs for paragraph_background_color in style-scheme-file-format.html. */
 struct _GtkSourceStyleData
 {
 	GdkRGBA foreground_color;
