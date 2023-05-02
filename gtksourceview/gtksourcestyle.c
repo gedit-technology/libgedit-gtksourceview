@@ -631,34 +631,6 @@ gtk_source_style_get_data (GtkSourceStyle *style)
 }
 
 /**
- * gtk_source_style_get_scale:
- * @style: a #GtkSourceStyle.
- * @scale: (out): output parameter to get the attribute value.
- *
- * Gets the scale factor. See also the #GtkTextTag:scale property.
- *
- * Returns: %TRUE if the attribute is used by the @style object, %FALSE
- *   otherwise. The output parameter (to get the value) is set only when %TRUE
- *   is returned.
- * Since: 300.0
- */
-gboolean
-gtk_source_style_get_scale (GtkSourceStyle *style,
-			    gdouble        *scale)
-{
-	g_return_val_if_fail (GTK_SOURCE_IS_STYLE (style), FALSE);
-	g_return_val_if_fail (scale != NULL, FALSE);
-
-	if (style->use_scale)
-	{
-		*scale = style->scale;
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-/**
  * gtk_source_style_copy:
  * @style: a #GtkSourceStyle structure to copy.
  *

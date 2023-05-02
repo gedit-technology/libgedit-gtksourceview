@@ -265,7 +265,8 @@
         </para>
         <para>
           The <code>GtkSourceStyle:scale</code> property has been removed, use
-          the corresponding getter function instead.
+          the <link linkend="gtk-source-style-get-data">gtk_source_style_get_data()</link>
+          function instead.
         </para>
       </listitem>
     </itemizedlist>

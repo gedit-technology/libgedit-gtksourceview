@@ -91,21 +91,17 @@ struct _GtkSourceStyleData
 };
 
 G_MODULE_EXPORT
-GType			gtk_source_style_get_type		(void);
+GType			gtk_source_style_get_type	(void);
 
 G_MODULE_EXPORT
-GtkSourceStyleData *	gtk_source_style_get_data		(GtkSourceStyle *style);
+GtkSourceStyleData *	gtk_source_style_get_data	(GtkSourceStyle *style);
 
 G_MODULE_EXPORT
-gboolean		gtk_source_style_get_scale		(GtkSourceStyle *style,
-								 gdouble        *scale);
+GtkSourceStyle *	gtk_source_style_copy		(const GtkSourceStyle *style);
 
 G_MODULE_EXPORT
-GtkSourceStyle *	gtk_source_style_copy			(const GtkSourceStyle *style);
-
-G_MODULE_EXPORT
-void			gtk_source_style_apply			(const GtkSourceStyle *style,
-								 GtkTextTag           *tag);
+void			gtk_source_style_apply		(const GtkSourceStyle *style,
+							 GtkTextTag           *tag);
 
 G_END_DECLS
 
