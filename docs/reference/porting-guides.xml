@@ -264,8 +264,8 @@
           instead.
         </para>
         <para>
-          The <link linkend="GtkSourceStyle--scale">GtkSourceStyle:scale</link>
-          property type has changed: it is no longer a string, it is a double.
+          The <code>GtkSourceStyle:scale</code> property has been removed, use
+          the corresponding getter function instead.
         </para>
       </listitem>
     </itemizedlist>

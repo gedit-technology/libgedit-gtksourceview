@@ -39,14 +39,18 @@ typedef struct _GtkSourceStyle		GtkSourceStyle;
 typedef struct _GtkSourceStyleClass	GtkSourceStyleClass;
 
 G_MODULE_EXPORT
-GType			gtk_source_style_get_type	(void);
+GType			gtk_source_style_get_type		(void);
 
 G_MODULE_EXPORT
-GtkSourceStyle *	gtk_source_style_copy		(const GtkSourceStyle *style);
+gboolean		gtk_source_style_get_scale		(GtkSourceStyle *style,
+								 gdouble        *scale);
 
 G_MODULE_EXPORT
-void			gtk_source_style_apply		(const GtkSourceStyle *style,
-							 GtkTextTag           *tag);
+GtkSourceStyle *	gtk_source_style_copy			(const GtkSourceStyle *style);
+
+G_MODULE_EXPORT
+void			gtk_source_style_apply			(const GtkSourceStyle *style,
+								 GtkTextTag           *tag);
 
 G_END_DECLS
 

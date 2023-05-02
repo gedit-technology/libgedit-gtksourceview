@@ -33,8 +33,7 @@ enum
 	GTK_SOURCE_STYLE_USE_BOLD            = 1 << 4,
 	GTK_SOURCE_STYLE_USE_UNDERLINE       = 1 << 5,
 	GTK_SOURCE_STYLE_USE_STRIKETHROUGH   = 1 << 6,
-	GTK_SOURCE_STYLE_USE_SCALE           = 1 << 7,
-	GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR = 1 << 8
+	GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR = 1 << 7
 };
 
 struct _GtkSourceStyle
@@ -64,6 +63,8 @@ struct _GtkSourceStyle
 	/* TODO: replace the mask by one bit field for each attribute. */
 
 	guint mask : 12;
+
+	guint use_scale : 1;
 };
 
 G_END_DECLS

@@ -55,8 +55,6 @@ enum
 	PROP_UNDERLINE_COLOR_SET,
 	PROP_STRIKETHROUGH,
 	PROP_STRIKETHROUGH_SET,
-	PROP_SCALE,
-	PROP_SCALE_SET,
 
 	/* FIXME: Not documented in style-scheme-file-format.html. Is it normal? */
 	PROP_LINE_BACKGROUND,
@@ -133,14 +131,6 @@ gtk_source_style_get_property (GObject      *object,
 
 		case PROP_STRIKETHROUGH_SET:
 			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_STRIKETHROUGH);
-			break;
-
-		case PROP_SCALE:
-			g_value_set_double (value, style->scale);
-			break;
-
-		case PROP_SCALE_SET:
-			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_SCALE);
 			break;
 
 		case PROP_LINE_BACKGROUND:
@@ -304,22 +294,6 @@ gtk_source_style_set_property (GObject      *object,
 			else
 			{
 				style->mask &= ~GTK_SOURCE_STYLE_USE_STRIKETHROUGH;
-			}
-			break;
-
-		case PROP_SCALE:
-			style->scale = g_value_get_double (value);
-			style->mask |= GTK_SOURCE_STYLE_USE_SCALE;
-			break;
-
-		case PROP_SCALE_SET:
-			if (g_value_get_boolean (value))
-			{
-				style->mask |= GTK_SOURCE_STYLE_USE_SCALE;
-			}
-			else
-			{
-				style->mask &= ~GTK_SOURCE_STYLE_USE_SCALE;
 			}
 			break;
 
@@ -565,34 +539,6 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 				      G_PARAM_STATIC_STRINGS);
 
 	/**
-	 * GtkSourceStyle:scale:
-	 *
-	 * Text scale factor. See also #GtkTextTag:scale.
-	 */
-	properties[PROP_SCALE] =
-		g_param_spec_double ("scale",
-				     "scale",
-				     "",
-				     0.0, G_MAXDOUBLE, 1.0,
-				     G_PARAM_READWRITE |
-				     G_PARAM_CONSTRUCT_ONLY |
-				     G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyle:scale-set:
-	 *
-	 * Whether #GtkSourceStyle:scale is set.
-	 */
-	properties[PROP_SCALE_SET] =
-		g_param_spec_boolean ("scale-set",
-				      "scale-set",
-				      "",
-				      FALSE,
-				      G_PARAM_READWRITE |
-				      G_PARAM_CONSTRUCT_ONLY |
-				      G_PARAM_STATIC_STRINGS);
-
-	/**
 	 * GtkSourceStyle:line-background:
 	 *
 	 * Line background color.
@@ -629,6 +575,34 @@ gtk_source_style_init (GtkSourceStyle *style)
 }
 
 /**
+ * gtk_source_style_get_scale:
+ * @style: a #GtkSourceStyle.
+ * @scale: (out): output parameter to get the attribute value.
+ *
+ * Gets the scale factor. See also the #GtkTextTag:scale property.
+ *
+ * Returns: %TRUE if the attribute is used by the @style object, %FALSE
+ *   otherwise. The output parameter (to get the value) is set only when %TRUE
+ *   is returned.
+ * Since: 300.0
+ */
+gboolean
+gtk_source_style_get_scale (GtkSourceStyle *style,
+			    gdouble        *scale)
+{
+	g_return_val_if_fail (GTK_SOURCE_IS_STYLE (style), FALSE);
+	g_return_val_if_fail (scale != NULL, FALSE);
+
+	if (style->use_scale)
+	{
+		*scale = style->scale;
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+/**
  * gtk_source_style_copy:
  * @style: a #GtkSourceStyle structure to copy.
  *
@@ -659,6 +633,7 @@ gtk_source_style_copy (const GtkSourceStyle *style)
 	copy->bold = style->bold;
 	copy->strikethrough = style->strikethrough;
 	copy->mask = style->mask;
+	copy->use_scale = style->use_scale;
 
 	return copy;
 }
@@ -758,7 +733,7 @@ gtk_source_style_apply (const GtkSourceStyle *style,
 			g_object_set (tag, "strikethrough-set", FALSE, NULL);
 		}
 
-		if (style->mask & GTK_SOURCE_STYLE_USE_SCALE)
+		if (style->use_scale)
 		{
 			g_object_set (tag, "scale", style->scale, NULL);
 		}

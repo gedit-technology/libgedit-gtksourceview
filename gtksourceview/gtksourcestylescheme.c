@@ -1118,7 +1118,7 @@ parse_style (GtkSourceStyleScheme *scheme,
 			if (_gtk_source_style_scheme_parser_parse_scale ((char*) scale, &scale_factor))
 			{
 				result->scale = scale_factor;
-				result->mask |= GTK_SOURCE_STYLE_USE_SCALE;
+				result->use_scale = TRUE;
 			}
 			else
 			{
