@@ -41,8 +41,6 @@ struct _GtkSourceStyleClass
 enum
 {
 	PROP_0,
-	PROP_PANGO_UNDERLINE,
-	PROP_UNDERLINE_SET,
 	PROP_UNDERLINE_COLOR,
 	PROP_UNDERLINE_COLOR_SET,
 	PROP_STRIKETHROUGH,
@@ -69,14 +67,6 @@ gtk_source_style_get_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_PANGO_UNDERLINE:
-			g_value_set_enum (value, style->underline);
-			break;
-
-		case PROP_UNDERLINE_SET:
-			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_UNDERLINE);
-			break;
-
 		case PROP_UNDERLINE_COLOR:
 			g_value_set_string (value, style->underline_color);
 			break;
@@ -118,22 +108,6 @@ gtk_source_style_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_PANGO_UNDERLINE:
-			style->underline = g_value_get_enum (value);
-			style->mask |= GTK_SOURCE_STYLE_USE_UNDERLINE;
-			break;
-
-		case PROP_UNDERLINE_SET:
-			if (g_value_get_boolean (value))
-			{
-				style->mask |= GTK_SOURCE_STYLE_USE_UNDERLINE;
-			}
-			else
-			{
-				style->mask &= ~GTK_SOURCE_STYLE_USE_UNDERLINE;
-			}
-			break;
-
 		case PROP_UNDERLINE_COLOR:
 			string = g_value_get_string (value);
 			if (string != NULL)
@@ -218,35 +192,6 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 	 * from style_scheme_get_style(). But style scheme is of course cheating
 	 * and sets everything after construction (but nobody can notice it).
 	 */
-
-	/**
-	 * GtkSourceStyle:pango-underline:
-	 *
-	 * Pango underline.
-	 */
-	properties[PROP_PANGO_UNDERLINE] =
-		g_param_spec_enum ("pango-underline",
-				   "pango-underline",
-				   "",
-				   PANGO_TYPE_UNDERLINE,
-				   PANGO_UNDERLINE_NONE,
-				   G_PARAM_READWRITE |
-				   G_PARAM_CONSTRUCT_ONLY |
-				   G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyle:underline-set:
-	 *
-	 * Whether #GtkSourceStyle:pango-underline is set.
-	 */
-	properties[PROP_UNDERLINE_SET] =
-		g_param_spec_boolean ("underline-set",
-				      "underline-set",
-				      "",
-				      FALSE,
-				      G_PARAM_READWRITE |
-				      G_PARAM_CONSTRUCT_ONLY |
-				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:underline-color:
