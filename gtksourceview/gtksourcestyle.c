@@ -23,7 +23,6 @@
 
 #include "gtksourcestyle.h"
 #include "gtksourcestyle-private.h"
-#include "gtksourcestyleschemeparser.h"
 
 /**
  * SECTION:style
@@ -137,7 +136,7 @@ gtk_source_style_get_property (GObject      *object,
 			break;
 
 		case PROP_SCALE:
-			g_value_set_string (value, style->scale);
+			g_value_set_double (value, style->scale);
 			break;
 
 		case PROP_SCALE_SET:
@@ -309,17 +308,8 @@ gtk_source_style_set_property (GObject      *object,
 			break;
 
 		case PROP_SCALE:
-			string = g_value_get_string (value);
-			if (string != NULL)
-			{
-				style->scale = g_intern_string (string);
-				style->mask |= GTK_SOURCE_STYLE_USE_SCALE;
-			}
-			else
-			{
-				style->scale = NULL;
-				style->mask &= ~GTK_SOURCE_STYLE_USE_SCALE;
-			}
+			style->scale = g_value_get_double (value);
+			style->mask |= GTK_SOURCE_STYLE_USE_SCALE;
 			break;
 
 		case PROP_SCALE_SET:
@@ -577,13 +567,13 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 	/**
 	 * GtkSourceStyle:scale:
 	 *
-	 * Text scale factor.
+	 * Text scale factor. See also #GtkTextTag:scale.
 	 */
 	properties[PROP_SCALE] =
-		g_param_spec_string ("scale",
+		g_param_spec_double ("scale",
 				     "scale",
 				     "",
-				     NULL,
+				     0.0, G_MAXDOUBLE, 1.0,
 				     G_PARAM_READWRITE |
 				     G_PARAM_CONSTRUCT_ONLY |
 				     G_PARAM_STATIC_STRINGS);
@@ -662,8 +652,8 @@ gtk_source_style_copy (const GtkSourceStyle *style)
 	copy->foreground = style->foreground;
 	copy->background = style->background;
 	copy->underline_color = style->underline_color;
-	copy->scale = style->scale;
 	copy->line_background = style->line_background;
+	copy->scale = style->scale;
 	copy->underline = style->underline;
 	copy->italic = style->italic;
 	copy->bold = style->bold;
@@ -700,8 +690,6 @@ gtk_source_style_apply (const GtkSourceStyle *style,
 
 	if (style != NULL)
 	{
-		gdouble scale_factor = 1.0;
-
 		g_object_freeze_notify (G_OBJECT (tag));
 
 		if (style->mask & GTK_SOURCE_STYLE_USE_FOREGROUND)
@@ -770,10 +758,9 @@ gtk_source_style_apply (const GtkSourceStyle *style,
 			g_object_set (tag, "strikethrough-set", FALSE, NULL);
 		}
 
-		if ((style->mask & GTK_SOURCE_STYLE_USE_SCALE) &&
-		    _gtk_source_style_scheme_parser_parse_scale (style->scale, &scale_factor))
+		if (style->mask & GTK_SOURCE_STYLE_USE_SCALE)
 		{
-			g_object_set (tag, "scale", scale_factor, NULL);
+			g_object_set (tag, "scale", style->scale, NULL);
 		}
 		else
 		{

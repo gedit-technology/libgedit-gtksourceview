@@ -263,6 +263,10 @@
           <link linkend="gtk-source-style-scheme-manager-get-schemes">gtk_source_style_scheme_manager_get_schemes()</link>
           instead.
         </para>
+        <para>
+          The <link linkend="GtkSourceStyle--scale">GtkSourceStyle:scale</link>
+          property type has changed: it is no longer a string, it is a double.
+        </para>
       </listitem>
     </itemizedlist>
   </refsect1>

@@ -45,16 +45,15 @@ struct _GtkSourceStyle
 	 * GtkTextTag has corresponding *-rgba properties for all stuff we need.
 	 */
 
-	/* TODO: have gdouble type for the scale. */
-
 	/* These fields are strings interned with g_intern_string(), so we don't
 	 * need to copy/free them.
 	 */
 	const gchar *foreground;
 	const gchar *background;
 	const gchar *underline_color;
-	const gchar *scale;
 	const gchar *line_background;
+
+	gdouble scale;
 
 	PangoUnderline underline;
 

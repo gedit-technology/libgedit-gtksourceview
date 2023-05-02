@@ -27,6 +27,7 @@
 #include <glib/gi18n-lib.h>
 #include "gtksourcestyle.h"
 #include "gtksourcestyle-private.h"
+#include "gtksourcestyleschemeparser.h"
 
 /**
  * SECTION:stylescheme
@@ -1112,8 +1113,18 @@ parse_style (GtkSourceStyleScheme *scheme,
 
 		if (scale != NULL)
 		{
-			result->scale = g_intern_string ((char*) scale);
-			result->mask |= GTK_SOURCE_STYLE_USE_SCALE;
+			gdouble scale_factor = 1.0;
+
+			if (_gtk_source_style_scheme_parser_parse_scale ((char*) scale, &scale_factor))
+			{
+				result->scale = scale_factor;
+				result->mask |= GTK_SOURCE_STYLE_USE_SCALE;
+			}
+			else
+			{
+				g_warning ("Style scheme: failed to parse the scale attribute: '%s' is not a valid value.",
+					   (char*) scale);
+			}
 		}
 	}
 
