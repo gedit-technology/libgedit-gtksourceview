@@ -264,6 +264,10 @@
           instead.
         </para>
         <para>
+          All the <link linkend="GtkSourceStyleScheme">GtkSourceStyleScheme</link>
+          properties have been removed. Use the get functions instead.
+        </para>
+        <para>
           All the <link linkend="GtkSourceStyle">GtkSourceStyle</link>
           properties have been removed. Use the
           <link linkend="gtk-source-style-get-data">gtk_source_style_get_data()</link>

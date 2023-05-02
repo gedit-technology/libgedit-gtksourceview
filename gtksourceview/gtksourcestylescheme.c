@@ -79,18 +79,6 @@ struct _GtkSourceStyleSchemePrivate
 	GtkCssProvider *css_provider_cursors;
 };
 
-enum
-{
-	PROP_0,
-	PROP_ID,
-	PROP_NAME,
-	PROP_DESCRIPTION,
-	PROP_FILENAME,
-	N_PROPERTIES
-};
-
-static GParamSpec *properties[N_PROPERTIES];
-
 G_DEFINE_TYPE_WITH_PRIVATE (GtkSourceStyleScheme, gtk_source_style_scheme, G_TYPE_OBJECT)
 
 static void
@@ -143,120 +131,12 @@ gtk_source_style_scheme_finalize (GObject *object)
 }
 
 static void
-gtk_source_style_scheme_set_property (GObject 	   *object,
-				      guint         prop_id,
-				      const GValue *value,
-				      GParamSpec   *pspec)
-{
-	GtkSourceStyleScheme *scheme = GTK_SOURCE_STYLE_SCHEME (object);
-
-	switch (prop_id)
-	{
-		case PROP_ID:
-			g_free (scheme->priv->id);
-			scheme->priv->id = g_value_dup_string (value);
-			break;
-
-		default:
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-			break;
-	}
-}
-
-static void
-gtk_source_style_scheme_get_property (GObject 	 *object,
-				      guint 	  prop_id,
-				      GValue 	 *value,
-				      GParamSpec *pspec)
-{
-	GtkSourceStyleScheme *scheme = GTK_SOURCE_STYLE_SCHEME (object);
-
-	switch (prop_id)
-	{
-		case PROP_ID:
-			g_value_set_string (value, gtk_source_style_scheme_get_id (scheme));
-			break;
-
-		case PROP_NAME:
-			g_value_set_string (value, gtk_source_style_scheme_get_name (scheme));
-			break;
-
-		case PROP_DESCRIPTION:
-			g_value_set_string (value, gtk_source_style_scheme_get_description (scheme));
-			break;
-
-		case PROP_FILENAME:
-			g_value_set_string (value, gtk_source_style_scheme_get_filename (scheme));
-			break;
-
-		default:
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-			break;
-	}
-}
-
-static void
 gtk_source_style_scheme_class_init (GtkSourceStyleSchemeClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = gtk_source_style_scheme_dispose;
 	object_class->finalize = gtk_source_style_scheme_finalize;
-	object_class->set_property = gtk_source_style_scheme_set_property;
-	object_class->get_property = gtk_source_style_scheme_get_property;
-
-	/**
-	 * GtkSourceStyleScheme:id:
-	 *
-	 * Style scheme id, a unique string used to identify the style scheme
-	 * in #GtkSourceStyleSchemeManager.
-	 */
-	properties[PROP_ID] =
-		g_param_spec_string ("id",
-				     "id",
-				     "",
-				     NULL,
-				     G_PARAM_READWRITE |
-				     G_PARAM_CONSTRUCT_ONLY |
-				     G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyleScheme:name:
-	 *
-	 * Style scheme name, a translatable string to present to the user.
-	 */
-	properties[PROP_NAME] =
-		g_param_spec_string ("name",
-				     "name",
-				     "",
-				     NULL,
-				     G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyleScheme:description:
-	 *
-	 * Style scheme description, a translatable string to present to the user.
-	 */
-	properties[PROP_DESCRIPTION] =
-		g_param_spec_string ("description",
-				     "description",
-				     "",
-				     NULL,
-				     G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyleScheme:filename:
-	 *
-	 * Style scheme filename or %NULL.
-	 */
-	properties[PROP_FILENAME] =
-		g_param_spec_string ("filename",
-				     "filename",
-				     "",
-				     NULL,
-				     G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
-
-	g_object_class_install_properties (object_class, N_PROPERTIES, properties);
 }
 
 static void
@@ -289,7 +169,8 @@ gtk_source_style_scheme_init (GtkSourceStyleScheme *scheme)
  * gtk_source_style_scheme_get_id:
  * @scheme: a #GtkSourceStyleScheme.
  *
- * Returns: the value of the #GtkSourceStyleScheme:id property.
+ * Returns: the @scheme ID, a unique string used to identify the style scheme in
+ *   a #GtkSourceStyleSchemeManager.
  * Since: 2.0
  */
 const gchar *
@@ -304,7 +185,8 @@ gtk_source_style_scheme_get_id (GtkSourceStyleScheme *scheme)
  * gtk_source_style_scheme_get_name:
  * @scheme: a #GtkSourceStyleScheme.
  *
- * Returns: the value of the #GtkSourceStyleScheme:name property.
+ * Returns: the @scheme name, a human-readable (translated) string to present to
+ *   the user.
  * Since: 2.0
  */
 const gchar *
@@ -319,8 +201,8 @@ gtk_source_style_scheme_get_name (GtkSourceStyleScheme *scheme)
  * gtk_source_style_scheme_get_description:
  * @scheme: a #GtkSourceStyleScheme.
  *
- * Returns: (nullable): the value of the #GtkSourceStyleScheme:description
- *   property.
+ * Returns: (nullable): the @scheme description, a human-readable (translated)
+ *   string to present to the user.
  * Since: 2.0
  */
 const gchar *
@@ -336,8 +218,8 @@ gtk_source_style_scheme_get_description (GtkSourceStyleScheme *scheme)
  * @scheme: a #GtkSourceStyleScheme.
  *
  * Returns: (nullable) (array zero-terminated=1) (transfer none): a
- *   %NULL-terminated array containing the @scheme authors or %NULL if no author
- *   is specified by the style scheme.
+ *   %NULL-terminated array containing the @scheme authors, or %NULL if no
+ *   author is specified by the style scheme.
  * Since: 2.0
  */
 const gchar * const *
@@ -358,7 +240,7 @@ gtk_source_style_scheme_get_authors (GtkSourceStyleScheme *scheme)
  * @scheme: a #GtkSourceStyleScheme.
  *
  * Returns: (nullable): @scheme file name if the scheme was created parsing a
- *   style scheme file or %NULL in the other cases.
+ *   style scheme file, or %NULL in the other cases.
  * Since: 2.0
  */
 const gchar *
