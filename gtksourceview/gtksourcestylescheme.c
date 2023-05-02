@@ -543,37 +543,28 @@ gtk_source_style_scheme_get_style (GtkSourceStyleScheme *scheme,
 }
 
 static gboolean
-get_color (GtkSourceStyle *style,
-	   gboolean        foreground,
-	   GdkRGBA        *dest)
+get_foreground_color (GtkSourceStyle *style,
+		      GdkRGBA        *rgba)
 {
-	const gchar *color;
-	guint mask;
-
-	if (style != NULL)
+	if (style != NULL &&
+	    (style->mask & GTK_SOURCE_STYLE_USE_FOREGROUND) &&
+	    style->foreground != NULL)
 	{
-		if (foreground)
-		{
-			color = style->foreground;
-			mask = GTK_SOURCE_STYLE_USE_FOREGROUND;
-		}
-		else
-		{
-			color = style->background;
-			mask = GTK_SOURCE_STYLE_USE_BACKGROUND;
-		}
+		return _gtk_source_style_scheme_parser_parse_final_color (style->foreground, rgba);
+	}
 
-		if (style->mask & mask)
-		{
-			if (color == NULL || !color_parse (color, dest))
-			{
-				g_warning ("%s: invalid color '%s'", G_STRLOC,
-					   color != NULL ? color : "(null)");
-				return FALSE;
-			}
+	return FALSE;
+}
 
-			return TRUE;
-		}
+static gboolean
+get_background_color (GtkSourceStyle *style,
+		      GdkRGBA        *rgba)
+{
+	if (style != NULL &&
+	    (style->mask & GTK_SOURCE_STYLE_USE_BACKGROUND) &&
+	    style->background != NULL)
+	{
+		return _gtk_source_style_scheme_parser_parse_final_color (style->background, rgba);
 	}
 
 	return FALSE;
@@ -595,8 +586,8 @@ get_cursors_css_style (GtkSourceStyleScheme *scheme,
 	primary_style = gtk_source_style_scheme_get_style (scheme, STYLE_CURSOR);
 	secondary_style = gtk_source_style_scheme_get_style (scheme, STYLE_SECONDARY_CURSOR);
 
-	primary_color_set = get_color (primary_style, TRUE, &primary_color);
-	secondary_color_set = get_color (secondary_style, TRUE, &secondary_color);
+	primary_color_set = get_foreground_color (primary_style, &primary_color);
+	secondary_color_set = get_foreground_color (secondary_style, &secondary_color);
 
 	if (!primary_color_set && !secondary_color_set)
 	{
@@ -773,7 +764,7 @@ get_css_color_style (GtkSourceStyle *style,
 {
 	GdkRGBA color;
 
-	if (get_color (style, FALSE, &color))
+	if (get_background_color (style, &color))
 	{
 		gchar *bg_color;
 		bg_color = gdk_rgba_to_string (&color);
@@ -785,7 +776,7 @@ get_css_color_style (GtkSourceStyle *style,
 		*bg = NULL;
 	}
 
-	if (get_color (style, TRUE, &color))
+	if (get_foreground_color (style, &color))
 	{
 		gchar *text_color;
 		text_color = gdk_rgba_to_string (&color);
