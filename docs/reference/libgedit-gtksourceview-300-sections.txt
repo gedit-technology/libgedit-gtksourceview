@@ -728,6 +728,7 @@ gtk_source_space_type_flags_get_type
 <FILE>style</FILE>
 GtkSourceStyle
 GtkSourceStyleData
+gtk_source_style_get_data
 gtk_source_style_get_scale
 gtk_source_style_copy
 gtk_source_style_apply

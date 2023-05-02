@@ -575,6 +575,62 @@ gtk_source_style_init (GtkSourceStyle *style)
 }
 
 /**
+ * gtk_source_style_get_data: (skip)
+ * @style: a #GtkSourceStyle.
+ *
+ * Returns: (transfer full): a new #GtkSourceStyleData. Free with g_free() when
+ *   no longer needed.
+ * Since: 300.0
+ */
+GtkSourceStyleData *
+gtk_source_style_get_data (GtkSourceStyle *style)
+{
+	GtkSourceStyleData *data;
+
+	g_return_val_if_fail (GTK_SOURCE_IS_STYLE (style), NULL);
+
+	data = g_new0 (GtkSourceStyleData, 1);
+
+	if (style->mask & GTK_SOURCE_STYLE_USE_FOREGROUND)
+	{
+		data->use_foreground_color = gdk_rgba_parse (&data->foreground_color, style->foreground);
+		g_warn_if_fail (data->use_foreground_color);
+	}
+	if (style->mask & GTK_SOURCE_STYLE_USE_BACKGROUND)
+	{
+		data->use_background_color = gdk_rgba_parse (&data->background_color, style->background);
+		g_warn_if_fail (data->use_background_color);
+	}
+	if (style->mask & GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR)
+	{
+		data->use_underline_color = gdk_rgba_parse (&data->underline_color, style->underline_color);
+		g_warn_if_fail (data->use_underline_color);
+	}
+	if (style->mask & GTK_SOURCE_STYLE_USE_LINE_BACKGROUND)
+	{
+		data->use_paragraph_background_color = gdk_rgba_parse (&data->paragraph_background_color, style->line_background);
+		g_warn_if_fail (data->use_paragraph_background_color);
+	}
+
+	data->scale = style->scale;
+	data->use_scale = style->use_scale;
+
+	data->underline = style->underline;
+	data->use_underline = (style->mask & GTK_SOURCE_STYLE_USE_UNDERLINE) != 0;
+
+	data->italic = style->italic;
+	data->use_italic = (style->mask & GTK_SOURCE_STYLE_USE_ITALIC) != 0;
+
+	data->bold = style->bold;
+	data->use_bold = (style->mask & GTK_SOURCE_STYLE_USE_BOLD) != 0;
+
+	data->strikethrough = style->strikethrough;
+	data->use_strikethrough = (style->mask & GTK_SOURCE_STYLE_USE_STRIKETHROUGH) != 0;
+
+	return data;
+}
+
+/**
  * gtk_source_style_get_scale:
  * @style: a #GtkSourceStyle.
  * @scale: (out): output parameter to get the attribute value.

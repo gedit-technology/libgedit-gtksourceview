@@ -94,6 +94,9 @@ G_MODULE_EXPORT
 GType			gtk_source_style_get_type		(void);
 
 G_MODULE_EXPORT
+GtkSourceStyleData *	gtk_source_style_get_data		(GtkSourceStyle *style);
+
+G_MODULE_EXPORT
 gboolean		gtk_source_style_get_scale		(GtkSourceStyle *style,
 								 gdouble        *scale);
 
