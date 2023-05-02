@@ -615,19 +615,39 @@ _gtk_source_style_scheme_remove_css_providers_from_widget (GtkSourceStyleScheme 
 
 #define ERROR_QUARK (g_quark_from_static_string ("gtk-source-style-scheme-parser-error"))
 
-static void
-get_css_color_style (GtkSourceStyle  *style,
-		     gchar          **bg,
-		     gchar          **text)
+static gchar *
+get_foreground_color_css_declaration (GtkSourceStyle *style)
 {
 	GtkSourceStyleData *style_data;
-
-	*bg = NULL;
-	*text = NULL;
+	gchar *ret = NULL;
 
 	if (style == NULL)
 	{
-		return;
+		return NULL;
+	}
+
+	style_data = gtk_source_style_get_data (style);
+
+	if (style_data->use_foreground_color)
+	{
+		gchar *fg_color_str = gdk_rgba_to_string (&style_data->foreground_color);
+		ret = g_strdup_printf ("\tcolor: %s;\n", fg_color_str);
+		g_free (fg_color_str);
+	}
+
+	g_free (style_data);
+	return ret;
+}
+
+static gchar *
+get_background_color_css_declaration (GtkSourceStyle *style)
+{
+	GtkSourceStyleData *style_data;
+	gchar *ret = NULL;
+
+	if (style == NULL)
+	{
+		return NULL;
 	}
 
 	style_data = gtk_source_style_get_data (style);
@@ -635,18 +655,12 @@ get_css_color_style (GtkSourceStyle  *style,
 	if (style_data->use_background_color)
 	{
 		gchar *bg_color_str = gdk_rgba_to_string (&style_data->background_color);
-		*bg = g_strdup_printf ("background-color: %s;\n", bg_color_str);
+		ret = g_strdup_printf ("\tbackground-color: %s;\n", bg_color_str);
 		g_free (bg_color_str);
 	}
 
-	if (style_data->use_foreground_color)
-	{
-		gchar *fg_color_str = gdk_rgba_to_string (&style_data->foreground_color);
-		*text = g_strdup_printf ("color: %s;\n", fg_color_str);
-		g_free (fg_color_str);
-	}
-
 	g_free (style_data);
+	return ret;
 }
 
 static void
@@ -654,23 +668,25 @@ append_css_style (GString        *string,
                   GtkSourceStyle *style,
                   const gchar    *selector)
 {
-	gchar *bg, *text;
-	const gchar css_style[] =
-		"%s {\n"
-		"	%s"
-		"	%s"
-		"}\n";
+	gchar *fg_decl = get_foreground_color_css_declaration (style);
+	gchar *bg_decl = get_background_color_css_declaration (style);
 
-	get_css_color_style (style, &bg, &text);
-	if (bg || text)
+	if (fg_decl == NULL && bg_decl == NULL)
 	{
-		g_string_append_printf (string, css_style, selector,
-		                        bg != NULL ? bg : "",
-		                        text != NULL ? text : "");
-
-		g_free (bg);
-		g_free (text);
+		return;
 	}
+
+	g_string_append_printf (string,
+				"%s {\n"
+				"%s"
+				"%s"
+				"}\n",
+				selector,
+				fg_decl != NULL ? fg_decl : "",
+				bg_decl != NULL ? bg_decl : "");
+
+	g_free (fg_decl);
+	g_free (bg_decl);
 }
 
 static void
