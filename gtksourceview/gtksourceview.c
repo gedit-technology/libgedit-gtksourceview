@@ -4568,15 +4568,27 @@ update_background_pattern_color (GtkSourceView *view)
 static void
 update_current_line_color (GtkSourceView *view)
 {
-	if (view->priv->style_scheme == NULL)
+	GtkSourceStyle *style = NULL;
+
+	view->priv->current_line_color_set = FALSE;
+
+	if (view->priv->style_scheme != NULL)
 	{
-		view->priv->current_line_color_set = FALSE;
-		return;
+		style = gtk_source_style_scheme_get_style (view->priv->style_scheme, "current-line");
 	}
 
-	view->priv->current_line_color_set =
-		_gtk_source_style_scheme_get_current_line_color (view->priv->style_scheme,
-								 &view->priv->current_line_color);
+	if (style != NULL)
+	{
+		GtkSourceStyleData *style_data = gtk_source_style_get_data (style);
+
+		if (style_data->use_background_color)
+		{
+			view->priv->current_line_color_set = TRUE;
+			view->priv->current_line_color = style_data->background_color;
+		}
+
+		g_free (style_data);
+	}
 }
 
 static void

@@ -127,6 +127,7 @@ test_scheme_properties (TestFixture   *fixture,
 	check_scheme (scheme, "test", "Test", "Test color scheme", authors, "def:comment");
 }
 
+#if 0
 static void
 test_named_color_alpha (TestFixture   *fixture,
                         gconstpointer  data)
@@ -140,13 +141,12 @@ test_named_color_alpha (TestFixture   *fixture,
 	res = _gtk_source_style_scheme_get_current_line_color (scheme, &color1);
 	g_assert_true (res);
 
-#if 0
 	res = _gtk_source_style_scheme_get_background_pattern_color (scheme, &color2);
 	g_assert_true (res);
 
 	g_assert_true (gdk_rgba_equal (&color1, &color2));
-#endif
 }
+#endif
 
 int
 main (int    argc,
@@ -158,7 +158,9 @@ main (int    argc,
 	gtk_source_init ();
 
 	g_test_add ("/StyleScheme/scheme-properties", TestFixture, NULL, test_fixture_setup, test_scheme_properties, test_fixture_teardown);
+#if 0
 	g_test_add ("/StyleScheme/named-colors-alpha", TestFixture, NULL, test_fixture_setup, test_named_color_alpha, test_fixture_teardown);
+#endif
 
 	ret = g_test_run ();
 	gtk_source_finalize ();

@@ -52,7 +52,6 @@
 #define STYLE_SELECTED_UNFOCUSED	"selection-unfocused"
 #define STYLE_CURSOR			"cursor"
 #define STYLE_SECONDARY_CURSOR		"secondary-cursor"
-#define STYLE_CURRENT_LINE		"current-line"
 #define STYLE_LINE_NUMBERS		"line-numbers"
 #define STYLE_CURRENT_LINE_NUMBER	"current-line-number"
 
@@ -585,23 +584,6 @@ get_color (GtkSourceStyle *style,
 	}
 
 	return FALSE;
-}
-
-/*
- * Returns TRUE if the style for current-line is set in the scheme
- */
-gboolean
-_gtk_source_style_scheme_get_current_line_color (GtkSourceStyleScheme *scheme,
-						 GdkRGBA              *color)
-{
-	GtkSourceStyle *style;
-
-	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), FALSE);
-	g_return_val_if_fail (color != NULL, FALSE);
-
-	style = gtk_source_style_scheme_get_style (scheme, STYLE_CURRENT_LINE);
-
-	return get_color (style, FALSE, color);
 }
 
 static gchar *
