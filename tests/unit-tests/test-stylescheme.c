@@ -1,4 +1,3 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8; coding: utf-8 -*- */
 /*
  * This file is part of GtkSourceView
  *
@@ -18,133 +17,93 @@
  * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <stdlib.h>
 #include <gtksourceview/gtksource.h>
 
-typedef struct _TestFixture TestFixture;
+static void
+set_single_search_path (GtkSourceStyleSchemeManager *manager,
+			const gchar                 *path)
+{
+	const gchar *search_path[] = { path, NULL };
 
-struct _TestFixture {
-	GtkSourceStyleSchemeManager *manager;
-};
+	gtk_source_style_scheme_manager_set_search_path (manager, (gchar **) search_path);
+}
 
-/* If we are running from the source dir (e.g. during make check)
- * we override the path to read from the data dir
+/* To have reproducible results.
+ * The unit tests can be run without the need to install the project.
  */
-static void
-test_fixture_setup (TestFixture   *fixture,
-                    gconstpointer  data)
+static GtkSourceStyleSchemeManager *
+create_manager (void)
 {
+	GtkSourceStyleSchemeManager *manager;
 	gchar *dir;
-	gchar **style_dirs;
 
-	dir = g_build_filename (TOP_SRCDIR, "data", "style-schemes", "default-style-schemes", NULL);
+	manager = gtk_source_style_scheme_manager_new ();
 
-	fixture->manager = gtk_source_style_scheme_manager_get_default ();
+	dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
+	set_single_search_path (manager, dir);
+	g_free (dir);
 
-	if (g_file_test (dir, G_FILE_TEST_IS_DIR))
-	{
-		style_dirs = g_new0 (gchar *, 3);
-		style_dirs[0] = dir;
-		style_dirs[1] = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
-	}
-	else
-	{
-		const gchar * const *current;
-		int i;
-
-		g_free (dir);
-
-		current = gtk_source_style_scheme_manager_get_search_path (fixture->manager);
-		style_dirs = g_new0 (gchar *, g_strv_length ((gchar **)current) + 2);
-		for (i = 0; current[i] != NULL; i++)
-		{
-			style_dirs[i] = g_strdup(current[i]);
-		}
-		style_dirs[i] = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
-	}
-
-	gtk_source_style_scheme_manager_set_search_path (fixture->manager, style_dirs);
-	g_strfreev (style_dirs);
-}
-
-static void
-test_fixture_teardown (TestFixture   *fixture,
-                       gconstpointer  data)
-{
-}
-
-static void
-compare_strv (const gchar **strv,
-	      const gchar **expected_strv)
-{
-	if (expected_strv != NULL)
-	{
-		guint n, i;
-
-		n = g_strv_length ((gchar **) expected_strv);
-		for (i = 0; i < n; i++)
-		{
-			g_assert_cmpstr (strv[i], ==, expected_strv[i]);
-		}
-	}
-	else
-	{
-		g_assert (strv == NULL);
-	}
+	return manager;
 }
 
 static void
 check_scheme (GtkSourceStyleScheme  *scheme,
-              const gchar           *expected_id,
-              const gchar           *expected_name,
-              const gchar           *expected_description,
-              const gchar          **expected_authors,
-              const gchar           *style_id)
+	      const gchar           *expected_id,
+	      const gchar           *expected_name,
+	      const gchar           *expected_description,
+	      const gchar          **expected_authors,
+	      const gchar           *style_id)
 {
 	GtkSourceStyle *style;
 
 	g_assert_cmpstr (gtk_source_style_scheme_get_id (scheme), ==, expected_id);
 	g_assert_cmpstr (gtk_source_style_scheme_get_name (scheme), ==, expected_name);
 	g_assert_cmpstr (gtk_source_style_scheme_get_description (scheme), ==, expected_description);
-	compare_strv ((const gchar **)gtk_source_style_scheme_get_authors (scheme), expected_authors);
+	g_assert_cmpstrv (gtk_source_style_scheme_get_authors (scheme), expected_authors);
 
 	style = gtk_source_style_scheme_get_style (scheme, style_id);
-	g_assert (GTK_SOURCE_IS_STYLE (style));
+	g_assert_true (GTK_SOURCE_IS_STYLE (style));
 }
 
 static void
-test_scheme_properties (TestFixture   *fixture,
-                        gconstpointer  data)
+test_scheme_properties (void)
 {
+	GtkSourceStyleSchemeManager *manager = create_manager ();
 	GtkSourceStyleScheme *scheme;
 	const gchar *authors[] = { "Paolo Borelli", "John Doe", NULL};
 
-	scheme = gtk_source_style_scheme_manager_get_scheme (fixture->manager, "test");
+	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "test");
 	check_scheme (scheme, "test", "Test", "Test color scheme", authors, "def:comment");
+
+	g_object_unref (manager);
 }
 
 #if 0
 static void
-test_named_color_alpha (TestFixture   *fixture,
-                        gconstpointer  data)
+test_rgba_colors (void)
 {
-	GtkSourceStyleScheme *scheme;
-	GdkRGBA color1;
-	gboolean res;
+	GtkSourceStyleSchemeManager *manager = create_manager ();
+	GtkSourceStyleScheme *scheme = gtk_source_style_scheme_manager_get_scheme (manager, "test");
+	GtkSourceStyle *style_current_line;
+	GtkSourceStyle *style_background_pattern;
+	GtkSourceStyleData *style_data_current_line;
+	GtkSourceStyleData *style_data_background_pattern;
 
-	scheme = gtk_source_style_scheme_manager_get_scheme (fixture->manager, "test");
+	style_current_line = gtk_source_style_scheme_get_style (scheme, "current-line");
+	style_background_pattern = gtk_source_style_scheme_get_style (scheme, "background-pattern");
+	g_assert_true (style_current_line != NULL);
+	g_assert_true (style_background_pattern != NULL);
 
-	res = _gtk_source_style_scheme_get_current_line_color (scheme, &color1);
-	g_assert_true (res);
+	style_data_current_line = gtk_source_style_get_data (style_current_line);
+	style_data_background_pattern = gtk_source_style_get_data (style_background_pattern);
 
-	res = _gtk_source_style_scheme_get_background_pattern_color (scheme, &color2);
-	g_assert_true (res);
+	g_assert_true (style_data_current_line->use_background_color);
+	g_assert_true (style_data_background_pattern->use_background_color);
+	g_assert_true (gdk_rgba_equal (&style_data_current_line->background_color,
+				       &style_data_background_pattern->background_color));
 
-	g_assert_true (gdk_rgba_equal (&color1, &color2));
+	g_free (style_data_current_line);
+	g_free (style_data_background_pattern);
 }
 #endif
 
@@ -157,10 +116,8 @@ main (int    argc,
 	gtk_test_init (&argc, &argv);
 	gtk_source_init ();
 
-	g_test_add ("/StyleScheme/scheme-properties", TestFixture, NULL, test_fixture_setup, test_scheme_properties, test_fixture_teardown);
-#if 0
-	g_test_add ("/StyleScheme/named-colors-alpha", TestFixture, NULL, test_fixture_setup, test_named_color_alpha, test_fixture_teardown);
-#endif
+	g_test_add_func ("/StyleScheme/scheme_properties", test_scheme_properties);
+	//g_test_add_func ("/StyleScheme/rgba_colors", test_rgba_colors);
 
 	ret = g_test_run ();
 	gtk_source_finalize ();
