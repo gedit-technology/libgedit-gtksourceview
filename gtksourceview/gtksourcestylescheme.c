@@ -402,6 +402,8 @@ gtk_source_style_scheme_get_style (GtkSourceStyleScheme *scheme,
 	return style;
 }
 
+/* --- CSS ---------------------------------------------------------------- */
+
 static gboolean
 get_style_foreground_color (GtkSourceStyleScheme *scheme,
 			    const gchar          *style_id,
@@ -611,10 +613,6 @@ _gtk_source_style_scheme_remove_css_providers_from_widget (GtkSourceStyleScheme 
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
-/* --- PARSER ---------------------------------------------------------------- */
-
-#define ERROR_QUARK (g_quark_from_static_string ("gtk-source-style-scheme-parser-error"))
-
 static gchar *
 get_foreground_color_css_declaration (GtkSourceStyle *style)
 {
@@ -757,6 +755,10 @@ generate_css_style (GtkSourceStyleScheme *scheme)
 
 	g_string_free (final_style, TRUE);
 }
+
+/* --- PARSER ---------------------------------------------------------------- */
+
+#define ERROR_QUARK (g_quark_from_static_string ("gtk-source-style-scheme-parser-error"))
 
 static gboolean
 parse_bool (char *value)
