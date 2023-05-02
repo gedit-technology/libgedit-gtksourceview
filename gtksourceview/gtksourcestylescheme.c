@@ -370,55 +370,33 @@ gtk_source_style_scheme_get_filename (GtkSourceStyleScheme *scheme)
 }
 
 /*
- * Try to parse a color string.
- * If the color can be parsed, return the offset in the string
- * with the real start of the color (either the string itself, or after
- * the initial '#' character).
- */
-static const gchar *
-color_parse (const gchar *color,
-             GdkRGBA     *rgba)
-{
-	if ((*color == '#') && gdk_rgba_parse (rgba, color + 1))
-	{
-		return color + 1;
-	}
-
-	if (gdk_rgba_parse (rgba, color))
-	{
-		return color;
-	}
-
-	return NULL;
-}
-
-/*
  * get_color_by_name:
  * @scheme: a #GtkSourceStyleScheme.
  * @name: color name to find.
  *
- * Returns: color which corresponds to @name in the @scheme.
- * Returned value is actual color string suitable for gdk_rgba_parse().
- * It may be @name or part of @name so copy it or something, if you need
- * it to stay around.
+ * Returned value is actual color string suitable for
+ * _gtk_source_style_scheme_parser_parse_final_color(). It may be @name so copy
+ * it or something, if you need it to stay around.
  *
- * Since: 2.0
+ * Returns: color which corresponds to @name in the @scheme.
  */
 static const gchar *
 get_color_by_name (GtkSourceStyleScheme *scheme,
 		   const gchar          *name)
 {
-	const char *color = NULL;
+	const gchar *color = NULL;
 
 	g_return_val_if_fail (name != NULL, NULL);
 
 	if (name[0] == '#')
 	{
-		GdkRGBA dummy;
+		GdkRGBA dummy_rgba;
 
-		color = color_parse (name, &dummy);
-
-		if (color == NULL)
+		if (_gtk_source_style_scheme_parser_parse_final_color (name, &dummy_rgba))
+		{
+			color = name;
+		}
+		else
 		{
 			g_warning ("could not parse color '%s'", name);
 		}
