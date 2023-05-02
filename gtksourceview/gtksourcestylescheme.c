@@ -457,24 +457,24 @@ fix_style_colors (GtkSourceStyleScheme *scheme,
 /**
  * gtk_source_style_scheme_get_style:
  * @scheme: a #GtkSourceStyleScheme.
- * @style_id: id of the style to retrieve.
+ * @style_id: ID of the style to retrieve.
  *
- * Returns: (nullable) (transfer none): style which corresponds to @style_id in
- * the @scheme, or %NULL when no style with this name found.  It is owned by
- * @scheme and may not be unref'ed.
- *
+ * Returns: (nullable) (transfer none): the #GtkSourceStyle which corresponds to
+ *   @style_id in the @scheme, or %NULL if not found.
  * Since: 2.0
  */
-/*
- * It's a little weird because we have named colors: styles loaded from
- * scheme file can have "#red" or "blue", and we want to give out styles
- * which have nice colors suitable for gdk_color_parse(), so that GtkSourceStyle
- * foreground and background properties are the same as GtkTextTag's.
- * Yet we do need to preserve what we got from file in style schemes,
- * since there may be child schemes which may redefine colors or something,
- * so we can't translate colors when loading scheme.
- * So, defined_styles hash has named colors; styles returned with get_style()
- * have real colors.
+/* It's a little weird because we have named colors: styles loaded from a
+ * scheme file can have "#red" or "blue". "#red" is a "final" color, while
+ * "blue" refers to a <color> tag. All final colors have # as prefix, and are
+ * suitable for _gtk_source_style_scheme_parser_parse_final_color(), to get a
+ * GdkRGBA.
+ *
+ * We need to preserve what we got from the file, because it's possible for a
+ * child scheme to redefine colors, so we can't translate colors when loading
+ * the scheme.
+ *
+ * So, the defined_styles hash table has original color values; styles returned
+ * with get_style() have final colors.
  */
 GtkSourceStyle *
 gtk_source_style_scheme_get_style (GtkSourceStyleScheme *scheme,
