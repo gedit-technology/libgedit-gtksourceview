@@ -86,7 +86,7 @@ test_rgba_colors (void)
 	GtkSourceStyle *style_current_line;
 	GtkSourceStyle *style_background_pattern;
 	GtkSourceStyleData *style_data_current_line;
-	//GtkSourceStyleData *style_data_background_pattern;
+	GtkSourceStyleData *style_data_background_pattern;
 
 	style_current_line = gtk_source_style_scheme_get_style (scheme, "current-line");
 	style_background_pattern = gtk_source_style_scheme_get_style (scheme, "background-pattern");
@@ -94,18 +94,15 @@ test_rgba_colors (void)
 	g_assert_true (style_background_pattern != NULL);
 
 	style_data_current_line = gtk_source_style_get_data (style_current_line);
-	// FIXME: the following gtk_source_style_get_data() call fails.
-	//style_data_background_pattern = gtk_source_style_get_data (style_background_pattern);
+	style_data_background_pattern = gtk_source_style_get_data (style_background_pattern);
 
 	g_assert_true (style_data_current_line->use_background_color);
-#if 0
 	g_assert_true (style_data_background_pattern->use_background_color);
 	g_assert_true (gdk_rgba_equal (&style_data_current_line->background_color,
 				       &style_data_background_pattern->background_color));
-#endif
 
 	g_free (style_data_current_line);
-	//g_free (style_data_background_pattern);
+	g_free (style_data_background_pattern);
 }
 
 int
