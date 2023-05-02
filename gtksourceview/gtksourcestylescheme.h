@@ -91,10 +91,6 @@ gboolean		 _gtk_source_style_scheme_get_current_line_color	(GtkSourceStyleScheme
 										 GdkRGBA              *color);
 
 G_GNUC_INTERNAL
-gboolean		 _gtk_source_style_scheme_get_background_pattern_color	(GtkSourceStyleScheme *scheme,
-										 GdkRGBA              *color);
-
-G_GNUC_INTERNAL
 void			 _gtk_source_style_scheme_add_css_providers_to_widget	(GtkSourceStyleScheme *scheme,
 										 GtkWidget            *widget);
 

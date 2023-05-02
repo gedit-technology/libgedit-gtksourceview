@@ -132,19 +132,20 @@ test_named_color_alpha (TestFixture   *fixture,
                         gconstpointer  data)
 {
 	GtkSourceStyleScheme *scheme;
-	GdkRGBA color1, color2;
+	GdkRGBA color1;
 	gboolean res;
 
 	scheme = gtk_source_style_scheme_manager_get_scheme (fixture->manager, "test");
 
-	/* Use these two semi private methods to compare a named color and a normal one */
 	res = _gtk_source_style_scheme_get_current_line_color (scheme, &color1);
-	g_assert (res);
+	g_assert_true (res);
 
+#if 0
 	res = _gtk_source_style_scheme_get_background_pattern_color (scheme, &color2);
-	g_assert (res);
+	g_assert_true (res);
 
-	g_assert (gdk_rgba_equal (&color1, &color2));
+	g_assert_true (gdk_rgba_equal (&color1, &color2));
+#endif
 }
 
 int

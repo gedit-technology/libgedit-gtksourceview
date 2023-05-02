@@ -4542,15 +4542,27 @@ gtk_source_view_get_visual_column (GtkSourceView     *view,
 static void
 update_background_pattern_color (GtkSourceView *view)
 {
-	if (view->priv->style_scheme == NULL)
+	GtkSourceStyle *style = NULL;
+
+	view->priv->background_pattern_color_set = FALSE;
+
+	if (view->priv->style_scheme != NULL)
 	{
-		view->priv->background_pattern_color_set = FALSE;
-		return;
+		style = gtk_source_style_scheme_get_style (view->priv->style_scheme, "background-pattern");
 	}
 
-	view->priv->background_pattern_color_set =
-		_gtk_source_style_scheme_get_background_pattern_color (view->priv->style_scheme,
-								       &view->priv->background_pattern_color);
+	if (style != NULL)
+	{
+		GtkSourceStyleData *style_data = gtk_source_style_get_data (style);
+
+		if (style_data->use_background_color)
+		{
+			view->priv->background_pattern_color_set = TRUE;
+			view->priv->background_pattern_color = style_data->background_color;
+		}
+
+		g_free (style_data);
+	}
 }
 
 static void
