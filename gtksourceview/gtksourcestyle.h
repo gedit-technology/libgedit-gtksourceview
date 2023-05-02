@@ -37,6 +37,58 @@ G_BEGIN_DECLS
 
 typedef struct _GtkSourceStyle		GtkSourceStyle;
 typedef struct _GtkSourceStyleClass	GtkSourceStyleClass;
+typedef struct _GtkSourceStyleData	GtkSourceStyleData;
+
+/**
+ * GtkSourceStyleData:
+ * @foreground_color: Equivalent to #GtkTextTag:foreground-rgba.
+ * @background_color: Equivalent to #GtkTextTag:background-rgba.
+ * @underline_color: Equivalent to #GtkTextTag:underline-rgba.
+ * @paragraph_background_color: Equivalent to #GtkTextTag:paragraph-background-rgba.
+ * @scale: Equivalent to #GtkTextTag:scale.
+ * @underline: Equivalent to #GtkTextTag:underline.
+ * @italic: For #GtkTextTag:style.
+ * @bold: For #GtkTextTag:weight.
+ * @strikethrough: Equivalent to #GtkTextTag:strikethrough.
+ * @use_foreground_color: Whether @foreground_color can be taken into account.
+ * @use_background_color: Whether @background_color can be taken into account.
+ * @use_underline_color: Whether @underline_color can be taken into account.
+ * @use_paragraph_background_color: Whether @paragraph_background_color can be taken into account.
+ * @use_scale: Whether @scale can be taken into account.
+ * @use_underline: Whether @underline can be taken into account.
+ * @use_italic: Whether @italic can be taken into account.
+ * @use_bold: Whether @bold can be taken into account.
+ * @use_strikethrough: Whether @strikethrough can be taken into account.
+ *
+ * The data of a #GtkSourceStyle object.
+ *
+ * Before using the value of a certain field, check the boolean value of the
+ * corresponding "use_" field.
+ *
+ * Since: 300.0
+ */
+struct _GtkSourceStyleData
+{
+	GdkRGBA foreground_color;
+	GdkRGBA background_color;
+	GdkRGBA underline_color;
+	GdkRGBA paragraph_background_color;
+	gdouble scale;
+	PangoUnderline underline;
+	guint italic : 1;
+	guint bold : 1;
+	guint strikethrough : 1;
+
+	guint use_foreground_color : 1;
+	guint use_background_color : 1;
+	guint use_underline_color : 1;
+	guint use_paragraph_background_color : 1;
+	guint use_scale : 1;
+	guint use_underline : 1;
+	guint use_italic : 1;
+	guint use_bold : 1;
+	guint use_strikethrough : 1;
+};
 
 G_MODULE_EXPORT
 GType			gtk_source_style_get_type		(void);
