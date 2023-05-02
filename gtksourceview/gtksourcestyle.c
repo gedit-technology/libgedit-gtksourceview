@@ -41,8 +41,6 @@ struct _GtkSourceStyleClass
 enum
 {
 	PROP_0,
-	PROP_UNDERLINE_COLOR,
-	PROP_UNDERLINE_COLOR_SET,
 	PROP_STRIKETHROUGH,
 	PROP_STRIKETHROUGH_SET,
 
@@ -67,14 +65,6 @@ gtk_source_style_get_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_UNDERLINE_COLOR:
-			g_value_set_string (value, style->underline_color);
-			break;
-
-		case PROP_UNDERLINE_COLOR_SET:
-			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR);
-			break;
-
 		case PROP_STRIKETHROUGH:
 			g_value_set_boolean (value, style->strikethrough);
 			break;
@@ -108,31 +98,6 @@ gtk_source_style_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_UNDERLINE_COLOR:
-			string = g_value_get_string (value);
-			if (string != NULL)
-			{
-				style->underline_color = g_intern_string (string);
-				style->mask |= GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR;
-			}
-			else
-			{
-				style->underline_color = NULL;
-				style->mask &= ~GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR;
-			}
-			break;
-
-		case PROP_UNDERLINE_COLOR_SET:
-			if (g_value_get_boolean (value))
-			{
-				style->mask |= GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR;
-			}
-			else
-			{
-				style->mask &= ~GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR;
-			}
-			break;
-
 		case PROP_STRIKETHROUGH:
 			style->strikethrough = g_value_get_boolean (value) != FALSE;
 			style->mask |= GTK_SOURCE_STYLE_USE_STRIKETHROUGH;
@@ -192,34 +157,6 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 	 * from style_scheme_get_style(). But style scheme is of course cheating
 	 * and sets everything after construction (but nobody can notice it).
 	 */
-
-	/**
-	 * GtkSourceStyle:underline-color:
-	 *
-	 * Underline color.
-	 */
-	properties[PROP_UNDERLINE_COLOR] =
-		g_param_spec_string ("underline-color",
-				     "underline-color",
-				     "",
-				     NULL,
-				     G_PARAM_READWRITE |
-				     G_PARAM_CONSTRUCT_ONLY |
-				     G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyle:underline-color-set:
-	 *
-	 * Whether #GtkSourceStyle:underline-color is set.
-	 */
-	properties[PROP_UNDERLINE_COLOR_SET] =
-		g_param_spec_boolean ("underline-color-set",
-				      "underline-color-set",
-				      "",
-				      FALSE,
-				      G_PARAM_READWRITE |
-				      G_PARAM_CONSTRUCT_ONLY |
-				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:strikethrough:
