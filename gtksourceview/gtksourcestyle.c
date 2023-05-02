@@ -41,8 +41,6 @@ struct _GtkSourceStyleClass
 enum
 {
 	PROP_0,
-	PROP_BACKGROUND,
-	PROP_BACKGROUND_SET,
 	PROP_ITALIC,
 	PROP_ITALIC_SET,
 	PROP_BOLD,
@@ -75,14 +73,6 @@ gtk_source_style_get_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_BACKGROUND:
-			g_value_set_string (value, style->background);
-			break;
-
-		case PROP_BACKGROUND_SET:
-			g_value_set_boolean (value, style->mask & GTK_SOURCE_STYLE_USE_BACKGROUND);
-			break;
-
 		case PROP_ITALIC:
 			g_value_set_boolean (value, style->italic);
 			break;
@@ -148,31 +138,6 @@ gtk_source_style_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_BACKGROUND:
-			string = g_value_get_string (value);
-			if (string != NULL)
-			{
-				style->background = g_intern_string (string);
-				style->mask |= GTK_SOURCE_STYLE_USE_BACKGROUND;
-			}
-			else
-			{
-				style->background = NULL;
-				style->mask &= ~GTK_SOURCE_STYLE_USE_BACKGROUND;
-			}
-			break;
-
-		case PROP_BACKGROUND_SET:
-			if (g_value_get_boolean (value))
-			{
-				style->mask |= GTK_SOURCE_STYLE_USE_BACKGROUND;
-			}
-			else
-			{
-				style->mask &= ~GTK_SOURCE_STYLE_USE_BACKGROUND;
-			}
-			break;
-
 		case PROP_ITALIC:
 			style->italic = g_value_get_boolean (value) != FALSE;
 			style->mask |= GTK_SOURCE_STYLE_USE_ITALIC;
@@ -305,34 +270,6 @@ gtk_source_style_class_init (GtkSourceStyleClass *klass)
 	 * from style_scheme_get_style(). But style scheme is of course cheating
 	 * and sets everything after construction (but nobody can notice it).
 	 */
-
-	/**
-	 * GtkSourceStyle:background:
-	 *
-	 * Background color.
-	 */
-	properties[PROP_BACKGROUND] =
-		g_param_spec_string ("background",
-				     "background",
-				     "",
-				     NULL,
-				     G_PARAM_READWRITE |
-				     G_PARAM_CONSTRUCT_ONLY |
-				     G_PARAM_STATIC_STRINGS);
-
-	/**
-	 * GtkSourceStyle:background-set:
-	 *
-	 * Whether #GtkSourceStyle:background is set.
-	 */
-	properties[PROP_BACKGROUND_SET] =
-		g_param_spec_boolean ("background-set",
-				      "background-set",
-				      "",
-				      FALSE,
-				      G_PARAM_READWRITE |
-				      G_PARAM_CONSTRUCT_ONLY |
-				      G_PARAM_STATIC_STRINGS);
 
 	/**
 	 * GtkSourceStyle:italic:
