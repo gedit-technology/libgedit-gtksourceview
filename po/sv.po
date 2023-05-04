@@ -7,17 +7,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/gedit-technology/"
+"libgedit-gtksourceview/issues\n"
 "POT-Creation-Date: 2023-04-28 20:25+0200\n"
-"PO-Revision-Date: 2017-02-13 23:50+0100\n"
-"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
-"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"PO-Revision-Date: 2023-05-05 10:52+0000\n"
+"Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/gedit-technology/"
+"libgedit-gtksourceview/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #. (itstool) path: abnf.lang/language@_section
 #. (itstool) path: actionscript.lang/language@_section
@@ -247,10 +249,8 @@ msgstr "RPM spec"
 
 #. (itstool) path: tera.lang/language@_name
 #: tera.lang:23
-#, fuzzy
-#| msgid "Template"
 msgid "Tera Template"
-msgstr "Mall"
+msgstr "Tera Mall"
 
 #. (itstool) path: default-style-schemes/classic.xml/style-scheme@_name
 #: default-style-schemes/classic.xml:23
