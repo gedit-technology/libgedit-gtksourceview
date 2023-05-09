@@ -158,7 +158,7 @@ renderer_new (GtkSourceGutter         *gutter,
               GtkSourceGutterRenderer *renderer,
               gint                     position)
 {
-	Renderer *ret = g_slice_new0 (Renderer);
+	Renderer *ret = g_new0 (Renderer, 1);
 
 	ret->renderer = g_object_ref_sink (renderer);
 	ret->position = position;
@@ -224,7 +224,7 @@ renderer_free (Renderer *renderer)
 	                                      GTK_TEXT_WINDOW_PRIVATE);
 
 	g_object_unref (renderer->renderer);
-	g_slice_free (Renderer, renderer);
+	g_free (renderer);
 }
 
 static void
@@ -701,7 +701,7 @@ lines_info_new (void)
 {
 	LinesInfo *info;
 
-	info = g_slice_new0 (LinesInfo);
+	info = g_new0 (LinesInfo, 1);
 
 	info->buffer_coords = g_array_new (FALSE, FALSE, sizeof (gint));
 	info->line_heights = g_array_new (FALSE, FALSE, sizeof (gint));
@@ -719,7 +719,7 @@ lines_info_free (LinesInfo *info)
 		g_array_free (info->line_heights, TRUE);
 		g_array_free (info->line_numbers, TRUE);
 
-		g_slice_free (LinesInfo, info);
+		g_free (info);
 	}
 }
 
