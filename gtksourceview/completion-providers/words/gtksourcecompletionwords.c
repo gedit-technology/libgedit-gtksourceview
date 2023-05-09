@@ -590,7 +590,7 @@ buffer_destroyed (BufferBinding *binding)
 	binding->words->priv->buffers = g_list_remove (binding->words->priv->buffers,
 	                                               binding);
 	g_object_unref (binding->buffer);
-	g_slice_free (BufferBinding, binding);
+	g_free (binding);
 }
 
 /**
@@ -626,7 +626,7 @@ gtk_source_completion_words_register (GtkSourceCompletionWords *words,
 	gtk_source_completion_words_buffer_set_minimum_word_size (buf,
 	                                                          words->priv->minimum_word_size);
 
-	binding = g_slice_new (BufferBinding);
+	binding = g_new0 (BufferBinding, 1);
 	binding->words = words;
 	binding->buffer = buf;
 

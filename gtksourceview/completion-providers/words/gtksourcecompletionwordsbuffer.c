@@ -59,7 +59,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtkSourceCompletionWordsBuffer, gtk_source_completio
 static ProposalCache *
 proposal_cache_new (GtkSourceCompletionWordsProposal *proposal)
 {
-	ProposalCache *cache = g_slice_new (ProposalCache);
+	ProposalCache *cache = g_new0 (ProposalCache, 1);
 	cache->proposal = g_object_ref (proposal);
 	cache->use_count = 1;
 
@@ -70,7 +70,7 @@ static void
 proposal_cache_free (ProposalCache *cache)
 {
 	g_object_unref (cache->proposal);
-	g_slice_free (ProposalCache, cache);
+	g_free (cache);
 }
 
 static void
