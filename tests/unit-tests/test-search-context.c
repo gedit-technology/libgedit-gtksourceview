@@ -521,7 +521,7 @@ finish_check_result (GtkSourceSearchContext *context,
 				    data->forward,
 				    FALSE);
 
-	g_slice_free (AsyncData, data);
+	g_free (data);
 }
 
 static void
@@ -545,7 +545,7 @@ check_async_search_results (GtkSourceSearchContext *context,
 		return;
 	}
 
-	data = g_slice_new (AsyncData);
+	data = g_new0 (AsyncData, 1);
 	data->results = results;
 	data->result_num = gtk_text_iter_get_offset (&iter);
 	data->forward = forward;
