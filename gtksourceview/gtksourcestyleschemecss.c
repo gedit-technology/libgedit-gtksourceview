@@ -64,17 +64,9 @@ _gtk_source_style_scheme_css_init (GtkSourceStyleSchemeCss *scheme_css)
 /* --- For the main CSS provider ------------------------------------ */
 
 static gchar *
-get_foreground_color_css_declaration (GtkSourceStyle *style)
+get_foreground_color_css_declaration (GtkSourceStyleData *style_data)
 {
-	GtkSourceStyleData *style_data;
 	gchar *ret = NULL;
-
-	if (style == NULL)
-	{
-		return NULL;
-	}
-
-	style_data = gtk_source_style_get_data (style);
 
 	if (style_data->use_foreground_color)
 	{
@@ -83,22 +75,13 @@ get_foreground_color_css_declaration (GtkSourceStyle *style)
 		g_free (fg_color_str);
 	}
 
-	g_free (style_data);
 	return ret;
 }
 
 static gchar *
-get_background_color_css_declaration (GtkSourceStyle *style)
+get_background_color_css_declaration (GtkSourceStyleData *style_data)
 {
-	GtkSourceStyleData *style_data;
 	gchar *ret = NULL;
-
-	if (style == NULL)
-	{
-		return NULL;
-	}
-
-	style_data = gtk_source_style_get_data (style);
 
 	if (style_data->use_background_color)
 	{
@@ -107,7 +90,6 @@ get_background_color_css_declaration (GtkSourceStyle *style)
 		g_free (bg_color_str);
 	}
 
-	g_free (style_data);
 	return ret;
 }
 
@@ -116,8 +98,19 @@ append_css_style (GString        *string,
                   GtkSourceStyle *style,
                   const gchar    *selector)
 {
-	gchar *fg_decl = get_foreground_color_css_declaration (style);
-	gchar *bg_decl = get_background_color_css_declaration (style);
+	GtkSourceStyleData *style_data;
+	gchar *fg_decl;
+	gchar *bg_decl;
+
+	if (style == NULL)
+	{
+		return;
+	}
+
+	style_data = gtk_source_style_get_data (style);
+	fg_decl = get_foreground_color_css_declaration (style_data);
+	bg_decl = get_background_color_css_declaration (style_data);
+	g_free (style_data);
 
 	if (fg_decl == NULL && bg_decl == NULL)
 	{
