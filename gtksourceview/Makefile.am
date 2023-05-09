@@ -115,6 +115,7 @@ libgtksourceview_private_headers =		\
 	gtksourceregex.h			\
 	gtksourcespacedrawer-private.h		\
 	gtksourcestyle-private.h		\
+	gtksourcestylescheme-private.h		\
 	gtksourcestyleschemecss.h		\
 	gtksourcestyleschemeparser.h		\
 	gtksourcetypes-private.h		\

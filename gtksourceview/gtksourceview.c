@@ -39,7 +39,7 @@
 #include "gtksource-enumtypes.h"
 #include "gtksourcemark.h"
 #include "gtksourcemarkattributes.h"
-#include "gtksourcestylescheme.h"
+#include "gtksourcestylescheme-private.h"
 #include "gtksourcecompletion.h"
 #include "gtksourcecompletion-private.h"
 #include "gtksourcecompletionprovider.h"
@@ -4670,6 +4670,7 @@ gtk_source_view_update_style_scheme (GtkSourceView *view)
 {
 	GtkTextBuffer *buffer;
 	GtkSourceStyleScheme *new_scheme = NULL;
+	GtkSourceStyleSchemeCss *scheme_css;
 
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
@@ -4685,16 +4686,16 @@ gtk_source_view_update_style_scheme (GtkSourceView *view)
 
 	if (view->priv->style_scheme != NULL)
 	{
-		_gtk_source_style_scheme_remove_css_providers_from_widget (view->priv->style_scheme,
-									   GTK_WIDGET (view));
+		scheme_css = _gtk_source_style_scheme_get_style_scheme_css (view->priv->style_scheme);
+		_gtk_source_style_scheme_css_unapply (scheme_css, GTK_WIDGET (view));
 	}
 
 	g_set_object (&view->priv->style_scheme, new_scheme);
 
 	if (view->priv->style_scheme != NULL)
 	{
-		_gtk_source_style_scheme_add_css_providers_to_widget (view->priv->style_scheme,
-								      GTK_WIDGET (view));
+		scheme_css = _gtk_source_style_scheme_get_style_scheme_css (view->priv->style_scheme);
+		_gtk_source_style_scheme_css_apply (scheme_css, GTK_WIDGET (view));
 	}
 
 	update_style (view);

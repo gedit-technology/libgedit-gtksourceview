@@ -22,12 +22,11 @@
 #endif
 
 #include "gtksourcestylescheme.h"
+#include "gtksourcestylescheme-private.h"
 #include <libxml/parser.h>
 #include <string.h>
 #include <glib/gi18n-lib.h>
-#include "gtksourcestyle.h"
 #include "gtksourcestyle-private.h"
-#include "gtksourcestyleschemecss.h"
 #include "gtksourcestyleschemeparser.h"
 
 /**
@@ -65,7 +64,7 @@ struct _GtkSourceStyleSchemePrivate
 	GHashTable *style_cache;
 	GHashTable *named_colors;
 
-	GtkSourceStyleSchemeCss *css;
+	GtkSourceStyleSchemeCss *scheme_css;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtkSourceStyleScheme, gtk_source_style_scheme, G_TYPE_OBJECT)
@@ -93,13 +92,8 @@ gtk_source_style_scheme_dispose (GObject *object)
 		scheme->priv->defined_styles = NULL;
 	}
 
-	if (scheme->priv->css != NULL)
-	{
-		_gtk_source_style_scheme_css_free (scheme->priv->css);
-		scheme->priv->css = NULL;
-	}
-
 	g_clear_object (&scheme->priv->parent);
+	g_clear_object (&scheme->priv->scheme_css);
 
 	G_OBJECT_CLASS (gtk_source_style_scheme_parent_class)->dispose (object);
 }
@@ -154,8 +148,6 @@ gtk_source_style_scheme_init (GtkSourceStyleScheme *scheme)
 
 	scheme->priv->named_colors = g_hash_table_new_full (g_str_hash, g_str_equal,
 							    g_free, g_free);
-
-	scheme->priv->css = _gtk_source_style_scheme_css_new (scheme);
 }
 
 /**
@@ -393,28 +385,6 @@ gtk_source_style_scheme_get_style (GtkSourceStyleScheme *scheme,
 			     style);
 
 	return style;
-}
-
-/* --- CSS ---------------------------------------------------------------- */
-
-void
-_gtk_source_style_scheme_add_css_providers_to_widget (GtkSourceStyleScheme *scheme,
-						      GtkWidget            *widget)
-{
-	g_return_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme));
-	g_return_if_fail (GTK_IS_WIDGET (widget));
-
-	_gtk_source_style_scheme_css_apply (scheme->priv->css, widget);
-}
-
-void
-_gtk_source_style_scheme_remove_css_providers_from_widget (GtkSourceStyleScheme *scheme,
-							   GtkWidget            *widget)
-{
-	g_return_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme));
-	g_return_if_fail (GTK_IS_WIDGET (widget));
-
-	_gtk_source_style_scheme_css_unapply (scheme->priv->css, widget);
 }
 
 /* --- PARSER ---------------------------------------------------------------- */
@@ -844,10 +814,6 @@ _gtk_source_style_scheme_new_from_file (const gchar *filename)
 		g_clear_error (&error);
 		g_clear_object (&scheme);
 	}
-	else
-	{
-		_gtk_source_style_scheme_css_load (scheme->priv->css);
-	}
 
 	xmlFreeDoc (doc);
 	g_free (text);
@@ -872,4 +838,17 @@ _gtk_source_style_scheme_set_parent (GtkSourceStyleScheme *scheme,
 	g_return_if_fail (parent_scheme == NULL || GTK_SOURCE_IS_STYLE_SCHEME (parent_scheme));
 
 	g_set_object (&scheme->priv->parent, parent_scheme);
+}
+
+GtkSourceStyleSchemeCss *
+_gtk_source_style_scheme_get_style_scheme_css (GtkSourceStyleScheme *scheme)
+{
+	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
+
+	if (scheme->priv->scheme_css == NULL)
+	{
+		scheme->priv->scheme_css = _gtk_source_style_scheme_css_new (scheme);
+	}
+
+	return scheme->priv->scheme_css;
 }

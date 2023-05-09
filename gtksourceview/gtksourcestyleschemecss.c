@@ -19,7 +19,7 @@
 
 #include "gtksourcestyleschemecss.h"
 
-struct _GtkSourceStyleSchemeCss
+struct _GtkSourceStyleSchemeCssPrivate
 {
 	GtkSourceStyleScheme *scheme; /* weak ref */
 
@@ -32,32 +32,190 @@ struct _GtkSourceStyleSchemeCss
  */
 #define GTK_SOURCE_STYLE_PROVIDER_PRIORITY (GTK_STYLE_PROVIDER_PRIORITY_APPLICATION - 1)
 
-GtkSourceStyleSchemeCss *
-_gtk_source_style_scheme_css_new (GtkSourceStyleScheme *scheme)
+G_DEFINE_TYPE_WITH_PRIVATE (GtkSourceStyleSchemeCss, _gtk_source_style_scheme_css, G_TYPE_OBJECT)
+
+static void
+_gtk_source_style_scheme_css_dispose (GObject *object)
 {
-	GtkSourceStyleSchemeCss *scheme_css;
+	GtkSourceStyleSchemeCss *scheme_css = GTK_SOURCE_STYLE_SCHEME_CSS (object);
 
-	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
+	g_clear_weak_pointer (&scheme_css->priv->scheme);
 
-	scheme_css = g_new0 (GtkSourceStyleSchemeCss, 1);
+	g_clear_object (&scheme_css->priv->main_provider);
+	g_clear_object (&scheme_css->priv->cursors_provider);
 
-	g_set_weak_pointer (&scheme_css->scheme, scheme);
-	scheme_css->main_provider = gtk_css_provider_new ();
-
-	return scheme_css;
+	G_OBJECT_CLASS (_gtk_source_style_scheme_css_parent_class)->dispose (object);
 }
 
-void
-_gtk_source_style_scheme_css_free (GtkSourceStyleSchemeCss *scheme_css)
+static void
+_gtk_source_style_scheme_css_class_init (GtkSourceStyleSchemeCssClass *klass)
 {
-	if (scheme_css != NULL)
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->dispose = _gtk_source_style_scheme_css_dispose;
+}
+
+static void
+_gtk_source_style_scheme_css_init (GtkSourceStyleSchemeCss *scheme_css)
+{
+	scheme_css->priv = _gtk_source_style_scheme_css_get_instance_private (scheme_css);
+}
+
+/* --- For the main CSS provider ------------------------------------ */
+
+static gchar *
+get_foreground_color_css_declaration (GtkSourceStyle *style)
+{
+	GtkSourceStyleData *style_data;
+	gchar *ret = NULL;
+
+	if (style == NULL)
 	{
-		g_clear_weak_pointer (&scheme_css->scheme);
-		g_clear_object (&scheme_css->main_provider);
-		g_clear_object (&scheme_css->cursors_provider);
-		g_free (scheme_css);
+		return NULL;
 	}
+
+	style_data = gtk_source_style_get_data (style);
+
+	if (style_data->use_foreground_color)
+	{
+		gchar *fg_color_str = gdk_rgba_to_string (&style_data->foreground_color);
+		ret = g_strdup_printf ("\tcolor: %s;\n", fg_color_str);
+		g_free (fg_color_str);
+	}
+
+	g_free (style_data);
+	return ret;
 }
+
+static gchar *
+get_background_color_css_declaration (GtkSourceStyle *style)
+{
+	GtkSourceStyleData *style_data;
+	gchar *ret = NULL;
+
+	if (style == NULL)
+	{
+		return NULL;
+	}
+
+	style_data = gtk_source_style_get_data (style);
+
+	if (style_data->use_background_color)
+	{
+		gchar *bg_color_str = gdk_rgba_to_string (&style_data->background_color);
+		ret = g_strdup_printf ("\tbackground-color: %s;\n", bg_color_str);
+		g_free (bg_color_str);
+	}
+
+	g_free (style_data);
+	return ret;
+}
+
+static void
+append_css_style (GString        *string,
+                  GtkSourceStyle *style,
+                  const gchar    *selector)
+{
+	gchar *fg_decl = get_foreground_color_css_declaration (style);
+	gchar *bg_decl = get_background_color_css_declaration (style);
+
+	if (fg_decl == NULL && bg_decl == NULL)
+	{
+		return;
+	}
+
+	g_string_append_printf (string,
+				"%s {\n"
+				"%s"
+				"%s"
+				"}\n",
+				selector,
+				fg_decl != NULL ? fg_decl : "",
+				bg_decl != NULL ? bg_decl : "");
+
+	g_free (fg_decl);
+	g_free (bg_decl);
+}
+
+static gchar *
+get_main_css (GtkSourceStyleScheme *scheme)
+{
+	GString *string;
+	GtkSourceStyle *style;
+	GtkSourceStyle *style2;
+
+	string = g_string_new (NULL);
+
+	style = gtk_source_style_scheme_get_style (scheme, "text");
+	append_css_style (string, style, "textview text");
+
+	style = gtk_source_style_scheme_get_style (scheme, "selection");
+	append_css_style (string, style, "textview:focus text selection");
+
+	style2 = gtk_source_style_scheme_get_style (scheme, "selection-unfocused");
+	append_css_style (string,
+			  style2 != NULL ? style2 : style,
+			  "textview text selection");
+
+	/* For now we use "line-numbers" colors for all the gutters. */
+	style = gtk_source_style_scheme_get_style (scheme, "line-numbers");
+	if (style != NULL)
+	{
+		append_css_style (string, style, "textview border");
+
+		/* Needed for GtkSourceGutter. In the ::draw callback,
+		 * gtk_style_context_add_class() is called to add e.g. the
+		 * "left" class. Because as of GTK 3.20 we cannot do the same to
+		 * add the "border" subnode.
+		 */
+		append_css_style (string, style, "textview .left");
+		append_css_style (string, style, "textview .right");
+		append_css_style (string, style, "textview .top");
+		append_css_style (string, style, "textview .bottom");
+
+		/* For the corners if the top or bottom gutter is also
+		 * displayed.
+		 * FIXME: this shouldn't be necessary, GTK should apply the
+		 * border style to the corners too, see:
+		 * https://bugzilla.gnome.org/show_bug.cgi?id=764239
+		 */
+		append_css_style (string, style, "textview");
+	}
+
+	style = gtk_source_style_scheme_get_style (scheme, "current-line-number");
+	append_css_style (string, style, ".current-line-number");
+
+	return g_string_free (string, FALSE);
+}
+
+static GtkCssProvider *
+create_main_provider (GtkSourceStyleScheme *scheme)
+{
+	gchar *css;
+	GtkCssProvider *provider;
+	GError *error = NULL;
+
+	css = get_main_css (scheme);
+	if (css == NULL)
+	{
+		return NULL;
+	}
+
+	provider = gtk_css_provider_new ();
+	gtk_css_provider_load_from_data (provider, css, -1, &error);
+	g_free (css);
+
+	if (error != NULL)
+	{
+		g_warning ("Error when loading CSS: %s", error->message);
+		g_clear_error (&error);
+		g_clear_object (&provider);
+	}
+
+	return provider;
+}
+
+/* --- For cursors -------------------------------------------------- */
 
 static gboolean
 get_style_foreground_color (GtkSourceStyleScheme *scheme,
@@ -91,8 +249,8 @@ get_style_foreground_color (GtkSourceStyleScheme *scheme,
 }
 
 static gchar *
-get_cursors_css_style (GtkSourceStyleScheme *scheme,
-		       GtkWidget            *widget)
+get_cursors_css (GtkSourceStyleScheme *scheme,
+		 GtkWidget            *widget)
 {
 	gboolean primary_color_set;
 	gboolean secondary_color_set;
@@ -178,7 +336,7 @@ create_cursors_provider (GtkSourceStyleScheme *scheme,
 	GtkCssProvider *provider;
 	GError *error = NULL;
 
-	css = get_cursors_css_style (scheme, widget);
+	css = get_cursors_css (scheme, widget);
 	if (css == NULL)
 	{
 		return NULL;
@@ -198,6 +356,22 @@ create_cursors_provider (GtkSourceStyleScheme *scheme,
 	return provider;
 }
 
+/* --- Public functions --------------------------------------------- */
+
+GtkSourceStyleSchemeCss *
+_gtk_source_style_scheme_css_new (GtkSourceStyleScheme *scheme)
+{
+	GtkSourceStyleSchemeCss *scheme_css;
+
+	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
+
+	scheme_css = g_object_new (GTK_SOURCE_TYPE_STYLE_SCHEME_CSS, NULL);
+
+	g_set_weak_pointer (&scheme_css->priv->scheme, scheme);
+
+	return scheme_css;
+}
+
 /* Adds the #GtkCssProvider's (that are part of @scheme_css) to @widget.
  * @widget is typically a #GtkSourceView.
  */
@@ -207,36 +381,45 @@ _gtk_source_style_scheme_css_apply (GtkSourceStyleSchemeCss *scheme_css,
 {
 	GtkStyleContext *context;
 
-	g_return_if_fail (scheme_css != NULL);
+	g_return_if_fail (GTK_SOURCE_IS_STYLE_SCHEME_CSS (scheme_css));
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	if (scheme_css->scheme == NULL)
+	if (scheme_css->priv->scheme == NULL)
 	{
 		return;
 	}
 
 	context = gtk_widget_get_style_context (widget);
-	gtk_style_context_add_provider (context,
-					GTK_STYLE_PROVIDER (scheme_css->main_provider),
-					GTK_SOURCE_STYLE_PROVIDER_PRIORITY);
 
-	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-	/* See https://bugzilla.gnome.org/show_bug.cgi?id=708583 */
-	gtk_style_context_invalidate (context);
-	G_GNUC_END_IGNORE_DEPRECATIONS;
+	if (scheme_css->priv->main_provider == NULL)
+	{
+		scheme_css->priv->main_provider = create_main_provider (scheme_css->priv->scheme);
+	}
+
+	if (scheme_css->priv->main_provider != NULL)
+	{
+		gtk_style_context_add_provider (context,
+						GTK_STYLE_PROVIDER (scheme_css->priv->main_provider),
+						GTK_SOURCE_STYLE_PROVIDER_PRIORITY);
+
+		G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
+		/* See https://bugzilla.gnome.org/show_bug.cgi?id=708583 */
+		gtk_style_context_invalidate (context);
+		G_GNUC_END_IGNORE_DEPRECATIONS;
+	}
 
 	/* The GtkCssProvider for the cursors needs that the first provider is
 	 * applied, to get the background color.
 	 */
-	if (scheme_css->cursors_provider == NULL)
+	if (scheme_css->priv->cursors_provider == NULL)
 	{
-		scheme_css->cursors_provider = create_cursors_provider (scheme_css->scheme, widget);
+		scheme_css->priv->cursors_provider = create_cursors_provider (scheme_css->priv->scheme, widget);
 	}
 
-	if (scheme_css->cursors_provider != NULL)
+	if (scheme_css->priv->cursors_provider != NULL)
 	{
 		gtk_style_context_add_provider (context,
-						GTK_STYLE_PROVIDER (scheme_css->cursors_provider),
+						GTK_STYLE_PROVIDER (scheme_css->priv->cursors_provider),
 						GTK_SOURCE_STYLE_PROVIDER_PRIORITY);
 
 		G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -254,172 +437,23 @@ _gtk_source_style_scheme_css_unapply (GtkSourceStyleSchemeCss *scheme_css,
 {
 	GtkStyleContext *context;
 
-	g_return_if_fail (scheme_css != NULL);
+	g_return_if_fail (GTK_SOURCE_IS_STYLE_SCHEME_CSS (scheme_css));
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 
 	context = gtk_widget_get_style_context (widget);
-	gtk_style_context_remove_provider (context,
-					   GTK_STYLE_PROVIDER (scheme_css->main_provider));
 
-	if (scheme_css->cursors_provider != NULL)
+	if (scheme_css->priv->main_provider != NULL)
 	{
-		gtk_style_context_remove_provider (context,
-						   GTK_STYLE_PROVIDER (scheme_css->cursors_provider));
+		gtk_style_context_remove_provider (context, GTK_STYLE_PROVIDER (scheme_css->priv->main_provider));
+	}
+
+	if (scheme_css->priv->cursors_provider != NULL)
+	{
+		gtk_style_context_remove_provider (context, GTK_STYLE_PROVIDER (scheme_css->priv->cursors_provider));
 	}
 
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 	/* See https://bugzilla.gnome.org/show_bug.cgi?id=708583 */
 	gtk_style_context_invalidate (context);
 	G_GNUC_END_IGNORE_DEPRECATIONS;
-}
-
-static gchar *
-get_foreground_color_css_declaration (GtkSourceStyle *style)
-{
-	GtkSourceStyleData *style_data;
-	gchar *ret = NULL;
-
-	if (style == NULL)
-	{
-		return NULL;
-	}
-
-	style_data = gtk_source_style_get_data (style);
-
-	if (style_data->use_foreground_color)
-	{
-		gchar *fg_color_str = gdk_rgba_to_string (&style_data->foreground_color);
-		ret = g_strdup_printf ("\tcolor: %s;\n", fg_color_str);
-		g_free (fg_color_str);
-	}
-
-	g_free (style_data);
-	return ret;
-}
-
-static gchar *
-get_background_color_css_declaration (GtkSourceStyle *style)
-{
-	GtkSourceStyleData *style_data;
-	gchar *ret = NULL;
-
-	if (style == NULL)
-	{
-		return NULL;
-	}
-
-	style_data = gtk_source_style_get_data (style);
-
-	if (style_data->use_background_color)
-	{
-		gchar *bg_color_str = gdk_rgba_to_string (&style_data->background_color);
-		ret = g_strdup_printf ("\tbackground-color: %s;\n", bg_color_str);
-		g_free (bg_color_str);
-	}
-
-	g_free (style_data);
-	return ret;
-}
-
-static void
-append_css_style (GString        *string,
-                  GtkSourceStyle *style,
-                  const gchar    *selector)
-{
-	gchar *fg_decl = get_foreground_color_css_declaration (style);
-	gchar *bg_decl = get_background_color_css_declaration (style);
-
-	if (fg_decl == NULL && bg_decl == NULL)
-	{
-		return;
-	}
-
-	g_string_append_printf (string,
-				"%s {\n"
-				"%s"
-				"%s"
-				"}\n",
-				selector,
-				fg_decl != NULL ? fg_decl : "",
-				bg_decl != NULL ? bg_decl : "");
-
-	g_free (fg_decl);
-	g_free (bg_decl);
-}
-
-void
-_gtk_source_style_scheme_css_load (GtkSourceStyleSchemeCss *scheme_css)
-{
-	GString *final_style;
-	GtkSourceStyle *style;
-	GtkSourceStyle *style2;
-
-	g_return_if_fail (scheme_css != NULL);
-
-	if (scheme_css->scheme == NULL)
-	{
-		return;
-	}
-
-	final_style = g_string_new ("");
-
-	style = gtk_source_style_scheme_get_style (scheme_css->scheme, "text");
-	append_css_style (final_style, style, "textview text");
-
-	style = gtk_source_style_scheme_get_style (scheme_css->scheme, "selection");
-	append_css_style (final_style, style, "textview:focus text selection");
-
-	style2 = gtk_source_style_scheme_get_style (scheme_css->scheme, "selection-unfocused");
-	append_css_style (final_style,
-			  style2 != NULL ? style2 : style,
-			  "textview text selection");
-
-	/* For now we use "line-numbers" colors for all the gutters. */
-	style = gtk_source_style_scheme_get_style (scheme_css->scheme, "line-numbers");
-	if (style != NULL)
-	{
-		append_css_style (final_style, style, "textview border");
-
-		/* Needed for GtkSourceGutter. In the ::draw callback,
-		 * gtk_style_context_add_class() is called to add e.g. the
-		 * "left" class. Because as of GTK+ 3.20 we cannot do the same
-		 * to add the "border" subnode.
-		 */
-		append_css_style (final_style, style, "textview .left");
-		append_css_style (final_style, style, "textview .right");
-		append_css_style (final_style, style, "textview .top");
-		append_css_style (final_style, style, "textview .bottom");
-
-		/* For the corners if the top or bottom gutter is also
-		 * displayed.
-		 * FIXME: this shouldn't be necessary, GTK+ should apply the
-		 * border style to the corners too, see:
-		 * https://bugzilla.gnome.org/show_bug.cgi?id=764239
-		 */
-		append_css_style (final_style, style, "textview");
-	}
-
-	style = gtk_source_style_scheme_get_style (scheme_css->scheme, "current-line-number");
-	if (style != NULL)
-	{
-		append_css_style (final_style, style, ".current-line-number");
-	}
-
-	if (*final_style->str != '\0')
-	{
-		GError *error = NULL;
-
-		gtk_css_provider_load_from_data (scheme_css->main_provider,
-						 final_style->str,
-						 final_style->len,
-						 &error);
-
-		if (error != NULL)
-		{
-			g_warning ("%s", error->message);
-			g_clear_error (&error);
-		}
-	}
-
-	g_string_free (final_style, TRUE);
 }

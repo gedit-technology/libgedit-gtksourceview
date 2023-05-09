@@ -86,14 +86,6 @@ G_GNUC_INTERNAL
 void			 _gtk_source_style_scheme_set_parent			(GtkSourceStyleScheme *scheme,
 										 GtkSourceStyleScheme *parent_scheme);
 
-G_GNUC_INTERNAL
-void			 _gtk_source_style_scheme_add_css_providers_to_widget	(GtkSourceStyleScheme *scheme,
-										 GtkWidget            *widget);
-
-G_GNUC_INTERNAL
-void			 _gtk_source_style_scheme_remove_css_providers_from_widget (GtkSourceStyleScheme *scheme,
-										    GtkWidget            *widget);
-
 G_END_DECLS
 
 #endif /* GTK_SOURCE_STYLE_SCHEME_H */
