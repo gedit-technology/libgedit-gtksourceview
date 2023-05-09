@@ -552,7 +552,7 @@ GtkSourceContextClass *
 gtk_source_context_class_new (gchar const *name,
                               gboolean     enabled)
 {
-	GtkSourceContextClass *def = g_slice_new (GtkSourceContextClass);
+	GtkSourceContextClass *def = g_new0 (GtkSourceContextClass, 1);
 
 	def->name = g_strdup (name);
 	def->enabled = enabled;
@@ -570,14 +570,14 @@ void
 gtk_source_context_class_free (GtkSourceContextClass *cclass)
 {
 	g_free (cclass->name);
-	g_slice_free (GtkSourceContextClass, cclass);
+	g_free (cclass);
 }
 
 static ContextClassTag *
 context_class_tag_new (GtkTextTag *tag,
 		       gboolean    enabled)
 {
-	ContextClassTag *attrtag = g_slice_new (ContextClassTag);
+	ContextClassTag *attrtag = g_new0 (ContextClassTag, 1);
 
 	attrtag->tag = tag;
 	attrtag->enabled = enabled;
@@ -588,7 +588,7 @@ context_class_tag_new (GtkTextTag *tag,
 static void
 context_class_tag_free (ContextClassTag *attrtag)
 {
-	g_slice_free (ContextClassTag, attrtag);
+	g_free (attrtag);
 }
 
 struct BufAndIters {
@@ -1630,7 +1630,7 @@ sub_pattern_new (Segment              *segment,
 {
 	SubPattern *sp;
 
-	sp = g_slice_new (SubPattern);
+	sp = g_new0 (SubPattern, 1);
 	sp->start_at = start_at;
 	sp->end_at = end_at;
 	sp->definition = sp_def;
@@ -1652,7 +1652,7 @@ sub_pattern_free (SubPattern *sp)
 #ifdef ENABLE_DEBUG
 	memset (sp, 1, sizeof (SubPattern));
 #else
-	g_slice_free (SubPattern, sp);
+	g_free (sp);
 #endif
 }
 
@@ -2754,7 +2754,7 @@ _gtk_source_context_data_new (GtkSourceLanguage *lang)
 
 	g_return_val_if_fail (GTK_SOURCE_IS_LANGUAGE (lang), NULL);
 
-	ctx_data = g_slice_new (GtkSourceContextData);
+	ctx_data = g_new0 (GtkSourceContextData, 1);
 	ctx_data->ref_count = 1;
 	ctx_data->lang = lang;
 	ctx_data->definitions = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
@@ -2790,7 +2790,7 @@ _gtk_source_context_data_unref (GtkSourceContextData *ctx_data)
 		    ctx_data->lang->priv->ctx_data == ctx_data)
 			ctx_data->lang->priv->ctx_data = NULL;
 		g_hash_table_destroy (ctx_data->definitions);
-		g_slice_free (GtkSourceContextData, ctx_data);
+		g_free (ctx_data);
 	}
 }
 
@@ -3165,7 +3165,7 @@ context_new (Context           *parent,
 {
 	Context *context;
 
-	context = g_slice_new0 (Context);
+	context = g_new0 (Context, 1);
 	context->ref_count = 1;
 	context->definition = definition;
 	context->parent = parent;
@@ -3285,7 +3285,7 @@ context_remove_child (Context *parent,
 #ifdef ENABLE_DEBUG
 		memset (ptr, 1, sizeof (ContextPtr));
 #else
-		g_slice_free (ContextPtr, ptr);
+		g_free (ptr);
 #endif
 	}
 }
@@ -3333,7 +3333,7 @@ context_unref (Context *context)
 #ifdef ENABLE_DEBUG
 		memset (ptr, 1, sizeof (ContextPtr));
 #else
-		g_slice_free (ContextPtr, ptr);
+		g_free (ptr);
 #endif
 	}
 
@@ -3357,7 +3357,7 @@ context_unref (Context *context)
 	g_free (context->subpattern_context_classes);
 	g_free (context->subpattern_tags);
 
-	g_slice_free (Context, context);
+	g_free (context);
 }
 
 static void
@@ -3485,7 +3485,7 @@ create_child_context (Context         *parent,
 
 	if (ptr == NULL)
 	{
-		ptr = g_slice_new0 (ContextPtr);
+		ptr = g_new0 (ContextPtr, 1);
 		ptr->next = parent->children;
 		parent->children = ptr;
 		ptr->definition = definition;
@@ -3563,7 +3563,7 @@ segment_new (GtkSourceContextEngine *ce,
 	g_assert (!is_start || context != NULL);
 #endif
 
-	segment = g_slice_new0 (Segment);
+	segment = g_new0 (Segment, 1);
 	segment->parent = parent;
 	segment->context = context_ref (context);
 	segment->start_at = start_at;
@@ -3847,7 +3847,7 @@ segment_destroy (GtkSourceContextEngine *ce,
 	g_assert (!g_slist_find (ce->priv->invalid, segment));
 	memset (segment, 1, sizeof (Segment));
 #else
-	g_slice_free (Segment, segment);
+	g_free (segment);
 #endif
 }
 
@@ -5591,7 +5591,7 @@ definition_child_new (ContextDefinition *definition,
 
 	g_return_val_if_fail (child_id != NULL, NULL);
 
-	ch = g_slice_new (DefinitionChild);
+	ch = g_new0 (DefinitionChild, 1);
 
 	if (original_ref)
 		ch->u.id = g_strdup_printf ("@%s", child_id);
@@ -5619,7 +5619,7 @@ definition_child_free (DefinitionChild *ch)
 #ifdef ENABLE_DEBUG
 	memset (ch, 1, sizeof (DefinitionChild));
 #else
-	g_slice_free (DefinitionChild, ch);
+	g_free (ch);
 #endif
 }
 
@@ -5668,7 +5668,7 @@ context_definition_new (const gchar            *id,
 			g_assert_not_reached ();
 	}
 
-	definition = g_slice_new0 (ContextDefinition);
+	definition = g_new0 (ContextDefinition, 1);
 
 	if (match != NULL)
 	{
@@ -5724,7 +5724,7 @@ context_definition_new (const gchar            *id,
 
 	if (regex_error)
 	{
-		g_slice_free (ContextDefinition, definition);
+		g_free (definition);
 		return NULL;
 	}
 
@@ -5785,7 +5785,7 @@ context_definition_unref (ContextDefinition *definition)
 		g_slist_free_full (sp_def->context_classes,
 		                   (GDestroyNotify)gtk_source_context_class_free);
 
-		g_slice_free (SubPatternDefinition, sp_def);
+		g_free (sp_def);
 		sub_pattern_list = sub_pattern_list->next;
 	}
 	g_slist_free (definition->sub_patterns);
@@ -5798,7 +5798,7 @@ context_definition_unref (ContextDefinition *definition)
 	                   (GDestroyNotify)gtk_source_context_class_free);
 
 	g_slist_free_full (definition->children, (GDestroyNotify)definition_child_free);
-	g_slice_free (ContextDefinition, definition);
+	g_free (definition);
 }
 
 static void
@@ -6003,7 +6003,7 @@ _gtk_source_context_data_add_sub_pattern (GtkSourceContextData  *ctx_data,
 		return FALSE;
 	}
 
-	sp_def = g_slice_new (SubPatternDefinition);
+	sp_def = g_new0 (SubPatternDefinition, 1);
 #ifdef NEED_DEBUG_ID
 	sp_def->id = g_strdup (id);
 #endif
@@ -6205,7 +6205,7 @@ _gtk_source_context_replace_new	(const gchar *to_replace_id,
 	g_return_val_if_fail (to_replace_id != NULL, NULL);
 	g_return_val_if_fail (replace_with_id != NULL, NULL);
 
-	repl = g_slice_new (GtkSourceContextReplace);
+	repl = g_new0 (GtkSourceContextReplace, 1);
 	repl->id = g_strdup (to_replace_id);
 	repl->replace_with = g_strdup (replace_with_id);
 
@@ -6219,7 +6219,7 @@ _gtk_source_context_replace_free (GtkSourceContextReplace *repl)
 	{
 		g_free (repl->id);
 		g_free (repl->replace_with);
-		g_slice_free (GtkSourceContextReplace, repl);
+		g_free (repl);
 	}
 }
 
