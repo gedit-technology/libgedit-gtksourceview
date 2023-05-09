@@ -199,7 +199,7 @@ action_new (void)
 {
 	Action *action;
 
-	action = g_slice_new0 (Action);
+	action = g_new0 (Action, 1);
 
 	action->selection_insert = -1;
 	action->selection_bound = -1;
@@ -213,7 +213,7 @@ action_free (Action *action)
 	if (action != NULL)
 	{
 		g_free (action->text);
-		g_slice_free (Action, action);
+		g_free (action);
 	}
 }
 
@@ -222,7 +222,7 @@ action_group_new (void)
 {
 	ActionGroup *group;
 
-	group = g_slice_new (ActionGroup);
+	group = g_new0 (ActionGroup, 1);
 	group->actions = g_queue_new ();
 	group->force_not_mergeable = FALSE;
 
@@ -235,7 +235,7 @@ action_group_free (ActionGroup *group)
 	if (group != NULL)
 	{
 		g_queue_free_full (group->actions, (GDestroyNotify) action_free);
-		g_slice_free (ActionGroup, group);
+		g_free (group);
 	}
 }
 
