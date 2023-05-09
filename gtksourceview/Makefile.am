@@ -115,6 +115,7 @@ libgtksourceview_private_headers =		\
 	gtksourceregex.h			\
 	gtksourcespacedrawer-private.h		\
 	gtksourcestyle-private.h		\
+	gtksourcestyleschemecss.h		\
 	gtksourcestyleschemeparser.h		\
 	gtksourcetypes-private.h		\
 	gtksourceundomanagerdefault.h		\
@@ -135,6 +136,7 @@ libgtksourceview_private_c_files =	\
 	gtksourcemarkssequence.c	\
 	gtksourcepixbufhelper.c		\
 	gtksourceregex.c		\
+	gtksourcestyleschemecss.c	\
 	gtksourcestyleschemeparser.c	\
 	gtksourceundomanagerdefault.c
 
