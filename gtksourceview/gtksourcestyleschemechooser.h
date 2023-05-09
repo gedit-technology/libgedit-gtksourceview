@@ -25,9 +25,7 @@
 #error "Only <gtksourceview/gtksource.h> can be included directly."
 #endif
 
-#include <glib-object.h>
-#include <gmodule.h>
-#include <gtksourceview/gtksourcetypes.h>
+#include <gtksourceview/gtksourcestylescheme.h>
 
 G_BEGIN_DECLS
 

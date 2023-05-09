@@ -23,7 +23,6 @@
 #endif
 
 #include "gtksourcestyleschemechooser.h"
-#include "gtksourcestylescheme.h"
 
 /**
  * SECTION:styleschemechooser

@@ -57,7 +57,6 @@ typedef struct _GtkSourcePrintCompositor	GtkSourcePrintCompositor;
 typedef struct _GtkSourceSearchContext		GtkSourceSearchContext;
 typedef struct _GtkSourceSearchSettings		GtkSourceSearchSettings;
 typedef struct _GtkSourceSpaceDrawer		GtkSourceSpaceDrawer;
-typedef struct _GtkSourceStyleScheme		GtkSourceStyleScheme;
 typedef struct _GtkSourceUndoManager		GtkSourceUndoManager;
 typedef struct _GtkSourceView			GtkSourceView;
 

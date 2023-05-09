@@ -24,8 +24,6 @@
 #error "Only <gtksourceview/gtksource.h> can be included directly."
 #endif
 
-#include <gtk/gtk.h>
-#include <gtksourceview/gtksourcetypes.h>
 #include <gtksourceview/gtksourcestyle.h>
 
 G_BEGIN_DECLS
@@ -37,12 +35,14 @@ G_BEGIN_DECLS
 #define GTK_SOURCE_IS_STYLE_SCHEME_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_SOURCE_TYPE_STYLE_SCHEME))
 #define GTK_SOURCE_STYLE_SCHEME_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_SOURCE_TYPE_STYLE_SCHEME, GtkSourceStyleSchemeClass))
 
-typedef struct _GtkSourceStyleSchemeClass	GtkSourceStyleSchemeClass;
-typedef struct _GtkSourceStyleSchemePrivate	GtkSourceStyleSchemePrivate;
+typedef struct _GtkSourceStyleScheme         GtkSourceStyleScheme;
+typedef struct _GtkSourceStyleSchemeClass    GtkSourceStyleSchemeClass;
+typedef struct _GtkSourceStyleSchemePrivate  GtkSourceStyleSchemePrivate;
 
 struct _GtkSourceStyleScheme
 {
 	GObject parent;
+
 	GtkSourceStyleSchemePrivate *priv;
 };
 
@@ -55,36 +55,36 @@ struct _GtkSourceStyleSchemeClass
 };
 
 G_MODULE_EXPORT
-GType			 gtk_source_style_scheme_get_type			(void);
+GType			gtk_source_style_scheme_get_type		(void);
 
 G_MODULE_EXPORT
-const gchar             *gtk_source_style_scheme_get_id				(GtkSourceStyleScheme *scheme);
+const gchar *		gtk_source_style_scheme_get_id			(GtkSourceStyleScheme *scheme);
 
 G_MODULE_EXPORT
-const gchar             *gtk_source_style_scheme_get_name			(GtkSourceStyleScheme *scheme);
+const gchar *		gtk_source_style_scheme_get_name		(GtkSourceStyleScheme *scheme);
 
 G_MODULE_EXPORT
-const gchar             *gtk_source_style_scheme_get_description		(GtkSourceStyleScheme *scheme);
+const gchar *		gtk_source_style_scheme_get_description		(GtkSourceStyleScheme *scheme);
 
 G_MODULE_EXPORT
-const gchar * const *	 gtk_source_style_scheme_get_authors			(GtkSourceStyleScheme *scheme);
+const gchar * const *	gtk_source_style_scheme_get_authors		(GtkSourceStyleScheme *scheme);
 
 G_MODULE_EXPORT
-const gchar             *gtk_source_style_scheme_get_filename			(GtkSourceStyleScheme *scheme);
+const gchar *		gtk_source_style_scheme_get_filename		(GtkSourceStyleScheme *scheme);
 
 G_MODULE_EXPORT
-GtkSourceStyle		*gtk_source_style_scheme_get_style			(GtkSourceStyleScheme *scheme,
-										 const gchar          *style_id);
+GtkSourceStyle *	gtk_source_style_scheme_get_style		(GtkSourceStyleScheme *scheme,
+									 const gchar          *style_id);
 
 G_GNUC_INTERNAL
-GtkSourceStyleScheme	*_gtk_source_style_scheme_new_from_file			(const gchar *filename);
+GtkSourceStyleScheme *	_gtk_source_style_scheme_new_from_file		(const gchar *filename);
 
 G_GNUC_INTERNAL
-const gchar		*_gtk_source_style_scheme_get_parent_id			(GtkSourceStyleScheme *scheme);
+const gchar *		_gtk_source_style_scheme_get_parent_id		(GtkSourceStyleScheme *scheme);
 
 G_GNUC_INTERNAL
-void			 _gtk_source_style_scheme_set_parent			(GtkSourceStyleScheme *scheme,
-										 GtkSourceStyleScheme *parent_scheme);
+void			_gtk_source_style_scheme_set_parent		(GtkSourceStyleScheme *scheme,
+									 GtkSourceStyleScheme *parent_scheme);
 
 G_END_DECLS
 

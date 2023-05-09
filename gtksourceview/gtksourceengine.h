@@ -21,9 +21,9 @@
 #ifndef GTK_SOURCE_ENGINE_H
 #define GTK_SOURCE_ENGINE_H
 
-#include <gtk/gtk.h>
 #include "gtksourcetypes.h"
 #include "gtksourcetypes-private.h"
+#include "gtksourcestylescheme.h"
 
 G_BEGIN_DECLS
 
