@@ -44,7 +44,7 @@ struct _GtkSourcePixbufHelper
 GtkSourcePixbufHelper *
 gtk_source_pixbuf_helper_new (void)
 {
-	return g_slice_new0 (GtkSourcePixbufHelper);
+	return g_new0 (GtkSourcePixbufHelper, 1);
 }
 
 void
@@ -67,7 +67,7 @@ gtk_source_pixbuf_helper_free (GtkSourcePixbufHelper *helper)
 
 	g_free (helper->icon_name);
 
-	g_slice_free (GtkSourcePixbufHelper, helper);
+	g_free (helper);
 }
 
 static void
