@@ -24,6 +24,18 @@
 
 G_BEGIN_DECLS
 
+typedef struct _GtkSourceStyleSchemeBasicInfos GtkSourceStyleSchemeBasicInfos;
+
+struct _GtkSourceStyleSchemeBasicInfos
+{
+	gchar *id;
+	gchar *name;
+	gchar *description;
+};
+
+G_GNUC_INTERNAL
+void		_gtk_source_style_scheme_basic_infos_free		(GtkSourceStyleSchemeBasicInfos *basic_infos);
+
 G_GNUC_INTERNAL
 gboolean	_gtk_source_style_scheme_parser_parse_final_color	(const gchar *color_str,
 									 GdkRGBA     *rgba);
@@ -31,6 +43,12 @@ gboolean	_gtk_source_style_scheme_parser_parse_final_color	(const gchar *color_s
 G_GNUC_INTERNAL
 gboolean	_gtk_source_style_scheme_parser_parse_scale		(const gchar *scale_str,
 									 gdouble     *scale_factor);
+
+G_GNUC_INTERNAL
+gboolean	_gtk_source_style_scheme_parser_parse_file		(GFile                           *file,
+									 GtkSourceStyleSchemeBasicInfos **basic_infos,
+									 GHashTable                     **styles,
+									 GError                         **error);
 
 G_END_DECLS
 
