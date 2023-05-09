@@ -1717,7 +1717,7 @@ parser_state_new (GtkSourceLanguage       *language,
 		  GHashTable              *loaded_lang_ids)
 {
 	ParserState *parser_state;
-	parser_state = g_slice_new0 (ParserState);
+	parser_state = g_new0 (ParserState, 1);
 
 	parser_state->language = language;
 	parser_state->ctx_data = ctx_data;
@@ -1765,7 +1765,7 @@ parser_state_destroy (ParserState *parser_state)
 	g_free (parser_state->language_decoration);
 	g_free (parser_state->filename);
 
-	g_slice_free (ParserState, parser_state);
+	g_free (parser_state);
 }
 
 static gboolean
