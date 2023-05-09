@@ -103,7 +103,7 @@ _gtk_source_regex_new (const gchar           *pattern,
 		return NULL;
 	}
 
-	regex = g_slice_new0 (GtkSourceRegex);
+	regex = g_new0 (GtkSourceRegex, 1);
 	regex->ref_count = 1;
 
 	if (g_regex_match (get_start_ref_regex (), pattern, 0, NULL))
@@ -121,7 +121,7 @@ _gtk_source_regex_new (const gchar           *pattern,
 
 		if (regex->u.regex.regex == NULL)
 		{
-			g_slice_free (GtkSourceRegex, regex);
+			g_free (regex);
 			regex = NULL;
 		}
 	}
@@ -152,7 +152,7 @@ _gtk_source_regex_unref (GtkSourceRegex *regex)
 		{
 			g_free (regex->u.info.pattern);
 		}
-		g_slice_free (GtkSourceRegex, regex);
+		g_free (regex);
 	}
 }
 
