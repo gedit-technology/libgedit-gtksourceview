@@ -958,7 +958,7 @@ forward_backward_data_free (ForwardBackwardData *data)
 		gtk_text_buffer_delete_mark (buffer, data->start_at);
 	}
 
-	g_slice_free (ForwardBackwardData, data);
+	g_free (data);
 }
 
 /* Returns TRUE if finished. */
@@ -985,7 +985,7 @@ smart_forward_search_async_step (GtkSourceSearchContext *search,
 			return FALSE;
 		}
 
-		task_data = g_slice_new0 (ForwardBackwardData);
+		task_data = g_new0 (ForwardBackwardData, 1);
 		task_data->found = FALSE;
 		task_data->is_forward = TRUE;
 		task_data->wrapped_around = *wrapped_around;
@@ -1033,7 +1033,7 @@ smart_forward_search_async_step (GtkSourceSearchContext *search,
 				continue;
 			}
 
-			task_data = g_slice_new0 (ForwardBackwardData);
+			task_data = g_new0 (ForwardBackwardData, 1);
 			task_data->found = TRUE;
 			task_data->match_start = match_start;
 			task_data->match_end = match_end;
@@ -1052,7 +1052,7 @@ smart_forward_search_async_step (GtkSourceSearchContext *search,
 		return FALSE;
 	}
 
-	task_data = g_slice_new0 (ForwardBackwardData);
+	task_data = g_new0 (ForwardBackwardData, 1);
 	task_data->is_forward = TRUE;
 	task_data->wrapped_around = *wrapped_around;
 	task_data->start_at = gtk_text_buffer_create_mark (search->priv->buffer,
@@ -1114,7 +1114,7 @@ smart_backward_search_async_step (GtkSourceSearchContext *search,
 			return FALSE;
 		}
 
-		task_data = g_slice_new0 (ForwardBackwardData);
+		task_data = g_new0 (ForwardBackwardData, 1);
 		task_data->found = FALSE;
 		task_data->is_forward = FALSE;
 		task_data->wrapped_around = *wrapped_around;
@@ -1164,7 +1164,7 @@ smart_backward_search_async_step (GtkSourceSearchContext *search,
 				continue;
 			}
 
-			task_data = g_slice_new0 (ForwardBackwardData);
+			task_data = g_new0 (ForwardBackwardData, 1);
 			task_data->found = TRUE;
 			task_data->match_start = match_start;
 			task_data->match_end = match_end;
@@ -1183,7 +1183,7 @@ smart_backward_search_async_step (GtkSourceSearchContext *search,
 		return FALSE;
 	}
 
-	task_data = g_slice_new0 (ForwardBackwardData);
+	task_data = g_new0 (ForwardBackwardData, 1);
 	task_data->is_forward = FALSE;
 	task_data->wrapped_around = *wrapped_around;
 	task_data->start_at = gtk_text_buffer_create_mark (search->priv->buffer,
