@@ -4730,7 +4730,7 @@ static MarkCategory *
 mark_category_new (GtkSourceMarkAttributes *attributes,
 		   gint                     priority)
 {
-	MarkCategory* category = g_slice_new (MarkCategory);
+	MarkCategory* category = g_new0 (MarkCategory, 1);
 
 	category->attributes = g_object_ref (attributes);
 	category->priority = priority;
@@ -4744,7 +4744,7 @@ mark_category_free (MarkCategory *category)
 	if (category != NULL)
 	{
 		g_object_unref (category->attributes);
-		g_slice_free (MarkCategory, category);
+		g_free (category);
 	}
 }
 
