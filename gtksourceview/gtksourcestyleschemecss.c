@@ -61,6 +61,30 @@ _gtk_source_style_scheme_css_init (GtkSourceStyleSchemeCss *scheme_css)
 	scheme_css->priv = _gtk_source_style_scheme_css_get_instance_private (scheme_css);
 }
 
+static GtkCssProvider *
+create_provider (const gchar *css)
+{
+	GtkCssProvider *provider;
+	GError *error = NULL;
+
+	if (css == NULL)
+	{
+		return NULL;
+	}
+
+	provider = gtk_css_provider_new ();
+	gtk_css_provider_load_from_data (provider, css, -1, &error);
+
+	if (error != NULL)
+	{
+		g_warning ("Failed to load CSS: %s", error->message);
+		g_clear_error (&error);
+		g_clear_object (&provider);
+	}
+
+	return provider;
+}
+
 /* --- For the main CSS provider ------------------------------------ */
 
 static gchar *
@@ -186,24 +210,10 @@ create_main_provider (GtkSourceStyleScheme *scheme)
 {
 	gchar *css;
 	GtkCssProvider *provider;
-	GError *error = NULL;
 
 	css = get_main_css (scheme);
-	if (css == NULL)
-	{
-		return NULL;
-	}
-
-	provider = gtk_css_provider_new ();
-	gtk_css_provider_load_from_data (provider, css, -1, &error);
+	provider = create_provider (css);
 	g_free (css);
-
-	if (error != NULL)
-	{
-		g_warning ("Error when loading CSS: %s", error->message);
-		g_clear_error (&error);
-		g_clear_object (&provider);
-	}
 
 	return provider;
 }
@@ -327,24 +337,10 @@ create_cursors_provider (GtkSourceStyleScheme *scheme,
 {
 	gchar *css;
 	GtkCssProvider *provider;
-	GError *error = NULL;
 
 	css = get_cursors_css (scheme, widget);
-	if (css == NULL)
-	{
-		return NULL;
-	}
-
-	provider = gtk_css_provider_new ();
-	gtk_css_provider_load_from_data (provider, css, -1, &error);
+	provider = create_provider (css);
 	g_free (css);
-
-	if (error != NULL)
-	{
-		g_warning ("Error when loading CSS for cursors: %s", error->message);
-		g_clear_error (&error);
-		g_clear_object (&provider);
-	}
 
 	return provider;
 }
