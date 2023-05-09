@@ -308,7 +308,7 @@ proposal_info_free (gpointer data)
 		g_object_unref (info->completion_proposal);
 	}
 
-	g_slice_free (ProposalInfo, data);
+	g_free (data);
 }
 
 static void
@@ -323,14 +323,14 @@ provider_info_free (gpointer data)
 
 	g_object_unref (info->completion_provider);
 	g_queue_free_full (info->proposals, (GDestroyNotify)proposal_info_free);
-	g_slice_free (ProviderInfo, data);
+	g_free (data);
 }
 
 static void
 add_header (GList *provider_node)
 {
 	ProviderInfo *provider_info = provider_node->data;
-	ProposalInfo *header = g_slice_new0 (ProposalInfo);
+	ProposalInfo *header = g_new0 (ProposalInfo, 1);
 
 	header->provider_node = provider_node;
 
@@ -778,7 +778,7 @@ create_provider_info (GtkSourceCompletionModel    *model,
 
 	/* Create the structure */
 
-	info = g_slice_new0 (ProviderInfo);
+	info = g_new0 (ProviderInfo, 1);
 	info->model = model;
 	info->completion_provider = g_object_ref (provider);
 	info->proposals = g_queue_new ();
@@ -841,7 +841,7 @@ add_proposal (GtkSourceCompletionProposal *proposal,
 	      GList                       *provider_node)
 {
 	ProviderInfo *provider_info = provider_node->data;
-	ProposalInfo *proposal_info = g_slice_new0 (ProposalInfo);
+	ProposalInfo *proposal_info = g_new0 (ProposalInfo, 1);
 
 	proposal_info->provider_node = provider_node;
 	proposal_info->completion_proposal = g_object_ref (proposal);
