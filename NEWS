@@ -1,6 +1,7 @@
 News in 299.0.2, 2023-xx-yy (not yet released)
 ---------------------------
 * Continue to rework GtkSourceStyle* classes.
+* Code maintenance: don't use g_slice_*() (deprecated).
 * Remove support for installed tests.
 * Translations: test Weblate.
 
