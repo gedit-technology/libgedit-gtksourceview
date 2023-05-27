@@ -9,18 +9,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview 3.3.4\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/gedit-technology/"
+"libgedit-gtksourceview/issues\n"
 "POT-Creation-Date: 2023-04-28 20:25+0200\n"
-"PO-Revision-Date: 2018-03-26 16:41+0800\n"
-"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
-"Language-Team: Chinese (traditional)\n"
+"PO-Revision-Date: 2023-05-27 18:53+0000\n"
+"Last-Translator: Newson Parker <2434843612@qq.com>\n"
+"Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
+"gedit-technology/libgedit-gtksourceview/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #. (itstool) path: abnf.lang/language@_section
 #. (itstool) path: actionscript.lang/language@_section
@@ -497,7 +498,7 @@ msgstr "阿美尼亞語"
 #: gtksourceview/gtksourceencoding.c:206 gtksourceview/gtksourceencoding.c:208
 #: gtksourceview/gtksourceencoding.c:222
 msgid "Chinese Traditional"
-msgstr "正體中文"
+msgstr "繁體中文"
 
 #: gtksourceview/gtksourceencoding.c:210
 msgid "Cyrillic/Russian"
