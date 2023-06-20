@@ -8,8 +8,8 @@
 ]>
 <book id="index">
   <bookinfo>
-    <title>libgedit-gtksourceview @GSV_API_VERSION@ Reference Manual</title>
-    <releaseinfo>for libgedit-gtksourceview &package_version;</releaseinfo>
+    <title>libgedit-gtksourceview &package_api_version; Reference Manual</title>
+    <releaseinfo>for &package_string;</releaseinfo>
   </bookinfo>
 
   <xi:include href="intro.xml"/>

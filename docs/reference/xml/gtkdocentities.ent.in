@@ -1,0 +1,2 @@
+<!ENTITY package_string "@PACKAGE_STRING@">
+<!ENTITY package_api_version "@PACKAGE_API_VERSION@">

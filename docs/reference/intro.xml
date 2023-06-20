@@ -19,14 +19,14 @@
   </para>
 
   <para>
-    libgedit-gtksourceview @GSV_API_VERSION@ depends on GTK 3.
+    libgedit-gtksourceview &package_api_version; depends on GTK 3.
   </para>
 
   <refsect1>
     <title>pkg-config name</title>
     <para>
-      For libgedit-gtksourceview @GSV_API_VERSION@, the pkg-config name is:
-      <code>libgedit-gtksourceview-@GSV_API_VERSION@</code>
+      For libgedit-gtksourceview &package_api_version;, the pkg-config name is:
+      <code>libgedit-gtksourceview-&package_api_version;</code>
     </para>
   </refsect1>
 </part>

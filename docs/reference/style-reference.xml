@@ -35,7 +35,7 @@ Reference to the libgedit-gtksourceview style scheme definition file format
 The formal definition is stored in the RelaxNG schema file
 <filename>style.rng</filename> which should be installed on your system in the
 directory
-<filename>${PREFIX}/share/libgedit-gtksourceview-@GSV_API_VERSION@/</filename>
+<filename>${PREFIX}/share/libgedit-gtksourceview-&package_api_version;/</filename>
 (where <filename>${PREFIX}</filename> is typically <filename>/usr/</filename> or
 <filename>/usr/local/</filename>).
 </para>

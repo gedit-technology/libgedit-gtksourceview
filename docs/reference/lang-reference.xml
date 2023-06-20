@@ -33,16 +33,16 @@ This is an overview of the Language Definition XML format, describing the
 meaning and usage of every element and attribute.  The formal definition is
 stored in the RelaxNG schema file <filename>language2.rng</filename> which
 should be installed on your system in the directory
-<filename>${PREFIX}/share/libgedit-gtksourceview-@GSV_API_VERSION@/</filename>
+<filename>${PREFIX}/share/libgedit-gtksourceview-&package_api_version;/</filename>
 (where <filename>${PREFIX}</filename> can be <filename>/usr/</filename> or
 <filename>/usr/local/</filename> if you have installed from source).
 </para>
 
 <para>
 The preinstalled language files are located in
-<filename>${PREFIX}/share/libgedit-gtksourceview-@GSV_API_VERSION@/language-specs/</filename>.
+<filename>${PREFIX}/share/libgedit-gtksourceview-&package_api_version;/language-specs/</filename>.
 Custom user languages are usually placed in
-<filename>~/.local/share/libgedit-gtksourceview-@GSV_API_VERSION@/language-specs/</filename>.
+<filename>~/.local/share/libgedit-gtksourceview-&package_api_version;/language-specs/</filename>.
 </para>
 </refsect1>
 
