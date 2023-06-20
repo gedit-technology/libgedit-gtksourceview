@@ -137,6 +137,7 @@ subdir('data')
 subdir('po')
 subdir('gtksourceview')
 subdir('tests')
+subdir('tools/list-langs')
 
 if get_option('gtk_doc')
   subdir('docs/reference')
