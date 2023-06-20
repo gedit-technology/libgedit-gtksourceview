@@ -1,5 +1,3 @@
-subdir('completion-providers/words')
-
 libgedit_gtksourceview_public_headers = [
   'gtksource.h',
   'gtksourceautocleanups.h',
@@ -163,6 +161,10 @@ libgedit_gtksourceview_static_lib = static_library(
     '-DHAVE_CONFIG_H',
   ]
 )
+
+# The words completion provider requires that the enumtypes are already
+# generated (which is done above).
+subdir('completion-providers/words')
 
 # For unit tests, to be able to test private functions.
 LIBGEDIT_GTKSOURCEVIEW_STATIC_DEP = declare_dependency(
