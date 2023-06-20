@@ -87,12 +87,6 @@ skip_language (GtkSourceLanguage *language)
 		return TRUE;
 	}
 
-	/* TODO: testv1.lang should be moved to another directory. */
-	if (g_str_equal (language_id, "testv1"))
-	{
-		return TRUE;
-	}
-
 	return FALSE;
 }
 

@@ -23,10 +23,5 @@ else
 fi
 
 for file in $files; do
-  case $file in
-  testv1.lang) ;; # skip test file for old format
-  *)
-    xmllint --relaxng language2.rng --noout $file || exit 1
-    ;;
-  esac
+  xmllint --relaxng language2.rng --noout "$file" || exit 1
 done
