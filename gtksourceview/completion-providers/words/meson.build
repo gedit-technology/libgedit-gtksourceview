@@ -31,7 +31,8 @@ WORDS_COMPLETION_PROVIDER_STATIC_LIB = static_library(
   [words_completion_provider_public_headers,
    words_completion_provider_public_c_files,
    WORDS_COMPLETION_PROVIDER_PRIVATE_HEADERS,
-   words_completion_provider_private_c_files],
+   words_completion_provider_private_c_files,
+   LIBGEDIT_GTKSOURCEVIEW_ENUM_TYPES[1]],
   pic: true, # this static lib is potentially linked in a shared library.
   include_directories: ROOT_INCLUDE_DIR,
   dependencies: LIBGEDIT_GTKSOURCEVIEW_ALL_DEPS,

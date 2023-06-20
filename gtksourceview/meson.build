@@ -129,7 +129,7 @@ install_headers(
   install_dir: headers_install_dir
 )
 
-libgedit_gtksourceview_enum_types = GNOME.mkenums(
+LIBGEDIT_GTKSOURCEVIEW_ENUM_TYPES = GNOME.mkenums(
   'gtksource-enumtypes',
   c_template: 'gtksource-enumtypes.c.in',
   h_template: 'gtksource-enumtypes.h.in',
@@ -151,7 +151,7 @@ libgedit_gtksourceview_static_lib = static_library(
    libgedit_gtksourceview_public_c_files,
    LIBGEDIT_GTKSOURCEVIEW_PRIVATE_HEADERS,
    libgedit_gtksourceview_private_c_files,
-   libgedit_gtksourceview_enum_types,
+   LIBGEDIT_GTKSOURCEVIEW_ENUM_TYPES,
    libgedit_gtksourceview_resources],
   pic: true, # this static lib is potentially linked in a shared library.
   include_directories: ROOT_INCLUDE_DIR,
@@ -173,7 +173,7 @@ LIBGEDIT_GTKSOURCEVIEW_STATIC_DEP = declare_dependency(
     libgedit_gtksourceview_static_lib,
     WORDS_COMPLETION_PROVIDER_STATIC_LIB,
   ],
-  sources: libgedit_gtksourceview_enum_types[1],
+  sources: LIBGEDIT_GTKSOURCEVIEW_ENUM_TYPES[1],
   dependencies: LIBGEDIT_GTKSOURCEVIEW_ALL_DEPS
 )
 
@@ -199,7 +199,7 @@ libgedit_gtksourceview_lib = library(
 LIBGEDIT_GTKSOURCEVIEW_LIB_DEP = declare_dependency(
   include_directories: ROOT_INCLUDE_DIR,
   link_with: libgedit_gtksourceview_lib,
-  sources: libgedit_gtksourceview_enum_types[1],
+  sources: LIBGEDIT_GTKSOURCEVIEW_ENUM_TYPES[1],
   dependencies: LIBGEDIT_GTKSOURCEVIEW_ALL_DEPS
 )
 
@@ -225,7 +225,7 @@ if get_option('gobject_introspection')
     sources: [
       libgedit_gtksourceview_public_headers,
       libgedit_gtksourceview_public_c_files,
-      libgedit_gtksourceview_enum_types
+      LIBGEDIT_GTKSOURCEVIEW_ENUM_TYPES
     ],
     # Support for deps being built as subprojects:
     dependencies: LIBGEDIT_GTKSOURCEVIEW_ALL_DEPS,
