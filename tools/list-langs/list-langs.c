@@ -42,6 +42,8 @@ main (int    argc,
 		goto end;
 	}
 
+	g_print ("<ul>\n");
+
 	for (i = 0; language_ids[i] != NULL; i++)
 	{
 		GtkSourceLanguage *cur_language;
@@ -50,9 +52,19 @@ main (int    argc,
 
 		if (!gtk_source_language_get_hidden (cur_language))
 		{
-			g_print ("%s\n", gtk_source_language_get_name (cur_language));
+			const gchar *name;
+			gchar *escaped_name;
+
+			name = gtk_source_language_get_name (cur_language);
+			escaped_name = g_markup_escape_text (name, -1);
+
+			g_print ("  <li>%s</li>\n", escaped_name);
+
+			g_free (escaped_name);
 		}
 	}
+
+	g_print ("</ul>\n");
 
 end:
 	g_object_unref (language_manager);
