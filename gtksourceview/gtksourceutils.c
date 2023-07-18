@@ -410,3 +410,45 @@ _gtk_source_utils_dgettext (const gchar *domain,
 	tmp = g_locale_to_utf8 (translated, -1, NULL, NULL, NULL);
 	return tmp != NULL ? tmp : g_strdup (string);
 }
+
+/**
+ * gtk_source_utils_get_bracket_matched_message:
+ * @iter: the #GtkTextIter.
+ * @state: the #GtkSourceBracketMatchType.
+ *
+ * This function is intended to be used inside a
+ * #GtkSourceBuffer::bracket-matched signal handler. Pass to this function the
+ * @iter and @state values as received in the signal handler, and a string
+ * description will be returned.
+ *
+ * Returns: (transfer full) (nullable): a string intended to be shown in the UI,
+ *   that describes a bracket matching. %NULL is returned on
+ *   %GTK_SOURCE_BRACKET_MATCH_NONE.
+ * Since: 300.0
+ */
+gchar *
+gtk_source_utils_get_bracket_matched_message (GtkTextIter               *iter,
+					      GtkSourceBracketMatchType  state)
+{
+	switch (state)
+	{
+		case GTK_SOURCE_BRACKET_MATCH_NONE:
+			return NULL;
+
+		case GTK_SOURCE_BRACKET_MATCH_OUT_OF_RANGE:
+			return g_strdup (_("Bracket match is out of range"));
+
+		case GTK_SOURCE_BRACKET_MATCH_NOT_FOUND:
+			return g_strdup (_("Bracket match not found"));
+
+		case GTK_SOURCE_BRACKET_MATCH_FOUND:
+			return g_strdup_printf (_("Bracket match found on line: %d"),
+						gtk_text_iter_get_line (iter) + 1);
+
+		default:
+			g_warn_if_reached ();
+			break;
+	}
+
+	return NULL;
+}

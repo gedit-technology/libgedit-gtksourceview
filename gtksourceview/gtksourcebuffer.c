@@ -495,7 +495,8 @@ gtk_source_buffer_class_init (GtkSourceBufferClass *klass)
 	 * The signal is emitted only when the @state changes, typically when
 	 * the cursor moves.
 	 *
-	 * A use-case for this signal is to show messages in a #GtkStatusbar.
+	 * A use-case for this signal is to show messages in a #GtkStatusbar,
+	 * with the help of gtk_source_utils_get_bracket_matched_message().
 	 *
 	 * Since: 2.12
 	 */

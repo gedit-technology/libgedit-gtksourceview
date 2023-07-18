@@ -25,15 +25,19 @@
 #error "Only <gtksourceview/gtksource.h> can be included directly."
 #endif
 
-#include <gmodule.h>
+#include <gtksourceview/gtksourcebuffer.h>
 
 G_BEGIN_DECLS
 
 G_MODULE_EXPORT
-gchar		*gtk_source_utils_unescape_search_text		(const gchar	*text);
+gchar *		gtk_source_utils_unescape_search_text		(const gchar *text);
 
 G_MODULE_EXPORT
-gchar		*gtk_source_utils_escape_search_text		(const gchar	*text);
+gchar *		gtk_source_utils_escape_search_text		(const gchar *text);
+
+G_MODULE_EXPORT
+gchar *		gtk_source_utils_get_bracket_matched_message	(GtkTextIter               *iter,
+								 GtkSourceBracketMatchType  state);
 
 G_END_DECLS
 
