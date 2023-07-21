@@ -9,18 +9,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/gedit-technology/"
+"libgedit-gtksourceview/issues\n"
 "POT-Creation-Date: 2023-04-28 20:25+0200\n"
-"PO-Revision-Date: 2017-09-02 10:12+0200\n"
-"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
-"Language-Team: slovenčina <>\n"
+"PO-Revision-Date: 2023-07-21 19:06+0000\n"
+"Last-Translator: Milan Šalka <salka.milan@googlemail.com>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/gedit-technology/"
+"libgedit-gtksourceview/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 # MČ: Názov sekcie zahrňujúci zdrojové súbory kompilačných jazykov. U nás by sa povedalo asi „zdrojáky“, ale neviem, či je to vhodné slovo na preklad.
 # Roman: lepšie?
@@ -269,10 +270,8 @@ msgstr "Popis zostavenia RPM"
 
 #. (itstool) path: tera.lang/language@_name
 #: tera.lang:23
-#, fuzzy
-#| msgid "Template"
 msgid "Tera Template"
-msgstr "Šablóna"
+msgstr "Šablóna Tera"
 
 # scheme name
 #. (itstool) path: default-style-schemes/classic.xml/style-scheme@_name
