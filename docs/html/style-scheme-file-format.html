@@ -109,17 +109,18 @@
 &lt;author&gt;Name2&lt;/author&gt;
 </pre>
 
-<!-- FIXME: document well if mandatory or optional, and if it must appear at
-            most once or if several instances are accepted. -->
-
-<h2>&lt;description&gt; or &lt;_description&gt;</h2>
+<h2>&lt;description&gt; or &lt;_description&gt; (optional)</h2>
 <p>
   Description of the style scheme. The <code>&lt;description&gt;</code> value is
-  not translated, while <code>&lt;_description&gt;</code> is. Example:
+  not translated, while <code>&lt;_description&gt;</code> is. It is an optional
+  tag. If present, only one description must be set. Example:
 </p>
 <pre>
 &lt;_description&gt;Classic color scheme&lt;/_description&gt;
 </pre>
+
+<!-- FIXME: document well if mandatory or optional, and if it must appear at
+            most once or if several instances are accepted. -->
 
 <h2>&lt;color&gt; tags</h2>
 <p>
