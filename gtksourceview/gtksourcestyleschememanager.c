@@ -331,13 +331,6 @@ reload_if_needed (GtkSourceStyleSchemeManager *manager)
 	g_slist_free_full (files, g_free);
 }
 
-static void
-search_path_changed (GtkSourceStyleSchemeManager *manager)
-{
-	manager->priv->need_reload = TRUE;
-	g_signal_emit (manager, signals[SIGNAL_CHANGED], 0);
-}
-
 /**
  * gtk_source_style_scheme_manager_set_search_path:
  * @manager: a #GtkSourceStyleSchemeManager.
@@ -379,7 +372,7 @@ gtk_source_style_scheme_manager_set_search_path (GtkSourceStyleSchemeManager  *m
 	g_strfreev (manager->priv->search_path);
 	manager->priv->search_path = path_dup;
 
-	search_path_changed (manager);
+	gtk_source_style_scheme_manager_force_rescan (manager);
 }
 
 static void
@@ -426,7 +419,7 @@ gtk_source_style_scheme_manager_append_search_path (GtkSourceStyleSchemeManager 
 	g_strfreev (manager->priv->search_path);
 	manager->priv->search_path = (gchar **) g_ptr_array_free (new_search_path, FALSE);
 
-	search_path_changed (manager);
+	gtk_source_style_scheme_manager_force_rescan (manager);
 }
 
 /**
@@ -454,7 +447,7 @@ gtk_source_style_scheme_manager_prepend_search_path (GtkSourceStyleSchemeManager
 	g_strfreev (manager->priv->search_path);
 	manager->priv->search_path = (gchar **) g_ptr_array_free (new_search_path, FALSE);
 
-	search_path_changed (manager);
+	gtk_source_style_scheme_manager_force_rescan (manager);
 }
 
 /**
@@ -495,7 +488,6 @@ gtk_source_style_scheme_manager_force_rescan (GtkSourceStyleSchemeManager *manag
 	g_return_if_fail (GTK_SOURCE_IS_STYLE_SCHEME_MANAGER (manager));
 
 	manager->priv->need_reload = TRUE;
-
 	g_signal_emit (manager, signals[SIGNAL_CHANGED], 0);
 }
 
