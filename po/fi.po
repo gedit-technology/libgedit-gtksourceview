@@ -14,9 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2017-03-11 19:01+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
@@ -122,7 +121,6 @@ msgstr "Lähde"
 #: perl.lang:25 php.lang:28 python3.lang:23 python.lang:27 ruby.lang:26
 #: sh.lang:24 tcl.lang:23
 #, fuzzy
-#| msgid "Scripts"
 msgid "Script"
 msgstr "Komentojonot"
 
@@ -259,7 +257,6 @@ msgstr "RPM-määrittely"
 #. (itstool) path: tera.lang/language@_name
 #: tera.lang:23
 #, fuzzy
-#| msgid "Django Template"
 msgid "Tera Template"
 msgstr "Django-pohja"
 
@@ -306,7 +303,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-dark.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized dark color palette"
 msgstr "Tango-väripaletissa käytetty värimalli"
 
@@ -318,7 +314,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-light.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized light color palette"
 msgstr "Tango-väripaletissa käytetty värimalli"
 
@@ -342,7 +337,6 @@ msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:848
 #, fuzzy, c-format
-#| msgid "string-conversion"
 msgid "Error during conversion: %s"
 msgstr "merkkimuunnos"
 
@@ -361,6 +355,7 @@ msgid "Invalid object, not initialized"
 msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
+#, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr ""
 
@@ -381,7 +376,6 @@ msgstr "Tarjoaja"
 
 #: gtksourceview/gtksourcecompletion.ui:86
 #, fuzzy
-#| msgid "Show provider and proposal icons in the completion popup"
 msgid "Show detailed proposal information"
 msgstr "Näytä tarjoaja- ja ehdotuskuvakkeet täydennysikkunassa"
 
@@ -414,23 +408,18 @@ msgstr ""
 
 #: gtksourceview/gtksourcecontextengine.c:5720
 #, fuzzy, c-format
-#| msgid "context '%s' cannot contain a \\%%{...@start} command"
 msgid "context “%s” cannot contain a \\%%{...@start} command"
 msgstr "konteksti ”%s” ei voi sisältää \\%%{…@start} -komentoa"
 
 #: gtksourceview/gtksourcecontextengine.c:5883
 #: gtksourceview/gtksourcecontextengine.c:5973
 #, fuzzy, c-format
-#| msgid "duplicated context id '%s'"
 msgid "duplicated context id “%s”"
 msgstr "kahdennettu kontekstin tunniste ”%s”"
 
 #: gtksourceview/gtksourcecontextengine.c:6087
 #: gtksourceview/gtksourcecontextengine.c:6147
 #, fuzzy, c-format
-#| msgid ""
-#| "style override used with wildcard context reference in language '%s' in "
-#| "ref '%s'"
 msgid ""
 "style override used with wildcard context reference in language “%s” in ref "
 "“%s”"
@@ -440,14 +429,12 @@ msgstr ""
 
 #: gtksourceview/gtksourcecontextengine.c:6161
 #, fuzzy, c-format
-#| msgid "invalid context reference '%s'"
 msgid "invalid context reference “%s”"
 msgstr "virheellinen kontekstiviite ”%s”"
 
 #: gtksourceview/gtksourcecontextengine.c:6180
 #: gtksourceview/gtksourcecontextengine.c:6190
 #, fuzzy, c-format
-#| msgid "unknown context '%s'"
 msgid "unknown context “%s”"
 msgstr "tuntematon konteksti ”%s”"
 
@@ -562,7 +549,6 @@ msgstr ""
 #: gtksourceview/gtksourceencoding.c:264 gtksourceview/gtksourceencoding.c:270
 #: gtksourceview/gtksourceencoding.c:289
 #, fuzzy
-#| msgid "Filename"
 msgid "Vietnamese"
 msgstr "Tiedostonimi"
 
@@ -632,19 +618,30 @@ msgstr "Muut"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:949
 #, fuzzy, c-format
-#| msgid "Unknown id '%s' in regex '%s'"
 msgid "Unknown id “%s” in regex “%s”"
 msgstr "Tuntematon tunniste ”%s” säännöllisessä lauseessa ”%s”"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:1179
 #, fuzzy, c-format
-#| msgid "in regex '%s': backreferences are not supported"
 msgid "in regex “%s”: backreferences are not supported"
 msgstr "lausekkeessa ”%s”: takaisinviittauksia ei tueta"
 
 #: gtksourceview/gtksourceregex.c:102
 msgid "using \\C is not supported in language definitions"
 msgstr "Käytetään arvoa \\C tukemattomissa kielimäärittelyissä"
+
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr ""
 
 #. create redo menu_item.
 #: gtksourceview/gtksourceview.c:1727

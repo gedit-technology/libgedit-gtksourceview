@@ -7,9 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview.master\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2013-08-30 15:34-0600\n"
 "Last-Translator: Seán de Búrca <leftmostcat@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -96,7 +95,6 @@ msgstr ""
 #: swift.lang:24 systemverilog.lang:21 thrift.lang:20 vala.lang:27
 #: vbnet.lang:23 verilog.lang:23 vhdl.lang:23
 #, fuzzy
-#| msgid "Sources"
 msgid "Source"
 msgstr "Foinsí"
 
@@ -116,7 +114,6 @@ msgstr "Foinsí"
 #: perl.lang:25 php.lang:28 python3.lang:23 python.lang:27 ruby.lang:26
 #: sh.lang:24 tcl.lang:23
 #, fuzzy
-#| msgid "Scripts"
 msgid "Script"
 msgstr "Scripteanna"
 
@@ -192,14 +189,12 @@ msgstr "Eile "
 #. (itstool) path: chdr.lang/language@_name
 #: chdr.lang:24
 #, fuzzy
-#| msgid "C/C++/ObjC Header"
 msgid "C/ObjC Header"
 msgstr "Ceanntásc C/C++/ObjC"
 
 #. (itstool) path: cpphdr.lang/language@_name
 #: cpphdr.lang:24
 #, fuzzy
-#| msgid "C/C++/ObjC Header"
 msgid "C++ Header"
 msgstr "Ceanntásc C/C++/ObjC"
 
@@ -304,7 +299,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-dark.xml:25
 #, fuzzy
-#| msgid "Dark color scheme using the Tango color palette"
 msgid "Color scheme using Solarized dark color palette"
 msgstr "Scéim dathanna dorcha ag úsáid an phailéid dathanna Tango"
 
@@ -316,7 +310,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-light.xml:25
 #, fuzzy
-#| msgid "Dark color scheme using the Tango color palette"
 msgid "Color scheme using Solarized light color palette"
 msgstr "Scéim dathanna dorcha ag úsáid an phailéid dathanna Tango"
 
@@ -358,6 +351,7 @@ msgid "Invalid object, not initialized"
 msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
+#, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr ""
 
@@ -382,7 +376,6 @@ msgstr ""
 
 #: gtksourceview/gtksourcecompletion.ui:88
 #, fuzzy
-#| msgid "_Details..."
 msgid "_Details…"
 msgstr "_Mionsonraí..."
 
@@ -623,6 +616,19 @@ msgstr ""
 
 #: gtksourceview/gtksourceregex.c:102
 msgid "using \\C is not supported in language definitions"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
 msgstr ""
 
 #. create redo menu_item.

@@ -11,9 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview.gnome-2-20.ne\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2007-12-10 12:20+0545\n"
 "Last-Translator: Nabin Gautam <nabin@mpp.org.np>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -100,7 +99,6 @@ msgstr ""
 #: swift.lang:24 systemverilog.lang:21 thrift.lang:20 vala.lang:27
 #: vbnet.lang:23 verilog.lang:23 vhdl.lang:23
 #, fuzzy
-#| msgid "Sources"
 msgid "Source"
 msgstr "स्रोतहरू"
 
@@ -120,7 +118,6 @@ msgstr "स्रोतहरू"
 #: perl.lang:25 php.lang:28 python3.lang:23 python.lang:27 ruby.lang:26
 #: sh.lang:24 tcl.lang:23
 #, fuzzy
-#| msgid "Scripts"
 msgid "Script"
 msgstr "स्क्रिप्टहरू"
 
@@ -154,7 +151,6 @@ msgstr "मार्कअप"
 #. (itstool) path: cg.lang/language@_name
 #: cg.lang:23
 #, fuzzy
-#| msgid "Language"
 msgid "CG Shader Language"
 msgstr "भाषा"
 
@@ -191,28 +187,24 @@ msgstr "भाषा"
 #: puppet.lang:23 rpmspec.lang:24 scss.lang:23 toml.lang:23 yacc.lang:23
 #: yaml.lang:21
 #, fuzzy
-#| msgid "Others"
 msgid "Other"
 msgstr "अन्य"
 
 #. (itstool) path: chdr.lang/language@_name
 #: chdr.lang:24
 #, fuzzy
-#| msgid "C/C++/ObjC Header"
 msgid "C/ObjC Header"
 msgstr "C/C++/ObjC हेडर"
 
 #. (itstool) path: cpphdr.lang/language@_name
 #: cpphdr.lang:24
 #, fuzzy
-#| msgid "Header"
 msgid "C++ Header"
 msgstr "हेडर"
 
 #. (itstool) path: dosbatch.lang/language@_name
 #: dosbatch.lang:23
 #, fuzzy
-#| msgid "DPatch"
 msgid "DOS Batch"
 msgstr "DPatch"
 
@@ -286,7 +278,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/cobalt.xml:27
 #, fuzzy
-#| msgid "Classic color scheme"
 msgid "Blue based color scheme"
 msgstr "उत्कृष्ट रङ योजना"
 
@@ -313,7 +304,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-dark.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized dark color palette"
 msgstr "टाङ्गो रङ रङदानी प्रयोग गर्ने रङ योजना"
 
@@ -325,7 +315,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-light.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized light color palette"
 msgstr "टाङ्गो रङ रङदानी प्रयोग गर्ने रङ योजना"
 
@@ -349,7 +338,6 @@ msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:848
 #, fuzzy, c-format
-#| msgid "string-conversion"
 msgid "Error during conversion: %s"
 msgstr "स्ट्रिङ रुपान्तरण"
 
@@ -368,6 +356,7 @@ msgid "Invalid object, not initialized"
 msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
+#, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr ""
 
@@ -417,23 +406,18 @@ msgstr ""
 
 #: gtksourceview/gtksourcecontextengine.c:5720
 #, fuzzy, c-format
-#| msgid "context '%s' cannot contain a \\%%{...@start} command"
 msgid "context “%s” cannot contain a \\%%{...@start} command"
 msgstr "सन्दर्भ '%s' ले \\%%{...@start} आदेश समावेश गर्न सक्दैन"
 
 #: gtksourceview/gtksourcecontextengine.c:5883
 #: gtksourceview/gtksourcecontextengine.c:5973
 #, fuzzy, c-format
-#| msgid "duplicated context id '%s'"
 msgid "duplicated context id “%s”"
 msgstr "नक्कली सन्दर्भ आईडी '%s'"
 
 #: gtksourceview/gtksourcecontextengine.c:6087
 #: gtksourceview/gtksourcecontextengine.c:6147
 #, fuzzy, c-format
-#| msgid ""
-#| "style override used with wildcard context reference in language '%s' in "
-#| "ref '%s'"
 msgid ""
 "style override used with wildcard context reference in language “%s” in ref "
 "“%s”"
@@ -442,14 +426,12 @@ msgstr ""
 
 #: gtksourceview/gtksourcecontextengine.c:6161
 #, fuzzy, c-format
-#| msgid "invalid reference '%s'"
 msgid "invalid context reference “%s”"
 msgstr "अमान्य सन्दर्भ '%s'"
 
 #: gtksourceview/gtksourcecontextengine.c:6180
 #: gtksourceview/gtksourcecontextengine.c:6190
 #, fuzzy, c-format
-#| msgid "unknown context '%s'"
 msgid "unknown context “%s”"
 msgstr "अज्यात विषय '%s'"
 
@@ -632,19 +614,30 @@ msgstr "अन्य"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:949
 #, fuzzy, c-format
-#| msgid "Unknown id '%s' in regex '%s'"
 msgid "Unknown id “%s” in regex “%s”"
 msgstr "रेगेक्स '%s' मा अज्ञात आईडी '%s'"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:1179
 #, fuzzy, c-format
-#| msgid "in regex '%s': backreferences are not supported"
 msgid "in regex “%s”: backreferences are not supported"
 msgstr "रेगेक्स '%s' मा: पछिल्ला सन्दर्भ समर्थित हुदैनन्"
 
 #: gtksourceview/gtksourceregex.c:102
 msgid "using \\C is not supported in language definitions"
 msgstr " \\C को प्रयोग भाषा सेटिङमा समर्थन गरिदैन"
+
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr ""
 
 #. create redo menu_item.
 #: gtksourceview/gtksourceview.c:1727
@@ -674,6 +667,5 @@ msgstr ""
 
 #: gtksourceview/gtksourceview.c:1797
 #, fuzzy
-#| msgid "Changed line"
 msgid "C_hange Case"
 msgstr "परिवर्तित रेखा"

@@ -20,9 +20,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2017-09-02 20:12-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -262,7 +261,6 @@ msgstr "Especificação de RPM"
 #. (itstool) path: tera.lang/language@_name
 #: tera.lang:23
 #, fuzzy
-#| msgid "Template"
 msgid "Tera Template"
 msgstr "Modelo"
 
@@ -359,6 +357,7 @@ msgid "Invalid object, not initialized"
 msgstr "Objeto inválido, não inicializado"
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
+#, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr "Sequência UTF-8 incompleta na entrada"
 
@@ -631,6 +630,19 @@ msgstr "na expressão regular “%s”: referências próprias não são suporta
 #: gtksourceview/gtksourceregex.c:102
 msgid "using \\C is not supported in language definitions"
 msgstr "usar \\C não é suportado em definições de linguagem"
+
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr ""
 
 #. create redo menu_item.
 #: gtksourceview/gtksourceview.c:1727

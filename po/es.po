@@ -8,9 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview.master\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/"
-"libgedit-gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2023-05-01 19:49+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/gedit-technology/"
@@ -346,6 +345,7 @@ msgid "Invalid object, not initialized"
 msgstr "Objeto no válido, no inicializado"
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
+#, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr "Secuencia UTF-8 de entrada incompleta"
 
@@ -619,6 +619,19 @@ msgstr "en la expresión regular «%s»: las retroreferencias no se soportan"
 #: gtksourceview/gtksourceregex.c:102
 msgid "using \\C is not supported in language definitions"
 msgstr "el uso de \\C no está soportado en las definiciones del lenguaje"
+
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr ""
 
 #. create redo menu_item.
 #: gtksourceview/gtksourceview.c:1727

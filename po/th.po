@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview 1.1.0\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2012-09-24 14:21+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -93,7 +92,6 @@ msgstr ""
 #: swift.lang:24 systemverilog.lang:21 thrift.lang:20 vala.lang:27
 #: vbnet.lang:23 verilog.lang:23 vhdl.lang:23
 #, fuzzy
-#| msgid "Sources"
 msgid "Source"
 msgstr "ซอร์สโค้ด"
 
@@ -113,7 +111,6 @@ msgstr "ซอร์สโค้ด"
 #: perl.lang:25 php.lang:28 python3.lang:23 python.lang:27 ruby.lang:26
 #: sh.lang:24 tcl.lang:23
 #, fuzzy
-#| msgid "Scripts"
 msgid "Script"
 msgstr "สคริปต์"
 
@@ -182,21 +179,18 @@ msgstr "ภาษา Shader CG"
 #: puppet.lang:23 rpmspec.lang:24 scss.lang:23 toml.lang:23 yacc.lang:23
 #: yaml.lang:21
 #, fuzzy
-#| msgid "Others"
 msgid "Other"
 msgstr "อื่นๆ"
 
 #. (itstool) path: chdr.lang/language@_name
 #: chdr.lang:24
 #, fuzzy
-#| msgid "C/C++/ObjC Header"
 msgid "C/ObjC Header"
 msgstr "แฟ้มส่วนหัว C/C++/ObjC"
 
 #. (itstool) path: cpphdr.lang/language@_name
 #: cpphdr.lang:24
 #, fuzzy
-#| msgid "Header"
 msgid "C++ Header"
 msgstr "ข้อมูลส่วนหัว"
 
@@ -300,7 +294,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-dark.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized dark color palette"
 msgstr "ชุดสีซึ่งใช้สีจากจานสีของ Tango"
 
@@ -312,7 +305,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-light.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized light color palette"
 msgstr "ชุดสีซึ่งใช้สีจากจานสีของ Tango"
 
@@ -336,7 +328,6 @@ msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:848
 #, fuzzy, c-format
-#| msgid "string-conversion"
 msgid "Error during conversion: %s"
 msgstr "การแปลงสตริง"
 
@@ -355,8 +346,7 @@ msgid "Invalid object, not initialized"
 msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
-#, fuzzy
-#| msgid "Incomplete Sequence"
+#, fuzzy, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr "ลำดับไม่สมบูรณ์"
 
@@ -381,7 +371,6 @@ msgstr "แสดงข้อมูลของคำเสนอโดยละ
 
 #: gtksourceview/gtksourcecompletion.ui:88
 #, fuzzy
-#| msgid "_Details..."
 msgid "_Details…"
 msgstr "_รายละเอียด..."
 
@@ -408,23 +397,18 @@ msgstr "การเน้นไวยากรณ์เพียงบรรท
 
 #: gtksourceview/gtksourcecontextengine.c:5720
 #, fuzzy, c-format
-#| msgid "context '%s' cannot contain a \\%%{...@start} command"
 msgid "context “%s” cannot contain a \\%%{...@start} command"
 msgstr "บริบท '%s' จะมีคำสั่ง \\%%{...@start} ไม่ได้"
 
 #: gtksourceview/gtksourcecontextengine.c:5883
 #: gtksourceview/gtksourcecontextengine.c:5973
 #, fuzzy, c-format
-#| msgid "duplicated context id '%s'"
 msgid "duplicated context id “%s”"
 msgstr "id ของบริบท '%s' ซ้ำกัน"
 
 #: gtksourceview/gtksourcecontextengine.c:6087
 #: gtksourceview/gtksourcecontextengine.c:6147
 #, fuzzy, c-format
-#| msgid ""
-#| "style override used with wildcard context reference in language '%s' in "
-#| "ref '%s'"
 msgid ""
 "style override used with wildcard context reference in language “%s” in ref "
 "“%s”"
@@ -432,14 +416,12 @@ msgstr "มีการทับค่าสไตล์ในตัวอ้า
 
 #: gtksourceview/gtksourcecontextengine.c:6161
 #, fuzzy, c-format
-#| msgid "invalid context reference '%s'"
 msgid "invalid context reference “%s”"
 msgstr "ตัวอ้างอิงบริบท '%s' ใช้การไม่ได้"
 
 #: gtksourceview/gtksourcecontextengine.c:6180
 #: gtksourceview/gtksourcecontextengine.c:6190
 #, fuzzy, c-format
-#| msgid "unknown context '%s'"
 msgid "unknown context “%s”"
 msgstr "ไม่รู้จักบริบท '%s'"
 
@@ -554,7 +536,6 @@ msgstr ""
 #: gtksourceview/gtksourceencoding.c:264 gtksourceview/gtksourceencoding.c:270
 #: gtksourceview/gtksourceencoding.c:289
 #, fuzzy
-#| msgid "Filename"
 msgid "Vietnamese"
 msgstr "ชื่อแฟ้ม"
 
@@ -624,19 +605,30 @@ msgstr "อื่นๆ"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:949
 #, fuzzy, c-format
-#| msgid "Unknown id '%s' in regex '%s'"
 msgid "Unknown id “%s” in regex “%s”"
 msgstr "ไม่รู้จัก id '%s' ใน regex '%s'"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:1179
 #, fuzzy, c-format
-#| msgid "in regex '%s': backreferences are not supported"
 msgid "in regex “%s”: backreferences are not supported"
 msgstr "ใน regex '%s': ไม่รองรับการอ้างอิงกลับ"
 
 #: gtksourceview/gtksourceregex.c:102
 msgid "using \\C is not supported in language definitions"
 msgstr "ไม่รองรับการใช้ \\C ในข้อกำหนดภาษา"
+
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr ""
 
 #. create redo menu_item.
 #: gtksourceview/gtksourceview.c:1727
@@ -666,6 +658,5 @@ msgstr ""
 
 #: gtksourceview/gtksourceview.c:1797
 #, fuzzy
-#| msgid "Changed line"
 msgid "C_hange Case"
 msgstr "บรรทัดที่เปลี่ยน"

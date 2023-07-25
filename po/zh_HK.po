@@ -9,9 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview 3.3.4\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2014-08-21 18:52+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
@@ -188,14 +187,12 @@ msgstr "其他"
 #. (itstool) path: chdr.lang/language@_name
 #: chdr.lang:24
 #, fuzzy
-#| msgid "C/C++/ObjC Header"
 msgid "C/ObjC Header"
 msgstr "C/C++/ObjC 檔頭"
 
 #. (itstool) path: cpphdr.lang/language@_name
 #: cpphdr.lang:24
 #, fuzzy
-#| msgid "Header"
 msgid "C++ Header"
 msgstr "標頭"
 
@@ -207,7 +204,6 @@ msgstr "DOS 批次檔"
 #. (itstool) path: dtl.lang/language@_name
 #: dtl.lang:25
 #, fuzzy
-#| msgid "Template"
 msgid "Django Template"
 msgstr "範本"
 
@@ -256,7 +252,6 @@ msgstr "RPM 規格"
 #. (itstool) path: tera.lang/language@_name
 #: tera.lang:23
 #, fuzzy
-#| msgid "Template"
 msgid "Tera Template"
 msgstr "範本"
 
@@ -340,13 +335,11 @@ msgstr "轉換時發生錯誤：%s"
 
 #: gtksourceview/gtksourcebufferoutputstream.c:929
 #, fuzzy, c-format
-#| msgid "Conversion from character set '%s' to 'UTF-8' is not supported"
 msgid "Conversion from character set “%s” to “UTF-8” is not supported"
 msgstr "不支援將字符集‘%s’轉換成‘UTF-8’"
 
 #: gtksourceview/gtksourcebufferoutputstream.c:935
 #, fuzzy, c-format
-#| msgid "Could not open converter from '%s' to 'UTF-8'"
 msgid "Could not open converter from “%s” to “UTF-8”"
 msgstr "無法開啟將‘%s’轉換至‘UTF-8’的轉換器"
 
@@ -355,6 +348,7 @@ msgid "Invalid object, not initialized"
 msgstr "無效的物件，尚未初始化"
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
+#, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr "在輸入中出現不完整的 UTF-8 次序"
 
@@ -379,7 +373,6 @@ msgstr "顯示詳細的計畫資訊"
 
 #: gtksourceview/gtksourcecompletion.ui:88
 #, fuzzy
-#| msgid "_Details..."
 msgid "_Details…"
 msgstr "詳細資料(_D)…"
 
@@ -405,23 +398,18 @@ msgstr "高亮度顯示單行花費太多時間，語法高亮度顯示功能將
 
 #: gtksourceview/gtksourcecontextengine.c:5720
 #, fuzzy, c-format
-#| msgid "context '%s' cannot contain a \\%%{...@start} command"
 msgid "context “%s” cannot contain a \\%%{...@start} command"
 msgstr "上下文「%s」不能包含 \\%%{…@start} 指命"
 
 #: gtksourceview/gtksourcecontextengine.c:5883
 #: gtksourceview/gtksourcecontextengine.c:5973
 #, fuzzy, c-format
-#| msgid "duplicated context id '%s'"
 msgid "duplicated context id “%s”"
 msgstr "重複的上下文 id 「%s」"
 
 #: gtksourceview/gtksourcecontextengine.c:6087
 #: gtksourceview/gtksourcecontextengine.c:6147
 #, fuzzy, c-format
-#| msgid ""
-#| "style override used with wildcard context reference in language '%s' in "
-#| "ref '%s'"
 msgid ""
 "style override used with wildcard context reference in language “%s” in ref "
 "“%s”"
@@ -429,14 +417,12 @@ msgstr "在語言「%s」參考「%s」中與萬用字符上下文參照共同�
 
 #: gtksourceview/gtksourcecontextengine.c:6161
 #, fuzzy, c-format
-#| msgid "invalid context reference '%s'"
 msgid "invalid context reference “%s”"
 msgstr "無效的上下文參照「%s」"
 
 #: gtksourceview/gtksourcecontextengine.c:6180
 #: gtksourceview/gtksourcecontextengine.c:6190
 #, fuzzy, c-format
-#| msgid "unknown context '%s'"
 msgid "unknown context “%s”"
 msgstr "未知的上下文「%s」"
 
@@ -619,19 +605,30 @@ msgstr "其他"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:949
 #, fuzzy, c-format
-#| msgid "Unknown id '%s' in regex '%s'"
 msgid "Unknown id “%s” in regex “%s”"
 msgstr "正規表示式「%s」中的不明 id「%s」"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:1179
 #, fuzzy, c-format
-#| msgid "in regex '%s': backreferences are not supported"
 msgid "in regex “%s”: backreferences are not supported"
 msgstr "於正規表示式「%s」：不支援後方參照"
 
 #: gtksourceview/gtksourceregex.c:102
 msgid "using \\C is not supported in language definitions"
 msgstr "在語言定義中不支援使用 \\C"
+
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr ""
 
 #. create redo menu_item.
 #: gtksourceview/gtksourceview.c:1727

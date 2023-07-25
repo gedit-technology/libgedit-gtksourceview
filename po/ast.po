@@ -5,9 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview master\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2011-12-20 19:19+0200\n"
 "Last-Translator: Xandru Armesto <xandru@softastur.org>\n"
 "Language-Team: Softastur alministradores@softastur.org\n"
@@ -98,7 +97,6 @@ msgstr ""
 #: swift.lang:24 systemverilog.lang:21 thrift.lang:20 vala.lang:27
 #: vbnet.lang:23 verilog.lang:23 vhdl.lang:23
 #, fuzzy
-#| msgid "Sources"
 msgid "Source"
 msgstr "Fontes"
 
@@ -118,7 +116,6 @@ msgstr "Fontes"
 #: perl.lang:25 php.lang:28 python3.lang:23 python.lang:27 ruby.lang:26
 #: sh.lang:24 tcl.lang:23
 #, fuzzy
-#| msgid "Scripts"
 msgid "Script"
 msgstr "Scripts"
 
@@ -187,21 +184,18 @@ msgstr "Llinguaxe de solombres CG"
 #: puppet.lang:23 rpmspec.lang:24 scss.lang:23 toml.lang:23 yacc.lang:23
 #: yaml.lang:21
 #, fuzzy
-#| msgid "Others"
 msgid "Other"
 msgstr "Otros"
 
 #. (itstool) path: chdr.lang/language@_name
 #: chdr.lang:24
 #, fuzzy
-#| msgid "C/C++/ObjC Header"
 msgid "C/ObjC Header"
 msgstr "C/C++/ObjC Header"
 
 #. (itstool) path: cpphdr.lang/language@_name
 #: cpphdr.lang:24
 #, fuzzy
-#| msgid "Header"
 msgid "C++ Header"
 msgstr "Encabezáu"
 
@@ -305,7 +299,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-dark.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized dark color palette"
 msgstr "Esquema de colores usando la paleta de colores de Tango"
 
@@ -317,7 +310,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-light.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized light color palette"
 msgstr "Esquema de colores usando la paleta de colores de Tango"
 
@@ -341,7 +333,6 @@ msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:848
 #, fuzzy, c-format
-#| msgid "string-conversion"
 msgid "Error during conversion: %s"
 msgstr "string-conversion"
 
@@ -360,8 +351,7 @@ msgid "Invalid object, not initialized"
 msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
-#, fuzzy
-#| msgid "Incomplete Sequence"
+#, fuzzy, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr "Secuencia incompleta"
 
@@ -382,7 +372,6 @@ msgstr "Fornidor"
 
 #: gtksourceview/gtksourcecompletion.ui:86
 #, fuzzy
-#| msgid "Show provider and proposal icons in the completion popup"
 msgid "Show detailed proposal information"
 msgstr ""
 "Amosar el fornidor y los iconos propuestos nel ventanu emerxente de completáu"
@@ -416,23 +405,18 @@ msgstr ""
 
 #: gtksourceview/gtksourcecontextengine.c:5720
 #, fuzzy, c-format
-#| msgid "context '%s' cannot contain a \\%%{...@start} command"
 msgid "context “%s” cannot contain a \\%%{...@start} command"
 msgstr "el contestu «%s» nun pue contener un comandu \\%%{...@start} command"
 
 #: gtksourceview/gtksourcecontextengine.c:5883
 #: gtksourceview/gtksourcecontextengine.c:5973
 #, fuzzy, c-format
-#| msgid "duplicated context id '%s'"
 msgid "duplicated context id “%s”"
 msgstr "id de contestu duplicáu«%s»"
 
 #: gtksourceview/gtksourcecontextengine.c:6087
 #: gtksourceview/gtksourcecontextengine.c:6147
 #, fuzzy, c-format
-#| msgid ""
-#| "style override used with wildcard context reference in language '%s' in "
-#| "ref '%s'"
 msgid ""
 "style override used with wildcard context reference in language “%s” in ref "
 "“%s”"
@@ -442,14 +426,12 @@ msgstr ""
 
 #: gtksourceview/gtksourcecontextengine.c:6161
 #, fuzzy, c-format
-#| msgid "invalid context reference '%s'"
 msgid "invalid context reference “%s”"
 msgstr "referencia de contestu inválida «%s»"
 
 #: gtksourceview/gtksourcecontextengine.c:6180
 #: gtksourceview/gtksourcecontextengine.c:6190
 #, fuzzy, c-format
-#| msgid "unknown context '%s'"
 msgid "unknown context “%s”"
 msgstr "contestu desconocíu «%s»"
 
@@ -564,7 +546,6 @@ msgstr ""
 #: gtksourceview/gtksourceencoding.c:264 gtksourceview/gtksourceencoding.c:270
 #: gtksourceview/gtksourceencoding.c:289
 #, fuzzy
-#| msgid "Filename"
 msgid "Vietnamese"
 msgstr "Nome de ficheru"
 
@@ -634,19 +615,30 @@ msgstr "Otros"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:949
 #, fuzzy, c-format
-#| msgid "Unknown id '%s' in regex '%s'"
 msgid "Unknown id “%s” in regex “%s”"
 msgstr "Id «%s» desconocíu na espresión regular «%s»"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:1179
 #, fuzzy, c-format
-#| msgid "in regex '%s': backreferences are not supported"
 msgid "in regex “%s”: backreferences are not supported"
 msgstr "na espresión regular «%s»: les retroreferencies nun se soporten"
 
 #: gtksourceview/gtksourceregex.c:102
 msgid "using \\C is not supported in language definitions"
 msgstr "l'usu de \\C nun se sofita nes definiciones del llinguax"
+
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr ""
 
 #. create redo menu_item.
 #: gtksourceview/gtksourceview.c:1727
@@ -676,6 +668,5 @@ msgstr ""
 
 #: gtksourceview/gtksourceview.c:1797
 #, fuzzy
-#| msgid "Changed line"
 msgid "C_hange Case"
 msgstr "Llinia camudada"

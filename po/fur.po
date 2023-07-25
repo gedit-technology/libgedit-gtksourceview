@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview gnome-3-24\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2017-05-29 21:41+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
@@ -246,7 +245,6 @@ msgstr "RPM spec"
 #. (itstool) path: tera.lang/language@_name
 #: tera.lang:23
 #, fuzzy
-#| msgid "Template"
 msgid "Tera Template"
 msgstr "Model"
 
@@ -344,6 +342,7 @@ msgid "Invalid object, not initialized"
 msgstr "Ogjet no valit, no inizializât"
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
+#, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr "Secuence UTF-8 incomplete te jentrade"
 
@@ -617,6 +616,19 @@ msgstr "te espression regolâr “%s”: i riferiments indaûr no son supuartât
 #: gtksourceview/gtksourceregex.c:102
 msgid "using \\C is not supported in language definitions"
 msgstr "l'ûs di \\C nol è supuartât tes definizions dal lengaç"
+
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr ""
 
 #. create redo menu_item.
 #: gtksourceview/gtksourceview.c:1727

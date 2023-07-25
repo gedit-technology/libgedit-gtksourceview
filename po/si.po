@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: si\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2007-08-31 15:00+0530\n"
 "Last-Translator: Danishka Navin <snavin@redhat.com>\n"
 "Language-Team: Sinhala <en@li.org>\n"
@@ -113,7 +112,6 @@ msgstr ""
 #: perl.lang:25 php.lang:28 python3.lang:23 python.lang:27 ruby.lang:26
 #: sh.lang:24 tcl.lang:23
 #, fuzzy
-#| msgid "Javascript"
 msgid "Script"
 msgstr "Javascript"
 
@@ -147,7 +145,6 @@ msgstr ""
 #. (itstool) path: cg.lang/language@_name
 #: cg.lang:23
 #, fuzzy
-#| msgid "Language"
 msgid "CG Shader Language"
 msgstr "භාෂාව"
 
@@ -184,28 +181,24 @@ msgstr "භාෂාව"
 #: puppet.lang:23 rpmspec.lang:24 scss.lang:23 toml.lang:23 yacc.lang:23
 #: yaml.lang:21
 #, fuzzy
-#| msgid "Others"
 msgid "Other"
 msgstr "වෙනත් පිරිස්"
 
 #. (itstool) path: chdr.lang/language@_name
 #: chdr.lang:24
 #, fuzzy
-#| msgid "C/C++/ObjC Header"
 msgid "C/ObjC Header"
 msgstr "C/C++/ObjC Header"
 
 #. (itstool) path: cpphdr.lang/language@_name
 #: cpphdr.lang:24
 #, fuzzy
-#| msgid "Header"
 msgid "C++ Header"
 msgstr "ශීර්ෂකය"
 
 #. (itstool) path: dosbatch.lang/language@_name
 #: dosbatch.lang:23
 #, fuzzy
-#| msgid "DPatch"
 msgid "DOS Batch"
 msgstr "DPatch"
 
@@ -354,6 +347,7 @@ msgid "Invalid object, not initialized"
 msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
+#, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr ""
 
@@ -617,6 +611,19 @@ msgstr ""
 
 #: gtksourceview/gtksourceregex.c:102
 msgid "using \\C is not supported in language definitions"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
 msgstr ""
 
 #. create redo menu_item.

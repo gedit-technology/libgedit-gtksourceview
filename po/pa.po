@@ -9,9 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview.HEAD\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2013-09-18 09:09-0500\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <kde-i18n-doc@kde.org>\n"
@@ -100,7 +99,6 @@ msgstr ""
 #: swift.lang:24 systemverilog.lang:21 thrift.lang:20 vala.lang:27
 #: vbnet.lang:23 verilog.lang:23 vhdl.lang:23
 #, fuzzy
-#| msgid "Sources"
 msgid "Source"
 msgstr "ਸਰੋਤ"
 
@@ -120,7 +118,6 @@ msgstr "ਸਰੋਤ"
 #: perl.lang:25 php.lang:28 python3.lang:23 python.lang:27 ruby.lang:26
 #: sh.lang:24 tcl.lang:23
 #, fuzzy
-#| msgid "Scripts"
 msgid "Script"
 msgstr "ਸਕ੍ਰਿਪਟ"
 
@@ -194,14 +191,12 @@ msgstr "ਹੋਰ"
 #. (itstool) path: chdr.lang/language@_name
 #: chdr.lang:24
 #, fuzzy
-#| msgid "C/C++/ObjC Header"
 msgid "C/ObjC Header"
 msgstr "C/C++/ObjC ਹੈੱਡਰ"
 
 #. (itstool) path: cpphdr.lang/language@_name
 #: cpphdr.lang:24
 #, fuzzy
-#| msgid "Header"
 msgid "C++ Header"
 msgstr "ਹੈਂਡਰ"
 
@@ -213,7 +208,6 @@ msgstr "DOS ਬੈਚ"
 #. (itstool) path: dtl.lang/language@_name
 #: dtl.lang:25
 #, fuzzy
-#| msgid "Template"
 msgid "Django Template"
 msgstr "ਟੈਪਲੇਟ"
 
@@ -262,7 +256,6 @@ msgstr "RPM spec"
 #. (itstool) path: tera.lang/language@_name
 #: tera.lang:23
 #, fuzzy
-#| msgid "Template"
 msgid "Tera Template"
 msgstr "ਟੈਪਲੇਟ"
 
@@ -309,7 +302,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-dark.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized dark color palette"
 msgstr "ਟਾਂਗੋ ਰੰਗ ਪਲੈਅਟ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰੰਗ ਸਕੀਮ"
 
@@ -321,7 +313,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-light.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized light color palette"
 msgstr "ਟਾਂਗੋ ਰੰਗ ਪਲੈਅਟ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰੰਗ ਸਕੀਮ"
 
@@ -345,7 +336,6 @@ msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:848
 #, fuzzy, c-format
-#| msgid "string-conversion"
 msgid "Error during conversion: %s"
 msgstr "string-conversion"
 
@@ -364,8 +354,7 @@ msgid "Invalid object, not initialized"
 msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
-#, fuzzy
-#| msgid "Incomplete Sequence"
+#, fuzzy, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr "ਅਧੂਰਾ ਕ੍ਰਮ"
 
@@ -390,7 +379,6 @@ msgstr "ਵੇਰਵੇ ਸਮੇਤ ਸੁਝਾਅ ਜਾਣਕਾਰੀ ਵ�
 
 #: gtksourceview/gtksourcecompletion.ui:88
 #, fuzzy
-#| msgid "_Details..."
 msgid "_Details…"
 msgstr "ਵੇਰਵਾ(_D)..."
 
@@ -417,23 +405,18 @@ msgstr "ਇੱਕ ਇੱਕਲੀ ਲਾਈਨ ਨੂੰ ਹਾਈਲਾਈਟ �
 
 #: gtksourceview/gtksourcecontextengine.c:5720
 #, fuzzy, c-format
-#| msgid "context '%s' cannot contain a \\%%{...@start} command"
 msgid "context “%s” cannot contain a \\%%{...@start} command"
 msgstr "ਕੰਟੈਕਸਟ '%s' ਵਿੱਚ ਇੱਕ \\%%{...@start} ਕਮਾਂਡ ਨਹੀਂ ਹੈ"
 
 #: gtksourceview/gtksourcecontextengine.c:5883
 #: gtksourceview/gtksourcecontextengine.c:5973
 #, fuzzy, c-format
-#| msgid "duplicated context id '%s'"
 msgid "duplicated context id “%s”"
 msgstr "ਡੁਪਲੀਕੇਟ ਕੰਟੈਕਸਟ id '%s'"
 
 #: gtksourceview/gtksourcecontextengine.c:6087
 #: gtksourceview/gtksourcecontextengine.c:6147
 #, fuzzy, c-format
-#| msgid ""
-#| "style override used with wildcard context reference in language '%s' in "
-#| "ref '%s'"
 msgid ""
 "style override used with wildcard context reference in language “%s” in ref "
 "“%s”"
@@ -441,14 +424,12 @@ msgstr "ਲੈਗੂਇਜ਼ '%s' ਵਿੱਚ ਰੈਫਰੈਂਸ '%s' ਲ�
 
 #: gtksourceview/gtksourcecontextengine.c:6161
 #, fuzzy, c-format
-#| msgid "invalid context reference '%s'"
 msgid "invalid context reference “%s”"
 msgstr "ਗਲਤ ਕੰਟੈਕਸਟ ਰੈਂਫਰੈਂਸ '%s'"
 
 #: gtksourceview/gtksourcecontextengine.c:6180
 #: gtksourceview/gtksourcecontextengine.c:6190
 #, fuzzy, c-format
-#| msgid "unknown context '%s'"
 msgid "unknown context “%s”"
 msgstr "ਅਣਜਾਣ ਕੰਟੈਕਸਟ '%s'"
 
@@ -563,7 +544,6 @@ msgstr ""
 #: gtksourceview/gtksourceencoding.c:264 gtksourceview/gtksourceencoding.c:270
 #: gtksourceview/gtksourceencoding.c:289
 #, fuzzy
-#| msgid "Filename"
 msgid "Vietnamese"
 msgstr "ਫਾਇਲ ਨਾਂ"
 
@@ -633,19 +613,30 @@ msgstr "ਹੋਰ"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:949
 #, fuzzy, c-format
-#| msgid "Unknown id '%s' in regex '%s'"
 msgid "Unknown id “%s” in regex “%s”"
 msgstr "regex '%2$s' ਵਿੱਚ ਅਣਜਾਣ id '%1$s'"
 
 #: gtksourceview/gtksourcelanguage-parser-2.c:1179
 #, fuzzy, c-format
-#| msgid "in regex '%s': backreferences are not supported"
 msgid "in regex “%s”: backreferences are not supported"
 msgstr "regex '%s' ਵਿੱਚ: ਬੈਕ-ਰੈਫਰੈਂਸ ਸਹਾਇਕ ਨਹੀਂ"
 
 #: gtksourceview/gtksourceregex.c:102
 msgid "using \\C is not supported in language definitions"
 msgstr "ਵਰਤੋਂ \\C ਲੈਗੂਇਜ਼ ਪਰਿਭਾਸ਼ਾ ਲਈ ਸਹਾਇਕ ਨਹੀਂ ਹੈ"
+
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr ""
 
 #. create redo menu_item.
 #: gtksourceview/gtksourceview.c:1727
@@ -671,12 +662,10 @@ msgstr ""
 
 #: gtksourceview/gtksourceview.c:1787
 #, fuzzy
-#| msgid "Title"
 msgid "_Title Case"
 msgstr "ਟਾਈਟਲ"
 
 #: gtksourceview/gtksourceview.c:1797
 #, fuzzy
-#| msgid "Changed line"
 msgid "C_hange Case"
 msgstr "ਬਦਲੀ ਲਾਈਨ"

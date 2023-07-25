@@ -4,9 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2010-05-12 18:37 -0400\n"
 "Last-Translator: Thomas Thurman <tthurman@gnome.org>\n"
 "Language-Team: Shavian <ubuntu-l10n-en-shaw@launchpad.net>\n"
@@ -92,7 +91,6 @@ msgstr ""
 #: swift.lang:24 systemverilog.lang:21 thrift.lang:20 vala.lang:27
 #: vbnet.lang:23 verilog.lang:23 vhdl.lang:23
 #, fuzzy
-#| msgid "Sources"
 msgid "Source"
 msgstr "𐑕𐑹𐑕𐑩𐑟"
 
@@ -112,7 +110,6 @@ msgstr "𐑕𐑹𐑕𐑩𐑟"
 #: perl.lang:25 php.lang:28 python3.lang:23 python.lang:27 ruby.lang:26
 #: sh.lang:24 tcl.lang:23
 #, fuzzy
-#| msgid "Scripts"
 msgid "Script"
 msgstr "𐑕𐑒𐑮𐑦𐑐𐑑𐑕"
 
@@ -182,7 +179,6 @@ msgstr "CG 𐑖𐑱𐑛𐑻 𐑤𐑨𐑙𐑜𐑢𐑩𐑡"
 #: puppet.lang:23 rpmspec.lang:24 scss.lang:23 toml.lang:23 yacc.lang:23
 #: yaml.lang:21
 #, fuzzy
-#| msgid "Others"
 msgid "Other"
 msgstr "𐑳𐑞𐑼𐑟"
 
@@ -195,14 +191,12 @@ msgstr "𐑕𐑰/𐑕𐑰++/ObjC 𐑣𐑧𐑛𐑼"
 #. (itstool) path: cpphdr.lang/language@_name
 #: cpphdr.lang:24
 #, fuzzy
-#| msgid "Header"
 msgid "C++ Header"
 msgstr "𐑣𐑧𐑛𐑼"
 
 #. (itstool) path: dosbatch.lang/language@_name
 #: dosbatch.lang:23
 #, fuzzy
-#| msgid "Dos Batch"
 msgid "DOS Batch"
 msgstr "·𐑛𐑵𐑟 𐑚𐑨𐑗"
 
@@ -303,7 +297,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-dark.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized dark color palette"
 msgstr "𐑒𐑳𐑤𐑼 𐑕𐑒𐑰𐑥 𐑿𐑟𐑦𐑙 ·𐑑𐑨𐑙𐑜𐑴 𐑒𐑳𐑤𐑼 𐑐𐑩𐑤𐑧𐑑"
 
@@ -315,7 +308,6 @@ msgstr ""
 #. (itstool) path: style-scheme/_description
 #: default-style-schemes/solarized-light.xml:25
 #, fuzzy
-#| msgid "Color scheme using Tango color palette"
 msgid "Color scheme using Solarized light color palette"
 msgstr "𐑒𐑳𐑤𐑼 𐑕𐑒𐑰𐑥 𐑿𐑟𐑦𐑙 ·𐑑𐑨𐑙𐑜𐑴 𐑒𐑳𐑤𐑼 𐑐𐑩𐑤𐑧𐑑"
 
@@ -339,7 +331,6 @@ msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:848
 #, fuzzy, c-format
-#| msgid "string-conversion"
 msgid "Error during conversion: %s"
 msgstr "𐑕𐑑𐑮𐑦𐑙-𐑒𐑩𐑯𐑝𐑻𐑖𐑩𐑯"
 
@@ -358,6 +349,7 @@ msgid "Invalid object, not initialized"
 msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
+#, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr ""
 
@@ -408,23 +400,18 @@ msgstr "𐑣𐑲𐑤𐑲𐑑𐑦𐑙 𐑩 𐑕𐑦𐑙𐑜𐑩𐑤 𐑤𐑲𐑯 
 
 #: gtksourceview/gtksourcecontextengine.c:5720
 #, fuzzy, c-format
-#| msgid "context '%s' cannot contain a \\%%{...@start} command"
 msgid "context “%s” cannot contain a \\%%{...@start} command"
 msgstr "𐑒𐑪𐑯𐑑𐑧𐑒𐑕𐑑 '%s' 𐑒𐑨𐑯𐑪𐑑 𐑒𐑩𐑯𐑑𐑱𐑯 𐑩 \\%%{...@start} 𐑒𐑩𐑥𐑭𐑯𐑛"
 
 #: gtksourceview/gtksourcecontextengine.c:5883
 #: gtksourceview/gtksourcecontextengine.c:5973
 #, fuzzy, c-format
-#| msgid "duplicated context id '%s'"
 msgid "duplicated context id “%s”"
 msgstr "𐑛𐑿𐑐𐑤𐑦𐑒𐑱𐑑𐑩𐑛 𐑒𐑪𐑯𐑑𐑧𐑒𐑕𐑑 𐑦𐑛 '%s'"
 
 #: gtksourceview/gtksourcecontextengine.c:6087
 #: gtksourceview/gtksourcecontextengine.c:6147
 #, fuzzy, c-format
-#| msgid ""
-#| "style override used with wildcard context reference in language '%s' in "
-#| "ref '%s'"
 msgid ""
 "style override used with wildcard context reference in language “%s” in ref "
 "“%s”"
@@ -433,14 +420,12 @@ msgstr ""
 
 #: gtksourceview/gtksourcecontextengine.c:6161
 #, fuzzy, c-format
-#| msgid "invalid context reference '%s'"
 msgid "invalid context reference “%s”"
 msgstr "𐑦𐑯𐑝𐑨𐑤𐑦𐑛 𐑒𐑪𐑯𐑑𐑧𐑒𐑕𐑑 𐑮𐑧𐑓𐑼𐑩𐑯𐑕 '%s'"
 
 #: gtksourceview/gtksourcecontextengine.c:6180
 #: gtksourceview/gtksourcecontextengine.c:6190
 #, fuzzy, c-format
-#| msgid "unknown context '%s'"
 msgid "unknown context “%s”"
 msgstr "𐑳𐑯𐑴𐑯 𐑒𐑪𐑯𐑑𐑧𐑒𐑕𐑑 '%s'"
 
@@ -635,6 +620,19 @@ msgstr "𐑦𐑯 regex '%s': backreferences 𐑸 𐑯𐑪𐑑 𐑕𐑩𐑐𐑹�
 msgid "using \\C is not supported in language definitions"
 msgstr "𐑿𐑟𐑦𐑙 \\C 𐑦𐑟 𐑯𐑪𐑑 𐑕𐑩𐑐𐑹𐑑𐑩𐑛 𐑦𐑯 𐑤𐑨𐑙𐑜𐑢𐑩𐑡 𐑛𐑧𐑓𐑩𐑯𐑦𐑖𐑩𐑯𐑟"
 
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr ""
+
 #. create redo menu_item.
 #: gtksourceview/gtksourceview.c:1727
 msgid "_Redo"
@@ -663,6 +661,5 @@ msgstr ""
 
 #: gtksourceview/gtksourceview.c:1797
 #, fuzzy
-#| msgid "Changed line"
 msgid "C_hange Case"
 msgstr "𐑗𐑱𐑯𐑡𐑛 𐑤𐑲𐑯"

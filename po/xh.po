@@ -7,9 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtksourceview\n"
-"Report-Msgid-Bugs-To: https://github.com/gedit-technology/libgedit-"
-"gtksourceview/issues\n"
-"POT-Creation-Date: 2023-04-28 20:25+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-29 00:22+0200\n"
 "PO-Revision-Date: 2005-03-18 00:40+0200\n"
 "Last-Translator: Canonical Ltd <translations@canonical.com>\n"
 "Language-Team: Xhosa <xh-translate@ubuntu.com>\n"
@@ -94,7 +93,6 @@ msgstr ""
 #: swift.lang:24 systemverilog.lang:21 thrift.lang:20 vala.lang:27
 #: vbnet.lang:23 verilog.lang:23 vhdl.lang:23
 #, fuzzy
-#| msgid "Sources"
 msgid "Source"
 msgstr "Imithombo"
 
@@ -114,7 +112,6 @@ msgstr "Imithombo"
 #: perl.lang:25 php.lang:28 python3.lang:23 python.lang:27 ruby.lang:26
 #: sh.lang:24 tcl.lang:23
 #, fuzzy
-#| msgid "Scripts"
 msgid "Script"
 msgstr "Izikripti"
 
@@ -148,7 +145,6 @@ msgstr "Ukunyusa ixabiso"
 #. (itstool) path: cg.lang/language@_name
 #: cg.lang:23
 #, fuzzy
-#| msgid "Language"
 msgid "CG Shader Language"
 msgstr "Ulwimi"
 
@@ -185,7 +181,6 @@ msgstr "Ulwimi"
 #: puppet.lang:23 rpmspec.lang:24 scss.lang:23 toml.lang:23 yacc.lang:23
 #: yaml.lang:21
 #, fuzzy
-#| msgid "Others"
 msgid "Other"
 msgstr "Ezinye"
 
@@ -197,7 +192,6 @@ msgstr ""
 #. (itstool) path: cpphdr.lang/language@_name
 #: cpphdr.lang:24
 #, fuzzy
-#| msgid "Print Header"
 msgid "C++ Header"
 msgstr "Shicilela Umbhalo okumntla wephepha"
 
@@ -351,6 +345,7 @@ msgid "Invalid object, not initialized"
 msgstr ""
 
 #: gtksourceview/gtksourcebufferoutputstream.c:1187
+#, c-format
 msgid "Incomplete UTF-8 sequence in input"
 msgstr ""
 
@@ -435,7 +430,6 @@ msgstr ""
 #: gtksourceview/gtksourceencoding.c:195 gtksourceview/gtksourceencoding.c:197
 #: gtksourceview/gtksourceencoding.c:199 gtksourceview/gtksourceencoding.c:201
 #, fuzzy
-#| msgid "Unicode Range"
 msgid "Unicode"
 msgstr "Uluhlu Lwekhowudi yomdibaniso"
 
@@ -618,6 +612,19 @@ msgstr ""
 msgid "using \\C is not supported in language definitions"
 msgstr ""
 
+#: gtksourceview/gtksourceutils.c:439
+msgid "Bracket match is out of range"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:442
+msgid "Bracket match not found"
+msgstr ""
+
+#: gtksourceview/gtksourceutils.c:445
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr ""
+
 #. create redo menu_item.
 #: gtksourceview/gtksourceview.c:1727
 msgid "_Redo"
@@ -646,6 +653,5 @@ msgstr ""
 
 #: gtksourceview/gtksourceview.c:1797
 #, fuzzy
-#| msgid "Changed line"
 msgid "C_hange Case"
 msgstr "Umgca Otshintshiweyo"
