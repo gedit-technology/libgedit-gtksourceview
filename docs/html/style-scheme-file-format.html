@@ -119,16 +119,64 @@
 &lt;_description&gt;Classic color scheme&lt;/_description&gt;
 </pre>
 
-<!-- FIXME: document well if mandatory or optional, and if it must appear at
-            most once or if several instances are accepted. -->
+<h2>Color values</h2>
+<p>
+  When a color value is needed inside a <code>&lt;color&gt;</code> tag, it needs
+  to be a "final" color value (see below).
+</p>
+<p>
+  When a color value is needed inside a <code>&lt;style&gt;</code> tag, it can
+  either be a "final" color value, or a reference to a
+  <code>&lt;color&gt;</code> tag.
+</p>
+
+<h3>Final color values</h3>
+<p>
+  All "final" color values must begin with <code>#</code>. Examples:
+</p>
+<ul>
+  <li>
+    An hexadecimal color specification like: <code>#000000</code>
+  </li>
+  <li>
+    A RGBA color (with an alpha field for transparency) like:
+    <code>#rgba(255,0,0,0.5)</code>
+  </li>
+  <li>
+    A named color understood by GDK like: <code>#beige</code>
+  </li>
+</ul>
+<p>
+  See the documentation of the <code>gdk_rgba_parse()</code> function (part of
+  the GDK library) for more information. Note that the <code>#</code> must be
+  prefixed if it's not already the case.
+</p>
+
+<h3>Referring to a &lt;color&gt; tag</h3>
+<p>
+  We refer to a <code>&lt;color&gt;</code> tag by its name. Example:
+</p>
+<pre>
+&lt;color name="aluminium1" value="#eeeeec"/&gt;
+&lt;style name="line-numbers" background="aluminium1"/&gt;
+</pre>
 
 <h2>&lt;color&gt; tags</h2>
 <p>
   The <code>&lt;color&gt;</code> tags define color names to be used in
   <code>&lt;style&gt;</code> tags. It has two attributes: <code>name</code> and
-  <code>value</code>. <code>value</code> is the hexadecimal color specification
-  like "#000000" or named color understood by Gdk prefixed with "#", e.g.
-  "#beige".
+  <code>value</code>. <code>value</code> is a "final" color value as described
+  above. Example:
+</p>
+<pre>
+&lt;color name="aluminium1" value="#eeeeec"/&gt;
+&lt;color name="with-transparency" value="#rgba(255,0,0,0.5)"/&gt;
+</pre>
+<p>
+  Note that <code>&lt;color&gt;</code> tags are optional because a
+  <code>&lt;style&gt;</code> tag can have final color values too.
+  <code>&lt;color&gt;</code> tags permit to avoid duplication of values, and to
+  give them names (like a color palette).
 </p>
 
 <h2>&lt;style&gt; tags</h2>
@@ -144,8 +192,8 @@
 <dl>
   <dt><code>name</code> (mandatory)</dt>
   <dd>
-    Name of the style. It can be anything, syntax highlighting uses
-    <em>lang-id:style-id</em>, and there are few special styles which are used
+    Name of the style. It can be anything. Syntax highlighting uses
+    <em>lang-id:style-id</em>, and there are a few special styles which are used
     to control general appearance of the text. Style scheme may contain other
     names to be used in an application. For instance, it may define color to
     highlight compilation errors in a build log or a color for bookmarks.
@@ -153,9 +201,7 @@
 
   <dt><code>foreground</code></dt>
   <dd>
-    Foreground color. It may be name defined in one of <code>color</code> tags,
-    or value in hexadecimal format, e.g. "#000000", or symbolic name understood
-    by Gdk, prefixed with "#", e.g. "#magenta" or "#darkred".
+    Foreground color.
   </dd>
 
   <dt><code>background</code></dt>
