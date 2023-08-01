@@ -47,19 +47,17 @@ create_manager (void)
 }
 
 static void
-check_scheme (GtkSourceStyleScheme  *scheme,
-	      const gchar           *expected_id,
-	      const gchar           *expected_name,
-	      const gchar           *expected_description,
-	      const gchar          **expected_authors,
-	      const gchar           *style_id)
+check_scheme (GtkSourceStyleScheme *scheme,
+	      const gchar          *expected_id,
+	      const gchar          *expected_name,
+	      const gchar          *expected_description,
+	      const gchar          *style_id)
 {
 	GtkSourceStyle *style;
 
 	g_assert_cmpstr (gtk_source_style_scheme_get_id (scheme), ==, expected_id);
 	g_assert_cmpstr (gtk_source_style_scheme_get_name (scheme), ==, expected_name);
 	g_assert_cmpstr (gtk_source_style_scheme_get_description (scheme), ==, expected_description);
-	g_assert_cmpstrv (gtk_source_style_scheme_get_authors (scheme), expected_authors);
 
 	style = gtk_source_style_scheme_get_style (scheme, style_id);
 	g_assert_true (GTK_SOURCE_IS_STYLE (style));
@@ -70,10 +68,9 @@ test_scheme_properties (void)
 {
 	GtkSourceStyleSchemeManager *manager = create_manager ();
 	GtkSourceStyleScheme *scheme;
-	const gchar *authors[] = { "Paolo Borelli", "John Doe", NULL};
 
 	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "test");
-	check_scheme (scheme, "test", "Test", "Test color scheme", authors, "def:comment");
+	check_scheme (scheme, "test", "Test", "Test color scheme", "def:comment");
 
 	g_object_unref (manager);
 }
