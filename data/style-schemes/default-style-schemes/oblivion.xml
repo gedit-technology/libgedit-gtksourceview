@@ -22,8 +22,6 @@
 -->
 
 <style-scheme id="oblivion" _name="Oblivion" version="1.0">
-
-  <author>Paolo Borelli</author>
   <_description>Dark color scheme using the Tango color palette</_description>
 
   <!-- Tango Palette -->

@@ -21,7 +21,6 @@
 
 -->
 <style-scheme id="classic" _name="Classic" version="1.0">
-  <author>GtkSourceView team</author>
   <_description>Classic color scheme</_description>
 
   <!-- The scheme tries to look like the default GVim scheme,

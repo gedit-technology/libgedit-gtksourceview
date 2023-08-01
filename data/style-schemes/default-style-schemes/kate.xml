@@ -21,7 +21,6 @@
 
 -->
 <style-scheme id="kate" name="Kate" version="1.0">
-  <author>GtkSourceView team</author>
   <_description>Color scheme used in the Kate text editor</_description>
 
   <color name="red"                         value="#FF0000"/>
