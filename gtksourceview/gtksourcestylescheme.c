@@ -53,7 +53,6 @@ struct _GtkSourceStyleSchemePrivate
 {
 	gchar *id;
 	gchar *name;
-	GPtrArray *authors;
 	gchar *description;
 	gchar *filename;
 
@@ -102,11 +101,6 @@ static void
 gtk_source_style_scheme_finalize (GObject *object)
 {
 	GtkSourceStyleScheme *scheme = GTK_SOURCE_STYLE_SCHEME (object);
-
-	if (scheme->priv->authors != NULL)
-	{
-		g_ptr_array_free (scheme->priv->authors, TRUE);
-	}
 
 	g_free (scheme->priv->filename);
 	g_free (scheme->priv->description);
@@ -629,16 +623,6 @@ parse_style_scheme_child (GtkSourceStyleScheme *scheme,
 		if (!parse_color (scheme, node, error))
 			return FALSE;
 	}
-	else if (strcmp ((char*) node->name, "author") == 0)
-	{
-		xmlChar *tmp = xmlNodeGetContent (node);
-		if (scheme->priv->authors == NULL)
-			scheme->priv->authors = g_ptr_array_new_with_free_func (g_free);
-
-		g_ptr_array_add (scheme->priv->authors, g_strdup ((char*) tmp));
-
-		xmlFree (tmp);
-	}
 	else if (strcmp ((char*) node->name, "description") == 0)
 	{
 		xmlChar *tmp = xmlNodeGetContent (node);
@@ -720,10 +704,6 @@ parse_style_scheme_element (GtkSourceStyleScheme *scheme,
 		if (node->type == XML_ELEMENT_NODE)
 			if (!parse_style_scheme_child (scheme, node, error))
 				return;
-
-	/* NULL-terminate the array of authors */
-	if (scheme->priv->authors != NULL)
-		g_ptr_array_add (scheme->priv->authors, NULL);
 }
 
 /*
