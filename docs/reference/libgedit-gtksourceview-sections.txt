@@ -748,7 +748,6 @@ GtkSourceStyleScheme
 gtk_source_style_scheme_get_id
 gtk_source_style_scheme_get_name
 gtk_source_style_scheme_get_description
-gtk_source_style_scheme_get_authors
 gtk_source_style_scheme_get_filename
 gtk_source_style_scheme_get_style
 <SUBSECTION Standard>

@@ -199,28 +199,6 @@ gtk_source_style_scheme_get_description (GtkSourceStyleScheme *scheme)
 }
 
 /**
- * gtk_source_style_scheme_get_authors:
- * @scheme: a #GtkSourceStyleScheme.
- *
- * Returns: (nullable) (array zero-terminated=1) (transfer none): a
- *   %NULL-terminated array containing the @scheme authors, or %NULL if no
- *   author is specified by the style scheme.
- * Since: 2.0
- */
-const gchar * const *
-gtk_source_style_scheme_get_authors (GtkSourceStyleScheme *scheme)
-{
-	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
-
-	if (scheme->priv->authors == NULL)
-	{
-		return NULL;
-	}
-
-	return (const gchar * const *)scheme->priv->authors->pdata;
-}
-
-/**
  * gtk_source_style_scheme_get_filename:
  * @scheme: a #GtkSourceStyleScheme.
  *

@@ -227,6 +227,14 @@
   </refsect1>
 
   <refsect1>
+    <title>Style schemes file format changes</title>
+    <para>
+      The <code>&lt;author&gt;</code> tags are no longer supported, so you
+      should remove them.
+    </para>
+  </refsect1>
+
+  <refsect1>
     <title>API breaks</title>
     <itemizedlist>
       <listitem>
@@ -272,6 +280,10 @@
           properties have been removed. Use the
           <link linkend="gtk-source-style-get-data">gtk_source_style_get_data()</link>
           function instead.
+        </para>
+        <para>
+          The <code>gtk_source_style_scheme_get_authors()</code> function has
+          been removed.
         </para>
       </listitem>
     </itemizedlist>
