@@ -88,13 +88,13 @@ create_provider (const gchar *css)
 /* --- For the main CSS provider ------------------------------------ */
 
 static gchar *
-get_foreground_color_css_declaration (GtkSourceStyleData *style_data)
+get_foreground_color_css_declaration (GtkSourceStyle *style)
 {
 	gchar *ret = NULL;
 
-	if (style_data->use_foreground_color)
+	if (style->use_foreground_color)
 	{
-		gchar *fg_color_str = gdk_rgba_to_string (&style_data->foreground_color);
+		gchar *fg_color_str = gdk_rgba_to_string (&style->foreground_color);
 		ret = g_strdup_printf ("\tcolor: %s;\n", fg_color_str);
 		g_free (fg_color_str);
 	}
@@ -103,13 +103,13 @@ get_foreground_color_css_declaration (GtkSourceStyleData *style_data)
 }
 
 static gchar *
-get_background_color_css_declaration (GtkSourceStyleData *style_data)
+get_background_color_css_declaration (GtkSourceStyle *style)
 {
 	gchar *ret = NULL;
 
-	if (style_data->use_background_color)
+	if (style->use_background_color)
 	{
-		gchar *bg_color_str = gdk_rgba_to_string (&style_data->background_color);
+		gchar *bg_color_str = gdk_rgba_to_string (&style->background_color);
 		ret = g_strdup_printf ("\tbackground-color: %s;\n", bg_color_str);
 		g_free (bg_color_str);
 	}
@@ -122,7 +122,6 @@ append_css_style (GString        *string,
                   GtkSourceStyle *style,
                   const gchar    *selector)
 {
-	GtkSourceStyleData *style_data;
 	gchar *fg_decl;
 	gchar *bg_decl;
 
@@ -131,10 +130,8 @@ append_css_style (GString        *string,
 		return;
 	}
 
-	style_data = gtk_source_style_get_data (style);
-	fg_decl = get_foreground_color_css_declaration (style_data);
-	bg_decl = get_background_color_css_declaration (style_data);
-	g_free (style_data);
+	fg_decl = get_foreground_color_css_declaration (style);
+	bg_decl = get_background_color_css_declaration (style);
 
 	if (fg_decl == NULL && bg_decl == NULL)
 	{
@@ -226,29 +223,20 @@ get_style_foreground_color (GtkSourceStyleScheme *scheme,
 			    GdkRGBA              *foreground_color)
 {
 	GtkSourceStyle *style;
-	GtkSourceStyleData *style_data;
-	gboolean success = FALSE;
 
 	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), FALSE);
 	g_return_val_if_fail (style_id != NULL, FALSE);
 	g_return_val_if_fail (foreground_color != NULL, FALSE);
 
 	style = gtk_source_style_scheme_get_style (scheme, style_id);
-	if (style == NULL)
+
+	if (style != NULL && style->use_foreground_color)
 	{
-		return FALSE;
+		*foreground_color = style->foreground_color;
+		return TRUE;
 	}
 
-	style_data = gtk_source_style_get_data (style);
-
-	if (style_data->use_foreground_color)
-	{
-		*foreground_color = style_data->foreground_color;
-		success = TRUE;
-	}
-
-	g_free (style_data);
-	return success;
+	return FALSE;
 }
 
 static gchar *
