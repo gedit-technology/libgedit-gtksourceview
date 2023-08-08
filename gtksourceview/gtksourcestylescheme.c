@@ -20,6 +20,7 @@
 
 #include "gtksourcestylescheme.h"
 #include "gtksourcestylescheme-private.h"
+#include "gtksourcestyleschemeparser.h"
 
 /**
  * SECTION:stylescheme
@@ -41,6 +42,15 @@
 
 struct _GtkSourceStyleSchemePrivate
 {
+	gchar *filename;
+
+	/* @basic_infos and @styles are what
+	 * _gtk_source_style_scheme_parser_parse_file() returns. See that
+	 * function and corresponding source file for all the details.
+	 */
+	GtkSourceStyleSchemeBasicInfos *basic_infos;
+	GHashTable *styles;
+
 	GtkSourceStyleSchemeCss *scheme_css;
 };
 
@@ -51,9 +61,26 @@ gtk_source_style_scheme_dispose (GObject *object)
 {
 	GtkSourceStyleScheme *scheme = GTK_SOURCE_STYLE_SCHEME (object);
 
+	if (scheme->priv->styles != NULL)
+	{
+		g_hash_table_unref (scheme->priv->styles);
+		scheme->priv->styles = NULL;
+	}
+
 	g_clear_object (&scheme->priv->scheme_css);
 
 	G_OBJECT_CLASS (gtk_source_style_scheme_parent_class)->dispose (object);
+}
+
+static void
+gtk_source_style_scheme_finalize (GObject *object)
+{
+	GtkSourceStyleScheme *scheme = GTK_SOURCE_STYLE_SCHEME (object);
+
+	g_free (scheme->priv->filename);
+	_gtk_source_style_scheme_basic_infos_free (scheme->priv->basic_infos);
+
+	G_OBJECT_CLASS (gtk_source_style_scheme_parent_class)->finalize (object);
 }
 
 static void
@@ -62,6 +89,7 @@ gtk_source_style_scheme_class_init (GtkSourceStyleSchemeClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = gtk_source_style_scheme_dispose;
+	object_class->finalize = gtk_source_style_scheme_finalize;
 }
 
 static void
@@ -83,7 +111,12 @@ gtk_source_style_scheme_get_id (GtkSourceStyleScheme *scheme)
 {
 	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
 
-	return NULL;
+	if (scheme->priv->basic_infos == NULL)
+	{
+		return NULL;
+	}
+
+	return scheme->priv->basic_infos->id;
 }
 
 /**
@@ -99,7 +132,12 @@ gtk_source_style_scheme_get_name (GtkSourceStyleScheme *scheme)
 {
 	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
 
-	return NULL;
+	if (scheme->priv->basic_infos == NULL)
+	{
+		return NULL;
+	}
+
+	return scheme->priv->basic_infos->name;
 }
 
 /**
@@ -115,7 +153,12 @@ gtk_source_style_scheme_get_description (GtkSourceStyleScheme *scheme)
 {
 	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
 
-	return NULL;
+	if (scheme->priv->basic_infos == NULL)
+	{
+		return NULL;
+	}
+
+	return scheme->priv->basic_infos->description;
 }
 
 /**
@@ -131,7 +174,7 @@ gtk_source_style_scheme_get_filename (GtkSourceStyleScheme *scheme)
 {
 	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
 
-	return NULL;
+	return scheme->priv->filename;
 }
 
 /**
@@ -150,7 +193,12 @@ gtk_source_style_scheme_get_style (GtkSourceStyleScheme *scheme,
 	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
 	g_return_val_if_fail (style_id != NULL, NULL);
 
-	return NULL;
+	if (scheme->priv->styles == NULL)
+	{
+		return NULL;
+	}
+
+	return g_hash_table_lookup (scheme->priv->styles, style_id);
 }
 
 /*
@@ -163,9 +211,39 @@ gtk_source_style_scheme_get_style (GtkSourceStyleScheme *scheme,
 GtkSourceStyleScheme *
 _gtk_source_style_scheme_new_from_file (const gchar *filename)
 {
+	GtkSourceStyleScheme *scheme;
+	GFile *file;
+	GError *error = NULL;
+	gboolean ok;
+
 	g_return_val_if_fail (filename != NULL, NULL);
 
-	return NULL;
+	scheme = g_object_new (GTK_SOURCE_TYPE_STYLE_SCHEME, NULL);
+	scheme->priv->filename = g_strdup (filename);
+
+	file = g_file_new_for_path (filename);
+	ok = _gtk_source_style_scheme_parser_parse_file (file,
+							 &scheme->priv->basic_infos,
+							 &scheme->priv->styles,
+							 &error);
+	g_object_unref (file);
+
+
+	if (error != NULL)
+	{
+		g_warning ("Failed to load style scheme file '%s': %s",
+			   filename,
+			   error->message);
+		g_clear_error (&error);
+	}
+
+	if (!ok)
+	{
+		g_object_unref (scheme);
+		return NULL;
+	}
+
+	return scheme;
 }
 
 GtkSourceStyleSchemeCss *
