@@ -727,7 +727,13 @@ gtk_source_space_type_flags_get_type
 <SECTION>
 <FILE>style</FILE>
 GtkSourceStyle
+gtk_source_style_new
+gtk_source_style_ref
+gtk_source_style_unref
 gtk_source_style_apply
+<SUBSECTION Standard>
+GTK_SOURCE_TYPE_STYLE
+gtk_source_style_get_type
 </SECTION>
 
 <SECTION>
