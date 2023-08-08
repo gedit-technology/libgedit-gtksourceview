@@ -232,6 +232,11 @@
       The <code>&lt;author&gt;</code> tags are no longer supported, so you
       should remove them.
     </para>
+    <para>
+      The support for the <code>parent-scheme</code> attribute has been removed.
+      It was unused. If you relied on it, copy and adapt the content of the
+      parent scheme.
+    </para>
   </refsect1>
 
   <refsect1>
