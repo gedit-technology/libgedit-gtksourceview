@@ -70,7 +70,7 @@ check_parsing_error_full (const gchar *filename,
 	GError *error = NULL;
 	gboolean ok;
 
-	path = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "parsing-errors", filename, NULL);
+	path = g_build_filename (UNIT_TESTS_SRCDIR, "datasets", "style-schemes", "parsing-errors", filename, NULL);
 	file = g_file_new_for_path (path);
 
 	ok = _gtk_source_style_scheme_parser_parse_file (file, NULL, NULL, &error);
@@ -98,7 +98,7 @@ check_successful_parsing (void)
 	gboolean ok;
 	GtkSourceStyleSchemeBasicInfos *basic_infos = NULL;
 
-	path = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", "classic.xml", NULL);
+	path = g_build_filename (UNIT_TESTS_SRCDIR, "datasets", "style-schemes", "basics", "classic.xml", NULL);
 	file = g_file_new_for_path (path);
 
 	ok = _gtk_source_style_scheme_parser_parse_file (file, &basic_infos, NULL, &error);

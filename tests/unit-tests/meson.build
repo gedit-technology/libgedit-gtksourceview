@@ -31,9 +31,6 @@ unit_tests_c_args = [
   '-DUNIT_TESTS_SRCDIR="@0@"'.format(meson.current_source_dir()),
 ]
 
-unit_tests_env = environment()
-unit_tests_env.set('G_TEST_SRCDIR', meson.current_source_dir())
-
 foreach test_name : unit_tests
   test_exe = executable(
     test_name,
@@ -42,9 +39,5 @@ foreach test_name : unit_tests
     c_args: unit_tests_c_args,
   )
 
-  test(
-    test_name,
-    test_exe,
-    env: unit_tests_env,
-  )
+  test(test_name, test_exe)
 endforeach
