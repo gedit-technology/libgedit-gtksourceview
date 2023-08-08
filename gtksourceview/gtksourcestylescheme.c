@@ -277,7 +277,6 @@ fix_style_colors (GtkSourceStyleScheme *scheme,
 
 	fix_style_color_for_attribute (scheme, style, GTK_SOURCE_STYLE_USE_BACKGROUND, &style->background);
 	fix_style_color_for_attribute (scheme, style, GTK_SOURCE_STYLE_USE_FOREGROUND, &style->foreground);
-	fix_style_color_for_attribute (scheme, style, GTK_SOURCE_STYLE_USE_LINE_BACKGROUND, &style->line_background);
 	fix_style_color_for_attribute (scheme, style, GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR, &style->underline_color);
 
 	return style;
@@ -365,7 +364,6 @@ parse_style (GtkSourceStyleScheme *scheme,
 	GtkSourceStyle *result = NULL;
 	xmlChar *fg = NULL;
 	xmlChar *bg = NULL;
-	xmlChar *line_bg = NULL;
 	gchar *style_name = NULL;
 	guint mask = 0;
 	gboolean bold = FALSE;
@@ -405,7 +403,6 @@ parse_style (GtkSourceStyleScheme *scheme,
 
 	fg = xmlGetProp (node, BAD_CAST "foreground");
 	bg = xmlGetProp (node, BAD_CAST "background");
-	line_bg = xmlGetProp (node, BAD_CAST "line-background");
 	get_bool (node, "italic", &mask, GTK_SOURCE_STYLE_USE_ITALIC, &italic);
 	get_bool (node, "bold", &mask, GTK_SOURCE_STYLE_USE_BOLD, &bold);
 	get_bool (node, "strikethrough", &mask, GTK_SOURCE_STYLE_USE_STRIKETHROUGH, &strikethrough);
@@ -417,7 +414,6 @@ parse_style (GtkSourceStyleScheme *scheme,
 	{
 		if (fg != NULL ||
 		    bg != NULL ||
-		    line_bg != NULL ||
 		    mask != 0 ||
 		    underline != NULL ||
 		    underline_color != NULL ||
@@ -430,7 +426,6 @@ parse_style (GtkSourceStyleScheme *scheme,
 			g_free (style_name);
 			xmlFree (fg);
 			xmlFree (bg);
-			xmlFree (line_bg);
 			xmlFree (underline);
 			xmlFree (underline_color);
 			xmlFree (scale);
@@ -459,12 +454,6 @@ parse_style (GtkSourceStyleScheme *scheme,
 		{
 			result->background = g_intern_string ((char*) bg);
 			result->mask |= GTK_SOURCE_STYLE_USE_BACKGROUND;
-		}
-
-		if (line_bg != NULL)
-		{
-			result->line_background = g_intern_string ((char*) line_bg);
-			result->mask |= GTK_SOURCE_STYLE_USE_LINE_BACKGROUND;
 		}
 
 		if (underline != NULL)
@@ -527,7 +516,6 @@ parse_style (GtkSourceStyleScheme *scheme,
 
 	xmlFree (fg);
 	xmlFree (bg);
-	xmlFree (line_bg);
 	xmlFree (underline);
 	xmlFree (underline_color);
 	xmlFree (scale);

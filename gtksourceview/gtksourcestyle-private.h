@@ -26,14 +26,13 @@ G_BEGIN_DECLS
 
 enum
 {
-	GTK_SOURCE_STYLE_USE_LINE_BACKGROUND = 1 << 0,
-	GTK_SOURCE_STYLE_USE_BACKGROUND      = 1 << 1,
-	GTK_SOURCE_STYLE_USE_FOREGROUND      = 1 << 2,
-	GTK_SOURCE_STYLE_USE_ITALIC          = 1 << 3,
-	GTK_SOURCE_STYLE_USE_BOLD            = 1 << 4,
-	GTK_SOURCE_STYLE_USE_UNDERLINE       = 1 << 5,
-	GTK_SOURCE_STYLE_USE_STRIKETHROUGH   = 1 << 6,
-	GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR = 1 << 7
+	GTK_SOURCE_STYLE_USE_BACKGROUND      = 1 << 0,
+	GTK_SOURCE_STYLE_USE_FOREGROUND      = 1 << 1,
+	GTK_SOURCE_STYLE_USE_ITALIC          = 1 << 2,
+	GTK_SOURCE_STYLE_USE_BOLD            = 1 << 3,
+	GTK_SOURCE_STYLE_USE_UNDERLINE       = 1 << 4,
+	GTK_SOURCE_STYLE_USE_STRIKETHROUGH   = 1 << 5,
+	GTK_SOURCE_STYLE_USE_UNDERLINE_COLOR = 1 << 6
 };
 
 struct _GtkSourceStyle
@@ -51,7 +50,6 @@ struct _GtkSourceStyle
 	const gchar *foreground;
 	const gchar *background;
 	const gchar *underline_color;
-	const gchar *line_background;
 
 	gdouble scale;
 

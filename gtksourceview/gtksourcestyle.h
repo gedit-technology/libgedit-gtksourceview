@@ -44,7 +44,6 @@ typedef struct _GtkSourceStyleData	GtkSourceStyleData;
  * @foreground_color: Equivalent to #GtkTextTag:foreground-rgba.
  * @background_color: Equivalent to #GtkTextTag:background-rgba.
  * @underline_color: Equivalent to #GtkTextTag:underline-rgba.
- * @paragraph_background_color: Equivalent to #GtkTextTag:paragraph-background-rgba.
  * @scale: Equivalent to #GtkTextTag:scale.
  * @underline: Equivalent to #GtkTextTag:underline.
  * @italic: For #GtkTextTag:style.
@@ -53,7 +52,6 @@ typedef struct _GtkSourceStyleData	GtkSourceStyleData;
  * @use_foreground_color: Whether @foreground_color can be taken into account.
  * @use_background_color: Whether @background_color can be taken into account.
  * @use_underline_color: Whether @underline_color can be taken into account.
- * @use_paragraph_background_color: Whether @paragraph_background_color can be taken into account.
  * @use_scale: Whether @scale can be taken into account.
  * @use_underline: Whether @underline can be taken into account.
  * @use_italic: Whether @italic can be taken into account.
@@ -67,13 +65,11 @@ typedef struct _GtkSourceStyleData	GtkSourceStyleData;
  *
  * Since: 300.0
  */
-/* TODO: Add docs for paragraph_background_color in style-scheme-file-format.html. */
 struct _GtkSourceStyleData
 {
 	GdkRGBA foreground_color;
 	GdkRGBA background_color;
 	GdkRGBA underline_color;
-	GdkRGBA paragraph_background_color;
 	gdouble scale;
 	PangoUnderline underline;
 	guint italic : 1;
@@ -83,7 +79,6 @@ struct _GtkSourceStyleData
 	guint use_foreground_color : 1;
 	guint use_background_color : 1;
 	guint use_underline_color : 1;
-	guint use_paragraph_background_color : 1;
 	guint use_scale : 1;
 	guint use_underline : 1;
 	guint use_italic : 1;

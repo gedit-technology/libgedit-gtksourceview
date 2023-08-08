@@ -237,6 +237,10 @@
       It was unused. If you relied on it, copy and adapt the content of the
       parent scheme.
     </para>
+    <para>
+      The support for the <code>line-background</code> attribute (for the
+      <code>&lt;style&gt;</code> tag) has been removed.
+    </para>
   </refsect1>
 
   <refsect1>

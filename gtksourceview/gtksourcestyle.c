@@ -96,13 +96,6 @@ gtk_source_style_get_data (GtkSourceStyle *style)
 									   &data->underline_color);
 		g_warn_if_fail (data->use_underline_color);
 	}
-	if (style->mask & GTK_SOURCE_STYLE_USE_LINE_BACKGROUND)
-	{
-		data->use_paragraph_background_color =
-			_gtk_source_style_scheme_parser_parse_final_color (style->line_background,
-									   &data->paragraph_background_color);
-		g_warn_if_fail (data->use_paragraph_background_color);
-	}
 
 	data->scale = style->scale;
 	data->use_scale = style->use_scale;
@@ -146,7 +139,6 @@ gtk_source_style_copy (const GtkSourceStyle *style)
 	copy->foreground = style->foreground;
 	copy->background = style->background;
 	copy->underline_color = style->underline_color;
-	copy->line_background = style->line_background;
 	copy->scale = style->scale;
 	copy->underline = style->underline;
 	copy->italic = style->italic;
@@ -258,15 +250,6 @@ gtk_source_style_apply (GtkSourceStyle *style,
 			g_object_set (tag, "scale-set", FALSE, NULL);
 		}
 
-		if (data->use_paragraph_background_color)
-		{
-			g_object_set (tag, "paragraph-background-rgba", &data->paragraph_background_color, NULL);
-		}
-		else
-		{
-			g_object_set (tag, "paragraph-background-set", FALSE, NULL);
-		}
-
 		g_object_thaw_notify (G_OBJECT (tag));
 
 		g_free (data);
@@ -282,7 +265,6 @@ gtk_source_style_apply (GtkSourceStyle *style,
 			      "underline-rgba-set", FALSE,
 			      "strikethrough-set", FALSE,
 			      "scale-set", FALSE,
-			      "paragraph-background-set", FALSE,
 			      NULL);
 	}
 }
