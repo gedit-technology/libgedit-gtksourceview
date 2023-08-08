@@ -110,7 +110,6 @@
   <style name="diff:added-line"             use-style="def:decimal"/>
   <style name="diff:removed-line"           use-style="def:string"/>
   <style name="diff:changed-line"           use-style="c:preprocessor"/>
-  <style name="diff:special-case"/>
   <style name="diff:location"               use-style="def:type"/>
 
   <style name="xml:attribute-name"          foreground="dark-green"/>
