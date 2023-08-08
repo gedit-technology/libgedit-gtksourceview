@@ -31,13 +31,73 @@
 
 /* API design:
  *
- * A GtkSourceStyle object is read-only. It is created by a
- * GtkSourceStyleScheme. In the past there were lots of GObject properties to
- * get each individual attribute. The properties had the advantage to be
- * language-bindings friendly.
- * With all the properties (they were read-write and construct-only) there were
- * a lot of code. The idea is to have something simpler.
+ * In a past implementation, GtkSourceStyle was a GObject with a lot of
+ * properties to get each individual attribute (the properties were read-write
+ * and construct-only). This was language-bindings friendly, but a bit too
+ * "heavy" as a solution.
+ *
+ * Thus it is now a boxed type.
  */
+
+G_DEFINE_BOXED_TYPE (GtkSourceStyle, gtk_source_style,
+		     gtk_source_style_ref,
+		     gtk_source_style_unref)
+
+/**
+ * gtk_source_style_new:
+ *
+ * Returns: a new #GtkSourceStyle with a reference count of one.
+ * Since: 300.0
+ */
+GtkSourceStyle *
+gtk_source_style_new (void)
+{
+	GtkSourceStyle *style;
+
+	style = g_new0 (GtkSourceStyle, 1);
+	g_ref_count_init (&style->ref_count);
+
+	return style;
+}
+
+/**
+ * gtk_source_style_ref:
+ * @style: a #GtkSourceStyle.
+ *
+ * Increases the reference count of @style by one.
+ *
+ * Returns: (transfer full): the passed in @style.
+ * Since: 300.0
+ */
+GtkSourceStyle *
+gtk_source_style_ref (GtkSourceStyle *style)
+{
+	g_return_val_if_fail (style != NULL, NULL);
+
+	g_ref_count_inc (&style->ref_count);
+
+	return style;
+}
+
+/**
+ * gtk_source_style_unref:
+ * @style: a #GtkSourceStyle.
+ *
+ * Decreases the reference count of @style by one. If the reference count drops
+ * to 0, @style is freed.
+ *
+ * Since: 300.0
+ */
+void
+gtk_source_style_unref (GtkSourceStyle *style)
+{
+	g_return_if_fail (style != NULL);
+
+	if (g_ref_count_dec (&style->ref_count))
+	{
+		g_free (style);
+	}
+}
 
 /**
  * gtk_source_style_apply:

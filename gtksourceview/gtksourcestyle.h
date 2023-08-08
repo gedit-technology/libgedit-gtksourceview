@@ -29,6 +29,8 @@
 
 G_BEGIN_DECLS
 
+#define GTK_SOURCE_TYPE_STYLE (gtk_source_style_get_type ())
+
 typedef struct _GtkSourceStyle GtkSourceStyle;
 
 /**
@@ -57,6 +59,10 @@ typedef struct _GtkSourceStyle GtkSourceStyle;
  */
 struct _GtkSourceStyle
 {
+	/*< private >*/
+	grefcount ref_count;
+
+	/*< public >*/
 	GdkRGBA foreground_color;
 	GdkRGBA background_color;
 	GdkRGBA underline_color;
@@ -77,8 +83,20 @@ struct _GtkSourceStyle
 };
 
 G_MODULE_EXPORT
-void	gtk_source_style_apply	(GtkSourceStyle *style,
-				 GtkTextTag     *tag);
+GType			gtk_source_style_get_type	(void);
+
+G_MODULE_EXPORT
+GtkSourceStyle *	gtk_source_style_new		(void);
+
+G_MODULE_EXPORT
+GtkSourceStyle *	gtk_source_style_ref		(GtkSourceStyle *style);
+
+G_MODULE_EXPORT
+void			gtk_source_style_unref		(GtkSourceStyle *style);
+
+G_MODULE_EXPORT
+void			gtk_source_style_apply		(GtkSourceStyle *style,
+							 GtkTextTag     *tag);
 
 G_END_DECLS
 
