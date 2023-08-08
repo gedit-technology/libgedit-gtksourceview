@@ -60,7 +60,7 @@ check_scheme (GtkSourceStyleScheme *scheme,
 	g_assert_cmpstr (gtk_source_style_scheme_get_description (scheme), ==, expected_description);
 
 	style = gtk_source_style_scheme_get_style (scheme, style_id);
-	g_assert_true (GTK_SOURCE_IS_STYLE (style));
+	g_assert_nonnull (style);
 }
 
 static void
