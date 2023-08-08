@@ -9,9 +9,3 @@ option(
   type: 'boolean', value: true,
   description: 'Build API reference (requires gtk-doc)'
 )
-
-option(
-  'tests_relying_on_external_programs',
-  type: 'boolean', value: true,
-  description: 'Enable tests that rely on external programs (e.g. bash and xmllint)'
-)
