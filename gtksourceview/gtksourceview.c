@@ -4551,17 +4551,10 @@ update_background_pattern_color (GtkSourceView *view)
 		style = gtk_source_style_scheme_get_style (view->priv->style_scheme, "background-pattern");
 	}
 
-	if (style != NULL)
+	if (style != NULL && style->use_background_color)
 	{
-		GtkSourceStyleData *style_data = gtk_source_style_get_data (style);
-
-		if (style_data->use_background_color)
-		{
-			view->priv->background_pattern_color_set = TRUE;
-			view->priv->background_pattern_color = style_data->background_color;
-		}
-
-		g_free (style_data);
+		view->priv->background_pattern_color_set = TRUE;
+		view->priv->background_pattern_color = style->background_color;
 	}
 }
 
@@ -4577,17 +4570,10 @@ update_current_line_color (GtkSourceView *view)
 		style = gtk_source_style_scheme_get_style (view->priv->style_scheme, "current-line");
 	}
 
-	if (style != NULL)
+	if (style != NULL && style->use_background_color)
 	{
-		GtkSourceStyleData *style_data = gtk_source_style_get_data (style);
-
-		if (style_data->use_background_color)
-		{
-			view->priv->current_line_color_set = TRUE;
-			view->priv->current_line_color = style_data->background_color;
-		}
-
-		g_free (style_data);
+		view->priv->current_line_color_set = TRUE;
+		view->priv->current_line_color = style->background_color;
 	}
 }
 
@@ -4614,21 +4600,17 @@ update_right_margin_colors (GtkSourceView *view)
 
 		if (style != NULL)
 		{
-			GtkSourceStyleData *style_data = gtk_source_style_get_data (style);
-
-			if (style_data->use_foreground_color)
+			if (style->use_foreground_color)
 			{
-				view->priv->right_margin_line_color = gdk_rgba_copy (&style_data->foreground_color);
+				view->priv->right_margin_line_color = gdk_rgba_copy (&style->foreground_color);
 				view->priv->right_margin_line_color->alpha = RIGHT_MARGIN_LINE_ALPHA / 255.0;
 			}
 
-			if (style_data->use_background_color)
+			if (style->use_background_color)
 			{
-				view->priv->right_margin_overlay_color = gdk_rgba_copy (&style_data->background_color);
+				view->priv->right_margin_overlay_color = gdk_rgba_copy (&style->background_color);
 				view->priv->right_margin_overlay_color->alpha = RIGHT_MARGIN_OVERLAY_ALPHA / 255.0;
 			}
-
-			g_free (style_data);
 		}
 	}
 
