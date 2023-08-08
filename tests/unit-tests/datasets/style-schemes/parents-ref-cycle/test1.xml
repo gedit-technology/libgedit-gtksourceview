@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Test parent-scheme ref cycle -->
-<style-scheme id="test1" name="Test 1" parent-scheme="test2" version="1.0">
-</style-scheme>
