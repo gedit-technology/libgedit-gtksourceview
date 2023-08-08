@@ -1,3 +1,10 @@
+News in 299.0.5, 2023-yy-zz (not yet released)
+---------------------------
+* Continue to rework GtkSourceStyle* classes.
+  This includes a switch from the libxml2 to GMarkupParser.
+  (the libxml2 is still used for *.lang files though).
+* Simplify the style schemes XML file format, and better document it.
+
 News in 299.0.4, 2023-07-29
 ---------------------------
 * Tools: list-langs, to generate a listing of *.lang files.
