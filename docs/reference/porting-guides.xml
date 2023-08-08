@@ -241,6 +241,10 @@
       The support for the <code>line-background</code> attribute (for the
       <code>&lt;style&gt;</code> tag) has been removed.
     </para>
+    <para>
+      The parser is now a bit more strict, check if there are warning messages
+      printed in the terminal if a style scheme fails to load.
+    </para>
   </refsect1>
 
   <refsect1>
@@ -285,10 +289,12 @@
           properties have been removed. Use the get functions instead.
         </para>
         <para>
-          All the <link linkend="GtkSourceStyle">GtkSourceStyle</link>
-          properties have been removed. Use the
-          <link linkend="gtk-source-style-get-data">gtk_source_style_get_data()</link>
-          function instead.
+          <link linkend="GtkSourceStyle">GtkSourceStyle</link> is now a boxed
+          type (a simple struct), no longer a GObject. Which means that all the
+          properties have been removed. Instead of getting the values from the
+          properties, you now access the values directly from the struct.
+          Another important difference is to call the right ref/unref functions
+          for memory management.
         </para>
         <para>
           The <code>gtk_source_style_scheme_get_authors()</code> function has
