@@ -721,16 +721,9 @@ _gtk_source_space_drawer_update_color (GtkSourceSpaceDrawer *drawer,
 	{
 		GtkSourceStyle *style = gtk_source_style_scheme_get_style (style_scheme, "draw-spaces");
 
-		if (style != NULL)
+		if (style != NULL && style->use_foreground_color)
 		{
-			GtkSourceStyleData *style_data = gtk_source_style_get_data (style);
-
-			if (style_data->use_foreground_color)
-			{
-				drawer->priv->color = gdk_rgba_copy (&style_data->foreground_color);
-			}
-
-			g_free (style_data);
+			drawer->priv->color = gdk_rgba_copy (&style->foreground_color);
 		}
 	}
 
