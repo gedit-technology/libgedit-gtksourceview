@@ -2,6 +2,7 @@
  * This file is part of GtkSourceView
  *
  * Copyright (C) 2003 - Paolo Maggi <paolo.maggi@polito.it>
+ * Copyright (C) 2023 - Sébastien Wilmet <swilmet@gnome.org>
  *
  * GtkSourceView is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -28,19 +29,10 @@
 
 G_BEGIN_DECLS
 
-#define GTK_SOURCE_TYPE_STYLE             (gtk_source_style_get_type ())
-#define GTK_SOURCE_STYLE(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_SOURCE_TYPE_STYLE, GtkSourceStyle))
-#define GTK_SOURCE_IS_STYLE(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_SOURCE_TYPE_STYLE))
-#define GTK_SOURCE_STYLE_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_SOURCE_TYPE_STYLE, GtkSourceStyleClass))
-#define GTK_SOURCE_IS_STYLE_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_SOURCE_TYPE_STYLE))
-#define GTK_SOURCE_STYLE_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_SOURCE_TYPE_STYLE, GtkSourceStyleClass))
-
-typedef struct _GtkSourceStyle		GtkSourceStyle;
-typedef struct _GtkSourceStyleClass	GtkSourceStyleClass;
-typedef struct _GtkSourceStyleData	GtkSourceStyleData;
+typedef struct _GtkSourceStyle GtkSourceStyle;
 
 /**
- * GtkSourceStyleData:
+ * GtkSourceStyle:
  * @foreground_color: Equivalent to #GtkTextTag:foreground-rgba.
  * @background_color: Equivalent to #GtkTextTag:background-rgba.
  * @underline_color: Equivalent to #GtkTextTag:underline-rgba.
@@ -58,14 +50,12 @@ typedef struct _GtkSourceStyleData	GtkSourceStyleData;
  * @use_bold: Whether @bold can be taken into account.
  * @use_strikethrough: Whether @strikethrough can be taken into account.
  *
- * The data of a #GtkSourceStyle object.
- *
  * Before using the value of a certain field, check the boolean value of the
  * corresponding "use_" field.
  *
  * Since: 300.0
  */
-struct _GtkSourceStyleData
+struct _GtkSourceStyle
 {
 	GdkRGBA foreground_color;
 	GdkRGBA background_color;
@@ -87,17 +77,8 @@ struct _GtkSourceStyleData
 };
 
 G_MODULE_EXPORT
-GType			gtk_source_style_get_type	(void);
-
-G_MODULE_EXPORT
-GtkSourceStyleData *	gtk_source_style_get_data	(GtkSourceStyle *style);
-
-G_MODULE_EXPORT
-GtkSourceStyle *	gtk_source_style_copy		(const GtkSourceStyle *style);
-
-G_MODULE_EXPORT
-void			gtk_source_style_apply		(GtkSourceStyle *style,
-							 GtkTextTag     *tag);
+void	gtk_source_style_apply	(GtkSourceStyle *style,
+				 GtkTextTag     *tag);
 
 G_END_DECLS
 
