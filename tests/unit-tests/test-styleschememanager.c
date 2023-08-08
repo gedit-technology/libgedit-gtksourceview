@@ -81,7 +81,7 @@ test_prepend_search_path (void)
 	obtained_filename_before = g_strdup (gtk_source_style_scheme_get_filename (scheme));
 
 	// Now prepend the basics/ dir to the search path.
-	dataset_dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
+	dataset_dir = g_build_filename (UNIT_TESTS_SRCDIR, "datasets", "style-schemes", "basics", NULL);
 	gtk_source_style_scheme_manager_prepend_search_path (manager, dataset_dir);
 
 	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "classic");
@@ -123,14 +123,14 @@ test_append_search_path (void)
 	g_list_free (schemes);
 
 	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "test");
-	g_assert_true (scheme == NULL);
+	g_assert_null (scheme);
 
 	// Now append the basics/ dir to the search path.
-	dataset_dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
+	dataset_dir = g_build_filename (UNIT_TESTS_SRCDIR, "datasets", "style-schemes", "basics", NULL);
 	gtk_source_style_scheme_manager_append_search_path (manager, dataset_dir);
 
 	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "classic");
-	g_assert_true (scheme != NULL);
+	g_assert_nonnull (scheme);
 
 	obtained_filename_after = gtk_source_style_scheme_get_filename (scheme);
 	g_assert_cmpstr (obtained_filename_after, ==, obtained_filename_before);
@@ -142,7 +142,7 @@ test_append_search_path (void)
 	// The 'test' scheme has been added.
 	g_assert_cmpuint (n_schemes_after, ==, (n_schemes_before + 1));
 	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "test");
-	g_assert_true (scheme != NULL);
+	g_assert_nonnull (scheme);
 
 	g_object_unref (manager);
 	g_free (obtained_filename_before);
