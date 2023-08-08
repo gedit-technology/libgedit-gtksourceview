@@ -137,6 +137,9 @@ test_parse_file (void)
 	check_parsing_error ("019-style-dups.xml");
 	check_parsing_error ("020-style-name-only.xml");
 	check_parsing_error ("021-style-use-style-plus-other-attr.xml");
+	check_parsing_error ("022-style-bad-use-style.xml");
+	check_parsing_error ("023-empty-description.xml");
+	check_parsing_error ("024-use-style-cycle.xml");
 
 	check_successful_parsing ();
 }
