@@ -242,6 +242,10 @@
       <code>&lt;style&gt;</code> tag) has been removed.
     </para>
     <para>
+      You need to add the <code>kind</code> attribute (for light/dark), a new
+      mandatory attribute.
+    </para>
+    <para>
       The parser is now a bit more strict, check if there are warning messages
       printed in the terminal if a style scheme fails to load.
     </para>
@@ -295,6 +299,11 @@
           properties, you now access the values directly from the struct.
           Another important difference is to call the right ref/unref functions
           for memory management.
+        </para>
+        <para>
+          The <link linkend="GtkSourceSearchContext--match-style">GtkSourceSearchContext:match-style</link>
+          property is a <link linkend="GtkSourceStyle">GtkSourceStyle</link>, so
+          it may require some code changes when using it.
         </para>
         <para>
           The <code>gtk_source_style_scheme_get_authors()</code> function has

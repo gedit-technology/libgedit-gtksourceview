@@ -40,7 +40,7 @@
   Example:
 </p>
 <pre>
-&lt;style-scheme id="classic" _name="Classic" version="1.0"&gt;
+&lt;style-scheme id="classic" _name="Classic" kind="light" version="1.0"&gt;
   &lt;!-- ... --&gt;
 &lt;/style-scheme&gt;
 </pre>
@@ -69,6 +69,12 @@
     This is the same as the <code>name</code> attribute, except that it will be
     translated. <code>name</code> and <code>_name</code> may not be used
     simultaneously.
+  </dd>
+
+  <dt><code>kind</code> (mandatory)</dt>
+  <dd>
+    The kind of style scheme. It accepts only two possible values: "light" or
+    "dark".
   </dd>
 
   <dt><code>version</code> (mandatory)</dt>
