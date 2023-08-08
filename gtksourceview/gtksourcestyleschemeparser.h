@@ -20,7 +20,7 @@
 #ifndef GTK_SOURCE_STYLE_SCHEME_PARSER_H
 #define GTK_SOURCE_STYLE_SCHEME_PARSER_H
 
-#include <gdk/gdk.h>
+#include "gtksourcestylescheme.h"
 
 G_BEGIN_DECLS
 
@@ -31,6 +31,7 @@ struct _GtkSourceStyleSchemeBasicInfos
 	gchar *id;
 	gchar *name;
 	gchar *description;
+	GtkSourceStyleSchemeKind kind;
 };
 
 G_GNUC_INTERNAL
