@@ -17,6 +17,7 @@ unit_tests = [
   'test-region',
   'test-search-context',
   'test-space-drawer',
+  'test-style',
   'test-stylescheme',
   'test-styleschememanager',
   'test-styleschemeparser',
