@@ -97,6 +97,28 @@ test_rgba_colors (void)
 	g_object_unref (manager);
 }
 
+static void
+test_use_style_chain (void)
+{
+	GtkSourceStyleSchemeManager *manager;
+	gchar *filename;
+	GtkSourceStyleScheme *scheme;
+	GtkSourceStyle *style;
+	GdkRGBA red_color = {1.0, 0.0, 0.0, 1.0};
+
+	manager = gtk_source_style_scheme_manager_new ();
+	filename = g_build_filename (UNIT_TESTS_SRCDIR, "datasets", "style-schemes", "others", "use-style-chain.xml", NULL);
+	set_single_search_path (manager, filename);
+	g_free (filename);
+
+	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "chain");
+	style = gtk_source_style_scheme_get_style (scheme, "C");
+	g_assert_true (style->use_foreground_color);
+	g_assert_true (gdk_rgba_equal (&style->foreground_color, &red_color));
+
+	g_object_unref (manager);
+}
+
 int
 main (int    argc,
       char **argv)
@@ -108,6 +130,7 @@ main (int    argc,
 
 	g_test_add_func ("/StyleScheme/scheme_attributes", test_scheme_attributes);
 	g_test_add_func ("/StyleScheme/rgba_colors", test_rgba_colors);
+	g_test_add_func ("/StyleScheme/use_style_chain", test_use_style_chain);
 
 	ret = g_test_run ();
 	gtk_source_finalize ();
