@@ -9,5 +9,5 @@ get_script_directory() {
 script_directory="`get_script_directory`"
 
 pushd "${script_directory}"
-./check-style-schemes.sh default-style-schemes/*.xml testdark.xml
+./check-style-schemes.sh default-style-schemes/*.xml
 popd
