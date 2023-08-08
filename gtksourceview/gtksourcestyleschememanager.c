@@ -148,129 +148,6 @@ _gtk_source_style_scheme_manager_peek_default (void)
 	return default_instance;
 }
 
-/* Returns: (transfer full) */
-static GQueue *
-get_parents_chain (GHashTable           *schemes_hash_table,
-		   GtkSourceStyleScheme *scheme,
-		   gboolean             *ok)
-{
-	GQueue *chain = g_queue_new ();
-	GtkSourceStyleScheme *cur_scheme = scheme;
-
-	*ok = TRUE;
-
-	while (TRUE)
-	{
-		const gchar *parent_id;
-		GtkSourceStyleScheme *parent_scheme;
-
-		g_queue_push_tail (chain, g_object_ref (cur_scheme));
-
-		parent_id = _gtk_source_style_scheme_get_parent_id (cur_scheme);
-		if (parent_id == NULL)
-		{
-			/* No parents */
-			break;
-		}
-
-		parent_scheme = g_hash_table_lookup (schemes_hash_table, parent_id);
-		if (parent_scheme == NULL)
-		{
-			g_warning ("Unknown parent-scheme '%s' in scheme '%s'.",
-				   parent_id,
-				   gtk_source_style_scheme_get_id (cur_scheme));
-			*ok = FALSE;
-			break;
-		}
-
-		if (g_queue_find (chain, parent_scheme) != NULL)
-		{
-			g_warning ("parent-scheme reference cycle for scheme '%s'.",
-				   gtk_source_style_scheme_get_id (scheme));
-			*ok = FALSE;
-			break;
-		}
-
-		cur_scheme = parent_scheme;
-	}
-
-	return chain;
-}
-
-static void
-chain_parents (GQueue *chain)
-{
-	GList *child_node = chain->head;
-
-	while (child_node != NULL)
-	{
-		GtkSourceStyleScheme *child_scheme = child_node->data;
-		GList *parent_node = child_node->next;
-
-		if (parent_node != NULL)
-		{
-			GtkSourceStyleScheme *parent_scheme = parent_node->data;
-			_gtk_source_style_scheme_set_parent (child_scheme, parent_scheme);
-		}
-
-		child_node = parent_node;
-	}
-}
-
-static void
-remove_chain_from_schemes_hash_table (GtkSourceStyleSchemeManager *manager,
-				      GQueue                      *chain)
-{
-	GList *l;
-
-	for (l = chain->head; l != NULL; l = l->next)
-	{
-		GtkSourceStyleScheme *scheme = l->data;
-		const gchar *id = gtk_source_style_scheme_get_id (scheme);
-
-		g_hash_table_remove (manager->priv->schemes_hash_table, id);
-	}
-}
-
-static gboolean
-do_setup_parent_schemes (GtkSourceStyleSchemeManager *manager)
-{
-	GList *schemes;
-	GList *l;
-	gboolean ok = TRUE;
-
-	schemes = g_hash_table_get_values (manager->priv->schemes_hash_table);
-
-	for (l = schemes; l != NULL && ok; l = l->next)
-	{
-		GtkSourceStyleScheme *cur_scheme = l->data;
-		GQueue *chain;
-
-		chain = get_parents_chain (manager->priv->schemes_hash_table, cur_scheme, &ok);
-
-		if (ok)
-		{
-			chain_parents (chain);
-		}
-		else
-		{
-			remove_chain_from_schemes_hash_table (manager, chain);
-		}
-
-		g_queue_free_full (chain, g_object_unref);
-	}
-
-	g_list_free (schemes);
-	return ok;
-}
-
-static void
-setup_parent_schemes (GtkSourceStyleSchemeManager *manager)
-{
-	while (!do_setup_parent_schemes (manager))
-		; /* empty loop body */
-}
-
 static void
 reload_if_needed (GtkSourceStyleSchemeManager *manager)
 {
@@ -323,8 +200,6 @@ reload_if_needed (GtkSourceStyleSchemeManager *manager)
 				     g_strdup (id),
 				     scheme);
 	}
-
-	setup_parent_schemes (manager);
 
 	manager->priv->need_reload = FALSE;
 

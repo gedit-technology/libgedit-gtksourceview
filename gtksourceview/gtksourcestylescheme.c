@@ -56,9 +56,6 @@ struct _GtkSourceStyleSchemePrivate
 	gchar *description;
 	gchar *filename;
 
-	GtkSourceStyleScheme *parent;
-	gchar *parent_id;
-
 	GHashTable *defined_styles;
 	GHashTable *style_cache;
 	GHashTable *named_colors;
@@ -91,7 +88,6 @@ gtk_source_style_scheme_dispose (GObject *object)
 		scheme->priv->defined_styles = NULL;
 	}
 
-	g_clear_object (&scheme->priv->parent);
 	g_clear_object (&scheme->priv->scheme_css);
 
 	G_OBJECT_CLASS (gtk_source_style_scheme_parent_class)->dispose (object);
@@ -106,7 +102,6 @@ gtk_source_style_scheme_finalize (GObject *object)
 	g_free (scheme->priv->description);
 	g_free (scheme->priv->id);
 	g_free (scheme->priv->name);
-	g_free (scheme->priv->parent_id);
 
 	G_OBJECT_CLASS (gtk_source_style_scheme_parent_class)->finalize (object);
 }
@@ -244,11 +239,6 @@ get_color_by_name (GtkSourceStyleScheme *scheme,
 	{
 		color = g_hash_table_lookup (scheme->priv->named_colors, name);
 
-		if (color == NULL && scheme->priv->parent != NULL)
-		{
-			color = get_color_by_name (scheme->priv->parent, name);
-		}
-
 		if (color == NULL)
 		{
 			g_warning ("no color named '%s'", name);
@@ -302,19 +292,6 @@ fix_style_colors (GtkSourceStyleScheme *scheme,
  *   @style_id in the @scheme, or %NULL if not found.
  * Since: 2.0
  */
-/* It's a little weird because we have named colors: styles loaded from a
- * scheme file can have "#red" or "blue". "#red" is a "final" color, while
- * "blue" refers to a <color> tag. All final colors have # as prefix, and are
- * suitable for _gtk_source_style_scheme_parser_parse_final_color(), to get a
- * GdkRGBA.
- *
- * We need to preserve what we got from the file, because it's possible for a
- * child scheme to redefine colors, so we can't translate colors when loading
- * the scheme.
- *
- * So, the defined_styles hash table has original color values; styles returned
- * with get_style() have final colors.
- */
 GtkSourceStyle *
 gtk_source_style_scheme_get_style (GtkSourceStyleScheme *scheme,
 				   const gchar          *style_id)
@@ -335,19 +312,7 @@ gtk_source_style_scheme_get_style (GtkSourceStyleScheme *scheme,
 
 	real_style = g_hash_table_lookup (scheme->priv->defined_styles, style_id);
 
-	if (real_style == NULL)
-	{
-		if (scheme->priv->parent != NULL)
-		{
-			style = gtk_source_style_scheme_get_style (scheme->priv->parent,
-								   style_id);
-		}
-		if (style != NULL)
-		{
-			g_object_ref (style);
-		}
-	}
-	else
+	if (real_style != NULL)
 	{
 		style = fix_style_colors (scheme, real_style);
 	}
@@ -695,11 +660,6 @@ parse_style_scheme_element (GtkSourceStyleScheme *scheme,
 	}
 	xmlFree (tmp);
 
-	tmp = xmlGetProp (scheme_node, BAD_CAST "parent-scheme");
-	if (tmp != NULL)
-		scheme->priv->parent_id = g_strdup ((char*) tmp);
-	xmlFree (tmp);
-
 	for (node = scheme_node->children; node != NULL; node = node->next)
 		if (node->type == XML_ELEMENT_NODE)
 			if (!parse_style_scheme_child (scheme, node, error))
@@ -777,25 +737,6 @@ _gtk_source_style_scheme_new_from_file (const gchar *filename)
 	g_free (text);
 
 	return scheme;
-}
-
-/* Returns: (nullable): the parent style scheme ID, or %NULL. */
-const gchar *
-_gtk_source_style_scheme_get_parent_id (GtkSourceStyleScheme *scheme)
-{
-	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), NULL);
-
-	return scheme->priv->parent_id;
-}
-
-void
-_gtk_source_style_scheme_set_parent (GtkSourceStyleScheme *scheme,
-				     GtkSourceStyleScheme *parent_scheme)
-{
-	g_return_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme));
-	g_return_if_fail (parent_scheme == NULL || GTK_SOURCE_IS_STYLE_SCHEME (parent_scheme));
-
-	g_set_object (&scheme->priv->parent, parent_scheme);
 }
 
 GtkSourceStyleSchemeCss *

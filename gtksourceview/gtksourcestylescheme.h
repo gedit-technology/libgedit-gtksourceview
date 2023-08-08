@@ -76,13 +76,6 @@ GtkSourceStyle *	gtk_source_style_scheme_get_style		(GtkSourceStyleScheme *schem
 G_GNUC_INTERNAL
 GtkSourceStyleScheme *	_gtk_source_style_scheme_new_from_file		(const gchar *filename);
 
-G_GNUC_INTERNAL
-const gchar *		_gtk_source_style_scheme_get_parent_id		(GtkSourceStyleScheme *scheme);
-
-G_GNUC_INTERNAL
-void			_gtk_source_style_scheme_set_parent		(GtkSourceStyleScheme *scheme,
-									 GtkSourceStyleScheme *parent_scheme);
-
 G_END_DECLS
 
 #endif /* GTK_SOURCE_STYLE_SCHEME_H */
