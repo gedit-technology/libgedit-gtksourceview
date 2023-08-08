@@ -149,6 +149,32 @@ test_append_search_path (void)
 	g_free (dataset_dir);
 }
 
+static void
+test_load_failure (void)
+{
+	GtkSourceStyleSchemeManager *manager;
+	gchar *filename;
+	GList *schemes;
+
+	manager = gtk_source_style_scheme_manager_new ();
+
+	filename = g_build_filename (UNIT_TESTS_SRCDIR,
+				     "datasets", "style-schemes", "parsing-errors",
+				     "001-no-style-scheme-attributes.xml",
+				     NULL);
+	set_single_search_path (manager, filename);
+	g_free (filename);
+
+	g_test_expect_message (G_LOG_DOMAIN,
+			       G_LOG_LEVEL_WARNING,
+			       "*Failed to load*");
+	schemes = gtk_source_style_scheme_manager_get_schemes (manager);
+	g_test_assert_expected_messages ();
+	g_assert_null (schemes);
+
+	g_object_unref (manager);
+}
+
 int
 main (int    argc,
       char **argv)
@@ -161,6 +187,7 @@ main (int    argc,
 	g_test_add_func ("/StyleSchemeManager/get_default", test_get_default);
 	g_test_add_func ("/StyleSchemeManager/prepend_search_path", test_prepend_search_path);
 	g_test_add_func ("/StyleSchemeManager/append_search_path", test_append_search_path);
+	g_test_add_func ("/StyleSchemeManager/load_failure", test_load_failure);
 
 	ret = g_test_run ();
 	gtk_source_finalize ();
