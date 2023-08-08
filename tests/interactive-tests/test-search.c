@@ -456,13 +456,15 @@ test_search_new (void)
 	return g_object_new (test_search_get_type (), NULL);
 }
 
-gint
-main (gint argc, gchar *argv[])
+int
+main (int    argc,
+      char **argv)
 {
 	GtkWidget *window;
 	TestSearch *search;
 
 	gtk_init (&argc, &argv);
+	gtk_source_init ();
 
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
@@ -479,6 +481,8 @@ main (gint argc, gchar *argv[])
 	gtk_widget_show (window);
 
 	gtk_main ();
+
+	gtk_source_finalize ();
 
 	return 0;
 }
