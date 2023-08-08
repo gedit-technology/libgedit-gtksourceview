@@ -124,6 +124,19 @@ test_parse_file (void)
 	check_parsing_error ("006-empty-names.xml");
 	check_parsing_error ("007-two-names.xml");
 	check_parsing_error ("008-two-descriptions.xml");
+	check_parsing_error ("009-bad-element.xml");
+	check_parsing_error ("010-bad-version.xml");
+	check_parsing_error ("011-color-missing-value.xml");
+	check_parsing_error ("012-color-empty-name.xml");
+	check_parsing_error ("013-color-dups.xml");
+	check_parsing_error ("014-color-bad-value.xml");
+	check_parsing_error ("015-style-bad-color-value.xml");
+	check_parsing_error ("016-style-bad-italic.xml");
+	check_parsing_error ("017-style-bad-scale.xml");
+	check_parsing_error ("018-style-empty-name.xml");
+	check_parsing_error ("019-style-dups.xml");
+	check_parsing_error ("020-style-name-only.xml");
+	check_parsing_error ("021-style-use-style-plus-other-attr.xml");
 
 	check_successful_parsing ();
 }
