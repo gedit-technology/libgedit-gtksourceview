@@ -2,6 +2,7 @@
  * This file is part of GtkSourceView
  *
  * Copyright (C) 2015 - Paolo Borelli
+ * Copyright (C) 2023 - Sébastien Wilmet
  *
  * GtkSourceView is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -28,8 +29,8 @@ set_single_search_path (GtkSourceStyleSchemeManager *manager,
 	gtk_source_style_scheme_manager_set_search_path (manager, (gchar **) search_path);
 }
 
-/* To have reproducible results.
- * The unit tests can be run without the need to install the project.
+/* Control the search path, to have reproducible results.
+ * Also, the unit tests can be run without the need to install the project.
  */
 static GtkSourceStyleSchemeManager *
 create_manager (void)
@@ -39,7 +40,7 @@ create_manager (void)
 
 	manager = gtk_source_style_scheme_manager_new ();
 
-	dir = g_test_build_filename (G_TEST_DIST, "datasets", "style-schemes", "basics", NULL);
+	dir = g_build_filename (UNIT_TESTS_SRCDIR, "datasets", "style-schemes", "basics", NULL);
 	set_single_search_path (manager, dir);
 	g_free (dir);
 
@@ -64,7 +65,7 @@ check_scheme (GtkSourceStyleScheme *scheme,
 }
 
 static void
-test_scheme_properties (void)
+test_scheme_attributes (void)
 {
 	GtkSourceStyleSchemeManager *manager = create_manager ();
 	GtkSourceStyleScheme *scheme;
@@ -85,13 +86,15 @@ test_rgba_colors (void)
 
 	style_current_line = gtk_source_style_scheme_get_style (scheme, "current-line");
 	style_background_pattern = gtk_source_style_scheme_get_style (scheme, "background-pattern");
-	g_assert_true (style_current_line != NULL);
-	g_assert_true (style_background_pattern != NULL);
+	g_assert_nonnull (style_current_line);
+	g_assert_nonnull (style_background_pattern);
 
 	g_assert_true (style_current_line->use_background_color);
 	g_assert_true (style_background_pattern->use_background_color);
 	g_assert_true (gdk_rgba_equal (&style_current_line->background_color,
 				       &style_background_pattern->background_color));
+
+	g_object_unref (manager);
 }
 
 int
@@ -103,7 +106,7 @@ main (int    argc,
 	gtk_test_init (&argc, &argv);
 	gtk_source_init ();
 
-	g_test_add_func ("/StyleScheme/scheme_properties", test_scheme_properties);
+	g_test_add_func ("/StyleScheme/scheme_attributes", test_scheme_attributes);
 	g_test_add_func ("/StyleScheme/rgba_colors", test_rgba_colors);
 
 	ret = g_test_run ();

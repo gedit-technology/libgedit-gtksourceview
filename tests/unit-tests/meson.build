@@ -26,7 +26,10 @@ unit_tests = [
   'test-view',
 ]
 
-unit_tests_c_args = '-DTOP_SRCDIR="@0@"'.format(meson.project_source_root())
+unit_tests_c_args = [
+  '-DTOP_SRCDIR="@0@"'.format(meson.project_source_root()),
+  '-DUNIT_TESTS_SRCDIR="@0@"'.format(meson.current_source_dir()),
+]
 
 unit_tests_env = environment()
 unit_tests_env.set('G_TEST_SRCDIR', meson.current_source_dir())
