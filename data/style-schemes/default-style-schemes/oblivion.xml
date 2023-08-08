@@ -21,7 +21,7 @@
 
 -->
 
-<style-scheme id="oblivion" _name="Oblivion" version="1.0">
+<style-scheme id="oblivion" _name="Oblivion" kind="dark" version="1.0">
   <_description>Dark color scheme using the Tango color palette</_description>
 
   <!-- Tango Palette -->

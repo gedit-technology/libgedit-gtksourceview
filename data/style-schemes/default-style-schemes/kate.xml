@@ -20,7 +20,7 @@
  along with this library; if not, see <http://www.gnu.org/licenses/>.
 
 -->
-<style-scheme id="kate" name="Kate" version="1.0">
+<style-scheme id="kate" name="Kate" kind="light" version="1.0">
   <_description>Color scheme used in the Kate text editor</_description>
 
   <color name="red"                         value="#FF0000"/>

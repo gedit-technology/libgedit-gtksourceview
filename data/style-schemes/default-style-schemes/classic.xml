@@ -20,7 +20,7 @@
  along with this library; if not, see <http://www.gnu.org/licenses/>.
 
 -->
-<style-scheme id="classic" _name="Classic" version="1.0">
+<style-scheme id="classic" _name="Classic" kind="light" version="1.0">
   <_description>Classic color scheme</_description>
 
   <!-- The scheme tries to look like the default GVim scheme,

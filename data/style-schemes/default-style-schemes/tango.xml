@@ -20,7 +20,7 @@
  along with this library; if not, see <http://www.gnu.org/licenses/>.
 
 -->
-<style-scheme id="tango" _name="Tango" version="1.0">
+<style-scheme id="tango" _name="Tango" kind="light" version="1.0">
   <_description>Color scheme using Tango color palette</_description>
 
   <!-- Tango Palette -->
