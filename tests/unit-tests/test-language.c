@@ -50,7 +50,7 @@ test_fixture_setup (TestFixture   *fixture,
 	{
 		lang_dirs = g_new0 (gchar *, 3);
 		lang_dirs[0] = dir;
-		lang_dirs[1] = g_test_build_filename (G_TEST_DIST, "datasets", "language-specs", NULL);
+		lang_dirs[1] = g_build_filename (UNIT_TESTS_SRCDIR, "datasets", "language-specs", NULL);
 	}
 	else
 	{
@@ -65,7 +65,7 @@ test_fixture_setup (TestFixture   *fixture,
 		{
 			lang_dirs[i] = g_strdup (current[i]);
 		}
-		lang_dirs[i] = g_test_build_filename (G_TEST_DIST, "datasets", "language-specs", NULL);
+		lang_dirs[i] = g_build_filename (UNIT_TESTS_SRCDIR, "datasets", "language-specs", NULL);
 	}
 
 	gtk_source_language_manager_set_search_path (fixture->manager, lang_dirs);
