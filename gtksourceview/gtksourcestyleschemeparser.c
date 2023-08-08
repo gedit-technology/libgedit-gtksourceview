@@ -268,7 +268,7 @@ parse_start_element_style_scheme (ParserData   *parser_data,
 					  G_MARKUP_COLLECT_STRING, "id", &id,
 					  G_MARKUP_COLLECT_STRING | G_MARKUP_COLLECT_OPTIONAL, "name", &name,
 					  G_MARKUP_COLLECT_STRING | G_MARKUP_COLLECT_OPTIONAL, "_name", &translatable_name,
-					  G_MARKUP_COLLECT_STRING | G_MARKUP_COLLECT_OPTIONAL, "kind", &kind,
+					  G_MARKUP_COLLECT_STRING, "kind", &kind,
 					  G_MARKUP_COLLECT_STRING, "version", &version,
 					  G_MARKUP_COLLECT_INVALID))
 	{
@@ -333,25 +333,22 @@ parse_start_element_style_scheme (ParserData   *parser_data,
 
 	/* Kind */
 
-	if (kind != NULL)
+	if (g_strcmp0 (kind, "light") == 0)
 	{
-		if (g_str_equal (kind, "light"))
-		{
-			parser_data->basic_infos->kind = GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT;
-		}
-		else if (g_str_equal (kind, "dark"))
-		{
-			parser_data->basic_infos->kind = GTK_SOURCE_STYLE_SCHEME_KIND_DARK;
-		}
-		else
-		{
-			g_set_error (error,
-				     G_MARKUP_ERROR,
-				     G_MARKUP_ERROR_PARSE,
-				     "Failed to parse the kind '%s'.",
-				     kind);
-			return;
-		}
+		parser_data->basic_infos->kind = GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT;
+	}
+	else if (g_strcmp0 (kind, "dark") == 0)
+	{
+		parser_data->basic_infos->kind = GTK_SOURCE_STYLE_SCHEME_KIND_DARK;
+	}
+	else
+	{
+		g_set_error (error,
+			     G_MARKUP_ERROR,
+			     G_MARKUP_ERROR_PARSE,
+			     "Failed to parse the kind '%s'.",
+			     kind);
+		return;
 	}
 }
 
