@@ -48,17 +48,19 @@ create_manager (void)
 }
 
 static void
-check_scheme (GtkSourceStyleScheme *scheme,
-	      const gchar          *expected_id,
-	      const gchar          *expected_name,
-	      const gchar          *expected_description,
-	      const gchar          *style_id)
+check_scheme (GtkSourceStyleScheme     *scheme,
+	      const gchar              *expected_id,
+	      const gchar              *expected_name,
+	      const gchar              *expected_description,
+	      GtkSourceStyleSchemeKind  expected_kind,
+	      const gchar              *style_id)
 {
 	GtkSourceStyle *style;
 
 	g_assert_cmpstr (gtk_source_style_scheme_get_id (scheme), ==, expected_id);
 	g_assert_cmpstr (gtk_source_style_scheme_get_name (scheme), ==, expected_name);
 	g_assert_cmpstr (gtk_source_style_scheme_get_description (scheme), ==, expected_description);
+	g_assert_cmpint (gtk_source_style_scheme_get_kind (scheme), ==, expected_kind);
 
 	style = gtk_source_style_scheme_get_style (scheme, style_id);
 	g_assert_nonnull (style);
@@ -71,7 +73,12 @@ test_scheme_attributes (void)
 	GtkSourceStyleScheme *scheme;
 
 	scheme = gtk_source_style_scheme_manager_get_scheme (manager, "test");
-	check_scheme (scheme, "test", "Test", "Test color scheme", "def:comment");
+	check_scheme (scheme,
+		      "test",
+		      "Test",
+		      "Test color scheme",
+		      GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT,
+		      "def:comment");
 
 	g_object_unref (manager);
 }
