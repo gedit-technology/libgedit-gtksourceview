@@ -36,6 +36,9 @@
  * "heavy" as a solution.
  *
  * Thus it is now a boxed type.
+ *
+ * Reference counting is useful to implement the use-style attribute of the
+ * <style> tag from the style scheme XML file format.
  */
 
 G_DEFINE_BOXED_TYPE (GtkSourceStyle, gtk_source_style,
