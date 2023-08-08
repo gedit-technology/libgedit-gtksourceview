@@ -35,10 +35,6 @@
       <attribute name="_name"/>
     </choice>
 
-    <optional>
-      <attribute name="parent-scheme"/>
-    </optional>
-
     <attribute name="version">
       <value>1.0</value>
     </attribute>
