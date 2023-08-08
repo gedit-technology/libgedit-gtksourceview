@@ -137,6 +137,10 @@
 &lt;color name="aluminium1" value="#eeeeec"/&gt;
 &lt;style name="line-numbers" background="aluminium1"/&gt;
 </pre>
+<p>
+  The order is important: a <code>&lt;color&gt;</code> tag must be located
+  <em>before</em> any reference to it (a “define-before-use” rule).
+</p>
 
 <h2>&lt;color&gt; tags</h2>
 <p>
@@ -230,7 +234,8 @@
     not be used at the exception of the <code>name</code>. The value of
     <code>use-style</code> is the name of a previously-defined
     <code>&lt;style&gt;</code> tag inside the same style scheme file, to re-use
-    the same style.
+    the same style. So the order in which the <code>&lt;style&gt;</code> tags
+    appear is important in this case (a “define-before-use” rule).
   </dd>
 </dl>
 
