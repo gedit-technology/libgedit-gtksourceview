@@ -727,19 +727,7 @@ gtk_source_space_type_flags_get_type
 <SECTION>
 <FILE>style</FILE>
 GtkSourceStyle
-GtkSourceStyleData
-gtk_source_style_get_data
-gtk_source_style_copy
 gtk_source_style_apply
-<SUBSECTION Standard>
-GtkSourceStyleClass
-GTK_SOURCE_TYPE_STYLE
-GTK_SOURCE_IS_STYLE
-GTK_SOURCE_IS_STYLE_CLASS
-GTK_SOURCE_STYLE
-GTK_SOURCE_STYLE_CLASS
-GTK_SOURCE_STYLE_GET_CLASS
-gtk_source_style_get_type
 </SECTION>
 
 <SECTION>
