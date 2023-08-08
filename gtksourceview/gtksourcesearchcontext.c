@@ -2639,6 +2639,12 @@ gtk_source_search_context_dispose (GObject *object)
 
 	g_clear_object (&search->priv->settings);
 
+	if (search->priv->match_style != NULL)
+	{
+		gtk_source_style_unref (search->priv->match_style);
+		search->priv->match_style = NULL;
+	}
+
 	G_OBJECT_CLASS (gtk_source_search_context_parent_class)->dispose (object);
 }
 
