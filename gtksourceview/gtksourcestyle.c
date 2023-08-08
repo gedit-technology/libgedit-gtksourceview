@@ -23,10 +23,9 @@
 /**
  * SECTION:style
  * @Title: GtkSourceStyle
- * @Short_description: Represents a style
+ * @Short_description: A style
  *
- * The #GtkSourceStyle structure is used to describe text attributes which are
- * set when the given style is used.
+ * The #GtkSourceStyle structure contains text attributes.
  */
 
 /* API design:
