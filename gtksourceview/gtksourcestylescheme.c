@@ -162,6 +162,26 @@ gtk_source_style_scheme_get_description (GtkSourceStyleScheme *scheme)
 }
 
 /**
+ * gtk_source_style_scheme_get_kind:
+ * @scheme: a #GtkSourceStyleScheme.
+ *
+ * Returns: the kind of @scheme.
+ * Since: 300.0
+ */
+GtkSourceStyleSchemeKind
+gtk_source_style_scheme_get_kind (GtkSourceStyleScheme *scheme)
+{
+	g_return_val_if_fail (GTK_SOURCE_IS_STYLE_SCHEME (scheme), GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT);
+
+	if (scheme->priv->basic_infos == NULL)
+	{
+		return GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT;
+	}
+
+	return scheme->priv->basic_infos->kind;
+}
+
+/**
  * gtk_source_style_scheme_get_filename:
  * @scheme: a #GtkSourceStyleScheme.
  *

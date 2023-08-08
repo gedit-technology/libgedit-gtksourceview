@@ -82,6 +82,9 @@ G_MODULE_EXPORT
 const gchar *		gtk_source_style_scheme_get_description		(GtkSourceStyleScheme *scheme);
 
 G_MODULE_EXPORT
+GtkSourceStyleSchemeKind gtk_source_style_scheme_get_kind		(GtkSourceStyleScheme *scheme);
+
+G_MODULE_EXPORT
 const gchar *		gtk_source_style_scheme_get_filename		(GtkSourceStyleScheme *scheme);
 
 G_MODULE_EXPORT
