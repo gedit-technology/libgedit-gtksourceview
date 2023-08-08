@@ -48,6 +48,9 @@ G_DEFINE_BOXED_TYPE (GtkSourceStyle, gtk_source_style,
 /**
  * gtk_source_style_new:
  *
+ * Creates a new #GtkSourceStyle with initially all the "`use_`" fields set to
+ * %FALSE.
+ *
  * Returns: a new #GtkSourceStyle with a reference count of one.
  * Since: 300.0
  */

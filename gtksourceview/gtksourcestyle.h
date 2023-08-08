@@ -53,7 +53,7 @@ typedef struct _GtkSourceStyle GtkSourceStyle;
  * @use_strikethrough: Whether @strikethrough can be taken into account.
  *
  * Before using the value of a certain field, check the boolean value of the
- * corresponding "use_" field.
+ * corresponding "`use_`" field.
  *
  * Since: 300.0
  */
