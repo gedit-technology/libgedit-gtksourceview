@@ -93,7 +93,7 @@ gtk_source_style_scheme_manager_class_init (GtkSourceStyleSchemeManagerClass *kl
 	 * GtkSourceStyleSchemeManager::changed:
 	 * @manager: the #GtkSourceStyleSchemeManager emitting the signal.
 	 *
-	 * Emitted when the @manager has changed.
+	 * Emitted when the @manager's content has changed.
 	 *
 	 * Since: 300.0
 	 */
