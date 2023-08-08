@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<style-scheme id="chain" name="Chain" version="1.0">
+<style-scheme id="chain" name="Chain" kind="dark" version="1.0">
   <style name="A" foreground="#FF0000" />
   <style name="B" use-style="A" />
   <style name="C" use-style="B" />

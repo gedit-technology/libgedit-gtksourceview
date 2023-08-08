@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<style-scheme id="classic" name="Classic" version="1.0">
+<style-scheme id="classic" name="Classic" kind="dark" version="1.0">
   <color name="color-name" />
 </style-scheme>
