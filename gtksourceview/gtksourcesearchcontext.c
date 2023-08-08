@@ -2684,7 +2684,7 @@ gtk_source_search_context_get_property (GObject    *object,
 			break;
 
 		case PROP_MATCH_STYLE:
-			g_value_set_object (value, search->priv->match_style);
+			g_value_set_boxed (value, search->priv->match_style);
 			break;
 
 		case PROP_OCCURRENCES_COUNT:
@@ -2728,7 +2728,7 @@ gtk_source_search_context_set_property (GObject      *object,
 			break;
 
 		case PROP_MATCH_STYLE:
-			gtk_source_search_context_set_match_style (search, g_value_get_object (value));
+			gtk_source_search_context_set_match_style (search, g_value_get_boxed (value));
 			break;
 
 		default:
@@ -2805,17 +2805,17 @@ gtk_source_search_context_class_init (GtkSourceSearchContextClass *klass)
 	 *
 	 * A #GtkSourceStyle, or %NULL for theme's scheme default style.
 	 *
-	 * Since: 3.16
+	 * Since: 300.0
 	 */
 	g_object_class_install_property (object_class,
 					 PROP_MATCH_STYLE,
-					 g_param_spec_object ("match-style",
-							      "Match style",
-							      "The text style for matches",
-							      GTK_SOURCE_TYPE_STYLE,
-							      G_PARAM_READWRITE |
-							      G_PARAM_CONSTRUCT |
-							      G_PARAM_STATIC_STRINGS));
+					 g_param_spec_boxed ("match-style",
+							     "Match style",
+							     "The text style for matches",
+							     GTK_SOURCE_TYPE_STYLE,
+							     G_PARAM_READWRITE |
+							     G_PARAM_CONSTRUCT |
+							     G_PARAM_STATIC_STRINGS));
 
 	/**
 	 * GtkSourceSearchContext:occurrences-count:
@@ -2993,7 +2993,6 @@ gtk_source_search_context_set_match_style (GtkSourceSearchContext *search,
 					   GtkSourceStyle         *match_style)
 {
 	g_return_if_fail (GTK_SOURCE_IS_SEARCH_CONTEXT (search));
-	g_return_if_fail (match_style == NULL || GTK_SOURCE_IS_STYLE (match_style));
 
 	if (search->priv->match_style == match_style)
 	{
@@ -3002,14 +3001,14 @@ gtk_source_search_context_set_match_style (GtkSourceSearchContext *search,
 
 	if (search->priv->match_style != NULL)
 	{
-		g_object_unref (search->priv->match_style);
+		gtk_source_style_unref (search->priv->match_style);
 	}
 
 	search->priv->match_style = match_style;
 
 	if (match_style != NULL)
 	{
-		g_object_ref (match_style);
+		gtk_source_style_ref (match_style);
 	}
 
 	g_object_notify (G_OBJECT (search), "match-style");
