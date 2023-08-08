@@ -741,6 +741,7 @@ gtk_source_style_get_type
 <SECTION>
 <FILE>stylescheme</FILE>
 GtkSourceStyleScheme
+GtkSourceStyleSchemeKind
 gtk_source_style_scheme_get_id
 gtk_source_style_scheme_get_name
 gtk_source_style_scheme_get_description
@@ -756,6 +757,8 @@ GTK_SOURCE_STYLE_SCHEME_GET_CLASS
 GTK_SOURCE_TYPE_STYLE_SCHEME
 GtkSourceStyleSchemePrivate
 gtk_source_style_scheme_get_type
+GTK_SOURCE_TYPE_STYLE_SCHEME_KIND
+gtk_source_style_scheme_kind_get_type
 </SECTION>
 
 <SECTION>

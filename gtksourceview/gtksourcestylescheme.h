@@ -54,6 +54,21 @@ struct _GtkSourceStyleSchemeClass
 	gpointer padding[10];
 };
 
+/**
+ * GtkSourceStyleSchemeKind:
+ * @GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT: Light style.
+ * @GTK_SOURCE_STYLE_SCHEME_KIND_DARK: Dark style.
+ *
+ * The kind (or category) of a #GtkSourceStyleScheme.
+ *
+ * Since: 300.0
+ */
+typedef enum _GtkSourceStyleSchemeKind
+{
+	GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT,
+	GTK_SOURCE_STYLE_SCHEME_KIND_DARK,
+} GtkSourceStyleSchemeKind;
+
 G_MODULE_EXPORT
 GType			gtk_source_style_scheme_get_type		(void);
 
