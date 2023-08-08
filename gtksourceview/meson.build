@@ -94,7 +94,6 @@ LIBGEDIT_GTKSOURCEVIEW_PRIVATE_HEADERS = [
   'gtksourcepixbufhelper.h',
   'gtksourceregex.h',
   'gtksourcespacedrawer-private.h',
-  'gtksourcestyle-private.h',
   'gtksourcestylescheme-private.h',
   'gtksourcestyleschemecss.h',
   'gtksourcestyleschemeparser.h',

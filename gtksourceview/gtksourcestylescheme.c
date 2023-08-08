@@ -26,7 +26,6 @@
 #include <libxml/parser.h>
 #include <string.h>
 #include <glib/gi18n-lib.h>
-#include "gtksourcestyle-private.h"
 #include "gtksourcestyleschemeparser.h"
 
 /**

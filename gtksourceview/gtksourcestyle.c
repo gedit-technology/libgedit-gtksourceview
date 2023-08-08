@@ -18,7 +18,6 @@
  */
 
 #include "gtksourcestyle.h"
-#include "gtksourcestyle-private.h"
 #include "gtksourcestyleschemeparser.h"
 
 /**
