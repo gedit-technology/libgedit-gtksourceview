@@ -19,24 +19,10 @@ Reference to the libgedit-gtksourceview style scheme definition file format
 </refnamediv>
 
 <refsect1>
-<title>Documentation migrated elsewhere</title>
+<title>Documentation migrated</title>
 <para>
   In the Git repository of libgedit-gtksourceview, see the
   <code>docs/html/</code> directory.
 </para>
-<para>
-  Below is the content that is not yet migrated.
-</para>
 </refsect1>
-
-<refsect1>
-<title>Default style schemes</title>
-<para>
-The libgedit-gtksourceview team prefers to just keep a small number of style
-schemes distributed with the library. To add a new style scheme in
-libgedit-gtksourceview itself, the style scheme must be very popular, and
-ideally a libgedit-gtksourceview-based application must use it by default.
-</para>
-</refsect1>
-
 </refentry>
