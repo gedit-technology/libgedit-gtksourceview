@@ -3,7 +3,16 @@ News in 299.0.5, 2023-yy-zz (not yet released)
 * Continue to rework GtkSourceStyle* classes.
   This includes a switch from the libxml2 to GMarkupParser.
   (the libxml2 is still used for *.lang files though).
-* Simplify the style schemes XML file format, and better document it.
+
+* Style schemes XML file format:
+  - Simplify it.
+  - Better document it.
+  - Extend it with the "kind" attribute, for light/dark schemes.
+  - Remove the *.rng file.
+
+* Unit tests:
+  - Don't rely on environment variables to be set to run the tests.
+  - Have good code coverage for what has been modified or added.
 
 News in 299.0.4, 2023-07-29
 ---------------------------
