@@ -246,6 +246,11 @@
       mandatory attribute.
     </para>
     <para>
+      The <code>version</code> attribute of the
+      <code>&lt;style-scheme&gt;</code> element is no longer supported, so you
+      should remove it.
+    </para>
+    <para>
       The parser is now a bit more strict, check if there are warning messages
       printed in the terminal if a style scheme fails to load.
     </para>
