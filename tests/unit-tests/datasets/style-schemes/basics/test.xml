@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<style-scheme id="test" name="Test" kind="light" version="1.0">
+<style-scheme id="test" name="Test" kind="light">
   <description>Test color scheme</description>
 
   <color name="namedrgba" value="#rgba(100, 0, 0, 0.5)"/>

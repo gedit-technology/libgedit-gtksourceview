@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<style-scheme id="classic" name="Classic" kind="light" version="1.0">
-  <style-scheme id="foo" name="Foo" kind="dark" version="1.0">
+<style-scheme id="classic" name="Classic" kind="light">
+  <style-scheme id="foo" name="Foo" kind="dark">
   </style-scheme>
 </style-scheme>

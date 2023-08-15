@@ -125,7 +125,6 @@ test_parse_file (void)
 	check_parsing_error ("007-two-names.xml");
 	check_parsing_error ("008-two-descriptions.xml");
 	check_parsing_error ("009-bad-element.xml");
-	check_parsing_error ("010-bad-version.xml");
 	check_parsing_error ("011-color-missing-value.xml");
 	check_parsing_error ("012-color-empty-name.xml");
 	check_parsing_error ("013-color-dups.xml");
