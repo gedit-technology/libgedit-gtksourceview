@@ -22,7 +22,7 @@
  Theme based on the style of the same name from pastie.caboo.se
 -->
 
-<style-scheme id="cobalt" _name="Cobalt" kind="dark" version="1.0">
+<style-scheme id="cobalt" _name="Cobalt" kind="dark">
   <_description>Blue based color scheme</_description>
 
   <!-- Colors -->

@@ -20,7 +20,7 @@
   along with this library; if not, see <http://www.gnu.org/licenses/>.
 
 -->
-<style-scheme id="solarized-dark" _name="Solarized Dark" kind="dark" version="1.0">
+<style-scheme id="solarized-dark" _name="Solarized Dark" kind="dark">
   <_description>Color scheme using Solarized dark color palette</_description>
 
   <!-- Solarized Palette -->
