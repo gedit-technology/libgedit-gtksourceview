@@ -250,7 +250,6 @@ parse_start_element_style_scheme (ParserData   *parser_data,
 	const gchar *name = NULL;
 	const gchar *translatable_name = NULL;
 	const gchar *kind = NULL;
-	const gchar *version = NULL;
 
 	if (parser_data->basic_infos->id != NULL)
 	{
@@ -269,23 +268,8 @@ parse_start_element_style_scheme (ParserData   *parser_data,
 					  G_MARKUP_COLLECT_STRING | G_MARKUP_COLLECT_OPTIONAL, "name", &name,
 					  G_MARKUP_COLLECT_STRING | G_MARKUP_COLLECT_OPTIONAL, "_name", &translatable_name,
 					  G_MARKUP_COLLECT_STRING, "kind", &kind,
-					  G_MARKUP_COLLECT_STRING, "version", &version,
 					  G_MARKUP_COLLECT_INVALID))
 	{
-		return;
-	}
-
-	/* Check first the version, because if it is not correct that's the
-	 * first thing to fix.
-	 */
-	if (g_strcmp0 (version, "1.0") != 0)
-	{
-		g_set_error (error,
-			     G_MARKUP_ERROR,
-			     G_MARKUP_ERROR_INVALID_CONTENT,
-			     "A <style-scheme> with a version of \"%s\" is not supported. "
-			     "Only the version \"1.0\" is supported.",
-			     version);
 		return;
 	}
 
