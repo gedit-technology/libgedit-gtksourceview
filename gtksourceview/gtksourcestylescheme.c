@@ -166,7 +166,7 @@ gtk_source_style_scheme_get_description (GtkSourceStyleScheme *scheme)
  * @scheme: a #GtkSourceStyleScheme.
  *
  * Returns: the kind of @scheme.
- * Since: 300.0
+ * Since: 299.0
  */
 GtkSourceStyleSchemeKind
 gtk_source_style_scheme_get_kind (GtkSourceStyleScheme *scheme)

@@ -95,7 +95,7 @@ gtk_source_style_scheme_manager_class_init (GtkSourceStyleSchemeManagerClass *kl
 	 *
 	 * Emitted when the @manager's content has changed.
 	 *
-	 * Since: 300.0
+	 * Since: 299.0
 	 */
 	signals[SIGNAL_CHANGED] =
 		g_signal_new ("changed",
@@ -383,7 +383,7 @@ schemes_compare_by_name (GtkSourceStyleScheme *scheme1,
  * Returns: (transfer container) (element-type GtkSourceStyleScheme): a list of
  *   all the #GtkSourceStyleScheme's that are part of @manager. The list is
  *   sorted alphabetically according to the scheme name.
- * Since: 300.0
+ * Since: 299.0
  */
 GList *
 gtk_source_style_scheme_manager_get_schemes (GtkSourceStyleSchemeManager *manager)

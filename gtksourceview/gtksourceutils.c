@@ -424,7 +424,7 @@ _gtk_source_utils_dgettext (const gchar *domain,
  * Returns: (transfer full) (nullable): a string intended to be shown in the UI,
  *   that describes a bracket matching. %NULL is returned on
  *   %GTK_SOURCE_BRACKET_MATCH_NONE.
- * Since: 300.0
+ * Since: 299.0
  */
 gchar *
 gtk_source_utils_get_bracket_matched_message (GtkTextIter               *iter,
