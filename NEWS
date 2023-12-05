@@ -1,3 +1,8 @@
+News in 299.0.5, 2023-12-07
+---------------------------
+* Fix a bug: Alt+Down (moving line(s) down) or Alt+Up (moving line(s) up) wrt.
+  the undo/redo history and cursor positioning.
+
 News in 299.0.4, 2023-07-29
 ---------------------------
 * Tools: list-langs, to generate a listing of *.lang files.
