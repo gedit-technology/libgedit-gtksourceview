@@ -6,7 +6,7 @@
 project(
   'libgedit-gtksourceview', 'c',
   meson_version: '>= 0.64',
-  version: '299.0.5',
+  version: '299.1.0',
   default_options: ['warning_level=2']
 )
 
