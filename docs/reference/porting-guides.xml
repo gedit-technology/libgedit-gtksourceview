@@ -179,16 +179,13 @@
   </refsect1>
 </chapter>
 
-<chapter id="porting-guide-gtksourceview-4-to-libgedit-gtksourceview-300">
-  <title>GtkSourceView 4 -> libgedit-gtksourceview 300 Porting Guide</title>
+<chapter id="porting-guide-gtksourceview-4-to-libgedit-gtksourceview-299-0">
+  <title>GtkSourceView 4 -> libgedit-gtksourceview 299.0 Porting Guide</title>
 
   <refsect1>
     <title>GTK dependency</title>
     <para>
-      Both GtkSourceView 4 and libgedit-gtksourceview 300 depend on GTK 3.
-    </para>
-    <para>
-      The “3” in “300” means that it targets GTK 3.
+      Both GtkSourceView 4 and libgedit-gtksourceview 299.x.y depend on GTK 3.
     </para>
   </refsect1>
 
@@ -197,6 +194,9 @@
     <para>
       The new pkg-config name is:
       <code>libgedit-gtksourceview-300</code>
+    </para>
+    <para>
+      The “3” in “300” means that it targets GTK 3.
     </para>
   </refsect1>
 
@@ -223,36 +223,6 @@
       example,
       <filename>/usr/share/libgedit-gtksourceview-300/language-specs/</filename>
       is the usual location where <code>*.lang</code> files are found.
-    </para>
-  </refsect1>
-
-  <refsect1>
-    <title>Style schemes file format changes</title>
-    <para>
-      The <code>&lt;author&gt;</code> tags are no longer supported, so you
-      should remove them.
-    </para>
-    <para>
-      The support for the <code>parent-scheme</code> attribute has been removed.
-      It was unused. If you relied on it, copy and adapt the content of the
-      parent scheme.
-    </para>
-    <para>
-      The support for the <code>line-background</code> attribute (for the
-      <code>&lt;style&gt;</code> tag) has been removed.
-    </para>
-    <para>
-      You need to add the <code>kind</code> attribute (for light/dark), a new
-      mandatory attribute.
-    </para>
-    <para>
-      The <code>version</code> attribute of the
-      <code>&lt;style-scheme&gt;</code> element is no longer supported, so you
-      should remove it.
-    </para>
-    <para>
-      The parser is now a bit more strict, check if there are warning messages
-      printed in the terminal if a style scheme fails to load.
     </para>
   </refsect1>
 
@@ -298,12 +268,58 @@
           properties have been removed. Use the get functions instead.
         </para>
         <para>
-          <link linkend="GtkSourceStyle">GtkSourceStyle</link> is now a boxed
-          type (a simple struct), no longer a GObject. Which means that all the
-          properties have been removed. Instead of getting the values from the
-          properties, you now access the values directly from the struct.
-          Another important difference is to call the right ref/unref functions
-          for memory management.
+          All the <link linkend="GtkSourceStyle">GtkSourceStyle</link>
+          properties have been removed. Use the
+          <code>gtk_source_style_get_data()</code> function instead.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </refsect1>
+</chapter>
+
+<chapter id="porting-guide-299-0-to-299-2">
+  <title>libgedit-gtksourceview 299.0 -> libgedit-gtksourceview 299.2 Porting Guide</title>
+
+  <refsect1>
+    <title>Style schemes file format changes</title>
+    <para>
+      The <code>&lt;author&gt;</code> tags are no longer supported, so you
+      should remove them.
+    </para>
+    <para>
+      The support for the <code>parent-scheme</code> attribute has been removed.
+      It was unused. If you relied on it, copy and adapt the content of the
+      parent scheme.
+    </para>
+    <para>
+      The support for the <code>line-background</code> attribute (for the
+      <code>&lt;style&gt;</code> tag) has been removed.
+    </para>
+    <para>
+      You need to add the <code>kind</code> attribute (for light/dark), a new
+      mandatory attribute.
+    </para>
+    <para>
+      The <code>version</code> attribute of the
+      <code>&lt;style-scheme&gt;</code> element is no longer supported, so you
+      should remove it.
+    </para>
+    <para>
+      The parser is now a bit more strict, check if there are warning messages
+      printed in the terminal if a style scheme fails to load.
+    </para>
+  </refsect1>
+
+  <refsect1>
+    <title>API breaks</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          The <code>gtk_source_style_get_data()</code> function has been
+          removed. <link linkend="GtkSourceStyle">GtkSourceStyle</link> is now a
+          boxed type (a simple struct), no longer a GObject. Another important
+          difference is to call the right ref/unref functions for memory
+          management.
         </para>
         <para>
           The <link linkend="GtkSourceSearchContext--match-style">GtkSourceSearchContext:match-style</link>
