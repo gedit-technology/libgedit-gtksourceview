@@ -14,6 +14,11 @@ News in 299.1.0, yyyy-mm-dd (not yet released)
   - Don't rely on environment variables to be set to run the tests.
   - Have good code coverage for what has been modified or added.
 
+News in 299.0.5, 2023-12-07
+---------------------------
+* Fix a bug: Alt+Down (moving line(s) down) or Alt+Up (moving line(s) up) wrt.
+  the undo/redo history and cursor positioning.
+
 News in 299.0.4, 2023-07-29
 ---------------------------
 * Tools: list-langs, to generate a listing of *.lang files.
