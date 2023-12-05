@@ -52,7 +52,7 @@ G_DEFINE_BOXED_TYPE (GtkSourceStyle, gtk_source_style,
  * %FALSE.
  *
  * Returns: a new #GtkSourceStyle with a reference count of one.
- * Since: 299.0
+ * Since: 299.2
  */
 GtkSourceStyle *
 gtk_source_style_new (void)
@@ -72,7 +72,7 @@ gtk_source_style_new (void)
  * Increases the reference count of @style by one.
  *
  * Returns: (transfer full): the passed in @style.
- * Since: 299.0
+ * Since: 299.2
  */
 GtkSourceStyle *
 gtk_source_style_ref (GtkSourceStyle *style)
@@ -91,7 +91,7 @@ gtk_source_style_ref (GtkSourceStyle *style)
  * Decreases the reference count of @style by one. If the reference count drops
  * to 0, @style is freed.
  *
- * Since: 299.0
+ * Since: 299.2
  */
 void
 gtk_source_style_unref (GtkSourceStyle *style)

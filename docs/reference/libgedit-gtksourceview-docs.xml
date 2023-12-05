@@ -191,5 +191,9 @@
       <title>Index of new symbols in 299.0</title>
       <xi:include href="xml/api-index-299.0.xml"><xi:fallback /></xi:include>
     </index>
+    <index id="api-index-299-2" role="299.2">
+      <title>Index of new symbols in 299.2</title>
+      <xi:include href="xml/api-index-299.2.xml"><xi:fallback /></xi:include>
+    </index>
   </part>
 </book>

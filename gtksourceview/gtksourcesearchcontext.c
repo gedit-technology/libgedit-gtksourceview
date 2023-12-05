@@ -2811,7 +2811,7 @@ gtk_source_search_context_class_init (GtkSourceSearchContextClass *klass)
 	 *
 	 * A #GtkSourceStyle, or %NULL for theme's scheme default style.
 	 *
-	 * Since: 299.0
+	 * Since: 299.2
 	 */
 	g_object_class_install_property (object_class,
 					 PROP_MATCH_STYLE,

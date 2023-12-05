@@ -55,7 +55,7 @@ typedef struct _GtkSourceStyle GtkSourceStyle;
  * Before using the value of a certain field, check the boolean value of the
  * corresponding "`use_`" field.
  *
- * Since: 299.0
+ * Since: 299.2
  */
 struct _GtkSourceStyle
 {

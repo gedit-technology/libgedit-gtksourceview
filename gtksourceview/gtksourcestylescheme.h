@@ -61,7 +61,7 @@ struct _GtkSourceStyleSchemeClass
  *
  * The kind (or category) of a #GtkSourceStyleScheme.
  *
- * Since: 299.0
+ * Since: 299.2
  */
 typedef enum _GtkSourceStyleSchemeKind
 {
