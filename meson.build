@@ -6,7 +6,7 @@
 project(
   'libgedit-gtksourceview', 'c',
   meson_version: '>= 0.64',
-  version: '299.2.1', # Do not forget to update the SOVERSION if needed.
+  version: '299.2.2', # Do not forget to update the SOVERSION if needed.
   default_options: ['warning_level=2']
 )
 
