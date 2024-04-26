@@ -1,3 +1,7 @@
+News in 299.2.1, 2024-04-27 (stable version)
+--------------------------------------------
+* Bump soversion (something that was forgotten for the 299.2.0 version).
+
 News in 299.2.0, 2024-04-27 (stable version)
 --------------------------------------------
 * Nothing new.
