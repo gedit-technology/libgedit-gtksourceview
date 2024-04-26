@@ -1,5 +1,9 @@
-News in 299.1.0, 2024-02-15
----------------------------
+News in 299.2.0, 2024-04-27 (stable version)
+--------------------------------------------
+* Nothing new.
+
+News in 299.1.0, 2024-02-15 (pre-release)
+-----------------------------------------
 * Continue to rework GtkSourceStyle* classes.
   This includes a switch from the libxml2 to GMarkupParser.
   (the libxml2 is still used for *.lang files though).
