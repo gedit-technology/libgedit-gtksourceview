@@ -6,9 +6,11 @@
 project(
   'libgedit-gtksourceview', 'c',
   meson_version: '>= 0.64',
-  version: '299.2.1',
+  version: '299.2.1', # Do not forget to update the SOVERSION if needed.
   default_options: ['warning_level=2']
 )
+
+SOVERSION = 1
 
 GNOME = import('gnome')
 PKG_CONFIG = import('pkgconfig')

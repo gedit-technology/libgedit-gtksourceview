@@ -191,7 +191,7 @@ libgedit_gtksourceview_lib = library(
     libgedit_gtksourceview_static_lib.extract_all_objects(recursive: false),
     WORDS_COMPLETION_PROVIDER_STATIC_LIB.extract_all_objects(recursive: false),
   ],
-  soversion: 0,
+  soversion: SOVERSION,
   install: true
 )
 
