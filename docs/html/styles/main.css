@@ -16,6 +16,7 @@ h1 {
   background-color: #eeeeec; /* Tango aluminium1 */
   text-align: center;
   border: medium solid #555753; /* Tango aluminium5 */
+  padding: 0.2em;
 }
 
 h2 {
@@ -24,4 +25,12 @@ h2 {
 
 h3 {
   color: #555753; /* Tango aluminium5 */
+}
+
+p {
+  line-height: 1.4;
+}
+
+ul {
+  line-height: 1.8;
 }
