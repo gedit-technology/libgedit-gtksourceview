@@ -1,7 +1,7 @@
 /*
  * This file is part of GtkSourceView
  *
- * Copyright (C) 2023 - Sébastien Wilmet <swilmet@gnome.org>
+ * Copyright (C) 2023-2024 - Sébastien Wilmet <swilmet@gnome.org>
  *
  * GtkSourceView is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -324,6 +324,14 @@ parse_start_element_style_scheme (ParserData   *parser_data,
 	else if (g_strcmp0 (kind, "dark") == 0)
 	{
 		parser_data->basic_infos->kind = GTK_SOURCE_STYLE_SCHEME_KIND_DARK;
+	}
+	else if (g_strcmp0 (kind, "light-only") == 0)
+	{
+		parser_data->basic_infos->kind = GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT_ONLY;
+	}
+	else if (g_strcmp0 (kind, "dark-only") == 0)
+	{
+		parser_data->basic_infos->kind = GTK_SOURCE_STYLE_SCHEME_KIND_DARK_ONLY;
 	}
 	else
 	{

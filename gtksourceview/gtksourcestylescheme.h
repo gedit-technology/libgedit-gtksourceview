@@ -58,6 +58,10 @@ struct _GtkSourceStyleSchemeClass
  * GtkSourceStyleSchemeKind:
  * @GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT: Light style.
  * @GTK_SOURCE_STYLE_SCHEME_KIND_DARK: Dark style.
+ * @GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT_ONLY: Light style. Supports only a light
+ *   GTK theme.
+ * @GTK_SOURCE_STYLE_SCHEME_KIND_DARK_ONLY: Dark style. Supports only a dark GTK
+ *   theme.
  *
  * The kind (or category) of a #GtkSourceStyleScheme.
  *
@@ -67,6 +71,8 @@ typedef enum _GtkSourceStyleSchemeKind
 {
 	GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT,
 	GTK_SOURCE_STYLE_SCHEME_KIND_DARK,
+	GTK_SOURCE_STYLE_SCHEME_KIND_LIGHT_ONLY,
+	GTK_SOURCE_STYLE_SCHEME_KIND_DARK_ONLY,
 } GtkSourceStyleSchemeKind;
 
 G_MODULE_EXPORT
