@@ -335,4 +335,19 @@
   </refsect1>
 </chapter>
 
+<chapter id="porting-guide-299-2-to-299-4">
+  <title>libgedit-gtksourceview 299.2 -> libgedit-gtksourceview 299.4 Porting Guide</title>
+  <refsect1>
+    <title>API breaks</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          The <code>GtkSourceStyleSchemeChooser</code> interface has been
+          removed because it is no longer used by libgedit-tepl.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </refsect1>
+</chapter>
+
 </part>

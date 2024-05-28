@@ -49,7 +49,6 @@
 #include <gtksourceview/gtksourcespacedrawer.h>
 #include <gtksourceview/gtksourcestyle.h>
 #include <gtksourceview/gtksourcestylescheme.h>
-#include <gtksourceview/gtksourcestyleschemechooser.h>
 #include <gtksourceview/gtksourcestyleschememanager.h>
 #include <gtksourceview/gtksourcetag.h>
 #include <gtksourceview/gtksourceundomanager.h>

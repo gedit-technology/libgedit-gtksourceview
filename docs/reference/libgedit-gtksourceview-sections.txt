@@ -763,20 +763,6 @@ gtk_source_style_scheme_kind_get_type
 </SECTION>
 
 <SECTION>
-<FILE>styleschemechooser</FILE>
-GtkSourceStyleSchemeChooser
-gtk_source_style_scheme_chooser_get_style_scheme
-gtk_source_style_scheme_chooser_set_style_scheme
-<SUBSECTION Standard>
-GtkSourceStyleSchemeChooserInterface
-GTK_SOURCE_TYPE_STYLE_SCHEME_CHOOSER
-GTK_SOURCE_STYLE_SCHEME_CHOOSER
-GTK_SOURCE_IS_STYLE_SCHEME_CHOOSER
-GTK_SOURCE_STYLE_SCHEME_CHOOSER_GET_IFACE
-gtk_source_style_scheme_chooser_get_type
-</SECTION>
-
-<SECTION>
 <FILE>styleschememanager</FILE>
 GtkSourceStyleSchemeManager
 gtk_source_style_scheme_manager_new
