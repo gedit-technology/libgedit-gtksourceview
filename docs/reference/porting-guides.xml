@@ -279,37 +279,6 @@
 
 <chapter id="porting-guide-299-0-to-299-2">
   <title>libgedit-gtksourceview 299.0 -> libgedit-gtksourceview 299.2 Porting Guide</title>
-
-  <refsect1>
-    <title>Style schemes file format changes</title>
-    <para>
-      The <code>&lt;author&gt;</code> tags are no longer supported, so you
-      should remove them.
-    </para>
-    <para>
-      The support for the <code>parent-scheme</code> attribute has been removed.
-      It was unused. If you relied on it, copy and adapt the content of the
-      parent scheme.
-    </para>
-    <para>
-      The support for the <code>line-background</code> attribute (for the
-      <code>&lt;style&gt;</code> tag) has been removed.
-    </para>
-    <para>
-      You need to add the <code>kind</code> attribute (for light/dark), a new
-      mandatory attribute.
-    </para>
-    <para>
-      The <code>version</code> attribute of the
-      <code>&lt;style-scheme&gt;</code> element is no longer supported, so you
-      should remove it.
-    </para>
-    <para>
-      The parser is now a bit more strict, check if there are warning messages
-      printed in the terminal if a style scheme fails to load.
-    </para>
-  </refsect1>
-
   <refsect1>
     <title>API breaks</title>
     <itemizedlist>
