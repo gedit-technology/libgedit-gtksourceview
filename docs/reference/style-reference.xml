@@ -22,7 +22,8 @@ Reference to the libgedit-gtksourceview style scheme definition file format
 <title>Documentation migrated</title>
 <para>
   In the Git repository of libgedit-gtksourceview, see the
-  <code>docs/html/</code> directory.
+  <code>docs/html/</code> directory. It is also
+  <ulink url="https://gedit-technology.github.io/developer-docs/extra/libgedit-gtksourceview/">available online</ulink>.
 </para>
 </refsect1>
 </refentry>
