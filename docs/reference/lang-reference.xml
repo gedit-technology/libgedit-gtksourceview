@@ -101,7 +101,7 @@ It is better to follow these conventions:
   </listitem>
   <listitem>
     <para>
-      Add an example in tests/syntax-highlighting/.
+      Add an example in tests/interactive-tests/syntax-highlighting/.
     </para>
   </listitem>
   <listitem>
