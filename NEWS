@@ -1,3 +1,21 @@
+News in 299.3.beta, yyyy-mm-dd (Pre-release)
+--------------------------------------------
+
+Style schemes:
+- Remove GtkSourceStyleSchemeChooser interface.
+- Add light-only and dark-only kinds.
+- Mark classic and tango as light-only kind (so they are unsupported with dark
+  theme variants).
+
+Syntax highlighting:
+- New *.lang file: Nix.
+
+For packagers:
+- Build: add 'tests' option.
+
+Misc:
+- Documentation updates and improvements.
+
 News in 299.2.1, 2024-04-27 (stable version)
 --------------------------------------------
 * Bump soversion (something that was forgotten for the 299.2.0 version).
