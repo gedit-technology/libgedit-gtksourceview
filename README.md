@@ -24,14 +24,6 @@ Dependencies
 - GTK 3
 - libxml2
 
-About versions
---------------
-
-libgedit-gtksourceview follows the even/odd minor version scheme.
-
-For example the `299.1.x` versions are unstable (development versions), and the
-`299.2.x` versions are stable.
-
 How to contribute
 -----------------
 
