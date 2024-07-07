@@ -1,6 +1,0 @@
-{
-global:
-  gtk_source_*;
-local:
-  *;
-};
